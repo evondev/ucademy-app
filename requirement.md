@@ -1,0 +1,8 @@
+- NodeJS: https://nodejs.org/en
+- Vercel account: https://vercel.com/signup
+- Github account: https://github.com/join/
+- MongoDB: https://www.mongodb.com/cloud/atlas/register
+- MongoDB Compass: https://www.mongodb.com/try/download/compass
+- Uploadthing: https://uploadthing.com/
+- Clerk: https://dashboard.clerk.com/sign-up
+- TinyMCE: https://www.tiny.cloud/auth/signup/

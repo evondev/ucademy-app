@@ -1,0 +1,3 @@
+- Metadata là những thông tin của trang web, thường là để tối ưu cho việc SEO
+- title: Tiêu đề của trang web
+- description: Mô tả của trang web
