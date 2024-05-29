@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
   font-family: var(--font-manrope);
 }
 h1,
@@ -12,4 +12,4 @@ h4,
 h5,
 h6 {
   font-family: var(--font-roboto);
-}
+} */

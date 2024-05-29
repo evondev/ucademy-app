@@ -5,7 +5,7 @@ export default function Home() {
       delectus nesciunt aliquid quis excepturi praesentium iste quos maiores
       animi quisquam modi architecto accusamus magni necessitatibus inventore
       laudantium vitae iure dicta!
-      <h1>Heading</h1>
+      <h1 className="font-secondary font-medium italic">Heading</h1>
     </main>
   );
 }

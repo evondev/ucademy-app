@@ -1,4 +1,4 @@
-import { manrope, roboto } from "@/components/fonts";
+import { dm_sans } from "@/components/fonts";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -14,9 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${roboto.variable}`}>
-        {children}
-      </body>
+      <body className={dm_sans.className}>{children}</body>
     </html>
   );
 }
