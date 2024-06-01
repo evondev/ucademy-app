@@ -41,4 +41,12 @@ const dm_sans = localFont({
 });
 ```
 
+# Typescript
+
+- `ComponentProps<"svg">`: Lấy ra các props của thẻ svg
+
+# Kiến thức
+
+- Nếu mà component có tính lặp đi lặp lại thì nên lưu vào 1 mảng rồi sau đó loop ra thì sẽ tối ưu hơn
+
 # Next/Link
