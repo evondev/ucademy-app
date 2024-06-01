@@ -10,7 +10,6 @@ const config: Config = {
     extend: {
       fontFamily: {
         primary: ["var(--font-manrope)"],
-        secondary: ["var(--font-roboto)"],
       },
     },
   },

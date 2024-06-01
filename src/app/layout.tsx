@@ -1,4 +1,5 @@
-import { dm_sans } from "@/components/fonts";
+import Sidebar from "@/components/layout/Sidebar";
+import { manrope } from "@/utils";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -14,7 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={dm_sans.className}>{children}</body>
+      <body className={manrope.className}>
+        <div className="wrapper grid grid-cols-[300px,minmax(0,1fr)] h-screen">
+          <Sidebar />
+          <main>{children}</main>
+        </div>
+      </body>
     </html>
   );
 }

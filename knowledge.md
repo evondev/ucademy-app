@@ -40,3 +40,5 @@ const dm_sans = localFont({
   display: "swap",
 });
 ```
+
+# Next/Link
