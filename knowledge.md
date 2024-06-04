@@ -50,3 +50,20 @@ const dm_sans = localFont({
 - Nếu mà component có tính lặp đi lặp lại thì nên lưu vào 1 mảng rồi sau đó loop ra thì sẽ tối ưu hơn
 
 # Next/Link
+
+- Link
+- href: đường dẫn, có thể truyền vào là chuỗi hoặc object
+
+```js
+<Link
+href={{
+  pathname: url,
+  query: { slug: "bai-1-tong-quan-ve-khoa-hoc" },
+}}
+></Link>
+>
+```
+
+- replace: thay thế đường dẫn và không lưu lại trong lịch sử
+- scroll: mặc dịnh là `true` nghĩa là khi nhấn vào link thì sẽ scroll lên trên cùng, nếu không muốn scroll thì thiết lập `scroll={false}`
+- prefetch:
