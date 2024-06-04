@@ -66,4 +66,9 @@ href={{
 
 - replace: thay thế đường dẫn và không lưu lại trong lịch sử
 - scroll: mặc dịnh là `true` nghĩa là khi nhấn vào link thì sẽ scroll lên trên cùng, nếu không muốn scroll thì thiết lập `scroll={false}`
-- prefetch:
+- prefetch: chạy khi thẻ Link xuất hiện trên viewport mà chúng ta thấy hoặc khi chúng ta scroll
+- hook `usePathname()` trả ra pathname giúp chúng ta xử lý trong những trường hợp mà chúng ta muốn ví dụ như là active link
+
+# Error
+
+- You're importing a component that needs `usePathname`. It only works in a Client Component but none of its parents are marked with "use client", so they're Server Components by default: Lỗi này là khi sử dụng các hook ở phía client trong khi các bạn đang sử dụng Server Components, để khắc phục thì thêm `use client` lên trên cùng của file.
