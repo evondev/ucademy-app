@@ -1,5 +1,5 @@
-import Sidebar from "@/components/layout/Sidebar";
 import { manrope } from "@/utils";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -14,13 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={manrope.className}>
-        <div className="wrapper grid grid-cols-[300px,minmax(0,1fr)] h-screen">
-          <Sidebar />
-          <main>{children}</main>
-        </div>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={manrope.className}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
