@@ -100,10 +100,11 @@ vscode-master/lesson?slug=bai-1-tong-dsfsdf
 - Optional Catch-all Segments: sign-in/[[...sign-in]]
 - Parallel Routes
 - Intercepting Routes
+- Lưu ý: Khi để 2 thư mục dynamic cùng cấp sẽ báo lỗi ví dụ [item] cùng cấp với [folder]
 
 # Params
 
-- Params
-- SearchParams
+- Params: Thông thường là dynamic routes: [item]/lesson. Ví dụ /html-css/lesson?slug=color thì _html-css_ chính là `params`
+- SearchParams: Thường là những query ở trên URL ví dụ lesson?slug=html-css. Thì _slug_ chính là `searchParams`
 
 # Layout
