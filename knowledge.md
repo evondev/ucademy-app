@@ -108,3 +108,22 @@ vscode-master/lesson?slug=bai-1-tong-dsfsdf
 - SearchParams: Thường là những query ở trên URL ví dụ lesson?slug=html-css. Thì _slug_ chính là `searchParams`
 
 # Layout
+
+# Next/Image
+
+- Image yêu cầu có 3 thuộc tính bắt buộc là `alt`, `width`, `height`
+- Nếu sử dụng thuộc tính `fill` thì ko cần `width` và `height` vẫn hoạt động. Tuy nhiên thẻ img sẽ trở thành absolute, cho nên cần có 1 phần tử chứa nó sử dụng position: relative hoặc absolute tùy vào mục đích code.
+- Khi sử dụng `src` từ bên ngoài thì phải thiết lập trong next.config.mjs ví dụ
+
+```ts
+images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+```
