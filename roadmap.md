@@ -3,6 +3,8 @@
 - Routing
 - Params
 - Setup basic routing
-- Schema
-- Action
-- Form
+- Heading
+- CourseItem
+- Protect route
+- Shadcn
+- Darkmode/lightmode
