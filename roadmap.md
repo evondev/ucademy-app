@@ -1,2 +1,8 @@
 - Font: Manrope
 - Link: Next/Link
+- Routing
+- Params
+- Setup basic routing
+- Schema
+- Action
+- Form
