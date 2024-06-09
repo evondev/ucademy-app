@@ -5,8 +5,11 @@ const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
+      screens: {
+        "3xl": "1600px",
+      },
       colors: {
-        primary: "#ff979a",
+        primary: "#cbabff",
         grayDarkest: "#131316",
         grayDarker: "#212126",
         grayDark: "#9394A1",
