@@ -7,6 +7,9 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#ff979a",
+        grayDarkest: "#131316",
+        grayDarker: "#212126",
+        grayDark: "#9394A1",
       },
       fontFamily: {
         primary: ["var(--font-manrope)"],

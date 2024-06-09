@@ -9,10 +9,10 @@ const ActiveLink = ({ url, children }: ActiveLinkProps) => {
   return (
     <Link
       href={url}
-      className={`p-3 rounded-md flex items-center gap-3  transition-all ${
+      className={`p-3 rounded-md flex items-center gap-3 dark:text-grayDark  transition-all ${
         isActive
-          ? "text-white bg-primary svg-animate"
-          : "hover:text-primary hover:bg-primary hover:bg-opacity-10"
+          ? "!text-white bg-primary svg-animate"
+          : "hover:!text-primary hover:!bg-primary hover:!bg-opacity-10"
       } `}
     >
       {children}
