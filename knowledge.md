@@ -127,3 +127,27 @@ images: {
     ],
   },
 ```
+
+# Mongoose
+
+- Schema trong Mongoose là một đối tượng xác định cấu trúc của tài liệu (document) trong một collection của MongoDB. Nó cho phép định nghĩa các trường (fields), kiểu dữ liệu (data types) và các ràng buộc (constraints) cho dữ liệu
+- Ví dụ: Collection `users` có `document` là
+
+```js
+{
+  id: "1",
+  name: "evondev"
+}
+```
+
+# Deploy lên vercel
+
+- 1. Tạo tài khoản tại vercel.com, lưu ý là chọn `Hobby`
+- 2. Tạo Project, và chọn `Import repository` từ Github
+- 3. Nếu chưa có cái nào thì chọn phần `Configure App` để có thể cấp quyền truy cập vào respository tương ứng của bạn
+- 4. Sau khi import vào xong thì đặt tên project là chữ in thường ví dụ `ucademy` sau đó nhấn Deploy
+- 5. Chờ deploy xong sẽ có domain ví dụ `ucademy.vercel.app`
+- 6. Nếu dự án lỗi thì check ở phần `Logs`
+- 7. Nếu thiếu file môi trường thì copy .env.local hết và dán vào mục `Settings -> Enviroment variables`
+- 8. Chọn deployment khi nãy và chọn `Redeploy` lưu ý nhớ tích vào `Using existing build cache`
+- 9. Nếu gặp khó khăn thì hỏi lên nhóm mình sẽ support
