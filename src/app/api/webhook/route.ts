@@ -1,3 +1,4 @@
+import createUser from "@/lib/actions/user.actions";
 import { Webhook } from "svix";
 
 const webhookSecret: string = process.env.WEBHOOK_SECRET || "your-secret";
@@ -23,11 +24,16 @@ export async function POST(req: Request) {
     return new Response("Bad Request", { status: 400 });
   }
 
-  console.log(msg);
   const event = msg.event;
-  console.log("POST ~ event:", event);
-
-  // Rest
+  if (event.type === "user.created") {
+    await createUser({
+      clerkId: event.payload.id,
+      username: event.payload.username,
+      email_address: event.payload.email_addresses[0].email_address,
+      name: event.payload.username,
+      avatar: event.payload.image_url,
+    });
+  }
 
   return new Response("OK", { status: 200 });
 }
