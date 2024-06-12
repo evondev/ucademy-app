@@ -1,18 +1,18 @@
-- Font: Manrope
-- Link: Next/Link
-- Routing
-- Params
-- Setup basic routing
-- Heading
-- CourseItem
-- Protect route
-- Shadcn
-- Darkmode/lightmode
-- User database
-- Schema
-- User actions
-- Create vercel account
-- Deploy vercel
+- Font: Manrope ✅
+- Link: Next/Link ✅
+- Routing ✅
+- Params ✅
+- Setup basic routing ✅
+- Heading ✅
+- CourseItem ✅
+- Protect route ✅
+- Shadcn ✅
+- Darkmode/lightmode ✅
+- User database ✅
+- Schema ✅
+- User actions ✅
+- Create vercel account ✅
+- Deploy vercel ✅
 - Webhook account
 - Server actions
 - Shadcn Form
