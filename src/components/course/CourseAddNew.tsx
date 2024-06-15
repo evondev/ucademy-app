@@ -8,56 +8,90 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import slugify from "slugify";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  title: z.string().min(10, "Tên khóa học phải có ít nhất 10 ký tự"),
+  slug: z.string().optional(),
 });
 
 function CourseAddNew() {
-  // 1. Define your form.
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      title: "",
+      slug: "",
     },
   });
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    setIsSubmitting(true);
+    try {
+      const data = {
+        title: values.title,
+        slug:
+          values.slug ||
+          slugify(values.title, {
+            lower: true,
+            locale: "vi",
+          }),
+      };
+      console.log(data);
+      // await createCourse(values);
+    } catch (error) {
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-10">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
+      <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off">
+        <div className="grid grid-cols-2 gap-8 mt-10 mb-8">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tên khóa học *</FormLabel>
+                <FormControl>
+                  <Input placeholder="Tên khóa học" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="slug"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Đường dẫn khóa học</FormLabel>
+                <FormControl>
+                  <Input placeholder="khoa-hoc-lap-trinh" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <Button
+          isLoading={isSubmitting}
+          variant="primary"
+          type="submit"
+          className="w-[120px]"
+          disabled={isSubmitting}
+        >
+          Tạo khóa học
+        </Button>
       </form>
     </Form>
   );
