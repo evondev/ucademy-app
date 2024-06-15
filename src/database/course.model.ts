@@ -38,18 +38,23 @@ const courseSchema = new Schema<ICourse>({
   },
   image: {
     type: String,
+    default: "",
   },
   intro_url: {
     type: String,
+    default: "",
   },
   desc: {
     type: String,
+    default: "",
   },
   price: {
     type: Number,
+    default: 0,
   },
   sale_price: {
     type: Number,
+    default: 0,
   },
   status: {
     type: String,

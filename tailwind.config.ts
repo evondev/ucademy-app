@@ -9,7 +9,7 @@ const config: Config = {
         "3xl": "1600px",
       },
       colors: {
-        primary: "#4E06FE",
+        primary: "#FF685A",
         grayDarkest: "#131316",
         grayDarker: "#212126",
         grayDark: "#9394A1",

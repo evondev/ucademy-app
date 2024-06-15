@@ -15,12 +15,12 @@
 - Deploy vercel ✅
 - Webhook account ✅
 - Course - Lecture - Lesson Models ✅
-- Server actions
-- Shadcn Form
-- Zod
-- Form Schema
+- Server actions ✅
+- Shadcn Form ✅
+- Zod ✅
+- Form Schema ✅
+- Validation ✅
 - Toastify
-- Validation
 - Create course
 - Update course
 - Upload image with Uploadthing
