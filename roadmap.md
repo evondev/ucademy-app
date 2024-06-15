@@ -20,8 +20,8 @@
 - Zod ✅
 - Form Schema ✅
 - Validation ✅
-- Toastify
-- Create course
+- Toastify ✅
+- Create course ✅
 - Update course
 - Upload image with Uploadthing
 - Information course

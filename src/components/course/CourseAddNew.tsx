@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { IUser } from "@/database/user.model";
 import { createCourse } from "@/lib/actions/course.actions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -25,7 +26,7 @@ const formSchema = z.object({
   slug: z.string().optional(),
 });
 
-function CourseAddNew() {
+function CourseAddNew({ user }: { user: IUser }) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -47,18 +48,20 @@ function CourseAddNew() {
             lower: true,
             locale: "vi",
           }),
+        author: user._id,
       };
       const res = await createCourse(data);
-      if (res?.success) {
-        toast.success("Tạo khóa học thành công");
+      if (!res?.success) {
+        toast.error(res?.message);
+        return;
       }
+      toast.success("Tạo khóa học thành công");
       if (res?.data) {
         router.push(`/manage/course/update?slug=${res.data.slug}`);
       }
     } catch (error) {
     } finally {
       setIsSubmitting(false);
-      form.reset();
     }
   }
 
