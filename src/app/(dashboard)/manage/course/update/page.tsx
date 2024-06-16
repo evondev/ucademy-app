@@ -16,7 +16,7 @@ const page = async ({
   return (
     <>
       <Heading className="mb-8">Cập nhật khóa học</Heading>
-      <CourseUpdate />
+      <CourseUpdate data={JSON.parse(JSON.stringify(findCourse))} />
     </>
   );
 };

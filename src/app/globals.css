@@ -5,6 +5,11 @@
   body {
     @apply bg-gray-100 dark:bg-grayDarkest dark:text-white text-grayDarkest;
   }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 @layer components {
   .svg-animate {
