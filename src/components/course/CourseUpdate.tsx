@@ -20,7 +20,10 @@ import { ECourseLevel, ECourseStatus } from "@/types/enums";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useImmer } from "use-immer";
+import { IconAdd } from "../icons";
 import { Textarea } from "../ui/textarea";
+
 const formSchema = z.object({
   title: z.string().min(10, "Tên khóa học phải có ít nhất 10 ký tự"),
   slug: z.string().optional(),
@@ -55,6 +58,11 @@ const formSchema = z.object({
 const CourseUpdate = ({ data }: { data: ICourse }) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [courseInfo, setCourseInfo] = useImmer({
+    requirements: data.info.requirements,
+    benefits: data.info.benefits,
+    qa: data.info.qa,
+  });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -68,6 +76,11 @@ const CourseUpdate = ({ data }: { data: ICourse }) => {
       status: data.status,
       level: data.level,
       views: data.views,
+      info: {
+        requirements: data.info.requirements,
+        benefits: data.info.benefits,
+        qa: data.info.qa,
+      },
     },
   });
 
@@ -84,6 +97,11 @@ const CourseUpdate = ({ data }: { data: ICourse }) => {
           intro_url: values.intro_url,
           desc: values.desc,
           views: values.views,
+          info: {
+            requirements: courseInfo.requirements,
+            benefits: courseInfo.benefits,
+            qa: courseInfo.qa,
+          },
         },
       });
       if (values.slug) {
@@ -252,8 +270,36 @@ const CourseUpdate = ({ data }: { data: ICourse }) => {
             name="info.requirements"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Yêu cầu</FormLabel>
-                <FormControl></FormControl>
+                <FormLabel className="flex items-center justify-between gap-5">
+                  <span>Yêu cầu</span>
+                  <button
+                    className="text-primary"
+                    onClick={() => {
+                      setCourseInfo((draft) => {
+                        draft.requirements.push("");
+                      });
+                    }}
+                    type="button"
+                  >
+                    <IconAdd className="size-5" />
+                  </button>
+                </FormLabel>
+                <FormControl>
+                  <>
+                    {courseInfo.requirements.map((r, index) => (
+                      <Input
+                        key={index}
+                        placeholder={`Yêu cầu số ${index + 1}`}
+                        value={r}
+                        onChange={(e) => {
+                          setCourseInfo((draft) => {
+                            draft.requirements[index] = e.target.value;
+                          });
+                        }}
+                      />
+                    ))}
+                  </>
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -263,8 +309,36 @@ const CourseUpdate = ({ data }: { data: ICourse }) => {
             name="info.benefits"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Lợi ích</FormLabel>
-                <FormControl></FormControl>
+                <FormLabel className="flex items-center justify-between gap-5">
+                  <span>Lợi ích</span>
+                  <button
+                    className="text-primary"
+                    onClick={() => {
+                      setCourseInfo((draft) => {
+                        draft.benefits.push("");
+                      });
+                    }}
+                    type="button"
+                  >
+                    <IconAdd className="size-5" />
+                  </button>
+                </FormLabel>
+                <FormControl>
+                  <>
+                    {courseInfo.benefits.map((r, index) => (
+                      <Input
+                        key={index}
+                        placeholder={`Lợi ích số ${index + 1}`}
+                        value={r}
+                        onChange={(e) => {
+                          setCourseInfo((draft) => {
+                            draft.benefits[index] = e.target.value;
+                          });
+                        }}
+                      />
+                    ))}
+                  </>
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -273,9 +347,52 @@ const CourseUpdate = ({ data }: { data: ICourse }) => {
             control={form.control}
             name="info.qa"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Question/Answer</FormLabel>
-                <FormControl></FormControl>
+              <FormItem className="col-start-1 col-end-3">
+                <FormLabel className="flex items-center justify-between gap-5">
+                  <span>Q.A</span>
+                  <button
+                    className="text-primary"
+                    onClick={() => {
+                      setCourseInfo((draft) => {
+                        draft.qa.push({
+                          question: "",
+                          answer: "",
+                        });
+                      });
+                    }}
+                    type="button"
+                  >
+                    <IconAdd className="size-5" />
+                  </button>
+                </FormLabel>
+                <FormControl>
+                  <>
+                    {courseInfo.qa.map((item, index) => (
+                      <div className="grid grid-cols-2 gap-5" key={index}>
+                        <Input
+                          key={index}
+                          placeholder={`Câu hỏi số ${index + 1}`}
+                          value={item.question}
+                          onChange={(e) => {
+                            setCourseInfo((draft) => {
+                              draft.qa[index].question = e.target.value;
+                            });
+                          }}
+                        />
+                        <Input
+                          key={index}
+                          placeholder={`Câu trả lời số ${index + 1}`}
+                          value={item.answer}
+                          onChange={(e) => {
+                            setCourseInfo((draft) => {
+                              draft.qa[index].answer = e.target.value;
+                            });
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </>
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
