@@ -22,13 +22,15 @@
 - Validation ✅
 - Toastify ✅
 - Create course ✅
-- Update course
+- Update course ✅
 - Upload image with Uploadthing
-- Information course
+- Information course ✅
 - Shadcn select
 - Course status
 - Global constant button
-- Button loading
+- Button loading ✅
 - Course manage
-- Course details
+- Course details ✅
 - Course delete
+- CRUD Lecture
+- CRUD Lesson

@@ -105,6 +105,11 @@ const courseSchema = new Schema<ICourse>({
     type: Boolean,
     default: false,
   },
+  level: {
+    type: String,
+    enum: Object.values(ECourseLevel),
+    default: ECourseLevel.BEGINNER,
+  },
 });
 const Course = models.Course || model<ICourse>("Course", courseSchema);
 export default Course;
