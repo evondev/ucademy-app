@@ -8,6 +8,7 @@ export type TMenuItem = {
   url: string;
   title: string;
   icon: React.ReactNode;
+  onlyIcon?: boolean;
 };
 // User
 export type TCreateUserParams = {
