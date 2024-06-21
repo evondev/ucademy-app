@@ -23,14 +23,14 @@
 - Toastify ✅
 - Create course ✅
 - Update course ✅
-- Upload image with Uploadthing
+- Upload image with Uploadthing ✅
 - Information course ✅
-- Shadcn select
-- Course status
-- Global constant button
+- Shadcn select ✅
+- Course status ✅
+- Global constant button ✅
 - Button loading ✅
-- Course manage
+- Course manage ✅
 - Course details ✅
-- Course delete
+- Course delete ✅
 - CRUD Lecture
 - CRUD Lesson
