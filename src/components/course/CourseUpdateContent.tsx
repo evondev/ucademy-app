@@ -8,11 +8,11 @@ import {
 import { commonClassNames } from "@/constants";
 import { ILecture } from "@/database/lecture.model";
 import { createLecture, updateLecture } from "@/lib/actions/lecture.actions";
+import { cn } from "@/lib/utils";
 import { TCourseUpdateParams } from "@/types";
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { useImmer } from "use-immer";
 import { IconDelete, IconEdit } from "../icons";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -68,48 +68,52 @@ const CourseUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
   ) => {
     e.stopPropagation();
     try {
-      await updateLecture({
+      const res = await updateLecture({
         lectureId,
         updateData: {
           title: lectureEdit,
           path: `/manage/course/update-content?slug=${course.slug}`,
         },
       });
+      if (res?.success) {
+        toast.success("Cập nhật thành công!");
+        setLectureIdEdit("");
+        setLectureEdit("");
+      }
     } catch (error) {
       console.log(error);
     }
   };
-  const [lectureEdit, setLectureEdit] = useImmer("");
-  const [lectureIndex, setLectureIndex] = useImmer(-1);
+  const [lectureEdit, setLectureEdit] = useState("");
+  const [lectureIdEdit, setLectureIdEdit] = useState("");
   return (
     <div>
       <div className="flex flex-col gap-5">
         {lectures.map((lecture: ILecture, index) => (
           <Accordion
             type="single"
-            collapsible
+            collapsible={!lectureIdEdit}
             className="w-full"
             key={lecture._id}
           >
-            <AccordionItem value="item-1">
+            <AccordionItem value={lecture._id}>
               <AccordionTrigger>
                 <div className="flex items-center gap-3 justify-between w-full pr-5">
-                  {index === lectureIndex ? (
+                  {lecture._id === lectureIdEdit ? (
                     <>
                       <div className="w-full">
                         <Input
                           placeholder="Tên chương"
                           defaultValue={lecture.title}
-                          onChange={(e) => {
-                            setLectureEdit((draft) => {
-                              draft = e.target.value;
-                            });
-                          }}
+                          onChange={(e) => setLectureEdit(e.target.value)}
                         />
                       </div>
                       <div className="flex gap-2">
                         <span
-                          className={commonClassNames.action}
+                          className={cn(
+                            commonClassNames.action,
+                            "text-green-500"
+                          )}
                           onClick={(e) => handleUpdateLecture(e, lecture._id)}
                         >
                           <svg
@@ -128,10 +132,13 @@ const CourseUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                           </svg>
                         </span>
                         <span
-                          className={commonClassNames.action}
+                          className={cn(
+                            commonClassNames.action,
+                            "text-red-500"
+                          )}
                           onClick={(e) => {
                             e.stopPropagation();
-                            setLectureIndex(-1);
+                            setLectureIdEdit("");
                           }}
                         >
                           <svg
@@ -156,16 +163,22 @@ const CourseUpdateContent = ({ course }: { course: TCourseUpdateParams }) => {
                       <div>{lecture.title}</div>
                       <div className="flex gap-2">
                         <span
-                          className={commonClassNames.action}
+                          className={cn(
+                            commonClassNames.action,
+                            "text-blue-500"
+                          )}
                           onClick={(e) => {
                             e.stopPropagation();
-                            setLectureIndex(index);
+                            setLectureIdEdit(lecture._id);
                           }}
                         >
                           <IconEdit />
                         </span>
                         <span
-                          className={commonClassNames.action}
+                          className={cn(
+                            commonClassNames.action,
+                            "text-red-500"
+                          )}
                           onClick={(e) => handleDeleteLecture(e, lecture._id)}
                         >
                           <IconDelete />

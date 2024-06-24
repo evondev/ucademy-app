@@ -1,7 +1,11 @@
 "use server";
 import Course, { ICourse } from "@/database/course.model";
 import Lecture from "@/database/lecture.model";
-import { TCreateCourseParams, TUpdateCourseParams } from "@/types";
+import {
+  TCourseUpdateParams,
+  TCreateCourseParams,
+  TUpdateCourseParams,
+} from "@/types";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
 // fetching
@@ -18,7 +22,7 @@ export async function getCourseBySlug({
   slug,
 }: {
   slug: string;
-}): Promise<ICourse | undefined> {
+}): Promise<TCourseUpdateParams | undefined> {
   try {
     connectToDatabase();
     const findCourse = await Course.findOne({ slug }).populate({
