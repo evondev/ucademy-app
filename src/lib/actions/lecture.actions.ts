@@ -22,7 +22,6 @@ export async function createLecture(params: TCreateLectureParams) {
 export async function updateLecture(params: TUpdateLectureParams) {
   try {
     connectToDatabase();
-    console.log(params);
     const res = await Lecture.findByIdAndUpdate(
       params.lectureId,
       params.updateData,
@@ -30,7 +29,8 @@ export async function updateLecture(params: TUpdateLectureParams) {
         new: true,
       }
     );
-    console.log("updateLecture ~ res:", res);
+    revalidatePath(params.updateData.path || "/");
+    if (!res) return;
     return {
       success: true,
     };
