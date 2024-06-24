@@ -29,3 +29,19 @@ export type TUpdateCourseParams = {
   updateData: Partial<ICourse>;
   path?: string;
 };
+// Lecture
+export type TCreateLectureParams = {
+  course: string;
+  title?: string;
+  order?: number;
+  path?: string;
+};
+export type TUpdateLectureParams = {
+  lectureId: string;
+  updateData: {
+    title?: string;
+    order?: number;
+    _destroy?: boolean;
+    path?: string;
+  };
+};
