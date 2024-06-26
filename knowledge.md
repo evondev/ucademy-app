@@ -140,6 +140,55 @@ images: {
 }
 ```
 
+- `find`: Cho phép tìm nhiều, xử lý tìm kiếm, phân trang...
+- `findById`: Tìm theo Id
+- `findByIdAndUpdate`: Tìm theo Id và cập nhật thông tin mới
+- `findOne`: Dùng để tìm một cái có thể theo bất kỳ field nào ví dụ slug, title,...
+- `findOneAndUpdate`: Tìm một cái nào đó thỏa mãn điều kiện và cập nhật thông tin mới
+- Để trả ra dữ liệu mới thì thêm options {new: true} vào sau cùng
+
+```js
+const res = await Lecture.findByIdAndUpdate(
+  params.lectureId,
+  params.updateData,
+  {
+    new: true,
+  }
+);
+```
+
+- Như ở trên thì Lecture sẽ tìm theo `lectureId` sau đó cập nhật thông tin từ `params.updateData` và thêm options là` new: true` để trả ra bản ghi đã được cập nhật mới
+- Ví dụ khác:
+
+```js
+await Course.findOne({ slug });
+await Course.findOneAndUpdate({ slug: params.slug }, params.updateData, {
+  new: true,
+});
+```
+
+- `populate`: Sử dụng populate("path") trong đó path chính là tên field trong model ví dụ course.model có field là lectures liên kết với Collection Lecture thì sẽ giúp chúng ta chọn được hết toàn bộ các documents từ Collection Lecture
+- Trong trường hợp để tối ưu thì chúng ta có thể `select` từng field mà chúng ta muốn, còn muốn kiểm tra điều kiện thì dùng `match`, model thì import Model từ chỗ chúng ta tạo.
+- Ví dụ
+
+```js
+const findCourse = await Course.findOne({ slug }).populate({
+  path: "lectures",
+  model: Lecture,
+  select: "_id title",
+  match: {
+    _destroy: false,
+  },
+  populate: {
+    path: "lessons",
+    model: Lesson,
+    match: {
+      _destroy: false,
+    },
+  },
+});
+```
+
 # Deploy lên vercel
 
 - 1. Tạo tài khoản tại vercel.com, lưu ý là chọn `Hobby`
