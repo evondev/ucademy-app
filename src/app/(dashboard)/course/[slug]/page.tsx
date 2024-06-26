@@ -124,7 +124,7 @@ const page = async ({
         </BoxSection>
       </div>
       <div>
-        <div className="bg-white rounded-lg p-5">
+        <div className="bgDarkMode border borderDarkMode rounded-lg p-5">
           <div className="flex items-center gap-2 mb-3">
             <strong className="text-primary text-xl font-bold">
               {data.price}
@@ -172,7 +172,7 @@ function BoxInfo({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white rounded-lg p-5">
+    <div className="bgDarkMode border borderDarkMode rounded-lg p-5">
       <h4 className="text-sm text-slate-400 font-normal">{title}</h4>
       <h3 className="font-bold">{children}</h3>
     </div>
