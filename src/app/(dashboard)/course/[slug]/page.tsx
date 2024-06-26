@@ -72,13 +72,28 @@ const page = async ({
                 className="w-full"
                 key={lecture._id}
               >
-                <AccordionItem value={lecture._id}>
+                <AccordionItem value={lecture._id.toString()}>
                   <AccordionTrigger>
                     <div className="flex items-center gap-3 justify-between w-full pr-5">
                       <div>{lecture.title}</div>
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent></AccordionContent>
+                  <AccordionContent className="!bg-transparent border-none p-0">
+                    <div className="flex flex-col gap-3">
+                      {lecture.lessons.map((lesson) => (
+                        <div
+                          key={lesson._id}
+                          className="flex items-center gap-3 bgDarkMode border borerDarkMode rounded-lg p-3 text-sm font-medium"
+                        >
+                          <IconPlay className="size-4" />
+                          <h4>{lesson.title}</h4>
+                          <span className="ml-auto text-xs font-semibold">
+                            {lesson.duration} phút
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
                 </AccordionItem>
               </Accordion>
             ))}
