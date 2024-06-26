@@ -1,6 +1,6 @@
 import PageNotFound from "@/app/not-found";
 import { IconPlay, IconStudy, IconUsers } from "@/components/icons";
-import LessonItem from "@/components/lesson/LessonItem";
+import LessonContent from "@/components/lesson/LessonContent";
 import {
   Accordion,
   AccordionContent,
@@ -10,7 +10,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { courseLevelTitle } from "@/constants";
 import { getCourseBySlug } from "@/lib/actions/course.actions";
-import { TUpdateCourseLecture } from "@/types";
 import { ECourseStatus } from "@/types/enums";
 import Image from "next/image";
 
@@ -65,34 +64,7 @@ const page = async ({
           </div>
         </BoxSection>
         <BoxSection title="Nội dung khóa học">
-          <div className="flex flex-col gap-5">
-            {lectures.map((lecture: TUpdateCourseLecture) => (
-              <Accordion
-                type="single"
-                collapsible
-                className="w-full"
-                key={lecture._id}
-              >
-                <AccordionItem value={lecture._id.toString()}>
-                  <AccordionTrigger>
-                    <div className="flex items-center gap-3 justify-between w-full pr-5">
-                      <div>{lecture.title}</div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="!bg-transparent border-none p-0">
-                    <div className="flex flex-col gap-3 mt-5">
-                      {lecture.lessons.map((lesson) => (
-                        <LessonItem
-                          key={lesson._id}
-                          lesson={lesson}
-                        ></LessonItem>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            ))}
-          </div>
+          <LessonContent lectures={lectures} course="" slug=""></LessonContent>
         </BoxSection>
         <BoxSection title="Yêu cầu">
           {data.info.requirements.map((r, index) => (

@@ -67,3 +67,32 @@
     }
   }
 }
+.entry-content {
+  font-size: 16px;
+  line-height: 2;
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ul,
+  ol,
+  figure {
+    @apply mb-5;
+  }
+  ol {
+    list-style: decimal;
+  }
+  ul {
+    list-style: disc;
+  }
+  ol,
+  ul {
+    @apply pl-10;
+  }
+  a {
+    @apply underline text-primary font-medium;
+  }
+}
