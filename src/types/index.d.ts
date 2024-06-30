@@ -74,3 +74,9 @@ export type TUpdateLessonParams = {
   };
   path?: string;
 };
+// History
+export type TCreateHistoryParams = {
+  course: string;
+  lesson: string;
+  checked: boolean | string;
+};
