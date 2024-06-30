@@ -17,7 +17,7 @@ const LessonContent = ({
   lectures: TUpdateCourseLecture[];
   course: string;
   slug: string;
-  histories: IHistory[];
+  histories?: IHistory[];
 }) => {
   return (
     <div className="flex flex-col gap-5">
