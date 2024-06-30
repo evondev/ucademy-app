@@ -7,6 +7,7 @@ import { findAllLessons, getLessonBySlug } from "@/lib/actions/lesson.actions";
 import { getUserInfo } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs/server";
 import LessonNavigation from "./LessonNavigation";
+import LessonSaveUrl from "./LessonSaveUrl";
 
 const page = async ({
   params,
@@ -46,6 +47,10 @@ const page = async ({
     ((histories?.length || 0) / (lessonList?.length || 1)) * 100;
   return (
     <div className="block xl:grid xl:grid-cols-[minmax(0,2fr),minmax(0,1fr)] gap-10 min-h-screen items-start">
+      <LessonSaveUrl
+        course={course}
+        url={`/${course}/lesson?slug=${slug}`}
+      ></LessonSaveUrl>
       <div>
         <div className="relative mb-5 aspect-video">
           <iframe
