@@ -1,3 +1,4 @@
+import { commonClassNames } from "@/constants";
 import { ICourse } from "@/database/course.model";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,7 +30,7 @@ const CourseItem = ({
   ];
   const courseUrl = url ? url : `/course/${data.slug}`;
   return (
-    <div className="bg-white dark:bg-grayDarker dark:border-opacity-10 border border-gray-200 p-4 rounded-2xl">
+    <div className="bg-white dark:bg-grayDarker dark:border-opacity-10 border border-gray-200 p-4 rounded-2xl flex flex-col">
       <Link href={courseUrl} className="block h-[180px] relative">
         <Image
           src={data.image}
@@ -44,27 +45,26 @@ const CourseItem = ({
           New
         </span> */}
       </Link>
-      <div className="pt-4">
+      <div className="pt-4 flex flex-col flex-1">
         <h3 className="font-bold text-lg mb-3">{data.title}</h3>
-        <div className="flex items-center gap-3 mb-5 text-xs text-gray-500 dark:text-grayDark">
-          {courseInfo.map((item, index) => (
-            <div className="flex items-center gap-2" key={index}>
-              {item.icon("size-4")}
-              <span>{item.title}</span>
-            </div>
-          ))}
+        <div className="mt-auto">
+          <div className="flex items-center gap-3 mb-5 text-xs text-gray-500 dark:text-grayDark">
+            {courseInfo.map((item, index) => (
+              <div className="flex items-center gap-2" key={index}>
+                {item.icon("size-4")}
+                <span>{item.title}</span>
+              </div>
+            ))}
 
-          <span className="font-bold text-primary ml-auto text-base">
-            {data.price.toLocaleString()}đ
-          </span>
+            <span className="font-bold text-primary ml-auto text-base">
+              {data.price.toLocaleString()}đ
+            </span>
+          </div>
+
+          <Link href={courseUrl} className={commonClassNames.btnPrimary}>
+            {cta || "Xem chi tiết"}
+          </Link>
         </div>
-
-        <Link
-          href={courseUrl}
-          className="flex items-center justify-center w-full mt-10 rounded-lg text-white font-semibold bg-primary h-12"
-        >
-          {cta || "Xem chi tiết"}
-        </Link>
       </div>
     </div>
   );

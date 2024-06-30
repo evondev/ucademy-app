@@ -17,6 +17,7 @@
     stroke-dasharray: 100;
     animation: dash 3s linear forwards;
   }
+
   @keyframes dash {
     to {
       stroke-dashoffset: 0;
@@ -32,6 +33,9 @@
   }
   .borderDarkMode {
     @apply border-gray-200 dark:border-opacity-10;
+  }
+  .focus-primary:focus {
+    @apply focus:ring-4 focus:ring-primary focus:ring-opacity-10;
   }
 }
 @media screen and (max-width: 1023.98px) {
@@ -94,5 +98,26 @@
   }
   a {
     @apply underline text-primary font-medium;
+  }
+}
+.button-primary {
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: 0;
+    height: 100%;
+    width: 0;
+    background-color: rgba(white, 0.1);
+    transition: all 0.25s linear;
+    z-index: -1;
+  }
+  &:hover:before {
+    left: 0;
+    width: 100%;
   }
 }

@@ -79,7 +79,7 @@ const page = async ({
       <div className="sticky top-5 right-0 max-h-[calc(100svh-100px)] overflow-y-auto">
         <div className="h-3 w-full rounded-full border borderDarkMode bgDarkMode mb-2">
           <div
-            className="h-full rounded-full bg-secondary w-0 transition-all duration-300"
+            className="h-full rounded-full bg-gradient-to-r from-primary to-secondary w-0 transition-all duration-300"
             style={{
               width: `${completePercentage}%`,
             }}

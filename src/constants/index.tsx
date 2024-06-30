@@ -91,6 +91,8 @@ export const commonClassNames = {
     "size-8 rounded-md border flex items-center justify-center p-2  text-gray-500 hover:border-opacity-80 dark:bg-transparent borderDarkMode dark:hover:border-opacity-20",
   paginationButton:
     "size-10 rounded-md borderDarkMode bgDarkMode border flex items-center justify-center hover:border-primary transition-all hover:text-primary",
+  btnPrimary:
+    "flex items-center justify-center w-full mt-10 rounded-lg text-white font-semibold bg-primary h-12 button-primary",
 };
 export const editorOptions = (field: any, theme: any) => ({
   initialValue: "",
@@ -129,3 +131,4 @@ export const editorOptions = (field: any, theme: any) => ({
     content_style: `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');body { font-family: Manrope,Helvetica,Arial,sans-serif; font-size:14px; line-height: 2; padding-bottom: 32px; } img { max-width: 100%; height: auto; display: block; margin: 0 auto; };`,
   },
 });
+export const lastLessonKey = "lastLesson";
