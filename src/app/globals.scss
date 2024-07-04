@@ -37,6 +37,9 @@
   .focus-primary:focus {
     @apply focus:ring-4 focus:ring-primary focus:ring-opacity-10;
   }
+  .skeleton {
+    @apply bg-gray-200 dark:bg-grayDarker animate-pulse;
+  }
 }
 @media screen and (max-width: 1023.98px) {
   .course-slider {

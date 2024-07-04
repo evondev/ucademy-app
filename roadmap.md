@@ -41,8 +41,8 @@
 - CRUD Lesson ✅
 - Complete lesson ✅
 - Continue lesson ✅
-- Optimize lesson page
-- Suspense and Skeleton loading
+- Optimize lesson page ✅
+- Suspense and Skeleton loading ✅
 - Optimize types and code
 - Add vercel page speed insight and analytics
 - Add lesson page "Expanded screen"

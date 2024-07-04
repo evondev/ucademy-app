@@ -51,7 +51,7 @@ export async function getLessonBySlug({
     const findLesson = await Lesson.findOne({
       slug,
       course,
-    });
+    }).select("title video_url content");
     return findLesson;
   } catch (error) {
     console.log(error);
@@ -66,7 +66,7 @@ export async function findAllLessons({
     connectToDatabase();
     const lessons = await Lesson.find({
       course,
-    });
+    }).select("title video_url content slug");
     return lessons;
   } catch (error) {
     console.log(error);

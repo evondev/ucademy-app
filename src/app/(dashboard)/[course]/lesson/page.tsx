@@ -3,7 +3,7 @@ import Heading from "@/components/common/Heading";
 import LessonContent from "@/components/lesson/LessonContent";
 import { getCourseBySlug } from "@/lib/actions/course.actions";
 import { getHistory } from "@/lib/actions/history.actions";
-import { findAllLessons, getLessonBySlug } from "@/lib/actions/lesson.actions";
+import { findAllLessons } from "@/lib/actions/lesson.actions";
 import { getUserInfo } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs/server";
 import LessonNavigation from "./LessonNavigation";
@@ -30,14 +30,11 @@ const page = async ({
   if (!findCourse) return null;
   const courseId = findCourse?._id.toString();
   if (!findUser.courses.includes(courseId as any)) return <PageNotFound />;
-  const lessonDetails = await getLessonBySlug({
-    slug,
-    course: courseId || "",
-  });
   const lessonList = await findAllLessons({ course: courseId || "" });
+  const lessonDetails = lessonList?.find((el) => el.slug === slug);
   if (!lessonDetails) return null;
   const currentLessonIndex =
-    lessonList?.findIndex((el) => el.slug === lessonDetails.slug) || 0;
+    lessonList?.findIndex((el) => el.slug === slug) || 0;
   const nextLesson = lessonList?.[currentLessonIndex + 1];
   const prevLesson = lessonList?.[currentLessonIndex - 1];
   const videoId = lessonDetails.video_url?.split("v=").at(-1);
