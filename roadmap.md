@@ -43,10 +43,11 @@
 - Continue lesson ✅
 - Optimize lesson page ✅
 - Suspense and Skeleton loading ✅
-- Optimize types and code
-- Add vercel page speed insight and analytics
-- Add lesson page "Expanded screen"
+- Add vercel page speed insight and analytics ✅
+- Add lesson page "Expanded screen" ✅
+- Auto change lesson ✅
 - Filter, pagination courses
+- Optimize types and code
 - DragnDrop Lecture - Lesson
 
 # Order

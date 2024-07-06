@@ -1,6 +1,8 @@
 import { ThemeProvider } from "@/components/common/ThemeProvider";
 import { manrope } from "@/utils";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,6 +29,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <SpeedInsights />
+            <Analytics />
             <ToastContainer
               autoClose={2000}
               bodyClassName="text-sm font-medium"

@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { Suspense } from "react";
 import LoadingOutline from "./@outline/LoadingOutline";
 import LoadingPlayer from "./@player/LoadingPlayer";
+import LessonWrapper from "./LessonWrapper";
 
 const Layout = async ({
   player,
@@ -18,10 +19,10 @@ const Layout = async ({
   if (!findUser) return <PageNotFound />;
 
   return (
-    <div className="block xl:grid xl:grid-cols-[minmax(0,2fr),minmax(0,1fr)] gap-10 min-h-screen items-start">
+    <LessonWrapper>
       <Suspense fallback={<LoadingPlayer />}>{player}</Suspense>
       <Suspense fallback={<LoadingOutline />}>{outline}</Suspense>
-    </div>
+    </LessonWrapper>
   );
 };
 
