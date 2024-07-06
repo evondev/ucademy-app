@@ -8,10 +8,32 @@ import {
   TGetAllCourseParams,
   TUpdateCourseParams,
 } from "@/types";
+import { ECourseStatus } from "@/types/enums";
 import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
 // fetching
+export async function getAllCoursesPublic(
+  params: TGetAllCourseParams
+): Promise<ICourse[] | undefined> {
+  try {
+    connectToDatabase();
+    const { page = 1, limit = 10, search } = params;
+    const skip = (page - 1) * limit;
+    const query: FilterQuery<typeof Course> = {};
+    if (search) {
+      query.$or = [{ title: { $regex: search, $options: "i" } }];
+    }
+    query.status = ECourseStatus.APPROVED;
+    const courses = await Course.find(query)
+      .skip(skip)
+      .limit(limit)
+      .sort({ created_at: -1 });
+    return courses;
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function getAllCourses(
   params: TGetAllCourseParams
 ): Promise<ICourse[] | undefined> {
@@ -42,23 +64,21 @@ export async function getCourseBySlug({
 }): Promise<TCourseUpdateParams | undefined> {
   try {
     connectToDatabase();
-    const findCourse = await Course.findOne({ slug })
-      .select("_id slug lectures")
-      .populate({
-        path: "lectures",
-        model: Lecture,
-        select: "_id title",
+    const findCourse = await Course.findOne({ slug }).populate({
+      path: "lectures",
+      model: Lecture,
+      select: "_id title",
+      match: {
+        _destroy: false,
+      },
+      populate: {
+        path: "lessons",
+        model: Lesson,
         match: {
           _destroy: false,
         },
-        populate: {
-          path: "lessons",
-          model: Lesson,
-          match: {
-            _destroy: false,
-          },
-        },
-      });
+      },
+    });
     return findCourse;
   } catch (error) {
     console.log(error);
@@ -85,6 +105,7 @@ export async function createCourse(params: TCreateCourseParams) {
   }
 }
 export async function updateCourse(params: TUpdateCourseParams) {
+  console.log("updateCourse ~ params:", params);
   try {
     connectToDatabase();
     const findCourse = await Course.findOne({ slug: params.slug });

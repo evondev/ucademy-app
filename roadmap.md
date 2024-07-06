@@ -46,7 +46,7 @@
 - Add vercel page speed insight and analytics ✅
 - Add lesson page "Expanded screen" ✅
 - Auto change lesson ✅
-- Filter, pagination courses
+- Filter, pagination courses ✅
 
 # Order
 
