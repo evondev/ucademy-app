@@ -47,8 +47,6 @@
 - Add lesson page "Expanded screen" ✅
 - Auto change lesson ✅
 - Filter, pagination courses
-- Optimize types and code
-- DragnDrop Lecture - Lesson
 
 # Order
 
@@ -79,4 +77,7 @@
 
 # User
 
-# Overview
+# Final
+
+- Optimize types and code
+- DragnDrop Lecture - Lesson

@@ -1,5 +1,13 @@
 "use client";
 import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Table,
   TableBody,
   TableCell,
@@ -12,47 +20,40 @@ import { ICourse } from "@/database/course.model";
 import { updateCourse } from "@/lib/actions/course.actions";
 import { cn } from "@/lib/utils";
 import { ECourseStatus } from "@/types/enums";
+import { debounce } from "lodash";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import Heading from "../common/Heading";
-import { IconDelete, IconEdit, IconEye, IconStudy } from "../icons";
+import {
+  IconDelete,
+  IconEdit,
+  IconEye,
+  IconLeftArrow,
+  IconRightArrow,
+  IconStudy,
+} from "../icons";
 import { Input } from "../ui/input";
 
-const IconArrowLeft = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className="w-6 h-6"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
-    />
-  </svg>
-);
-const IconArrowRight = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className="w-6 h-6"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-    />
-  </svg>
-);
 const CourseManage = ({ courses }: { courses: ICourse[] }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // Get a new searchParams string by merging the current
+  // searchParams with a provided key/value pair
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
   const handleDeleteCourse = (slug: string) => {
     Swal.fire({
       title: "Are you sure?",
@@ -105,6 +106,24 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
       console.log(error);
     }
   };
+  const handleSelectStatus = (status: ECourseStatus) => {
+    router.push(`${pathname}?${createQueryString("status", status)}`);
+  };
+  const handleSearchCourse = debounce(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      router.push(`${pathname}?${createQueryString("search", e.target.value)}`);
+    },
+    500
+  );
+  const [page, setPage] = useState(1);
+  const handleChangePage = (type: "prev" | "next") => {
+    if (type === "prev" && page === 1) return;
+    if (type === "prev") setPage((prev) => prev - 1);
+    if (type === "next") setPage((prev) => prev + 1);
+  };
+  useEffect(() => {
+    router.push(`${pathname}?${createQueryString("page", page.toString())}`);
+  }, [page]);
   return (
     <>
       <Link
@@ -128,8 +147,31 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
       </Link>
       <div className="flex flex-col lg:flex-row lg:items-center gap-5 justify-between mb-10">
         <Heading className="">Quản lý khóa học</Heading>
-        <div className="w-full lg:w-[300px]">
-          <Input placeholder="Tìm kiếm khóa học..." />
+        <div className="flex gap-3">
+          <div className="w-full lg:w-[300px]">
+            <Input
+              placeholder="Tìm kiếm khóa học..."
+              onChange={(e) => handleSearchCourse(e)}
+            />
+          </div>
+          <Select
+            onValueChange={(value) =>
+              handleSelectStatus(value as ECourseStatus)
+            }
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Chọn trạng thái" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {courseStatus.map((status) => (
+                  <SelectItem value={status.value} key={status.value}>
+                    {status.title}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
       </div>
       <Table className="table-responsive">
@@ -224,11 +266,17 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
         </TableBody>
       </Table>
       <div className="flex justify-end gap-3 mt-5">
-        <button className={commonClassNames.paginationButton}>
-          {IconArrowLeft}
+        <button
+          className={commonClassNames.paginationButton}
+          onClick={() => handleChangePage("prev")}
+        >
+          <IconLeftArrow />
         </button>
-        <button className={commonClassNames.paginationButton}>
-          {IconArrowRight}
+        <button
+          className={commonClassNames.paginationButton}
+          onClick={() => handleChangePage("next")}
+        >
+          <IconRightArrow />
         </button>
       </div>
     </>
