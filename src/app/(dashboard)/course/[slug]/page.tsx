@@ -7,11 +7,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { courseLevelTitle } from "@/constants";
 import { getCourseBySlug } from "@/lib/actions/course.actions";
+import { getUserInfo } from "@/lib/actions/user.actions";
 import { ECourseStatus } from "@/types/enums";
+import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
+import ButtonEnroll from "./ButtonEnroll";
 
 const page = async ({
   params,
@@ -25,6 +27,8 @@ const page = async ({
   });
   if (!data) return null;
   if (data.status !== ECourseStatus.APPROVED) return <PageNotFound />;
+  const { userId } = auth();
+  const findUser = await getUserInfo({ userId: userId || "" });
   const videoId = data.intro_url?.split("v=")[1];
   const lectures = data.lectures || [];
   return (
@@ -127,10 +131,10 @@ const page = async ({
         <div className="bgDarkMode border borderDarkMode rounded-lg p-5">
           <div className="flex items-center gap-2 mb-3">
             <strong className="text-primary text-xl font-bold">
-              {data.price}
+              {data.price.toLocaleString("en-EN")}
             </strong>
             <span className="text-slate-400 line-through text-sm">
-              {data.sale_price}
+              {data.sale_price.toLocaleString("en-EN")}
             </span>
             <span className="ml-auto inline-block px-3 py-1 rounded-lg bg-primary text-primary bg-opacity-10 font-semibold text-sm">
               {Math.floor((data.price / data.sale_price) * 100)}%
@@ -155,9 +159,11 @@ const page = async ({
               <span>Tài liệu kèm theo</span>
             </li>
           </ul>
-          <Button variant="primary" className="w-full">
-            Mua khóa học
-          </Button>
+          <ButtonEnroll
+            user={findUser ? JSON.parse(JSON.stringify(findUser)) : null}
+            courseId={data ? JSON.parse(JSON.stringify(data._id)) : null}
+            amount={data.price}
+          ></ButtonEnroll>
         </div>
       </div>
     </div>
