@@ -27,7 +27,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { StatusBadge } from "../common";
+import { BouncedLink, StatusBadge } from "../common";
 import Heading from "../common/Heading";
 import {
   IconDelete,
@@ -121,25 +121,7 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
   }, [page]);
   return (
     <>
-      <Link
-        href="/manage/course/new"
-        className="size-10 rounded-full bg-primary flexCenter text-white fixed right-5 bottom-5 animate-bounce"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 4.5v15m7.5-7.5h-15"
-          />
-        </svg>
-      </Link>
+      <BouncedLink url="/manage/course/new"></BouncedLink>
       <div className="flex flex-col lg:flex-row lg:items-center gap-5 justify-between mb-10">
         <Heading className="">Quản lý khóa học</Heading>
         <div className="flex gap-3">

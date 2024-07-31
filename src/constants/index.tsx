@@ -1,5 +1,6 @@
 import {
   IconComment,
+  IconCoupon,
   IconExplore,
   IconOrder,
   IconPlay,
@@ -34,6 +35,11 @@ export const menuItems: TMenuItem[] = [
     url: "/manage/order",
     title: "Quản lý đơn hàng",
     icon: <IconOrder className="size-5" />,
+  },
+  {
+    url: "/manage/coupon",
+    title: "Quản lý coupon",
+    icon: <IconCoupon className="size-5" />,
   },
   {
     url: "/manage/comment",
