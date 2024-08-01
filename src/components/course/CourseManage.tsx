@@ -22,21 +22,14 @@ import { updateCourse } from "@/lib/actions/course.actions";
 import { ECourseStatus } from "@/types/enums";
 import { debounce } from "lodash";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { BouncedLink, StatusBadge } from "../common";
+import { BouncedLink, StatusBadge, TableAction } from "../common";
 import Heading from "../common/Heading";
-import {
-  IconDelete,
-  IconEdit,
-  IconEye,
-  IconLeftArrow,
-  IconRightArrow,
-  IconStudy,
-} from "../icons";
+import TableActionItem from "../common/TableActionItem";
+import { IconLeftArrow, IconRightArrow } from "../icons";
 import { Input } from "../ui/input";
 
 const CourseManage = ({ courses }: { courses: ICourse[] }) => {
@@ -203,33 +196,24 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
                     ></StatusBadge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex gap-3">
-                      <Link
-                        href={`/manage/course/update-content?slug=${course.slug}`}
-                        className={commonClassNames.action}
-                      >
-                        <IconStudy />
-                      </Link>
-                      <Link
-                        href={`/course/${course.slug}`}
-                        target="_blank"
-                        className={commonClassNames.action}
-                      >
-                        <IconEye />
-                      </Link>
-                      <Link
-                        href={`/manage/course/update?slug=${course.slug}`}
-                        className={commonClassNames.action}
-                      >
-                        <IconEdit />
-                      </Link>
-                      <button
+                    <TableAction>
+                      <TableActionItem
+                        type="study"
+                        url={`/manage/course/update-content?slug=${course.slug}`}
+                      ></TableActionItem>
+                      <TableActionItem
+                        type="view"
+                        url={`/course/${course.slug}`}
+                      ></TableActionItem>
+                      <TableActionItem
+                        type="edit"
+                        url={`/manage/course/update?slug=${course.slug}`}
+                      ></TableActionItem>
+                      <TableActionItem
+                        type="delete"
                         onClick={() => handleDeleteCourse(course.slug)}
-                        className={commonClassNames.action}
-                      >
-                        <IconDelete />
-                      </button>
-                    </div>
+                      ></TableActionItem>
+                    </TableAction>
                   </TableCell>
                 </TableRow>
               );
