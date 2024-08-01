@@ -50,12 +50,18 @@
 
 # Order
 
-- Manage order
-- Create order
-- Update order
-- Filter, pagination order
-- Enroll course from order
-- Remove course from order
+- Manage order ✅
+- Create order ✅
+- Update order ✅
+- Filter, pagination order ✅
+- Enroll course from order ✅
+- Remove course from order ✅
+
+# Cart
+
+- Create cart
+- Update cart
+- Remove cart
 
 # Coupon
 
@@ -63,6 +69,9 @@
 - Create coupon
 - Update coupon
 - Filter, pagination coupon
+- Select course
+- Validate coupon
+- Discount order
 
 # Rating
 
@@ -73,9 +82,15 @@
 
 # Notification
 
+# User
+
 # Comment
 
-# User
+# Other
+
+- Hydration
+- SSG
+- Intercepting Routes
 
 # Final
 

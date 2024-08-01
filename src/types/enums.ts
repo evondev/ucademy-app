@@ -27,7 +27,12 @@ enum EOrderStatus {
   COMPLETED = "COMPLETED",
   CANCELED = "CANCELED",
 }
+enum ECouponType {
+  PERCENT = "PERCENT",
+  AMOUNT = "AMOUNT",
+}
 export {
+  ECouponType,
   ECourseLevel,
   ECourseStatus,
   ELessonType,

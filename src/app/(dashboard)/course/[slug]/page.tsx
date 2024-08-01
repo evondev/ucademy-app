@@ -1,5 +1,4 @@
 import PageNotFound from "@/app/not-found";
-import { IconPlay, IconStudy, IconUsers } from "@/components/icons";
 import LessonContent from "@/components/lesson/LessonContent";
 import {
   Accordion,
@@ -13,7 +12,8 @@ import { getUserInfo } from "@/lib/actions/user.actions";
 import { ECourseStatus } from "@/types/enums";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
-import ButtonEnroll from "./ButtonEnroll";
+import AlreadyEnroll from "./AlreadyEnroll";
+import CourseWidget from "./CourseWidget";
 
 const page = async ({
   params,
@@ -29,6 +29,7 @@ const page = async ({
   if (data.status !== ECourseStatus.APPROVED) return <PageNotFound />;
   const { userId } = auth();
   const findUser = await getUserInfo({ userId: userId || "" });
+  const userCourses = findUser?.courses.map((c) => c.toString());
   const videoId = data.intro_url?.split("v=")[1];
   const lectures = data.lectures || [];
   return (
@@ -128,43 +129,14 @@ const page = async ({
         </BoxSection>
       </div>
       <div>
-        <div className="bgDarkMode border borderDarkMode rounded-lg p-5">
-          <div className="flex items-center gap-2 mb-3">
-            <strong className="text-primary text-xl font-bold">
-              {data.price.toLocaleString("en-EN")}
-            </strong>
-            <span className="text-slate-400 line-through text-sm">
-              {data.sale_price.toLocaleString("en-EN")}
-            </span>
-            <span className="ml-auto inline-block px-3 py-1 rounded-lg bg-primary text-primary bg-opacity-10 font-semibold text-sm">
-              {Math.floor((data.price / data.sale_price) * 100)}%
-            </span>
-          </div>
-          <h3 className="font-bold mb-3 text-sm">Khóa học gồm có:</h3>
-          <ul className="mb-5 flex flex-col gap-2 text-sm text-slate-500">
-            <li className="flex items-center gap-2">
-              <IconPlay className="size-4" />
-              <span>30h học</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <IconPlay className="size-4" />
-              <span>Video Full HD</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <IconUsers className="size-4" />
-              <span>Có nhóm hỗ trợ</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <IconStudy className="size-4" />
-              <span>Tài liệu kèm theo</span>
-            </li>
-          </ul>
-          <ButtonEnroll
-            user={findUser ? JSON.parse(JSON.stringify(findUser)) : null}
-            courseId={data ? JSON.parse(JSON.stringify(data._id)) : null}
-            amount={data.price}
-          ></ButtonEnroll>
-        </div>
+        {userCourses?.includes(data._id.toString()) ? (
+          <AlreadyEnroll></AlreadyEnroll>
+        ) : (
+          <CourseWidget
+            findUser={findUser ? JSON.parse(JSON.stringify(findUser)) : null}
+            data={data ? JSON.parse(JSON.stringify(data)) : null}
+          ></CourseWidget>
+        )}
       </div>
     </div>
   );
