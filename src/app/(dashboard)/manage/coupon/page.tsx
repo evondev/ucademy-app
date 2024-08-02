@@ -13,9 +13,11 @@ import {
 } from "@/components/ui/table";
 import { getCoupons } from "@/lib/actions/coupon.actions";
 import { ECouponType } from "@/types/enums";
+import ActionDeleteCoupon from "./ActionDeleteCoupon";
 
 const page = async () => {
   const coupons = await getCoupons({});
+
   return (
     <div>
       <BouncedLink url="/manage/coupon/new"></BouncedLink>
@@ -82,7 +84,7 @@ const page = async () => {
                       type="edit"
                       url={`/manage/coupon/update?code=${coupon.code}`}
                     ></TableActionItem>
-                    <TableActionItem type="delete"></TableActionItem>
+                    <ActionDeleteCoupon code={coupon.code}></ActionDeleteCoupon>
                   </TableAction>
                 </TableCell>
               </TableRow>
