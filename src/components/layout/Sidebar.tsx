@@ -13,8 +13,11 @@ const Sidebar = () => {
     <div className="hidden p-5 border-r borderDarkMode bgDarkMode lg:flex flex-col fixed top-0 left-0 bottom-0 w-[300px]">
       <Link
         href="/"
-        className="font-bold text-3xl inline-flex items-baseline gap-0.5 mb-5 h-10 self-start pl-3"
+        className="font-bold text-2xl inline-flex items-center gap-2 mb-5 h-10 self-start pl-3"
       >
+        <span className="size-10 rounded-lg flex items-center justify-center text-lg text-primary bgDarkMode border borderDarkMode">
+          U
+        </span>
         <span>Ucademy</span>
       </Link>
       <ul className="flex flex-col gap-2">

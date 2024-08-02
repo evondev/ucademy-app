@@ -1,3 +1,4 @@
+import { ICoupon } from "@/database/coupon.model";
 import { ICourse } from "@/database/course.model";
 import { ILesson } from "@/database/lesson.model";
 
@@ -96,4 +97,12 @@ export type TCreateOrderParams = {
   amount?: number;
   discount?: number;
   coupon?: string;
+};
+// Coupon
+export type TCreateCouponParams = Omit<ICoupon, "_id created_at">;
+export type TCouponParams = Omit<ICoupon, "courses"> & {
+  courses: {
+    _id: string;
+    title: string;
+  }[];
 };
