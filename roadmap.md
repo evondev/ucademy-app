@@ -57,12 +57,6 @@
 - Enroll course from order ✅
 - Remove course from order ✅
 
-# Cart
-
-- Create cart
-- Update cart
-- Remove cart
-
 # Coupon
 
 - Manage coupon
@@ -80,11 +74,17 @@
 - Update rating
 - Filter rating
 
+# Comment
+
+# Cart
+
+- Create cart
+- Update cart
+- Remove cart
+
 # Notification
 
 # User
-
-# Comment
 
 # Other
 
