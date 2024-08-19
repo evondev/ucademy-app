@@ -76,12 +76,6 @@
 
 # Comment
 
-# Cart
-
-- Create cart
-- Update cart
-- Remove cart
-
 # Notification
 
 # User
@@ -96,3 +90,5 @@
 
 - Optimize types and code
 - DragnDrop Lecture - Lesson
+- Interview questions
+- English interview tips
