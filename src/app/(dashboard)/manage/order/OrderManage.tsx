@@ -34,6 +34,9 @@ interface IOrderManageProps {
   amount: number;
   discount: number;
   status: EOrderStatus;
+  coupon: {
+    code: string;
+  };
   course: {
     title: string;
   };
@@ -150,7 +153,9 @@ const OrderManage = ({ orders = [] }: { orders: IOrderManageProps[] }) => {
                       </strong>
                     </div>
                   </TableCell>
-                  <TableCell></TableCell>
+                  <TableCell>
+                    <strong>{order.coupon?.code || ""}</strong>
+                  </TableCell>
                   <TableCell>
                     <StatusBadge item={orderStatusItem}></StatusBadge>
                   </TableCell>

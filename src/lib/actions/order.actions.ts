@@ -1,4 +1,5 @@
 "use server";
+import Coupon from "@/database/coupon.model";
 import Course from "@/database/course.model";
 import Order from "@/database/order.model";
 import User from "@/database/user.model";
@@ -30,15 +31,25 @@ export async function fetchOrders(params: any) {
         model: User,
         select: "name",
       })
+      .populate({
+        path: "coupon",
+        select: "code",
+      })
+      .sort({ created_at: -1 })
       .skip(skip)
       .limit(limit);
-    return orders;
+    return JSON.parse(JSON.stringify(orders));
   } catch (error) {}
 }
 export async function createOrder(params: TCreateOrderParams) {
   try {
     connectToDatabase();
     const newOrder = await Order.create(params);
+    if (params.coupon) {
+      await Coupon.findByIdAndUpdate(params.coupon, {
+        $inc: { used: 1 },
+      });
+    }
     return JSON.parse(JSON.stringify(newOrder));
   } catch (error) {
     console.log(error);

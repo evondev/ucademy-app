@@ -43,7 +43,7 @@ export async function updateCoupon(params: TUpdateCouponParams) {
 export async function getCoupons(params: any): Promise<ICoupon[] | undefined> {
   try {
     connectToDatabase();
-    const coupons = await Coupon.find(params);
+    const coupons = await Coupon.find(params).sort({ created_at: -1 });
     return JSON.parse(JSON.stringify(coupons));
   } catch (error) {
     console.log(error);
@@ -78,7 +78,9 @@ export async function getValidateCoupon(
       select: "_id title",
     });
     const coupon = JSON.parse(JSON.stringify(findCoupon));
+    const couponCourses = coupon?.courses.map((course: any) => course._id);
     let isActive = true;
+    if (!couponCourses.includes(params.courseId)) isActive = false;
     if (!coupon?.active) isActive = false;
     if (coupon?.used >= coupon?.limit) isActive = false;
     if (coupon?.start_date && new Date(coupon?.start_date) > new Date())

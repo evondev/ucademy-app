@@ -6,6 +6,8 @@ import CouponForm from "./CouponForm";
 
 const CourseWidget = ({ data, findUser }: { data: any; findUser: any }) => {
   const [price, setPrice] = useState<number>(data.price);
+  const [coupon, setCoupon] = useState("");
+
   return (
     <>
       <div className="bgDarkMode border borderDarkMode rounded-lg p-5">
@@ -43,8 +45,14 @@ const CourseWidget = ({ data, findUser }: { data: any; findUser: any }) => {
           user={findUser ? JSON.parse(JSON.stringify(findUser)) : null}
           courseId={data ? JSON.parse(JSON.stringify(data._id)) : null}
           amount={price}
+          coupon={coupon}
         ></ButtonEnroll>
-        <CouponForm price={price} setPrice={setPrice}></CouponForm>
+        <CouponForm
+          setCouponId={setCoupon}
+          originalPrice={data.price}
+          setPrice={setPrice}
+          courseId={data ? JSON.parse(JSON.stringify(data._id)) : null}
+        ></CouponForm>
       </div>
     </>
   );
