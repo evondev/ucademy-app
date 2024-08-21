@@ -3,6 +3,7 @@ import Course, { ICourse } from "@/database/course.model";
 import Lecture from "@/database/lecture.model";
 import Lesson from "@/database/lesson.model";
 import {
+  StudyCoursesProps,
   TCourseUpdateParams,
   TCreateCourseParams,
   TGetAllCourseParams,
@@ -15,7 +16,7 @@ import { connectToDatabase } from "../mongoose";
 // fetching
 export async function getAllCoursesPublic(
   params: TGetAllCourseParams
-): Promise<ICourse[] | undefined> {
+): Promise<StudyCoursesProps[] | undefined> {
   try {
     connectToDatabase();
     const { page = 1, limit = 10, search } = params;
