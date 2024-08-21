@@ -59,13 +59,13 @@
 
 # Coupon
 
-- Manage coupon
-- Create coupon
-- Update coupon
-- Filter, pagination coupon
-- Select course
-- Validate coupon
-- Discount order
+- Manage coupon ✅
+- Create coupon ✅
+- Update coupon ✅
+- Filter, pagination coupon ✅
+- Select course ✅
+- Validate coupon ✅
+- Discount order ✅
 
 # Rating
 
@@ -92,3 +92,4 @@
 - DragnDrop Lecture - Lesson
 - Interview questions
 - English interview tips
+- Global state for authentication

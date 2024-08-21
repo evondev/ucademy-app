@@ -31,12 +31,17 @@ enum ECouponType {
   PERCENT = "PERCENT",
   AMOUNT = "AMOUNT",
 }
+enum ERatingStatus {
+  ACTIVE = "ACTIVE",
+  UNACTIVE = "UNACTIVE",
+}
 export {
   ECouponType,
   ECourseLevel,
   ECourseStatus,
   ELessonType,
   EOrderStatus,
+  ERatingStatus,
   EUserRole,
   EUserStatus,
 };

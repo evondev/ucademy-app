@@ -7,7 +7,7 @@ import {
   IconStudy,
   IconUsers,
 } from "@/components/icons";
-import { TMenuItem } from "@/types";
+import { TMenuItem, TRatingIcon } from "@/types";
 import {
   ECouponType,
   ECourseLevel,
@@ -198,3 +198,28 @@ export const couponFormSchema = z.object({
   courses: z.array(z.string()).optional(),
   limit: z.number().optional(),
 });
+export const ratingList: {
+  title: TRatingIcon;
+  value: number;
+}[] = [
+  {
+    title: "awesome",
+    value: 5,
+  },
+  {
+    title: "good",
+    value: 4,
+  },
+  {
+    title: "meh",
+    value: 3,
+  },
+  {
+    title: "bad",
+    value: 2,
+  },
+  {
+    title: "terrible",
+    value: 1,
+  },
+];

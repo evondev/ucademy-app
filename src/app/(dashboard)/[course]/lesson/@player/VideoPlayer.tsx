@@ -6,13 +6,19 @@ import MuxPlayer from "@mux/mux-player-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import LessonNavigation from "../LessonNavigation";
+import RatingButton from "./RatingButton";
 
 const VideoPlayer = ({
   nextLesson,
   prevLesson,
+  data,
 }: {
   nextLesson: string;
   prevLesson: string;
+  data: {
+    userId: string;
+    courseId: string;
+  };
 }) => {
   const duration = 5000;
   const [isEndedVideo, setIsEndedVideo] = useState(false);
@@ -51,9 +57,15 @@ const VideoPlayer = ({
           nextLesson={nextLesson}
           prevLesson={prevLesson}
         ></LessonNavigation>
-        <Button onClick={() => setExpandedPlayer(!expandedPlayer)}>
-          {expandedPlayer ? "Mặc định" : "Mở rộng"}
-        </Button>
+        <div className="flex gap-5">
+          <RatingButton
+            userId={data.userId}
+            courseId={data.courseId}
+          ></RatingButton>
+          <Button onClick={() => setExpandedPlayer(!expandedPlayer)}>
+            {expandedPlayer ? "Mặc định" : "Mở rộng"}
+          </Button>
+        </div>
       </div>
     </>
   );
