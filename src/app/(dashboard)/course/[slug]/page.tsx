@@ -7,9 +7,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { courseLevelTitle } from "@/constants";
-import { getCourseBySlug } from "@/lib/actions/course.actions";
+import {
+  getCourseBySlug,
+  getCourseLessonsInfo,
+  updateCourseView,
+} from "@/lib/actions/course.actions";
 import { getUserInfo } from "@/lib/actions/user.actions";
 import { ECourseStatus } from "@/types/enums";
+import { formatMinutesToHour } from "@/utils";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import AlreadyEnroll from "./AlreadyEnroll";
@@ -22,6 +27,7 @@ const page = async ({
     slug: string;
   };
 }) => {
+  await updateCourseView({ slug: params.slug });
   const data = await getCourseBySlug({
     slug: params.slug,
   });
@@ -32,6 +38,9 @@ const page = async ({
   const userCourses = findUser?.courses.map((c) => c.toString());
   const videoId = data.intro_url?.split("v=")[1];
   const lectures = data.lectures || [];
+  const { duration, lessons }: any = await getCourseLessonsInfo({
+    slug: data.slug,
+  });
   return (
     <div className="grid lg:grid-cols-[2fr,1fr] gap-10 min-h-screen">
       <div>
@@ -62,10 +71,12 @@ const page = async ({
         </BoxSection>
         <BoxSection title="Thông tin">
           <div className="grid grid-cols-4 gap-5 mb-10">
-            <BoxInfo title="Bài học">100</BoxInfo>
+            <BoxInfo title="Bài học">{lessons}</BoxInfo>
             <BoxInfo title="Lượt xem">{data.views.toLocaleString()}</BoxInfo>
             <BoxInfo title="Trình độ">{courseLevelTitle[data.level]}</BoxInfo>
-            <BoxInfo title="Thời lượng">100</BoxInfo>
+            <BoxInfo title="Thời lượng">
+              {formatMinutesToHour(duration)}
+            </BoxInfo>
           </div>
         </BoxSection>
         <BoxSection title="Nội dung khóa học">
@@ -135,6 +146,7 @@ const page = async ({
           <CourseWidget
             findUser={findUser ? JSON.parse(JSON.stringify(findUser)) : null}
             data={data ? JSON.parse(JSON.stringify(data)) : null}
+            duration={formatMinutesToHour(duration)}
           ></CourseWidget>
         )}
       </div>
