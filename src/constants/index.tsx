@@ -4,6 +4,7 @@ import {
   IconExplore,
   IconOrder,
   IconPlay,
+  IconStar,
   IconStudy,
   IconUsers,
 } from "@/components/icons";
@@ -46,6 +47,11 @@ export const menuItems: TMenuItem[] = [
     url: "/manage/coupon",
     title: "Quản lý coupon",
     icon: <IconCoupon className="size-5" />,
+  },
+  {
+    url: "/manage/rating",
+    title: "Quản lý đánh giá",
+    icon: <IconStar className="size-5" />,
   },
   {
     url: "/manage/comment",

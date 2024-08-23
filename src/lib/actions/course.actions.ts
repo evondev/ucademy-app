@@ -9,7 +9,7 @@ import {
   TGetAllCourseParams,
   TUpdateCourseParams,
 } from "@/types";
-import { ECourseStatus } from "@/types/enums";
+import { ECourseStatus, ERatingStatus } from "@/types/enums";
 import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
@@ -65,21 +65,28 @@ export async function getCourseBySlug({
 }): Promise<TCourseUpdateParams | undefined> {
   try {
     connectToDatabase();
-    const findCourse = await Course.findOne({ slug }).populate({
-      path: "lectures",
-      model: Lecture,
-      select: "_id title",
-      match: {
-        _destroy: false,
-      },
-      populate: {
-        path: "lessons",
-        model: Lesson,
+    const findCourse = await Course.findOne({ slug })
+      .populate({
+        path: "lectures",
+        model: Lecture,
+        select: "_id title",
         match: {
           _destroy: false,
         },
-      },
-    });
+        populate: {
+          path: "lessons",
+          model: Lesson,
+          match: {
+            _destroy: false,
+          },
+        },
+      })
+      .populate({
+        path: "rating",
+        match: {
+          status: ERatingStatus.ACTIVE,
+        },
+      });
     return findCourse;
   } catch (error) {
     console.log(error);

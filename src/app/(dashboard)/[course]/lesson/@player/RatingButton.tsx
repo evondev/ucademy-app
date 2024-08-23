@@ -11,9 +11,11 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { ratingList } from "@/constants";
+import { createRating, getRatingByUserId } from "@/lib/actions/rating.actions";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const RatingButton = ({
   courseId,
@@ -24,10 +26,30 @@ const RatingButton = ({
 }) => {
   const [ratingValue, setRatingValue] = useState(-1);
   const [ratingContent, setRatingContent] = useState("");
-  const handleRatingCourse = async () => {};
+
+  const handleRatingCourse = async () => {
+    try {
+      const isAlreadyRated = await getRatingByUserId(userId);
+      if (isAlreadyRated) {
+        toast.warning("Bạn đã đánh giá khóa học này rồi");
+        return;
+      }
+      const res = await createRating({
+        rate: ratingValue,
+        content: ratingContent,
+        user: userId,
+        course: courseId,
+      });
+      if (res) {
+        toast.success("Đánh giá thành công");
+        setRatingContent("");
+        setRatingValue(-1);
+      }
+    } catch (error) {}
+  };
   return (
     <Dialog>
-      <DialogTrigger className="flex items-center gap-3 rounded-lg h-12 bg-primary text-sm font-semibold px-5 text-white">
+      <DialogTrigger className="flex items-center gap-3 rounded-lg h-12 bg-primary text-sm font-semibold px-5 text-white disabled:opacity-50 disabled:cursor-not-allowed">
         <IconStar />
         <span>Đánh giá khóa học</span>
       </DialogTrigger>
@@ -67,7 +89,11 @@ const RatingButton = ({
               className="h-[200px] resize-none"
               onChange={(e) => setRatingContent(e.target.value)}
             />
-            <Button variant="primary" className="w-full mt-5">
+            <Button
+              variant="primary"
+              className="w-full mt-5"
+              onClick={handleRatingCourse}
+            >
               Gửi đánh giá
             </Button>
           </DialogDescription>
