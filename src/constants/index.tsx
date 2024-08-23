@@ -14,6 +14,7 @@ import {
   ECourseLevel,
   ECourseStatus,
   EOrderStatus,
+  ERatingStatus,
 } from "@/types/enums";
 import { z } from "zod";
 
@@ -227,5 +228,21 @@ export const ratingList: {
   {
     title: "terrible",
     value: 1,
+  },
+];
+export const ratingStatus: {
+  title: string;
+  value: ERatingStatus;
+  className?: string;
+}[] = [
+  {
+    title: "Đã duyệt",
+    value: ERatingStatus.ACTIVE,
+    className: "text-green-500 bg-green-500",
+  },
+  {
+    title: "Chờ duyệt",
+    value: ERatingStatus.UNACTIVE,
+    className: "text-orange-500 bg-orange-500",
   },
 ];
