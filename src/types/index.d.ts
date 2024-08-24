@@ -1,6 +1,7 @@
 import { ICoupon } from "@/database/coupon.model";
 import { ICourse } from "@/database/course.model";
 import { ILesson } from "@/database/lesson.model";
+import { Date } from "mongoose";
 import { ECouponType } from "./enums";
 
 export type TActiveLinkProps = {
@@ -134,4 +135,18 @@ export type TCreateRatingParams = {
   content: string;
   user: string;
   course: string;
+};
+export type TRatingItem = {
+  _id: string;
+  content: string;
+  rate: number;
+  created_at: string;
+  course: {
+    title: string;
+    slug: string;
+  };
+  user: {
+    name: string;
+  };
+  status: ERatingStatus;
 };

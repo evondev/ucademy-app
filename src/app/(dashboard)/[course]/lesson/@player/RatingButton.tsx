@@ -26,12 +26,19 @@ const RatingButton = ({
 }) => {
   const [ratingValue, setRatingValue] = useState(-1);
   const [ratingContent, setRatingContent] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRatingCourse = async () => {
+    setIsLoading(true);
     try {
       const isAlreadyRated = await getRatingByUserId(userId);
       if (isAlreadyRated) {
         toast.warning("Bạn đã đánh giá khóa học này rồi");
+        setIsLoading(false);
+        return;
+      }
+      if (!ratingContent || ratingValue === -1) {
+        toast.warning("Vui lòng chọn đánh giá và nhập nội dung đánh giá");
         return;
       }
       const res = await createRating({
@@ -45,8 +52,12 @@ const RatingButton = ({
         setRatingContent("");
         setRatingValue(-1);
       }
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
   };
+  const isDisabled = isLoading || ratingValue === -1 || !ratingContent;
   return (
     <Dialog>
       <DialogTrigger className="flex items-center gap-3 rounded-lg h-12 bg-primary text-sm font-semibold px-5 text-white disabled:opacity-50 disabled:cursor-not-allowed">
@@ -88,11 +99,14 @@ const RatingButton = ({
               placeholder="Đánh giá của bạn"
               className="h-[200px] resize-none"
               onChange={(e) => setRatingContent(e.target.value)}
+              value={ratingContent}
             />
             <Button
               variant="primary"
               className="w-full mt-5"
               onClick={handleRatingCourse}
+              disabled={isDisabled}
+              isLoading={isLoading}
             >
               Gửi đánh giá
             </Button>

@@ -70,7 +70,7 @@ const page = async ({
           {ratings.map((rating, index) => (
             <div
               key={index}
-              className="p-2 text-sm font-medium rounded-md border borderDarkMode bgDarkMode"
+              className="p-2 px-4 text-sm font-semibold rounded-full text-white bg-gradient-to-tr from-primary to-secondary"
             >
               {rating}
             </div>
