@@ -1,11 +1,14 @@
 "use server";
 
-import Coupon, { ICoupon } from "@/database/coupon.model";
+import Coupon from "@/database/coupon.model";
 import {
+  TCouponItem,
   TCouponParams,
   TCreateCouponParams,
+  TFilterData,
   TUpdateCouponParams,
 } from "@/types";
+import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
 
@@ -40,10 +43,22 @@ export async function updateCoupon(params: TUpdateCouponParams) {
     console.log(error);
   }
 }
-export async function getCoupons(params: any): Promise<ICoupon[] | undefined> {
+export async function getCoupons(
+  params: TFilterData
+): Promise<TCouponItem[] | undefined> {
   try {
     connectToDatabase();
-    const coupons = await Coupon.find(params).sort({ created_at: -1 });
+    const { page = 1, limit = 10, search, active } = params;
+    const skip = (page - 1) * limit;
+    const query: FilterQuery<typeof Coupon> = {};
+    if (search) {
+      query.$or = [{ code: { $regex: search, $options: "i" } }];
+    }
+    // query.active = active;
+    const coupons = await Coupon.find(query)
+      .skip(skip)
+      .limit(limit)
+      .sort({ created_at: -1 });
     return JSON.parse(JSON.stringify(coupons));
   } catch (error) {
     console.log(error);

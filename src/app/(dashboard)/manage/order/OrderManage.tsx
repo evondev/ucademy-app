@@ -19,12 +19,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { commonClassNames, orderStatus } from "@/constants";
+import { allValue, commonClassNames, orderStatus } from "@/constants";
 import useQueryString from "@/hooks/useQueryString";
 import { updateOrder } from "@/lib/actions/order.actions";
 import { cn } from "@/lib/utils";
 import { EOrderStatus } from "@/types/enums";
-import { debounce } from "lodash";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 interface IOrderManageProps {
@@ -72,17 +71,8 @@ const OrderManage = ({ orders = [] }: { orders: IOrderManageProps[] }) => {
       }
     }
   };
-  const { createQueryString, router, pathname } = useQueryString();
-  const handleCompleteOrder = () => {};
-  const handleSelectStatus = (status: EOrderStatus) => {
-    router.push(`${pathname}?${createQueryString("status", status)}`);
-  };
-  const handleSearchOrder = debounce(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      router.push(`${pathname}?${createQueryString("search", e.target.value)}`);
-    },
-    500
-  );
+  const { handleSearchData, handleSelectStatus } = useQueryString();
+
   return (
     <div>
       <div className="flex flex-col lg:flex-row lg:items-center gap-5 justify-between mb-10">
@@ -91,7 +81,7 @@ const OrderManage = ({ orders = [] }: { orders: IOrderManageProps[] }) => {
           <div className="w-full lg:w-[300px]">
             <Input
               placeholder="Tìm kiếm đơn hàng..."
-              onChange={(e) => handleSearchOrder(e)}
+              onChange={handleSearchData}
             />
           </div>
           <Select
@@ -102,6 +92,7 @@ const OrderManage = ({ orders = [] }: { orders: IOrderManageProps[] }) => {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
+                <SelectItem value={allValue}>Tất cả</SelectItem>
                 {orderStatus.map((status) => (
                   <SelectItem value={status.value} key={status.value}>
                     {status.title}

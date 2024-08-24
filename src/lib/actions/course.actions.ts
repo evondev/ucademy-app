@@ -6,6 +6,7 @@ import {
   StudyCoursesProps,
   TCourseUpdateParams,
   TCreateCourseParams,
+  TFilterData,
   TGetAllCourseParams,
   TUpdateCourseParams,
 } from "@/types";
@@ -36,7 +37,7 @@ export async function getAllCoursesPublic(
   }
 }
 export async function getAllCourses(
-  params: TGetAllCourseParams
+  params: TFilterData
 ): Promise<ICourse[] | undefined> {
   try {
     connectToDatabase();
