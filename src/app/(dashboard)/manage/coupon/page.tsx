@@ -1,3 +1,4 @@
+import { ITEMS_PER_PAGE } from "@/constants";
 import { getCoupons } from "@/lib/actions/coupon.actions";
 import CouponManage from "./CouponManage";
 
@@ -10,14 +11,23 @@ const page = async ({
     active: boolean;
   };
 }) => {
-  const coupons = await getCoupons({
+  const data = await getCoupons({
     page: searchParams.page || 1,
-    limit: 10,
+    limit: ITEMS_PER_PAGE,
     search: searchParams.search,
     active: searchParams.active,
   });
+  if (!data) return null;
+  const { coupons, total } = data;
+  const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
 
-  return <CouponManage coupons={coupons}></CouponManage>;
+  return (
+    <CouponManage
+      coupons={coupons}
+      totalPages={totalPages}
+      total={total}
+    ></CouponManage>
+  );
 };
 
 export default page;

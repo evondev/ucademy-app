@@ -1,7 +1,6 @@
 import { ICoupon } from "@/database/coupon.model";
 import { ICourse } from "@/database/course.model";
 import { ILesson } from "@/database/lesson.model";
-import { Date } from "mongoose";
 import { ECouponType } from "./enums";
 
 export type TActiveLinkProps = {

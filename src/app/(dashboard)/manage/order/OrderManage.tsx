@@ -48,9 +48,11 @@ interface IOrderManageProps {
 const OrderManage = ({
   orders = [],
   totalPages = 1,
+  total,
 }: {
   orders: IOrderManageProps[];
   totalPages: number;
+  total: number;
 }) => {
   const handleUpdateOrder = async ({
     orderId,
@@ -196,7 +198,7 @@ const OrderManage = ({
             })}
         </TableBody>
       </Table>
-      <Pagination totalPages={totalPages}></Pagination>
+      <Pagination totalPages={totalPages} total={total}></Pagination>
     </div>
   );
 };

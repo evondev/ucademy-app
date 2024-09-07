@@ -22,7 +22,13 @@ const page = async ({
   const { orders, total } = data;
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
 
-  return <OrderManage orders={orders} totalPages={totalPages}></OrderManage>;
+  return (
+    <OrderManage
+      orders={orders}
+      totalPages={totalPages}
+      total={total}
+    ></OrderManage>
+  );
 };
 
 export default page;

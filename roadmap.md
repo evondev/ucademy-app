@@ -69,10 +69,10 @@
 
 # Rating
 
-- Manage rating
-- Create rating
-- Update rating
-- Filter rating
+- Manage rating ✅
+- Create rating ✅
+- Update rating ✅
+- Filter rating ✅
 
 # Comment
 
