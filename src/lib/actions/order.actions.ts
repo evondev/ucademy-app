@@ -38,7 +38,11 @@ export async function fetchOrders(params: any) {
       .sort({ created_at: -1 })
       .skip(skip)
       .limit(limit);
-    return JSON.parse(JSON.stringify(orders));
+    const total = await Order.countDocuments(query);
+    return {
+      orders: JSON.parse(JSON.stringify(orders)),
+      total,
+    };
   } catch (error) {}
 }
 export async function createOrder(params: TCreateOrderParams) {

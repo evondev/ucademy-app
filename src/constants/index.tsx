@@ -247,3 +247,4 @@ export const ratingStatus: {
   },
 ];
 export const allValue = "ALL";
+export const ITEMS_PER_PAGE = 5;
