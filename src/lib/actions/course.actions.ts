@@ -2,6 +2,7 @@
 import Course, { ICourse } from "@/database/course.model";
 import Lecture from "@/database/lecture.model";
 import Lesson from "@/database/lesson.model";
+import Rating from "@/database/rating.model";
 import {
   StudyCoursesProps,
   TCourseUpdateParams,
@@ -84,6 +85,7 @@ export async function getCourseBySlug({
       })
       .populate({
         path: "rating",
+        model: Rating,
         match: {
           status: ERatingStatus.ACTIVE,
         },

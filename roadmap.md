@@ -76,6 +76,13 @@
 
 # Comment
 
+- Analytics
+- Create comment
+- Update comment
+- Filter comment
+- Nested comment
+- Reply comment
+
 # Notification
 
 # User
@@ -93,3 +100,4 @@
 - Interview questions
 - English interview tips
 - Global state for authentication
+- Check already bought course

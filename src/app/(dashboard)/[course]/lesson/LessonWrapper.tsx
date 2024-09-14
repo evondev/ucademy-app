@@ -3,6 +3,7 @@ import useGlobalStore from "@/store";
 import React from "react";
 
 const LessonWrapper = ({ children }: { children: React.ReactNode }) => {
+  console.log("LessonWrapper ~ children:", children);
   const { expandedPlayer, setExpandedPlayer } = useGlobalStore();
   return (
     <div
