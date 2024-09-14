@@ -9,9 +9,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
+import { createComment } from "@/lib/actions/comment.actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { z } from "zod";
 const formSchema = z.object({
   content: z
@@ -20,7 +22,11 @@ const formSchema = z.object({
     })
     .min(10, { message: "Comment must be at least 10 character long" }),
 });
-const CommentForm = () => {
+interface CommentFormProps {
+  userId: string;
+  lessonId: string;
+}
+const CommentForm = ({ userId, lessonId }: CommentFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
@@ -28,7 +34,17 @@ const CommentForm = () => {
   const [isPending, startTransition] = useTransition();
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      const newComment = await createComment({
+        content: values.content,
+        lesson: lessonId,
+        user: userId,
+      });
+      if (!newComment) {
+        toast.error("Failed to post comment");
+        return;
+      }
+      toast.success("Comment posted successfully");
+      form.setValue("content", "");
     });
   }
   return (

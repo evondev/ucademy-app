@@ -1,3 +1,4 @@
+import { IComment } from "@/database/comment.model";
 import { ICoupon } from "@/database/coupon.model";
 import { ICourse } from "@/database/course.model";
 import { ILesson } from "@/database/lesson.model";
@@ -158,3 +159,10 @@ export type TFilterData = {
   status?: string;
   active?: boolean;
 };
+// Comment
+export interface ICommentItem extends Omit<IComment, "user"> {
+  user: {
+    name: string;
+    avatar: string;
+  };
+}

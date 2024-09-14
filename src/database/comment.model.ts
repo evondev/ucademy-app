@@ -1,7 +1,7 @@
 import { ECommentStatus } from "@/types/enums";
 import { Document, Schema, model, models } from "mongoose";
 
-export interface Icomment extends Document {
+export interface IComment extends Document {
   _id: string;
   content: string;
   lesson: Schema.Types.ObjectId;
@@ -9,7 +9,7 @@ export interface Icomment extends Document {
   status: ECommentStatus;
   created_at: Date;
 }
-const commentSchema = new Schema<Icomment>({
+const commentSchema = new Schema<IComment>({
   content: {
     type: String,
     required: true,
@@ -32,5 +32,5 @@ const commentSchema = new Schema<Icomment>({
     default: Date.now,
   },
 });
-const comment = models.comment || model<Icomment>("comment", commentSchema);
-export default comment;
+const Comment = models.Comment || model<IComment>("Comment", commentSchema);
+export default Comment;

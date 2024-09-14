@@ -97,8 +97,10 @@
 
 - Optimize types and code
 - DragnDrop Lecture - Lesson
-- Interview questions
-- English interview tips
 - Global state for authentication
 - Check already bought course
 - Optimize UI UX invalid formfield
+- Using cookie to save userInfo
+- Optimize connect to database
+- Interview questions
+- English interview tips
