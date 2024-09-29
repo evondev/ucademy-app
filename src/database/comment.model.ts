@@ -8,6 +8,8 @@ export interface IComment extends Document {
   user: Schema.Types.ObjectId;
   status: ECommentStatus;
   created_at: Date;
+  parentId?: Schema.Types.ObjectId;
+  level: number;
 }
 const commentSchema = new Schema<IComment>({
   content: {
@@ -30,6 +32,14 @@ const commentSchema = new Schema<IComment>({
   created_at: {
     type: Date,
     default: Date.now,
+  },
+  level: {
+    type: Number,
+    default: 0,
+  },
+  parentId: {
+    type: Schema.Types.ObjectId,
+    ref: "Comment",
   },
 });
 const Comment = models.Comment || model<IComment>("Comment", commentSchema);

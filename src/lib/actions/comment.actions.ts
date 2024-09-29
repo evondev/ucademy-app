@@ -10,6 +10,8 @@ export async function createComment(params: {
   content: string;
   lesson: string;
   user: string;
+  level: number;
+  parentId?: string;
 }): Promise<boolean | undefined> {
   try {
     connectToDatabase();

@@ -48,6 +48,7 @@ export async function fetchOrders(params: any) {
 export async function createOrder(params: TCreateOrderParams) {
   try {
     connectToDatabase();
+    if (!params.coupon) delete params.coupon;
     const newOrder = await Order.create(params);
     if (params.coupon) {
       await Coupon.findByIdAndUpdate(params.coupon, {

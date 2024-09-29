@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { createComment } from "@/lib/actions/comment.actions";
+import { ICommentItem } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -25,8 +26,9 @@ const formSchema = z.object({
 interface CommentFormProps {
   userId: string;
   lessonId: string;
+  comment?: ICommentItem;
 }
-const CommentForm = ({ userId, lessonId }: CommentFormProps) => {
+const CommentForm = ({ userId, lessonId, comment }: CommentFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
@@ -38,6 +40,8 @@ const CommentForm = ({ userId, lessonId }: CommentFormProps) => {
         content: values.content,
         lesson: lessonId,
         user: userId,
+        level: comment && comment?.level >= 0 ? comment?.level + 1 : 0,
+        parentId: comment?._id,
       });
       if (!newComment) {
         toast.error("Failed to post comment");
@@ -53,7 +57,7 @@ const CommentForm = ({ userId, lessonId }: CommentFormProps) => {
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           autoComplete="off"
-          className="flex flex-col gap-5 mt-10"
+          className="flex flex-col gap-5"
         >
           <FormField
             control={form.control}
