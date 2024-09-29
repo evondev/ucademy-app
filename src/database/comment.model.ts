@@ -40,6 +40,7 @@ const commentSchema = new Schema<IComment>({
   parentId: {
     type: Schema.Types.ObjectId,
     ref: "Comment",
+    default: null,
   },
 });
 const Comment = models.Comment || model<IComment>("Comment", commentSchema);

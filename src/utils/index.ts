@@ -1,3 +1,5 @@
+import { ICommentItem } from "@/types";
+import { ObjectId } from "mongoose";
 import { Manrope } from "next/font/google";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
@@ -35,6 +37,15 @@ export const timeAgo = (date: string | Date) => {
   if (hours) return `${hours} giờ trước`;
   if (minutes) return `${minutes} phút trước`;
   return `${seconds} giây trước`;
+};
+
+export const getRepliesComment = (
+  comments: ICommentItem[],
+  parentId: string | ObjectId
+) => {
+  return comments.filter(
+    (item) => item.parentId?.toString() === parentId.toString()
+  );
 };
 
 export { manrope };

@@ -258,3 +258,4 @@ export const couponStatuses = [
     value: 0,
   },
 ];
+export const MAX_COMMENT_LEVEL = 3;

@@ -2,12 +2,9 @@ import { getCommentsByLesson } from "@/lib/actions/comment.actions";
 import { getCourseBySlug } from "@/lib/actions/course.actions";
 import { getLessonBySlug } from "@/lib/actions/lesson.actions";
 import { getUserInfo } from "@/lib/actions/user.actions";
-import { ICommentItem } from "@/types";
-import { timeAgo } from "@/utils";
 import { auth } from "@clerk/nextjs/server";
-import Image from "next/image";
 import CommentForm from "./CommentForm";
-import CommentReply from "./CommentReply";
+import CommentItem from "./CommentItem";
 
 const page = async ({
   params,
@@ -31,47 +28,28 @@ const page = async ({
     course: findCourse?._id.toString(),
   });
   const comments = await getCommentsByLesson(lesson?._id.toString() || "");
-  const renderCommentItem = (comment: ICommentItem) => {
-    return (
-      <div className="flex items-start gap-3 p-3 rounded-xl bg-white dark:bg-grayDarker shadow-sm border borderDarkMode">
-        <div className="size-10 rounded-full border borderDarkMode shadow-sm flex-shrink-0">
-          <Image
-            src={comment.user.avatar}
-            alt={comment.user.name}
-            width={40}
-            height={40}
-          />
-        </div>
-        <div className="flex flex-col gap-1 w-full">
-          <div className="flex items-center gap-3">
-            <h4 className="font-bold">{comment.user.name}</h4>
-            <span className="text-sm text-gray-400 font-medium">
-              {timeAgo(comment.created_at)}
-            </span>
-          </div>
-          <p className="mb-3 text-sm leading-relaxed text-gray-900 dark:text-white">
-            {comment.content}
-          </p>
-          <CommentReply
-            lessonId={lesson?._id.toString() || ""}
-            userId={findUser?._id.toString() || ""}
-            comment={comment}
-          />
-        </div>
-      </div>
-    );
-  };
+  const commentLessonId = lesson?._id.toString() || "";
+  const commentUserId = findUser?._id.toString() || "";
+  const rootComments = comments?.filter((item) => !item.parentId);
   return (
     <div>
       <CommentForm
-        lessonId={lesson?._id.toString() || ""}
-        userId={findUser?._id.toString() || ""}
+        lessonId={commentLessonId}
+        userId={commentUserId}
       ></CommentForm>
-      {comments && comments?.length > 0 && (
+      {rootComments && rootComments?.length > 0 && (
         <div className="flex flex-col gap-10 mt-10">
           <h2 className="text-2xl font-bold">Comments</h2>
           <div className="flex flex-col gap-5">
-            {comments?.map(renderCommentItem)}
+            {rootComments?.map((item) => (
+              <CommentItem
+                key={item._id}
+                comment={item}
+                lessonId={commentLessonId}
+                userId={commentUserId}
+                comments={comments || []}
+              ></CommentItem>
+            ))}
           </div>
         </div>
       )}

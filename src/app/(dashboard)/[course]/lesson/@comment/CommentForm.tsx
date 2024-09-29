@@ -27,8 +27,14 @@ interface CommentFormProps {
   userId: string;
   lessonId: string;
   comment?: ICommentItem;
+  isReply?: boolean;
 }
-const CommentForm = ({ userId, lessonId, comment }: CommentFormProps) => {
+const CommentForm = ({
+  userId,
+  lessonId,
+  comment,
+  isReply,
+}: CommentFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
@@ -82,7 +88,7 @@ const CommentForm = ({ userId, lessonId, comment }: CommentFormProps) => {
             className="w-[140px] ml-auto"
             type="submit"
           >
-            Post comment
+            {isReply ? "Post reply" : "Post comment"}
           </Button>
         </form>
       </Form>

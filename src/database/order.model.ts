@@ -11,7 +11,7 @@ export interface IOrder extends Document {
   total: number;
   amount: number;
   discount: number;
-  coupon: Schema.Types.ObjectId;
+  coupon?: Schema.Types.ObjectId;
 }
 const orderSchema = new Schema<IOrder>({
   code: {
