@@ -1,5 +1,4 @@
 "use client";
-import { cn } from "@/lib/utils";
 import { ICommentItem } from "@/types";
 import { getRepliesComment, timeAgo } from "@/utils";
 import Image from "next/image";
@@ -20,25 +19,16 @@ const CommentItem = ({
 }: ICommentItemProps) => {
   const replies = getRepliesComment(comments, comment._id);
   const level = comment.level || 0;
-  const commentBorderClassNames: { [key: string]: string } = {
-    "0": "borderDarkMode",
-    "1": "border-blue-200",
-    "2": "border-green-200",
-    "3": "border-yellow-200",
-    "4": "border-red-200",
-  };
+  const COMMENT_SPACING = 55;
   return (
     <>
       <div
-        className={cn(
-          "flex items-start gap-3 p-3 rounded-xl bg-white dark:bg-grayDarker border ml-auto dark:border-opacity-50",
-          commentBorderClassNames[level.toString()]
-        )}
+        className="flex items-start gap-3 ml-auto dark:border-opacity-50"
         style={{
-          width: `calc(100% - ${level * 65}px)`,
+          width: `calc(100% - ${level * COMMENT_SPACING}px)`,
         }}
       >
-        <div className="size-10 rounded-full border borderDarkMode shadow-sm flex-shrink-0">
+        <div className="size-10 rounded-full border borderDarkMode bgDarkMode flex-shrink-0">
           <Image
             src={comment.user.avatar}
             alt={comment.user.name}
@@ -47,16 +37,23 @@ const CommentItem = ({
           />
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <div className="flex items-center gap-3">
-            <h4 className="font-bold">{comment.user.name}</h4>
-            <span className="text-sm text-gray-400 font-medium">
+          <div className="flex items-center gap-2 mb-1">
+            <h4 className="font-medium text-sm">{comment.user.name}</h4>
+            <span className="rounded-full size-1 bg-gray-500"></span>
+            <span className="text-xs text-gray-500 font-medium">
               {timeAgo(comment.created_at)}
             </span>
           </div>
-          <p className="mb-3 text-sm leading-relaxed text-gray-900 dark:text-white">
-            {comment.content}
-          </p>
-          <CommentReply lessonId={lessonId} userId={userId} comment={comment} />
+          <div className="p-5 rounded-lg border borderDarkMode bgDarkMode">
+            <p className="mb-3 text-sm leading-relaxed text-gray-600 dark:text-white font-medium">
+              {comment.content}
+            </p>
+            <CommentReply
+              lessonId={lessonId}
+              userId={userId}
+              comment={comment}
+            />
+          </div>
         </div>
       </div>
       {replies.length > 0 &&

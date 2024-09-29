@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { createComment } from "@/lib/actions/comment.actions";
+import { cn } from "@/lib/utils";
 import { ICommentItem } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
@@ -63,7 +64,7 @@ const CommentForm = ({
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           autoComplete="off"
-          className="flex flex-col gap-5"
+          className="flex flex-col gap-5 relative"
         >
           <FormField
             control={form.control}
@@ -72,8 +73,10 @@ const CommentForm = ({
               <FormItem>
                 <FormControl>
                   <Textarea
-                    placeholder="Enter your comment..."
-                    className="min-h-[150px]"
+                    placeholder="Nhập bình luận..."
+                    className={cn("min-h-[150px]", {
+                      "bg-gray-50": isReply,
+                    })}
                     {...field}
                   />
                 </FormControl>
@@ -85,10 +88,12 @@ const CommentForm = ({
           <Button
             isLoading={isPending}
             variant="primary"
-            className="w-[140px] ml-auto"
+            className={cn("w-[140px] ml-auto rounded-lg h-10", {
+              "w-24": isReply,
+            })}
             type="submit"
           >
-            {isReply ? "Post reply" : "Post comment"}
+            {isReply ? "Trả lời" : "Đăng bình luận"}
           </Button>
         </form>
       </Form>

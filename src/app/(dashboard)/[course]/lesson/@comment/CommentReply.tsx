@@ -1,8 +1,8 @@
 "use client";
 
 import { MAX_COMMENT_LEVEL } from "@/constants";
+import { cn } from "@/lib/utils";
 import { ICommentItem } from "@/types";
-import { formatDate } from "@/utils";
 import { useState } from "react";
 import CommentForm from "./CommentForm";
 
@@ -16,24 +16,30 @@ const CommentReply = ({ comment, lessonId, userId }: CommentReplyProps) => {
   const [showReply, setShowReply] = useState(false);
   return (
     <>
-      <div className="flex items-center gap-5 text-sm text-gray-400 font-medium mb-5">
-        <span>{formatDate(comment.created_at)}</span>
+      <div className="flex items-center gap-5 text-sm text-gray-400 font-medium">
         {comment.level <= MAX_COMMENT_LEVEL && (
           <>
-            <span className="rounded-full size-1 bg-gray-300"></span>
-            <button type="button" onClick={() => setShowReply(!showReply)}>
+            <button
+              type="button"
+              className={cn("uppercase text-gray-400 font-bold", {
+                underline: showReply,
+              })}
+              onClick={() => setShowReply(!showReply)}
+            >
               Reply
             </button>
           </>
         )}
       </div>
       {showReply && (
-        <CommentForm
-          isReply
-          comment={comment}
-          lessonId={lessonId}
-          userId={userId}
-        />
+        <div className="mt-3">
+          <CommentForm
+            isReply
+            comment={comment}
+            lessonId={lessonId}
+            userId={userId}
+          />
+        </div>
       )}
     </>
   );
