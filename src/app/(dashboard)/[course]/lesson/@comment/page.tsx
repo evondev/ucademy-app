@@ -5,6 +5,7 @@ import { getUserInfo } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs/server";
 import CommentForm from "./CommentForm";
 import CommentItem from "./CommentItem";
+import CommentSorting from "./CommentSorting";
 
 const page = async ({
   params,
@@ -15,6 +16,7 @@ const page = async ({
   };
   searchParams: {
     slug: string;
+    sort: "recent" | "oldest";
   };
 }) => {
   const { userId } = auth();
@@ -27,7 +29,10 @@ const page = async ({
     slug: slug,
     course: findCourse?._id.toString(),
   });
-  const comments = await getCommentsByLesson(lesson?._id.toString() || "");
+  const comments = await getCommentsByLesson(
+    lesson?._id.toString() || "",
+    searchParams.sort
+  );
   const commentLessonId = lesson?._id.toString() || "";
   const commentUserId = findUser?._id.toString() || "";
   const rootComments = comments?.filter((item) => !item.parentId);
@@ -39,7 +44,15 @@ const page = async ({
       ></CommentForm>
       {rootComments && rootComments?.length > 0 && (
         <div className="flex flex-col gap-10 mt-10">
-          <h2 className="text-2xl font-bold">Comments</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold flex items-center gap-2">
+              <span>Comments</span>
+              <span className="flex items-center justify-center bg-primary text-white text-sm font-semibold rounded-full py-0.5 px-4">
+                {comments?.length}
+              </span>
+            </h2>
+            <CommentSorting></CommentSorting>
+          </div>
           <div className="flex flex-col gap-5">
             {rootComments?.map((item) => (
               <CommentItem

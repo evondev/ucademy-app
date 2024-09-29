@@ -35,6 +35,7 @@ const CommentReply = ({ comment, lessonId, userId }: CommentReplyProps) => {
         <div className="mt-3">
           <CommentForm
             isReply
+            closeReply={() => setShowReply(false)}
             comment={comment}
             lessonId={lessonId}
             userId={userId}
