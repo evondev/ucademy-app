@@ -138,7 +138,7 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
                     </Link>
                   </TableCell>
                   <TableCell>
-                    <strong>{rating.user.name}</strong>
+                    <strong>{rating.user?.name}</strong>
                   </TableCell>
                   <TableCell>
                     <StatusBadge item={ratingItemStatus}></StatusBadge>

@@ -138,7 +138,7 @@ const OrderManage = ({
                     <strong>{order.code}</strong>
                   </TableCell>
                   <TableCell>{order.course.title}</TableCell>
-                  <TableCell>{order.user.name}</TableCell>
+                  <TableCell>{order.user?.name}</TableCell>
                   <TableCell>
                     <div className="flex flex-col gap-2">
                       <span>{order.amount.toLocaleString("us-US")}</span>

@@ -36,15 +36,21 @@ const CommentItem = ({
       >
         <div className="size-10 rounded-full border borderDarkMode bgDarkMode flex-shrink-0">
           <Image
-            src={comment.user.avatar}
-            alt={comment.user.name}
+            src={
+              comment.user?.avatar ||
+              "https://images.unsplash.com/photo-1487139975590-b4f1dce9b035?q=80&w=4912&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            }
+            alt={comment.user?.name}
             width={40}
             height={40}
+            className="size-full rounded-full object-cover"
           />
         </div>
         <div className="flex flex-col gap-1 w-full">
           <div className="flex items-center gap-2 mb-1">
-            <h4 className="font-medium text-sm">{comment.user.name}</h4>
+            <h4 className="font-medium text-sm">
+              {comment.user?.name || "Anonymous"}
+            </h4>
             <span className="rounded-full size-1 bg-gray-500"></span>
             <span className="text-xs text-gray-500 font-medium">
               {timeAgo(comment.created_at)}
