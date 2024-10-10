@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { allValue, courseStatus } from "@/constants";
-import { Course } from "@/database/course.model";
+import { CourseProps } from "@/database/course.model";
 import useQueryString from "@/hooks/useQueryString";
 import { updateCourse } from "@/lib/actions/course.actions";
 import { CourseStatus } from "@/types/enums";
@@ -30,7 +30,7 @@ import Heading from "../common/Heading";
 import TableActionItem from "../common/TableActionItem";
 import { Input } from "../ui/input";
 
-const CourseManage = ({ courses }: { courses: Course[] }) => {
+const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
   const router = useRouter();
   const pathname = usePathname();
   const { handleSearchData, handleSelectStatus } = useQueryString();

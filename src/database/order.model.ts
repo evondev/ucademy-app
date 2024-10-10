@@ -1,7 +1,7 @@
 import { OrderStatus } from "@/types/enums";
 import { Document, Schema, model, models } from "mongoose";
 
-export interface Order extends Document {
+export interface OrderProps extends Document {
   _id: string;
   code: string;
   course: Schema.Types.ObjectId;
@@ -13,7 +13,7 @@ export interface Order extends Document {
   discount: number;
   coupon?: Schema.Types.ObjectId;
 }
-const orderSchema = new Schema<Order>({
+const orderSchema = new Schema<OrderProps>({
   code: {
     type: String,
     required: true,
@@ -51,5 +51,5 @@ const orderSchema = new Schema<Order>({
     default: OrderStatus.PENDING,
   },
 });
-const Order = models.Order || model<Order>("Order", orderSchema);
+const Order = models.Order || model<OrderProps>("Order", orderSchema);
 export default Order;

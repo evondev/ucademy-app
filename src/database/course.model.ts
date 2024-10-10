@@ -1,7 +1,7 @@
 import { CourseLevel, CourseStatus } from "@/types/enums";
 import { Document, Schema, model, models } from "mongoose";
 
-export interface Course extends Document {
+export interface CourseProps extends Document {
   _id: string;
   title: string;
   image: string;
@@ -27,7 +27,7 @@ export interface Course extends Document {
   author: Schema.Types.ObjectId;
   _destroy: boolean;
 }
-const courseSchema = new Schema<Course>({
+const courseSchema = new Schema<CourseProps>({
   title: {
     type: String,
     required: true,
@@ -111,5 +111,5 @@ const courseSchema = new Schema<Course>({
     default: CourseLevel.BEGINNER,
   },
 });
-const Course = models.Course || model<Course>("Course", courseSchema);
+const Course = models.Course || model<CourseProps>("Course", courseSchema);
 export default Course;

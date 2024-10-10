@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { User } from "@/database/user.model";
+import { UserProps } from "@/database/user.model";
 import { createOrder } from "@/lib/actions/order.actions";
 import { createOrderCode } from "@/utils";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ const ButtonEnroll = ({
   amount,
   coupon,
 }: {
-  user: User | null | undefined;
+  user: UserProps | null | undefined;
   courseId: string;
   amount: number;
   coupon: string;

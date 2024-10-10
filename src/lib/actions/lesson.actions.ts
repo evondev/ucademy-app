@@ -1,7 +1,7 @@
 "use server";
 import Course from "@/database/course.model";
 import Lecture from "@/database/lecture.model";
-import Lesson from "@/database/lesson.model";
+import Lesson, { LessonProps } from "@/database/lesson.model";
 import { CreateLessonParams, UpdateLessonParams } from "@/types";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
@@ -45,7 +45,7 @@ export async function getLessonBySlug({
 }: {
   slug: string;
   course: string;
-}): Promise<Lesson | undefined> {
+}): Promise<LessonProps | undefined> {
   try {
     connectToDatabase();
     const findLesson = await Lesson.findOne({
@@ -61,7 +61,7 @@ export async function findAllLessons({
   course,
 }: {
   course: string;
-}): Promise<Lesson[] | undefined> {
+}): Promise<LessonProps[] | undefined> {
   try {
     connectToDatabase();
     const lessons = await Lesson.find({

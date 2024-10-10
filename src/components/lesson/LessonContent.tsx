@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { History } from "@/database/history.model";
+import { HistoryProps } from "@/database/history.model";
 import { UpdateCourseLecture } from "@/types";
 import LessonItem from "./LessonItem";
 
@@ -17,7 +17,7 @@ const LessonContent = ({
   lectures: UpdateCourseLecture[];
   course: string;
   slug: string;
-  histories?: History[];
+  histories?: HistoryProps[];
 }) => {
   return (
     <div className="flex flex-col gap-5">

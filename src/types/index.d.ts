@@ -1,7 +1,7 @@
 import { Comment } from "@/database/comment.model";
 import { Coupon } from "@/database/coupon.model";
 import { Course } from "@/database/course.model";
-import { Lesson } from "@/database/lesson.model";
+import { LessonProps } from "@/database/lesson.model";
 import { CouponType } from "./enums";
 
 export type ActiveLinkProps = {
@@ -36,7 +36,7 @@ export type UpdateCourseParams = {
 export type UpdateCourseLecture = {
   _id: string;
   title: string;
-  lessons: Lesson[];
+  lessons: LessonProps[];
 };
 export interface CourseUpdateParams extends Omit<Course, "lectures"> {
   lectures: UpdateCourseLecture[];

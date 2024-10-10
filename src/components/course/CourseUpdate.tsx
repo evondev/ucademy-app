@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { courseLevel, courseStatus } from "@/constants";
-import { Course } from "@/database/course.model";
+import { CourseProps } from "@/database/course.model";
 import { updateCourse } from "@/lib/actions/course.actions";
 import { CourseLevel, CourseStatus } from "@/types/enums";
 import { UploadButton } from "@/utils/uploadthing";
@@ -61,7 +61,7 @@ const formSchema = z.object({
       .optional(),
   }),
 });
-const CourseUpdate = ({ data }: { data: Course }) => {
+const CourseUpdate = ({ data }: { data: CourseProps }) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [courseInfo, setCourseInfo] = useImmer({

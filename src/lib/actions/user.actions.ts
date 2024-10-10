@@ -1,9 +1,9 @@
 "use server";
 
-import Course from "@/database/course.model";
+import Course, { CourseProps } from "@/database/course.model";
 import Lecture from "@/database/lecture.model";
 import Lesson from "@/database/lesson.model";
-import User from "@/database/user.model";
+import User, { UserProps } from "@/database/user.model";
 import { CreateUserParams } from "@/types";
 import { CourseStatus } from "@/types/enums";
 import { auth } from "@clerk/nextjs/server";
@@ -22,7 +22,7 @@ export async function getUserInfo({
   userId,
 }: {
   userId: string;
-}): Promise<User | null | undefined> {
+}): Promise<UserProps | null | undefined> {
   try {
     connectToDatabase();
     const findUser = await User.findOne({ clerkId: userId });
@@ -32,7 +32,9 @@ export async function getUserInfo({
     console.log(error);
   }
 }
-export async function getUserCourses(): Promise<Course[] | undefined | null> {
+export async function getUserCourses(): Promise<
+  CourseProps[] | undefined | null
+> {
   try {
     connectToDatabase();
     const { userId } = auth();

@@ -1,7 +1,7 @@
 import { RatingStatus } from "@/types/enums";
 import { Document, Schema, model, models } from "mongoose";
 
-export interface Rating extends Document {
+export interface RatingProps extends Document {
   _id: string;
   rate: number;
   content: string;
@@ -10,7 +10,7 @@ export interface Rating extends Document {
   status: RatingStatus;
   created_at: Date;
 }
-const ratingSchema = new Schema<Rating>({
+const ratingSchema = new Schema<RatingProps>({
   rate: {
     type: Number,
     default: 5,
@@ -38,5 +38,5 @@ const ratingSchema = new Schema<Rating>({
     default: Date.now,
   },
 });
-const Rating = models.Rating || model<Rating>("Rating", ratingSchema);
+const Rating = models.Rating || model<RatingProps>("Rating", ratingSchema);
 export default Rating;

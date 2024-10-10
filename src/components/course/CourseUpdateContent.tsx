@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { commonClassNames } from "@/constants";
-import { Lesson } from "@/database/lesson.model";
+import { LessonProps } from "@/database/lesson.model";
 import { createLecture, updateLecture } from "@/lib/actions/lecture.actions";
 import { createLesson, updateLesson } from "@/lib/actions/lesson.actions";
 import { cn } from "@/lib/utils";
@@ -217,7 +217,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                 </AccordionTrigger>
                 <AccordionContent className="border-none !bg-transparent">
                   <div className="flex flex-col gap-5">
-                    {lecture.lessons.map((lesson: Lesson) => (
+                    {lecture.lessons.map((lesson: LessonProps) => (
                       <Accordion
                         type="single"
                         collapsible={!lessonEdit}

@@ -1,7 +1,7 @@
 import { UserRole, UserStatus } from "@/types/enums";
 import { Document, Schema, model, models } from "mongoose";
 
-export interface User extends Document {
+export interface UserProps extends Document {
   _id: string;
   clerkId: string;
   name: string;
@@ -13,7 +13,7 @@ export interface User extends Document {
   role: UserRole;
   created_at: Date;
 }
-const userSchema = new Schema<User>({
+const userSchema = new Schema<UserProps>({
   clerkId: {
     type: String,
   },
@@ -58,5 +58,5 @@ userSchema.index(
   { email: 1 },
   { unique: true, partialFilterExpression: { email: { $ne: null } } }
 );
-const User = models.User || model<User>("User", userSchema);
+const User = models.User || model<UserProps>("User", userSchema);
 export default User;

@@ -1,5 +1,5 @@
 "use server";
-import Course from "@/database/course.model";
+import Course, { CourseProps } from "@/database/course.model";
 import Lecture from "@/database/lecture.model";
 import Lesson from "@/database/lesson.model";
 import Rating from "@/database/rating.model";
@@ -39,7 +39,7 @@ export async function getAllCoursesPublic(
 }
 export async function getAllCourses(
   params: FilterData
-): Promise<Course[] | undefined> {
+): Promise<CourseProps[] | undefined> {
   try {
     connectToDatabase();
     const { page = 1, limit = 10, search, status } = params;
