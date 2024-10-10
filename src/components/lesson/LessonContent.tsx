@@ -4,8 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { IHistory } from "@/database/history.model";
-import { TUpdateCourseLecture } from "@/types";
+import { History } from "@/database/history.model";
+import { UpdateCourseLecture } from "@/types";
 import LessonItem from "./LessonItem";
 
 const LessonContent = ({
@@ -14,14 +14,14 @@ const LessonContent = ({
   slug,
   histories = [],
 }: {
-  lectures: TUpdateCourseLecture[];
+  lectures: UpdateCourseLecture[];
   course: string;
   slug: string;
-  histories?: IHistory[];
+  histories?: History[];
 }) => {
   return (
     <div className="flex flex-col gap-5">
-      {lectures.map((lecture: TUpdateCourseLecture) => (
+      {lectures.map((lecture: UpdateCourseLecture) => (
         <Accordion
           type="single"
           collapsible

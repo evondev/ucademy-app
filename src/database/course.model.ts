@@ -1,7 +1,7 @@
-import { ECourseLevel, ECourseStatus } from "@/types/enums";
+import { CourseLevel, CourseStatus } from "@/types/enums";
 import { Document, Schema, model, models } from "mongoose";
 
-export interface ICourse extends Document {
+export interface Course extends Document {
   _id: string;
   title: string;
   image: string;
@@ -10,8 +10,8 @@ export interface ICourse extends Document {
   price: number;
   sale_price: number;
   slug: string;
-  status: ECourseStatus;
-  level: ECourseLevel;
+  status: CourseStatus;
+  level: CourseLevel;
   views: number;
   rating: Schema.Types.ObjectId[];
   info: {
@@ -27,7 +27,7 @@ export interface ICourse extends Document {
   author: Schema.Types.ObjectId;
   _destroy: boolean;
 }
-const courseSchema = new Schema<ICourse>({
+const courseSchema = new Schema<Course>({
   title: {
     type: String,
     required: true,
@@ -58,8 +58,8 @@ const courseSchema = new Schema<ICourse>({
   },
   status: {
     type: String,
-    enum: Object.values(ECourseStatus),
-    default: ECourseStatus.PENDING,
+    enum: Object.values(CourseStatus),
+    default: CourseStatus.PENDING,
   },
   created_at: {
     type: Date,
@@ -107,9 +107,9 @@ const courseSchema = new Schema<ICourse>({
   },
   level: {
     type: String,
-    enum: Object.values(ECourseLevel),
-    default: ECourseLevel.BEGINNER,
+    enum: Object.values(CourseLevel),
+    default: CourseLevel.BEGINNER,
   },
 });
-const Course = models.Course || model<ICourse>("Course", courseSchema);
+const Course = models.Course || model<Course>("Course", courseSchema);
 export default Course;

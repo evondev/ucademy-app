@@ -3,8 +3,8 @@ import Coupon from "@/database/coupon.model";
 import Course from "@/database/course.model";
 import Order from "@/database/order.model";
 import User from "@/database/user.model";
-import { TCreateOrderParams } from "@/types";
-import { EOrderStatus } from "@/types/enums";
+import { CreateOrderParams } from "@/types";
+import { OrderStatus } from "@/types/enums";
 import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
@@ -45,7 +45,7 @@ export async function fetchOrders(params: any) {
     };
   } catch (error) {}
 }
-export async function createOrder(params: TCreateOrderParams) {
+export async function createOrder(params: CreateOrderParams) {
   try {
     connectToDatabase();
     if (!params.coupon) delete params.coupon;
@@ -65,7 +65,7 @@ export async function updateOrder({
   status,
 }: {
   orderId: string;
-  status: EOrderStatus;
+  status: OrderStatus;
 }) {
   try {
     connectToDatabase();
@@ -81,22 +81,22 @@ export async function updateOrder({
         select: "_id",
       });
     if (!findOrder) return;
-    if (findOrder.status === EOrderStatus.CANCELED) return;
+    if (findOrder.status === OrderStatus.CANCELED) return;
     const findUser = await User.findById(findOrder.user._id);
 
     await Order.findByIdAndUpdate(orderId, {
       status,
     });
     if (
-      status === EOrderStatus.COMPLETED &&
-      findOrder.status === EOrderStatus.PENDING
+      status === OrderStatus.COMPLETED &&
+      findOrder.status === OrderStatus.PENDING
     ) {
       findUser.courses.push(findOrder.course._id);
       await findUser.save();
     }
     if (
-      status === EOrderStatus.CANCELED &&
-      findOrder.status === EOrderStatus.COMPLETED
+      status === OrderStatus.CANCELED &&
+      findOrder.status === OrderStatus.COMPLETED
     ) {
       findUser.courses = findUser.courses.filter(
         (el: any) => el.toString() !== findOrder.course._id.toString()

@@ -1,7 +1,7 @@
-import { ECouponType } from "@/types/enums";
+import { CouponType } from "@/types/enums";
 import { Document, Schema, model, models } from "mongoose";
 
-export interface ICoupon extends Document {
+export interface Coupon extends Document {
   _id: string;
   title: string;
   code: string;
@@ -11,11 +11,11 @@ export interface ICoupon extends Document {
   used: number;
   limit: number;
   courses: Schema.Types.ObjectId[];
-  type: ECouponType;
+  type: CouponType;
   value: number;
   created_at: Date;
 }
-const couponSchema = new Schema<ICoupon>({
+const couponSchema = new Schema<Coupon>({
   title: {
     type: String,
     required: true,
@@ -49,8 +49,8 @@ const couponSchema = new Schema<ICoupon>({
   ],
   type: {
     type: String,
-    enum: Object.values(ECouponType),
-    default: ECouponType.PERCENT,
+    enum: Object.values(CouponType),
+    default: CouponType.PERCENT,
   },
   value: {
     type: Number,
@@ -60,5 +60,5 @@ const couponSchema = new Schema<ICoupon>({
     default: Date.now,
   },
 });
-const Coupon = models.Coupon || model<ICoupon>("Coupon", couponSchema);
+const Coupon = models.Coupon || model<Coupon>("Coupon", couponSchema);
 export default Coupon;

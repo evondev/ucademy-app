@@ -1,4 +1,4 @@
-import { ICommentItem } from "@/types";
+import { CommentItem } from "@/types";
 import { ObjectId } from "mongoose";
 import { Manrope } from "next/font/google";
 
@@ -40,7 +40,7 @@ export const timeAgo = (date: string | Date) => {
 };
 
 export const getRepliesComment = (
-  comments: ICommentItem[],
+  comments: CommentItem[],
   parentId: string | ObjectId
 ) => {
   return comments.filter(

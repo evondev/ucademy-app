@@ -76,12 +76,18 @@
 
 # Comment
 
-- Analytics
-- Create comment
-- Update comment
-- Filter comment
-- Nested comment
-- Reply comment
+- Analytics ✅
+- Create comment ✅
+- Update comment ✅
+- Filter comment ✅
+- Nested comment ✅
+- Reply comment ✅
+
+# Improve codebase
+
+- User
+- TUser
+- EUser
 
 # Notification
 

@@ -11,7 +11,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { createComment } from "@/lib/actions/comment.actions";
 import { cn } from "@/lib/utils";
-import { ICommentItem } from "@/types";
+import { CommentItem } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
@@ -28,7 +28,7 @@ const formSchema = z.object({
 interface CommentFormProps {
   userId: string;
   lessonId: string;
-  comment?: ICommentItem;
+  comment?: CommentItem;
   isReply?: boolean;
   closeReply?: () => void;
 }

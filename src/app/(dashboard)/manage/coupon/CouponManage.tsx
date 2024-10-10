@@ -22,8 +22,8 @@ import {
 } from "@/components/ui/table";
 import { allValue, couponStatuses } from "@/constants";
 import useQueryString from "@/hooks/useQueryString";
-import { TCouponItem } from "@/types";
-import { ECouponType } from "@/types/enums";
+import { CouponItem } from "@/types";
+import { CouponType } from "@/types/enums";
 import ActionDeleteCoupon from "./ActionDeleteCoupon";
 
 const CouponManage = ({
@@ -31,7 +31,7 @@ const CouponManage = ({
   totalPages,
   total,
 }: {
-  coupons: TCouponItem[] | undefined;
+  coupons: CouponItem[] | undefined;
   totalPages: number;
   total: number;
 }) => {
@@ -92,7 +92,7 @@ const CouponManage = ({
                   <strong>{coupon.title}</strong>
                 </TableCell>
                 <TableCell>
-                  {coupon.type === ECouponType.AMOUNT ? (
+                  {coupon.type === CouponType.AMOUNT ? (
                     <>{coupon.value.toLocaleString("us-US")}</>
                   ) : (
                     <>{coupon.value}%</>

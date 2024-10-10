@@ -22,9 +22,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { courseLevel, courseStatus } from "@/constants";
-import { ICourse } from "@/database/course.model";
+import { Course } from "@/database/course.model";
 import { updateCourse } from "@/lib/actions/course.actions";
-import { ECourseLevel, ECourseStatus } from "@/types/enums";
+import { CourseLevel, CourseStatus } from "@/types/enums";
 import { UploadButton } from "@/utils/uploadthing";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -44,17 +44,13 @@ const formSchema = z.object({
   image: z.string().optional(),
   views: z.number().int().optional(),
   status: z
-    .enum([
-      ECourseStatus.APPROVED,
-      ECourseStatus.PENDING,
-      ECourseStatus.REJECTED,
-    ])
+    .enum([CourseStatus.APPROVED, CourseStatus.PENDING, CourseStatus.REJECTED])
     .optional(),
   level: z
     .enum([
-      ECourseLevel.BEGINNER,
-      ECourseLevel.INTERMEDIATE,
-      ECourseLevel.ADVANCED,
+      CourseLevel.BEGINNER,
+      CourseLevel.INTERMEDIATE,
+      CourseLevel.ADVANCED,
     ])
     .optional(),
   info: z.object({
@@ -65,7 +61,7 @@ const formSchema = z.object({
       .optional(),
   }),
 });
-const CourseUpdate = ({ data }: { data: ICourse }) => {
+const CourseUpdate = ({ data }: { data: Course }) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [courseInfo, setCourseInfo] = useImmer({

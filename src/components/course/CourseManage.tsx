@@ -16,10 +16,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { allValue, courseStatus } from "@/constants";
-import { ICourse } from "@/database/course.model";
+import { Course } from "@/database/course.model";
 import useQueryString from "@/hooks/useQueryString";
 import { updateCourse } from "@/lib/actions/course.actions";
-import { ECourseStatus } from "@/types/enums";
+import { CourseStatus } from "@/types/enums";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -30,7 +30,7 @@ import Heading from "../common/Heading";
 import TableActionItem from "../common/TableActionItem";
 import { Input } from "../ui/input";
 
-const CourseManage = ({ courses }: { courses: ICourse[] }) => {
+const CourseManage = ({ courses }: { courses: Course[] }) => {
   const router = useRouter();
   const pathname = usePathname();
   const { handleSearchData, handleSelectStatus } = useQueryString();
@@ -49,7 +49,7 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
         await updateCourse({
           slug,
           updateData: {
-            status: ECourseStatus.PENDING,
+            status: CourseStatus.PENDING,
             _destroy: true,
           },
           path: "/manage/course",
@@ -58,7 +58,7 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
       }
     });
   };
-  const handleChangeStatus = async (slug: string, status: ECourseStatus) => {
+  const handleChangeStatus = async (slug: string, status: CourseStatus) => {
     try {
       Swal.fire({
         title: "Bạn có chắc muốn đổi trạng thái không?",
@@ -72,9 +72,9 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
             slug,
             updateData: {
               status:
-                status === ECourseStatus.PENDING
-                  ? ECourseStatus.APPROVED
-                  : ECourseStatus.PENDING,
+                status === CourseStatus.PENDING
+                  ? CourseStatus.APPROVED
+                  : CourseStatus.PENDING,
               _destroy: false,
             },
             path: "/manage/course",
@@ -116,9 +116,7 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
             />
           </div>
           <Select
-            onValueChange={(value) =>
-              handleSelectStatus(value as ECourseStatus)
-            }
+            onValueChange={(value) => handleSelectStatus(value as CourseStatus)}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Chọn trạng thái" />

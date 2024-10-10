@@ -2,17 +2,17 @@
 
 import Coupon from "@/database/coupon.model";
 import {
-  TCouponItem,
-  TCouponParams,
-  TCreateCouponParams,
-  TFilterData,
-  TUpdateCouponParams,
+  CouponItem,
+  CouponParams,
+  CreateCouponParams,
+  FilterData,
+  UpdateCouponParams,
 } from "@/types";
 import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
 
-export async function createCoupon(params: TCreateCouponParams) {
+export async function createCoupon(params: CreateCouponParams) {
   try {
     connectToDatabase();
     const existingCoupon = await Coupon.findOne({ code: params.code });
@@ -30,7 +30,7 @@ export async function createCoupon(params: TCreateCouponParams) {
     console.log(error);
   }
 }
-export async function updateCoupon(params: TUpdateCouponParams) {
+export async function updateCoupon(params: UpdateCouponParams) {
   try {
     connectToDatabase();
     const updatedCoupon = await Coupon.findByIdAndUpdate(
@@ -43,9 +43,9 @@ export async function updateCoupon(params: TUpdateCouponParams) {
     console.log(error);
   }
 }
-export async function getCoupons(params: TFilterData): Promise<
+export async function getCoupons(params: FilterData): Promise<
   | {
-      coupons: TCouponItem[] | undefined;
+      coupons: CouponItem[] | undefined;
       total: number;
     }
   | undefined
@@ -76,7 +76,7 @@ export async function getCoupons(params: TFilterData): Promise<
 }
 export async function getCouponByCode(
   params: any
-): Promise<TCouponParams | undefined> {
+): Promise<CouponParams | undefined> {
   try {
     connectToDatabase();
     const findCoupon = await Coupon.findOne({
@@ -93,7 +93,7 @@ export async function getCouponByCode(
 }
 export async function getValidateCoupon(
   params: any
-): Promise<TCouponParams | undefined> {
+): Promise<CouponParams | undefined> {
   try {
     connectToDatabase();
     const findCoupon = await Coupon.findOne({

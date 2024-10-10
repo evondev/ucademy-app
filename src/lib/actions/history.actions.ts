@@ -1,13 +1,13 @@
 "use server";
 
-import History, { IHistory } from "@/database/history.model";
+import History from "@/database/history.model";
 import User from "@/database/user.model";
-import { TCreateHistoryParams } from "@/types";
+import { CreateHistoryParams } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
 
-export async function createHistory(params: TCreateHistoryParams) {
+export async function createHistory(params: CreateHistoryParams) {
   try {
     connectToDatabase();
     const { userId } = auth();
@@ -33,7 +33,7 @@ export async function createHistory(params: TCreateHistoryParams) {
 }
 export async function getHistory(params: {
   course: string;
-}): Promise<IHistory[] | undefined> {
+}): Promise<History[] | undefined> {
   try {
     connectToDatabase();
     const { userId } = auth();

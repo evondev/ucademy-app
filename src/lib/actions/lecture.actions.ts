@@ -1,11 +1,11 @@
 "use server";
 import Course from "@/database/course.model";
 import Lecture from "@/database/lecture.model";
-import { TCreateLectureParams, TUpdateLectureParams } from "@/types";
+import { CreateLectureParams, UpdateLectureParams } from "@/types";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
 
-export async function createLecture(params: TCreateLectureParams) {
+export async function createLecture(params: CreateLectureParams) {
   try {
     connectToDatabase();
     const findCourse = await Course.findById(params.course);
@@ -19,7 +19,7 @@ export async function createLecture(params: TCreateLectureParams) {
     };
   } catch (error) {}
 }
-export async function updateLecture(params: TUpdateLectureParams) {
+export async function updateLecture(params: UpdateLectureParams) {
   try {
     connectToDatabase();
     const res = await Lecture.findByIdAndUpdate(

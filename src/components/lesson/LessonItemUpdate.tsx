@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { editorOptions } from "@/constants";
-import { ILesson } from "@/database/lesson.model";
+import { Lesson } from "@/database/lesson.model";
 import { updateLesson } from "@/lib/actions/lesson.actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Editor } from "@tinymce/tinymce-react";
@@ -28,7 +28,7 @@ const formSchema = z.object({
   content: z.string().optional(),
 });
 
-const LessonItemUpdate = ({ lesson }: { lesson: ILesson }) => {
+const LessonItemUpdate = ({ lesson }: { lesson: Lesson }) => {
   const editorRef = useRef<any>(null);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

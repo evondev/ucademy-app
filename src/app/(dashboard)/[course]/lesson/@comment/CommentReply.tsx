@@ -2,12 +2,12 @@
 
 import { MAX_COMMENT_LEVEL } from "@/constants";
 import { cn } from "@/lib/utils";
-import { ICommentItem } from "@/types";
+import { CommentItem } from "@/types";
 import { useState } from "react";
 import CommentForm from "./CommentForm";
 
 interface CommentReplyProps {
-  comment: ICommentItem;
+  comment: CommentItem;
   lessonId: string;
   userId: string;
 }

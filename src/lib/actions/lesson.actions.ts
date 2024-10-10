@@ -1,12 +1,12 @@
 "use server";
 import Course from "@/database/course.model";
 import Lecture from "@/database/lecture.model";
-import Lesson, { ILesson } from "@/database/lesson.model";
-import { TCreateLessonParams, TUpdateLessonParams } from "@/types";
+import Lesson from "@/database/lesson.model";
+import { CreateLessonParams, UpdateLessonParams } from "@/types";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
 
-export async function createLesson(params: TCreateLessonParams) {
+export async function createLesson(params: CreateLessonParams) {
   try {
     connectToDatabase();
     const findCourse = await Course.findById(params.course);
@@ -23,7 +23,7 @@ export async function createLesson(params: TCreateLessonParams) {
     };
   } catch (error) {}
 }
-export async function updateLesson(params: TUpdateLessonParams) {
+export async function updateLesson(params: UpdateLessonParams) {
   try {
     connectToDatabase();
     const res = await Lesson.findByIdAndUpdate(
@@ -45,7 +45,7 @@ export async function getLessonBySlug({
 }: {
   slug: string;
   course: string;
-}): Promise<ILesson | undefined> {
+}): Promise<Lesson | undefined> {
   try {
     connectToDatabase();
     const findLesson = await Lesson.findOne({
@@ -61,7 +61,7 @@ export async function findAllLessons({
   course,
 }: {
   course: string;
-}): Promise<ILesson[] | undefined> {
+}): Promise<Lesson[] | undefined> {
   try {
     connectToDatabase();
     const lessons = await Lesson.find({

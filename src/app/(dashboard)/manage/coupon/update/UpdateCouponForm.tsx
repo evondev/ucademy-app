@@ -28,15 +28,15 @@ import { Switch } from "@/components/ui/switch";
 import { couponFormSchema, couponTypes } from "@/constants";
 import { updateCoupon } from "@/lib/actions/coupon.actions";
 import { getAllCourses } from "@/lib/actions/course.actions";
-import { TCouponParams } from "@/types";
-import { ECouponType } from "@/types/enums";
+import { CouponParams } from "@/types";
+import { CouponType } from "@/types/enums";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import { debounce } from "lodash";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const UpdateCouponForm = ({ data }: { data: TCouponParams }) => {
+const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
   const [findCourse, setFindCourse] = useState<any[] | undefined>([]);
   const [selectedCourses, setSelectedCourses] = useState<any[]>([]);
   const [startDate, setStartDate] = useState<Date>(
@@ -65,7 +65,7 @@ const UpdateCouponForm = ({ data }: { data: TCouponParams }) => {
       const couponType = values.type;
       const couponValue = Number(values.value?.replace(/,/g, ""));
       if (
-        couponType === ECouponType.PERCENT &&
+        couponType === CouponType.PERCENT &&
         couponValue &&
         (couponValue > 100 || couponValue < 0)
       ) {
@@ -247,7 +247,7 @@ const UpdateCouponForm = ({ data }: { data: TCouponParams }) => {
                 <FormLabel>Giá trị</FormLabel>
                 <FormControl>
                   <>
-                    {couponTypeWatch === ECouponType.PERCENT ? (
+                    {couponTypeWatch === CouponType.PERCENT ? (
                       <Input
                         placeholder="100"
                         {...field}

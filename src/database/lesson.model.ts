@@ -1,7 +1,7 @@
-import { ELessonType } from "@/types/enums";
+import { LessonType } from "@/types/enums";
 import { Schema, model, models } from "mongoose";
 
-export interface ILesson extends Document {
+export interface Lesson extends Document {
   _id: string;
   title: string;
   slug: string;
@@ -11,11 +11,11 @@ export interface ILesson extends Document {
   duration: number;
   video_url: string;
   content: string;
-  type: ELessonType;
+  type: LessonType;
   _destroy: boolean;
   created_at: Date;
 }
-const lessonSchema = new Schema<ILesson>({
+const lessonSchema = new Schema<Lesson>({
   title: {
     type: String,
     required: true,
@@ -56,9 +56,9 @@ const lessonSchema = new Schema<ILesson>({
   },
   type: {
     type: String,
-    enum: Object.values(ELessonType),
-    default: ELessonType.VIDEO,
+    enum: Object.values(LessonType),
+    default: LessonType.VIDEO,
   },
 });
-const Lesson = models.Lesson || model<ILesson>("Lesson", lessonSchema);
+const Lesson = models.Lesson || model<Lesson>("Lesson", lessonSchema);
 export default Lesson;

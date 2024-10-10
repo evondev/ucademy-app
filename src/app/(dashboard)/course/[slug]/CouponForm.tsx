@@ -1,7 +1,7 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import { getValidateCoupon } from "@/lib/actions/coupon.actions";
-import { ECouponType } from "@/types/enums";
+import { CouponType } from "@/types/enums";
 import { debounce } from "lodash";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -41,9 +41,9 @@ const CouponForm = ({
         return;
       }
 
-      if (couponType === ECouponType.PERCENT) {
+      if (couponType === CouponType.PERCENT) {
         finalPrice = originalPrice - (originalPrice * response?.value) / 100;
-      } else if (couponType === ECouponType.AMOUNT) {
+      } else if (couponType === CouponType.AMOUNT) {
         finalPrice = originalPrice - response?.value;
       }
       setPrice(finalPrice);

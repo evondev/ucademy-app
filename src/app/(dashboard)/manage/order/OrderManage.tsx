@@ -25,16 +25,16 @@ import { allValue, commonClassNames, orderStatus } from "@/constants";
 import useQueryString from "@/hooks/useQueryString";
 import { updateOrder } from "@/lib/actions/order.actions";
 import { cn } from "@/lib/utils";
-import { EOrderStatus } from "@/types/enums";
+import { OrderStatus } from "@/types/enums";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-interface IOrderManageProps {
+interface OrderManageProps {
   _id: string;
   code: string;
   total: number;
   amount: number;
   discount: number;
-  status: EOrderStatus;
+  status: OrderStatus;
   coupon: {
     code: string;
   };
@@ -50,7 +50,7 @@ const OrderManage = ({
   totalPages = 1,
   total,
 }: {
-  orders: IOrderManageProps[];
+  orders: OrderManageProps[];
   totalPages: number;
   total: number;
 }) => {
@@ -59,9 +59,9 @@ const OrderManage = ({
     status,
   }: {
     orderId: string;
-    status: EOrderStatus;
+    status: OrderStatus;
   }) => {
-    if (status === EOrderStatus.CANCELED) {
+    if (status === OrderStatus.CANCELED) {
       Swal.fire({
         title: "Bạn có chắc muốn hủy đơn hàng không?",
         icon: "warning",
@@ -74,7 +74,7 @@ const OrderManage = ({
         }
       });
     }
-    if (status === EOrderStatus.COMPLETED) {
+    if (status === OrderStatus.COMPLETED) {
       const res = await updateOrder({ orderId, status });
       if (res?.success) {
         toast.success("Cập nhật đơn hàng thành công");
@@ -95,7 +95,7 @@ const OrderManage = ({
             />
           </div>
           <Select
-            onValueChange={(value) => handleSelectStatus(value as EOrderStatus)}
+            onValueChange={(value) => handleSelectStatus(value as OrderStatus)}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Chọn trạng thái" />
@@ -162,16 +162,16 @@ const OrderManage = ({
                     <StatusBadge item={orderStatusItem}></StatusBadge>
                   </TableCell>
                   <TableCell>
-                    {order.status !== EOrderStatus.CANCELED && (
+                    {order.status !== OrderStatus.CANCELED && (
                       <div className="flex gap-3">
-                        {order.status === EOrderStatus.PENDING && (
+                        {order.status === OrderStatus.PENDING && (
                           <button
                             type="button"
                             className={commonClassNames.action}
                             onClick={() =>
                               handleUpdateOrder({
                                 orderId: order._id,
-                                status: EOrderStatus.COMPLETED,
+                                status: OrderStatus.COMPLETED,
                               })
                             }
                           >
@@ -184,7 +184,7 @@ const OrderManage = ({
                           onClick={() =>
                             handleUpdateOrder({
                               orderId: order._id,
-                              status: EOrderStatus.CANCELED,
+                              status: OrderStatus.CANCELED,
                             })
                           }
                         >

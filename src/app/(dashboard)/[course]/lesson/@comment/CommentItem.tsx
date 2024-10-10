@@ -1,16 +1,16 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { ICommentItem } from "@/types";
-import { ECommentStatus } from "@/types/enums";
+import { CommentItem } from "@/types";
+import { CommentStatus } from "@/types/enums";
 import { getRepliesComment, timeAgo } from "@/utils";
 import Image from "next/image";
 import CommentReply from "./CommentReply";
 
-interface ICommentItemProps {
-  comment: ICommentItem;
+interface CommentItemProps {
+  comment: CommentItem;
   lessonId: string;
   userId: string;
-  comments: ICommentItem[];
+  comments: CommentItem[];
 }
 
 const CommentItem = ({
@@ -18,11 +18,11 @@ const CommentItem = ({
   lessonId,
   userId,
   comments = [],
-}: ICommentItemProps) => {
+}: CommentItemProps) => {
   const replies = getRepliesComment(comments, comment._id);
   const level = comment.level || 0;
   const COMMENT_SPACING = 55;
-  const isPending = comment.status === ECommentStatus.PENDING;
+  const isPending = comment.status === CommentStatus.PENDING;
   return (
     <>
       <div

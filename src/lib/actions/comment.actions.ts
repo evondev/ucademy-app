@@ -2,7 +2,7 @@
 
 import Comment from "@/database/comment.model";
 import User from "@/database/user.model";
-import { ICommentItem } from "@/types";
+import { CommentItem } from "@/types";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
 
@@ -27,10 +27,10 @@ export async function createComment(params: {
 export async function getCommentsByLesson(
   lessonId: string,
   sort: "recent" | "oldest" = "recent"
-): Promise<ICommentItem[] | undefined> {
+): Promise<CommentItem[] | undefined> {
   try {
     connectToDatabase();
-    const comments = await Comment.find<ICommentItem>({
+    const comments = await Comment.find<CommentItem>({
       lesson: lessonId,
     })
       .sort({ created_at: sort === "recent" ? -1 : 1 })

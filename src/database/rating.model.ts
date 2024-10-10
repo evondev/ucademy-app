@@ -1,16 +1,16 @@
-import { ERatingStatus } from "@/types/enums";
+import { RatingStatus } from "@/types/enums";
 import { Document, Schema, model, models } from "mongoose";
 
-export interface IRating extends Document {
+export interface Rating extends Document {
   _id: string;
   rate: number;
   content: string;
   user: Schema.Types.ObjectId;
   course: Schema.Types.ObjectId;
-  status: ERatingStatus;
+  status: RatingStatus;
   created_at: Date;
 }
-const ratingSchema = new Schema<IRating>({
+const ratingSchema = new Schema<Rating>({
   rate: {
     type: Number,
     default: 5,
@@ -22,8 +22,8 @@ const ratingSchema = new Schema<IRating>({
   },
   status: {
     type: String,
-    enum: Object.values(ERatingStatus),
-    default: ERatingStatus.UNACTIVE,
+    enum: Object.values(RatingStatus),
+    default: RatingStatus.UNACTIVE,
   },
   user: {
     type: Schema.Types.ObjectId,
@@ -38,5 +38,5 @@ const ratingSchema = new Schema<IRating>({
     default: Date.now,
   },
 });
-const Rating = models.Rating || model<IRating>("Rating", ratingSchema);
+const Rating = models.Rating || model<Rating>("Rating", ratingSchema);
 export default Rating;

@@ -1,6 +1,6 @@
 import CourseManage from "@/components/course/CourseManage";
 import { getAllCourses } from "@/lib/actions/course.actions";
-import { ECourseStatus } from "@/types/enums";
+import { CourseStatus } from "@/types/enums";
 
 const page = async ({
   searchParams,
@@ -8,7 +8,7 @@ const page = async ({
   searchParams: {
     page: number;
     search: string;
-    status: ECourseStatus;
+    status: CourseStatus;
   };
 }) => {
   const courses = await getAllCourses({

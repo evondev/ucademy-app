@@ -13,7 +13,7 @@ import {
   updateCourseView,
 } from "@/lib/actions/course.actions";
 import { getUserInfo } from "@/lib/actions/user.actions";
-import { ECourseStatus } from "@/types/enums";
+import { CourseStatus } from "@/types/enums";
 import { formatMinutesToHour } from "@/utils";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
@@ -32,7 +32,7 @@ const page = async ({
     slug: params.slug,
   });
   if (!data) return null;
-  if (data.status !== ECourseStatus.APPROVED) return <PageNotFound />;
+  if (data.status !== CourseStatus.APPROVED) return <PageNotFound />;
   const { userId } = auth();
   const findUser = await getUserInfo({ userId: userId || "" });
   const userCourses = findUser?.courses.map((c) => c.toString());
