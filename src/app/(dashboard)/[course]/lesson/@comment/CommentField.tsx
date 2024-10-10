@@ -13,7 +13,7 @@ interface CommentItemProps {
   comments: CommentItem[];
 }
 
-const CommentItem = ({
+const CommentField = ({
   comment,
   lessonId,
   userId,
@@ -72,7 +72,7 @@ const CommentItem = ({
       </div>
       {replies.length > 0 &&
         replies.map((reply) => (
-          <CommentItem
+          <CommentField
             key={reply._id}
             comment={reply}
             lessonId={lessonId}
@@ -84,4 +84,4 @@ const CommentItem = ({
   );
 };
 
-export default CommentItem;
+export default CommentField;

@@ -1,6 +1,6 @@
-import { Comment } from "@/database/comment.model";
-import { Coupon } from "@/database/coupon.model";
-import { Course } from "@/database/course.model";
+import { CommentProps } from "@/database/comment.model";
+import { CouponProps } from "@/database/coupon.model";
+import { CourseProps } from "@/database/course.model";
 import { LessonProps } from "@/database/lesson.model";
 import { CouponType } from "./enums";
 
@@ -8,7 +8,7 @@ export type ActiveLinkProps = {
   url: string;
   children: React.ReactNode;
 };
-export type MenuItem = {
+export type MenuField = {
   url: string;
   title: string;
   icon: React.ReactNode;
@@ -30,7 +30,7 @@ export type CreateCourseParams = {
 };
 export type UpdateCourseParams = {
   slug: string;
-  updateData: Partial<Course>;
+  updateData: Partial<CourseProps>;
   path?: string;
 };
 export type UpdateCourseLecture = {
@@ -38,7 +38,7 @@ export type UpdateCourseLecture = {
   title: string;
   lessons: LessonProps[];
 };
-export interface CourseUpdateParams extends Omit<Course, "lectures"> {
+export interface CourseUpdateParams extends Omit<CourseProps, "lectures"> {
   lectures: UpdateCourseLecture[];
 }
 export type GetAllCourseParams = {
@@ -116,13 +116,13 @@ export type UpdateCouponParams = {
   _id: string;
   updateData: Partial<CreateCouponParams>;
 };
-export type CouponParams = Omit<Coupon, "courses"> & {
+export type CouponParams = Omit<CouponProps, "courses"> & {
   courses: {
     _id: string;
     title: string;
   }[];
 };
-export interface StudyCoursesProps extends Omit<Course, "lectures"> {
+export interface StudyCoursesProps extends Omit<CourseProps, "lectures"> {
   lectures: {
     lessons: {
       slug: string;
@@ -150,7 +150,7 @@ export type RatingItem = {
   };
   status: RatingStatus;
 };
-export type CouponItem = Omit<Coupon, "_id" | "courses">;
+export type CouponItem = Omit<CouponProps, "_id" | "courses">;
 // Filter, pagination
 export type FilterData = {
   page?: number;
@@ -160,7 +160,7 @@ export type FilterData = {
   active?: boolean;
 };
 // Comment
-export interface CommentItem extends Omit<Comment, "user"> {
+export interface CommentItem extends Omit<CommentProps, "user"> {
   user: {
     name: string;
     avatar: string;

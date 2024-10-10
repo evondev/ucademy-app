@@ -67,7 +67,7 @@ const page = async ({
           )}
         </div>
         <div className="flex flex-wrap gap-2 mb-5">
-          {ratings.map((rating, index) => (
+          {ratings.map((rating: string, index: number) => (
             <div
               key={index}
               className="p-2 px-4 text-sm font-semibold rounded-full text-white bg-gradient-to-tr from-primary to-secondary"

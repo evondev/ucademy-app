@@ -6,7 +6,6 @@ import Lesson from "@/database/lesson.model";
 import User, { UserProps } from "@/database/user.model";
 import { CreateUserParams } from "@/types";
 import { CourseStatus } from "@/types/enums";
-import { auth } from "@clerk/nextjs/server";
 import { connectToDatabase } from "../mongoose";
 
 export async function createUser(params: CreateUserParams) {
@@ -32,12 +31,11 @@ export async function getUserInfo({
     console.log(error);
   }
 }
-export async function getUserCourses(): Promise<
-  CourseProps[] | undefined | null
-> {
+export async function getUserCourses(
+  userId: string
+): Promise<CourseProps[] | undefined | null> {
   try {
     connectToDatabase();
-    const { userId } = auth();
     const findUser = await User.findOne({ clerkId: userId }).populate({
       path: "courses",
       model: Course,

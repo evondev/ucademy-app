@@ -3,19 +3,24 @@ import { CourseGrid } from "@/components/common";
 import CourseItem from "@/components/course/CourseItem";
 import { lastLessonKey } from "@/constants";
 import { StudyCoursesProps } from "@/types";
+import { useEffect, useState } from "react";
 
 const StudyCourses = ({
   courses,
 }: {
   courses: StudyCoursesProps[] | null | undefined;
 }) => {
+  const [lastLesson, setLastLesson] = useState<any[]>([]);
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const data = localStorage
+        ? JSON.parse(localStorage?.getItem(lastLessonKey) || "[]") || []
+        : [];
+      setLastLesson(data);
+    }
+  }, []);
   if (!courses || courses.length <= 0) return null;
-  let lastLesson = [];
-  if (typeof localStorage !== "undefined") {
-    lastLesson = localStorage
-      ? JSON.parse(localStorage?.getItem(lastLessonKey) || "[]") || []
-      : [];
-  }
+
   return (
     <CourseGrid>
       {courses &&

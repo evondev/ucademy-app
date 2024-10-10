@@ -3,8 +3,8 @@ import { getCourseBySlug } from "@/lib/actions/course.actions";
 import { getLessonBySlug } from "@/lib/actions/lesson.actions";
 import { getUserInfo } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs/server";
+import CommentField from "./CommentField";
 import CommentForm from "./CommentForm";
-import CommentItem from "./CommentItem";
 import CommentSorting from "./CommentSorting";
 
 const page = async ({
@@ -55,13 +55,13 @@ const page = async ({
           </div>
           <div className="flex flex-col gap-5">
             {rootComments?.map((item) => (
-              <CommentItem
+              <CommentField
                 key={item._id}
                 comment={item}
                 lessonId={commentLessonId}
                 userId={commentUserId}
                 comments={comments || []}
-              ></CommentItem>
+              ></CommentField>
             ))}
           </div>
         </div>
