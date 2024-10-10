@@ -54,9 +54,5 @@ const userSchema = new Schema<UserProps>({
     default: UserStatus.ACTIVE,
   },
 });
-userSchema.index(
-  { email: 1 },
-  { unique: true, partialFilterExpression: { email: { $ne: null } } }
-);
 const User = models.User || model<UserProps>("User", userSchema);
 export default User;

@@ -11,8 +11,7 @@ import { connectToDatabase } from "../mongoose";
 export async function createUser(params: CreateUserParams) {
   try {
     connectToDatabase();
-    const user = new User(params);
-    await user.save();
+    const user = await User.create(params);
     return user;
   } catch (error) {
     console.log(error);
