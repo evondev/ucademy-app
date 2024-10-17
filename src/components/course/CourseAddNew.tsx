@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { UserProps } from "@/database/user.model";
+import { User } from "@/database/user.model";
 import { createCourse } from "@/lib/actions/course.actions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -26,7 +26,7 @@ const formSchema = z.object({
   slug: z.string().optional(),
 });
 
-function CourseAddNew({ user }: { user: UserProps }) {
+function CourseAddNew({ user }: { user: User }) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({

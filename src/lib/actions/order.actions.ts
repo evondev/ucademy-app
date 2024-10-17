@@ -2,7 +2,7 @@
 import Coupon from "@/database/coupon.model";
 import Course from "@/database/course.model";
 import Order from "@/database/order.model";
-import User from "@/database/user.model";
+import { default as UserSchema } from "@/database/user.model";
 import { CreateOrderParams } from "@/types";
 import { OrderStatus } from "@/types/enums";
 import { FilterQuery } from "mongoose";
@@ -28,7 +28,7 @@ export async function fetchOrders(params: any) {
       })
       .populate({
         path: "user",
-        model: User,
+        model: UserSchema,
         select: "name",
       })
       .populate({
@@ -77,12 +77,12 @@ export async function updateOrder({
       })
       .populate({
         path: "user",
-        model: User,
+        model: UserSchema,
         select: "_id",
       });
     if (!findOrder) return;
     if (findOrder.status === OrderStatus.CANCELED) return;
-    const findUser = await User.findById(findOrder.user._id);
+    const findUser = await UserSchema.findById(findOrder.user._id);
 
     await Order.findByIdAndUpdate(orderId, {
       status,

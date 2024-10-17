@@ -1,7 +1,7 @@
 "use server";
 
 import History from "@/database/history.model";
-import User from "@/database/user.model";
+import UserSchema from "@/database/user.model";
 import { CreateHistoryParams } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
@@ -11,7 +11,7 @@ export async function createHistory(params: CreateHistoryParams) {
   try {
     connectToDatabase();
     const { userId } = auth();
-    const findUser = await User.findOne({ clerkId: userId });
+    const findUser = await UserSchema.findOne({ clerkId: userId });
     if (!findUser) return;
     if (params.checked) {
       await History.create({
@@ -37,7 +37,7 @@ export async function getHistory(params: {
   try {
     connectToDatabase();
     const { userId } = auth();
-    const findUser = await User.findOne({ clerkId: userId });
+    const findUser = await UserSchema.findOne({ clerkId: userId });
     if (!findUser) return;
     const histories = await History.find({
       course: params.course,

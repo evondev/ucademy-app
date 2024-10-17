@@ -85,28 +85,58 @@
 
 # Improve codebase
 
+## Types
+
 - User
 - TUser
 - EUser
+- Schema: UserSchema
+
+## Structure
+
+- app: routes
+- modules: components, hooks, services, types, pages, utils
+- shared: components, hooks, utils, constants, types
+- api: services, types
+- middleware
+- assets
+-
+
+## Naming
+
+- kebab-case ✅
+- camelCase
+
+## Components
+
+- Icon component svg
+- props: on, handle, destructuring
+- Nếu props truyền vào component mà là sự kiện thì nên đặt tên bắt đầu với on ví dụ: `onChange`, `onOpenModal` `onRemoveText`
+- Những function xử lý bên trong component, gọi là internal function thì thường hay bắt đầu với từ handle. Ví dụ: `handleUpdateData`, `handleChangeValue`
+- Nếu mà props truyền vào từ 2 trở lên thì nên sử dụng destructuring
+
+## Client side vs Server side
+
+- Tanstack query
+- Client components
+- Server components
+- Server actions
+
+## Performance
+
+## Data Fetching
 
 # Notification
 
 # User
 
-# Other
+# Final
 
 - Hydration
 - SSG
 - Intercepting Routes
-
-# Final
-
-- Optimize types and code
 - DragnDrop Lecture - Lesson
-- Global state for authentication
 - Check already bought course
-- Optimize UI UX invalid formfield
-- Using cookie to save userInfo
-- Optimize connect to database
+- Optimize UI UX
 - Interview questions
 - English interview tips

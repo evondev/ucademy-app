@@ -1,7 +1,7 @@
 "use server";
 
 import Comment from "@/database/comment.model";
-import User from "@/database/user.model";
+import UserSchema from "@/database/user.model";
 import { CommentItem } from "@/types";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
@@ -36,7 +36,7 @@ export async function getCommentsByLesson(
       .sort({ created_at: sort === "recent" ? -1 : 1 })
       .populate({
         path: "user",
-        model: User,
+        model: UserSchema,
         select: "name avatar",
       });
     return JSON.parse(JSON.stringify(comments));
