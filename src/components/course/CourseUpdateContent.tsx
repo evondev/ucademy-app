@@ -1,15 +1,15 @@
 "use client";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { commonClassNames } from "@/constants";
 import { LessonProps } from "@/database/lesson.model";
 import { createLecture, updateLecture } from "@/lib/actions/lecture.actions";
 import { createLesson, updateLesson } from "@/lib/actions/lesson.actions";
 import { cn } from "@/lib/utils";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/shared/components/ui/accordion";
 import { CourseUpdateParams, UpdateCourseLecture } from "@/types";
 import { MouseEvent, useState } from "react";
 import { toast } from "react-toastify";

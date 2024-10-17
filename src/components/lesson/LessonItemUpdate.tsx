@@ -1,4 +1,7 @@
 "use client";
+import { editorOptions } from "@/constants";
+import { LessonProps } from "@/database/lesson.model";
+import { updateLesson } from "@/lib/actions/lesson.actions";
 import {
   Form,
   FormControl,
@@ -6,11 +9,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { editorOptions } from "@/constants";
-import { LessonProps } from "@/database/lesson.model";
-import { updateLesson } from "@/lib/actions/lesson.actions";
+} from "@/shared/components/ui/form";
+import { Input } from "@/shared/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Editor } from "@tinymce/tinymce-react";
 import { useTheme } from "next-themes";

@@ -1,8 +1,10 @@
 "use client";
-import { ActiveLinkProps } from "@/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+interface ActiveLinkProps {
+  url: string;
+  children: React.ReactNode;
+}
 const ActiveLink = ({ url, children }: ActiveLinkProps) => {
   const pathname = usePathname();
   const isActive = url === pathname;

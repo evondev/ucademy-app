@@ -4,7 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
+import { courseLevel, courseStatus } from "@/constants";
+import { CourseProps } from "@/database/course.model";
+import { updateCourse } from "@/lib/actions/course.actions";
+import { Button } from "@/shared/components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,18 +15,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/shared/components/ui/form";
+import { Input } from "@/shared/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { courseLevel, courseStatus } from "@/constants";
-import { CourseProps } from "@/database/course.model";
-import { updateCourse } from "@/lib/actions/course.actions";
+} from "@/shared/components/ui/select";
 import { CourseLevel, CourseStatus } from "@/types/enums";
 import { UploadButton } from "@/utils/uploadthing";
 import Image from "next/image";

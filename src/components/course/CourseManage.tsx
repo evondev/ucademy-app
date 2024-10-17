@@ -1,4 +1,8 @@
 "use client";
+import { allValue, courseStatus } from "@/constants";
+import { CourseProps } from "@/database/course.model";
+import useQueryString from "@/hooks/useQueryString";
+import { updateCourse } from "@/lib/actions/course.actions";
 import {
   Select,
   SelectContent,
@@ -6,7 +10,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/components/ui/select";
 import {
   Table,
   TableBody,
@@ -14,11 +18,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { allValue, courseStatus } from "@/constants";
-import { CourseProps } from "@/database/course.model";
-import useQueryString from "@/hooks/useQueryString";
-import { updateCourse } from "@/lib/actions/course.actions";
+} from "@/shared/components/ui/table";
 import { CourseStatus } from "@/types/enums";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";

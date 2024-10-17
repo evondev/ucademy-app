@@ -1,6 +1,6 @@
 "use client";
-import { Input } from "@/components/ui/input";
 import { getValidateCoupon } from "@/lib/actions/coupon.actions";
+import { Input } from "@/shared/components/ui/input";
 import { CouponType } from "@/types/enums";
 import { debounce } from "lodash";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";

@@ -115,6 +115,11 @@
 - Những function xử lý bên trong component, gọi là internal function thì thường hay bắt đầu với từ handle. Ví dụ: `handleUpdateData`, `handleChangeValue`
 - Nếu mà props truyền vào từ 2 trở lên thì nên sử dụng destructuring
 
+## Eslint
+
+- sort-imports
+- import cycle
+
 ## Client side vs Server side
 
 - Tanstack query

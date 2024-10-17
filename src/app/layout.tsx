@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/components/common/ThemeProvider";
+import { ThemeProvider } from "@/shared/components";
 import { manrope } from "@/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/react";

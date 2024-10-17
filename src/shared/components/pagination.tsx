@@ -8,6 +8,7 @@ interface IPaginationProps {
   totalPages: number;
   total: number;
 }
+
 const IconDoubleLeft = (
   <svg
     xmlns="http://www.w3.org/2000/svg"

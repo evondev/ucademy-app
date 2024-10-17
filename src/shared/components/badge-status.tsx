@@ -1,16 +1,15 @@
 import { commonClassNames } from "@/constants";
 import { cn } from "@/lib/utils";
 
-const StatusBadge = ({
-  item,
-  onClick,
-}: {
+interface BadgeStatusProps {
   item?: {
     className?: string;
     title: string;
   };
   onClick?: () => void;
-}) => {
+}
+
+const BadgeStatus = ({ item, onClick }: BadgeStatusProps) => {
   return (
     <span
       className={cn(commonClassNames.status, item?.className)}
@@ -21,4 +20,4 @@ const StatusBadge = ({
   );
 };
 
-export default StatusBadge;
+export default BadgeStatus;

@@ -1,6 +1,6 @@
-import { TableCell, TableRow } from "../ui/table";
+import { TableCell, TableRow } from "@/shared/components/ui/table";
 
-const EmptyData = ({ text }: { text?: string }) => {
+const EmptySpace = ({ text }: { text?: string }) => {
   return (
     <TableRow>
       <TableCell colSpan={99}>
@@ -12,4 +12,4 @@ const EmptyData = ({ text }: { text?: string }) => {
   );
 };
 
-export default EmptyData;
+export default EmptySpace;

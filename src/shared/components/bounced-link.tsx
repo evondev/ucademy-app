@@ -1,5 +1,5 @@
+import { IconPlus } from "@/components/icons";
 import Link from "next/link";
-import { IconPlus } from "../icons";
 
 const BouncedLink = ({ url }: { url: string }) => {
   return (

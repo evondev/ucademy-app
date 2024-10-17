@@ -4,7 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
+import { User } from "@/database/user.model";
+import { createCourse } from "@/lib/actions/course.actions";
+import { Button } from "@/shared/components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,10 +14,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { User } from "@/database/user.model";
-import { createCourse } from "@/lib/actions/course.actions";
+} from "@/shared/components/ui/form";
+import { Input } from "@/shared/components/ui/input";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";

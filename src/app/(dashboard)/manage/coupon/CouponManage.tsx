@@ -3,7 +3,9 @@ import { BouncedLink, StatusBadge, TableAction } from "@/components/common";
 import Heading from "@/components/common/Heading";
 import Pagination from "@/components/common/Pagination";
 import TableActionItem from "@/components/common/TableActionItem";
-import { Input } from "@/components/ui/input";
+import { allValue, couponStatuses } from "@/constants";
+import useQueryString from "@/hooks/useQueryString";
+import { Input } from "@/shared/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -11,7 +13,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/components/ui/select";
 import {
   Table,
   TableBody,
@@ -19,9 +21,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { allValue, couponStatuses } from "@/constants";
-import useQueryString from "@/hooks/useQueryString";
+} from "@/shared/components/ui/table";
 import { CouponItem } from "@/types";
 import { CouponType } from "@/types/enums";
 import ActionDeleteCoupon from "./ActionDeleteCoupon";

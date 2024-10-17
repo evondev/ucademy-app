@@ -1,10 +1,16 @@
 "use client";
-import { StatusBadge } from "@/components/common";
-import EmptyData from "@/components/common/EmptyData";
-import Heading from "@/components/common/Heading";
-import Pagination from "@/components/common/Pagination";
 import { IconCancel, IconCheck } from "@/components/icons";
-import { Input } from "@/components/ui/input";
+import { allValue, commonClassNames, orderStatus } from "@/constants";
+import useQueryString from "@/hooks/useQueryString";
+import { updateOrder } from "@/lib/actions/order.actions";
+import { cn } from "@/lib/utils";
+import {
+  BadgeStatus,
+  EmptySpace,
+  Heading,
+  Pagination,
+} from "@/shared/components";
+import { Input } from "@/shared/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -12,7 +18,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/components/ui/select";
 import {
   Table,
   TableBody,
@@ -20,40 +26,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { allValue, commonClassNames, orderStatus } from "@/constants";
-import useQueryString from "@/hooks/useQueryString";
-import { updateOrder } from "@/lib/actions/order.actions";
-import { cn } from "@/lib/utils";
-import { OrderStatus } from "@/types/enums";
+} from "@/shared/components/ui/table";
+import { OrderStatus } from "@/shared/types/enums";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-interface OrderManageProps {
-  _id: string;
-  code: string;
-  total: number;
-  amount: number;
-  discount: number;
-  status: OrderStatus;
-  coupon: {
-    code: string;
-  };
-  course: {
-    title: string;
-  };
-  user: {
-    name: string;
-  };
-}
-const OrderManage = ({
+import { OrderManagePageProps } from "../types/order.types";
+
+const OrderManagePage = ({
   orders = [],
   totalPages = 1,
   total,
-}: {
-  orders: OrderManageProps[];
-  totalPages: number;
-  total: number;
-}) => {
+}: OrderManagePageProps) => {
   const handleUpdateOrder = async ({
     orderId,
     status,
@@ -126,7 +109,7 @@ const OrderManage = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {orders.length === 0 && <EmptyData text="Không có đơn hàng!" />}
+          {orders.length === 0 && <EmptySpace text="Không có đơn hàng!" />}
           {orders.length > 0 &&
             orders.map((order) => {
               const orderStatusItem = orderStatus.find(
@@ -159,7 +142,7 @@ const OrderManage = ({
                     <strong>{order.coupon?.code || ""}</strong>
                   </TableCell>
                   <TableCell>
-                    <StatusBadge item={orderStatusItem}></StatusBadge>
+                    <BadgeStatus item={orderStatusItem}></BadgeStatus>
                   </TableCell>
                   <TableCell>
                     {order.status !== OrderStatus.CANCELED && (
@@ -203,4 +186,4 @@ const OrderManage = ({
   );
 };
 
-export default OrderManage;
+export default OrderManagePage;

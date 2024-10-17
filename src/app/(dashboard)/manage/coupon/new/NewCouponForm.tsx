@@ -4,9 +4,12 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { IconClose } from "@/components/icons";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Checkbox } from "@/components/ui/checkbox";
+import { couponFormSchema, couponTypes } from "@/constants";
+import { createCoupon } from "@/lib/actions/coupon.actions";
+import { getAllCourses } from "@/lib/actions/course.actions";
+import { Button } from "@/shared/components/ui/button";
+import { Calendar } from "@/shared/components/ui/calendar";
+import { Checkbox } from "@/shared/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -14,20 +17,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import InputFormatCurrency from "@/components/ui/input-format";
-import { Label } from "@/components/ui/label";
+} from "@/shared/components/ui/form";
+import { Input } from "@/shared/components/ui/input";
+import InputFormatCurrency from "@/shared/components/ui/input-format";
+import { Label } from "@/shared/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Switch } from "@/components/ui/switch";
-import { couponFormSchema, couponTypes } from "@/constants";
-import { createCoupon } from "@/lib/actions/coupon.actions";
-import { getAllCourses } from "@/lib/actions/course.actions";
+} from "@/shared/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
+import { Switch } from "@/shared/components/ui/switch";
 import { CouponType } from "@/types/enums";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
