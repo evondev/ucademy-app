@@ -1,9 +1,9 @@
 "use client";
 import { createHistory } from "@/lib/actions/history.actions";
 import { cn } from "@/lib/utils";
+import { Checkbox } from "@/shared/components/ui/checkbox";
 import Link from "next/link";
 import { IconPlay } from "../icons";
-import { Checkbox } from "../ui/checkbox";
 
 const LessonItem = ({
   lesson,

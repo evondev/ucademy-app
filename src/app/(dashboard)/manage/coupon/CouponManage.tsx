@@ -1,10 +1,14 @@
 "use client";
-import { BouncedLink, StatusBadge, TableAction } from "@/components/common";
-import Heading from "@/components/common/Heading";
-import Pagination from "@/components/common/Pagination";
-import TableActionItem from "@/components/common/TableActionItem";
 import { allValue, couponStatuses } from "@/constants";
 import useQueryString from "@/hooks/useQueryString";
+import {
+  BadgeStatus,
+  BouncedLink,
+  Heading,
+  Pagination,
+  TableAction,
+  TableActionItem,
+} from "@/shared/components";
 import { Input } from "@/shared/components/ui/input";
 import {
   Select,
@@ -103,19 +107,19 @@ const CouponManage = ({
                 </TableCell>
                 <TableCell>
                   {coupon.active ? (
-                    <StatusBadge
+                    <BadgeStatus
                       item={{
                         title: "Đang kích hoạt",
                         className: "text-green-500",
                       }}
-                    ></StatusBadge>
+                    ></BadgeStatus>
                   ) : (
-                    <StatusBadge
+                    <BadgeStatus
                       item={{
                         title: "Chưa kích hoạt",
                         className: "text-orange-500",
                       }}
-                    ></StatusBadge>
+                    ></BadgeStatus>
                   )}
                 </TableCell>
                 <TableCell>

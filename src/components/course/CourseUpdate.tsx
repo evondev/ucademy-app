@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
+import { Textarea } from "@/shared/components/ui/textarea";
 import { CourseLevel, CourseStatus } from "@/types/enums";
 import { UploadButton } from "@/utils/uploadthing";
 import Image from "next/image";
@@ -32,7 +33,6 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useImmer } from "use-immer";
 import { IconAdd } from "../icons";
-import { Textarea } from "../ui/textarea";
 
 const formSchema = z.object({
   title: z.string().min(10, "Tên khóa học phải có ít nhất 10 ký tự"),

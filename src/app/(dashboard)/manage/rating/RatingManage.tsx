@@ -1,11 +1,13 @@
 "use client";
-import { StatusBadge, TableAction } from "@/components/common";
-import Heading from "@/components/common/Heading";
-import PaginationBtn from "@/components/common/PaginationBtn";
-import TableActionItem from "@/components/common/TableActionItem";
 import { allValue, ratingList, ratingStatus } from "@/constants";
 import useQueryString from "@/hooks/useQueryString";
 import { deleteRating, updateRating } from "@/lib/actions/rating.actions";
+import {
+  BadgeStatus,
+  Heading,
+  TableAction,
+  TableActionItem,
+} from "@/shared/components";
 import { Input } from "@/shared/components/ui/input";
 import {
   Select,
@@ -139,7 +141,7 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
                     <strong>{rating.user?.name}</strong>
                   </TableCell>
                   <TableCell>
-                    <StatusBadge item={ratingItemStatus}></StatusBadge>
+                    <BadgeStatus item={ratingItemStatus}></BadgeStatus>
                   </TableCell>
                   <TableCell>
                     <TableAction>
@@ -160,7 +162,6 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
             })}
         </TableBody>
       </Table>
-      <PaginationBtn></PaginationBtn>
     </div>
   );
 };

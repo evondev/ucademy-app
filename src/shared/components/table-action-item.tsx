@@ -1,6 +1,12 @@
+import {
+  IconCheck,
+  IconDelete,
+  IconEdit,
+  IconEye,
+  IconStudy,
+} from "@/components/icons";
 import { commonClassNames } from "@/constants";
 import Link from "next/link";
-import { IconCheck, IconDelete, IconEdit, IconEye, IconStudy } from "../icons";
 type TableActionIcon = "edit" | "delete" | "view" | "study" | "approve";
 const TableActionItem = ({
   onClick,

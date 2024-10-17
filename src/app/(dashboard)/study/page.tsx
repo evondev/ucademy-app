@@ -1,5 +1,5 @@
-import Heading from "@/components/common/Heading";
 import { getUserCourses } from "@/lib/actions/user.actions";
+import { Heading } from "@/shared/components";
 import { auth } from "@clerk/nextjs/server";
 import StudyCourses from "./StudyCourses";
 

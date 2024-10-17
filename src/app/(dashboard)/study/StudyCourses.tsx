@@ -1,7 +1,7 @@
 "use client";
-import { CourseGrid } from "@/components/common";
 import CourseItem from "@/components/course/CourseItem";
 import { lastLessonKey } from "@/constants";
+import { CourseGrid } from "@/shared/components";
 import { StudyCoursesProps } from "@/types";
 import { useEffect, useState } from "react";
 

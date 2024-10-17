@@ -1,6 +1,6 @@
-import Heading from "@/components/common/Heading";
 import CourseUpdateContent from "@/components/course/CourseUpdateContent";
 import { getCourseBySlug } from "@/lib/actions/course.actions";
+import { Heading } from "@/shared/components";
 
 const page = async ({
   searchParams,

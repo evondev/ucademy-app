@@ -1,10 +1,9 @@
 "use client";
 import { menuItems } from "@/constants";
+import { ActiveLink, ModeToggle } from "@/shared/components";
 import { MenuField } from "@/types";
 import { UserButton, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
-import { ActiveLink } from "../common";
-import { ModeToggle } from "../common/ModeToggle";
 import { IconUsers } from "../icons";
 
 const Sidebar = () => {

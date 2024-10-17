@@ -2,6 +2,7 @@
 import { editorOptions } from "@/constants";
 import { LessonProps } from "@/database/lesson.model";
 import { updateLesson } from "@/lib/actions/lesson.actions";
+import { Button } from "@/shared/components/ui/button";
 import {
   Form,
   FormControl,
@@ -19,7 +20,6 @@ import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
-import { Button } from "../ui/button";
 
 const formSchema = z.object({
   slug: z.string().optional(),

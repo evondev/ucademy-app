@@ -10,15 +10,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/shared/components/ui/accordion";
+import { Input } from "@/shared/components/ui/input";
 import { CourseUpdateParams, UpdateCourseLecture } from "@/types";
 import { MouseEvent, useState } from "react";
+import { Button } from "react-day-picker";
 import { toast } from "react-toastify";
 import slugify from "slugify";
 import Swal from "sweetalert2";
 import { IconCancel, IconCheck, IconDelete, IconEdit } from "../icons";
 import LessonItemUpdate from "../lesson/LessonItemUpdate";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
 
 const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
   const lectures = course.lectures;

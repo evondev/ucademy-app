@@ -4,6 +4,14 @@ import { CourseProps } from "@/database/course.model";
 import useQueryString from "@/hooks/useQueryString";
 import { updateCourse } from "@/lib/actions/course.actions";
 import {
+  BadgeStatus,
+  BouncedLink,
+  Heading,
+  TableAction,
+  TableActionItem,
+} from "@/shared/components";
+import { Input } from "@/shared/components/ui/input";
+import {
   Select,
   SelectContent,
   SelectGroup,
@@ -25,10 +33,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { BouncedLink, StatusBadge, TableAction } from "../common";
-import Heading from "../common/Heading";
-import TableActionItem from "../common/TableActionItem";
-import { Input } from "../ui/input";
 
 const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
   const router = useRouter();
@@ -178,12 +182,12 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
                     </span>
                   </TableCell>
                   <TableCell>
-                    <StatusBadge
+                    <BadgeStatus
                       item={courseStatusItem}
                       onClick={() =>
                         handleChangeStatus(course.slug, course.status)
                       }
-                    ></StatusBadge>
+                    ></BadgeStatus>
                   </TableCell>
                   <TableCell>
                     <TableAction>
@@ -210,20 +214,6 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
             })}
         </TableBody>
       </Table>
-      {/* <div className="flex justify-end gap-3 mt-5">
-        <button
-          className={commonClassNames.paginationButton}
-          onClick={() => handleChangePage("prev")}
-        >
-          <IconLeftArrow />
-        </button>
-        <button
-          className={commonClassNames.paginationButton}
-          onClick={() => handleChangePage("next")}
-        >
-          <IconRightArrow />
-        </button>
-      </div> */}
     </>
   );
 };
