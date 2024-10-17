@@ -4,8 +4,8 @@ import {
   IconEdit,
   IconEye,
   IconStudy,
-} from "@/components/icons";
-import { commonClassNames } from "@/constants";
+} from "@/shared/components/icons";
+import { commonClassNames } from "@/shared/constants";
 import Link from "next/link";
 type TableActionIcon = "edit" | "delete" | "view" | "study" | "approve";
 const TableActionItem = ({

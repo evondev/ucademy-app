@@ -7,7 +7,7 @@ import {
   IconStar,
   IconStudy,
   IconUsers,
-} from "@/components/icons";
+} from "@/shared/components/icons";
 import { MenuField, RatingIcon } from "@/types";
 import {
   CouponType,

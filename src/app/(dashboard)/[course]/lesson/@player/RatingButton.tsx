@@ -1,8 +1,7 @@
 "use client";
-import { IconStar } from "@/components/icons";
-import { ratingList } from "@/constants";
 import { createRating, getRatingByUserId } from "@/lib/actions/rating.actions";
 import { cn } from "@/lib/utils";
+import { IconStar } from "@/shared/components/icons";
 import { Button } from "@/shared/components/ui/button";
 import {
   Dialog,
@@ -13,6 +12,7 @@ import {
   DialogTrigger,
 } from "@/shared/components/ui/dialog";
 import { Textarea } from "@/shared/components/ui/textarea";
+import { ratingList } from "@/shared/constants";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";

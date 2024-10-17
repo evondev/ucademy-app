@@ -1,10 +1,9 @@
 "use client";
-import { menuItems } from "@/constants";
-import { ActiveLink, ModeToggle } from "@/shared/components";
-import { MenuField } from "@/types";
+import { MenuItem, ModeToggle } from "@/shared/components";
+import { IconUsers } from "@/shared/components/icons";
+import { menuItems } from "@/shared/constants";
 import { UserButton, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
-import { IconUsers } from "../icons";
 
 const Sidebar = () => {
   const { userId } = useAuth();
@@ -45,16 +44,5 @@ const Sidebar = () => {
     </div>
   );
 };
-
-export function MenuItem({ url = "/", title = "", icon, onlyIcon }: MenuField) {
-  return (
-    <li>
-      <ActiveLink url={url}>
-        {icon}
-        {onlyIcon ? null : title}
-      </ActiveLink>
-    </li>
-  );
-}
 
 export default Sidebar;

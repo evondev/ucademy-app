@@ -4,6 +4,8 @@ export { default as BouncedLink } from "./bounced-link";
 export { default as CourseGrid } from "./course-grid";
 export { default as EmptySpace } from "./empty-space";
 export { default as Heading } from "./heading";
+export { default as Sidebar } from "./layout/sidebar";
+export { default as MenuItem } from "./menu-item";
 export { default as ModeToggle } from "./mode-toggle";
 export { default as Pagination } from "./pagination";
 export { default as TableAction } from "./table-action";

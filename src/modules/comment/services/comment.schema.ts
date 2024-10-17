@@ -1,7 +1,7 @@
-import { CommentStatus } from "@/types/enums";
+import { CommentStatus } from "@/shared/types/enums";
 import { Document, Schema, model, models } from "mongoose";
 
-export interface CommentProps extends Document {
+export interface Comment extends Document {
   _id: string;
   content: string;
   lesson: Schema.Types.ObjectId;
@@ -11,7 +11,7 @@ export interface CommentProps extends Document {
   parentId?: Schema.Types.ObjectId;
   level: number;
 }
-const commentSchema = new Schema<CommentProps>({
+const commentSchema = new Schema<Comment>({
   content: {
     type: String,
     required: true,
@@ -43,5 +43,6 @@ const commentSchema = new Schema<CommentProps>({
     default: null,
   },
 });
-const Comment = models.Comment || model<CommentProps>("Comment", commentSchema);
-export default Comment;
+const CommentSchema =
+  models.Comment || model<Comment>("Comment", commentSchema);
+export default CommentSchema;

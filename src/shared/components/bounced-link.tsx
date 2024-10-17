@@ -1,4 +1,4 @@
-import { IconPlus } from "@/components/icons";
+import { IconPlus } from "@/shared/components/icons";
 import Link from "next/link";
 
 const BouncedLink = ({ url }: { url: string }) => {

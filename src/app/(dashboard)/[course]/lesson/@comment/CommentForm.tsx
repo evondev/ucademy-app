@@ -1,7 +1,7 @@
 "use client";
 
-import { createComment } from "@/lib/actions/comment.actions";
 import { cn } from "@/lib/utils";
+import { createComment } from "@/modules/comment/services/comment.actions";
 import { Button } from "@/shared/components/ui/button";
 import {
   Form,

@@ -1,10 +1,10 @@
 "use server";
 
-import Comment from "@/database/comment.model";
 import UserSchema from "@/database/user.model";
+import { connectToDatabase } from "@/lib/mongoose";
 import { CommentItem } from "@/types";
 import { revalidatePath } from "next/cache";
-import { connectToDatabase } from "../mongoose";
+import CommentSchema from "./comment.schema";
 
 export async function createComment(params: {
   content: string;
@@ -16,7 +16,7 @@ export async function createComment(params: {
 }): Promise<boolean | undefined> {
   try {
     connectToDatabase();
-    const newComment = await Comment.create(params);
+    const newComment = await CommentSchema.create(params);
     revalidatePath(params.path || "/");
     if (!newComment) return false;
     return true;
@@ -30,7 +30,7 @@ export async function getCommentsByLesson(
 ): Promise<CommentItem[] | undefined> {
   try {
     connectToDatabase();
-    const comments = await Comment.find<CommentItem>({
+    const comments = await CommentSchema.find<CommentItem>({
       lesson: lessonId,
     })
       .sort({ created_at: sort === "recent" ? -1 : 1 })

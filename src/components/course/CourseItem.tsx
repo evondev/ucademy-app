@@ -1,12 +1,12 @@
 "use client";
-import { commonClassNames } from "@/constants";
 import { getCourseLessonsInfo } from "@/lib/actions/course.actions";
+import { commonClassNames } from "@/shared/constants";
 import { StudyCoursesProps } from "@/types";
 import { formatMinutesToHour, formatNumberToK } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { IconClock, IconEye, IconStar } from "../icons";
+import { IconClock, IconEye, IconStar } from "../../shared/components/icons";
 const CourseItem = ({
   data,
   cta,

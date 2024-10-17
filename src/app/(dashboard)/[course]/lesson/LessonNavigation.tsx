@@ -1,6 +1,6 @@
 "use client";
 
-import { IconLeftArrow, IconRightArrow } from "@/components/icons";
+import { IconLeftArrow, IconRightArrow } from "@/shared/components/icons";
 import { Button } from "@/shared/components/ui/button";
 import { useRouter } from "next/navigation";
 

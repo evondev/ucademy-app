@@ -1,6 +1,4 @@
 "use client";
-import { IconCancel, IconCheck } from "@/components/icons";
-import { allValue, commonClassNames, orderStatus } from "@/constants";
 import useQueryString from "@/hooks/useQueryString";
 import { updateOrder } from "@/lib/actions/order.actions";
 import { cn } from "@/lib/utils";
@@ -10,6 +8,7 @@ import {
   Heading,
   Pagination,
 } from "@/shared/components";
+import { IconCancel, IconCheck } from "@/shared/components/icons";
 import { Input } from "@/shared/components/ui/input";
 import {
   Select,
@@ -27,6 +26,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table";
+import { allValue, commonClassNames, orderStatus } from "@/shared/constants";
 import { OrderStatus } from "@/shared/types/enums";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";

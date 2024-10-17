@@ -1,5 +1,4 @@
 "use client";
-import { allValue, courseStatus } from "@/constants";
 import { CourseProps } from "@/database/course.model";
 import useQueryString from "@/hooks/useQueryString";
 import { updateCourse } from "@/lib/actions/course.actions";
@@ -27,6 +26,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table";
+import { allValue, courseStatus } from "@/shared/constants";
 import { CourseStatus } from "@/types/enums";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";

@@ -1,6 +1,5 @@
 import PageNotFound from "@/app/not-found";
 import LessonContent from "@/components/lesson/LessonContent";
-import { courseLevelTitle } from "@/constants";
 import {
   getCourseBySlug,
   getCourseLessonsInfo,
@@ -13,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/shared/components/ui/accordion";
+import { courseLevelTitle } from "@/shared/constants";
 import { CourseStatus } from "@/types/enums";
 import { formatMinutesToHour } from "@/utils";
 import { auth } from "@clerk/nextjs/server";

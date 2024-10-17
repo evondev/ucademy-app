@@ -1,5 +1,4 @@
 "use client";
-import { allValue, ratingList, ratingStatus } from "@/constants";
 import useQueryString from "@/hooks/useQueryString";
 import { deleteRating, updateRating } from "@/lib/actions/rating.actions";
 import {
@@ -25,6 +24,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table";
+import { allValue, ratingList, ratingStatus } from "@/shared/constants";
 import { RatingItem } from "@/types";
 import { RatingStatus } from "@/types/enums";
 import Image from "next/image";

@@ -1,5 +1,4 @@
 "use client";
-import { editorOptions } from "@/constants";
 import { LessonProps } from "@/database/lesson.model";
 import { updateLesson } from "@/lib/actions/lesson.actions";
 import { Button } from "@/shared/components/ui/button";
@@ -12,6 +11,7 @@ import {
   FormMessage,
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
+import { editorOptions } from "@/shared/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Editor } from "@tinymce/tinymce-react";
 import { useTheme } from "next-themes";

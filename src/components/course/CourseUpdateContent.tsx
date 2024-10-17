@@ -1,5 +1,4 @@
 "use client";
-import { commonClassNames } from "@/constants";
 import { LessonProps } from "@/database/lesson.model";
 import { createLecture, updateLecture } from "@/lib/actions/lecture.actions";
 import { createLesson, updateLesson } from "@/lib/actions/lesson.actions";
@@ -10,14 +9,20 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/shared/components/ui/accordion";
+import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
+import { commonClassNames } from "@/shared/constants";
 import { CourseUpdateParams, UpdateCourseLecture } from "@/types";
 import { MouseEvent, useState } from "react";
-import { Button } from "react-day-picker";
 import { toast } from "react-toastify";
 import slugify from "slugify";
 import Swal from "sweetalert2";
-import { IconCancel, IconCheck, IconDelete, IconEdit } from "../icons";
+import {
+  IconCancel,
+  IconCheck,
+  IconDelete,
+  IconEdit,
+} from "../../shared/components/icons";
 import LessonItemUpdate from "../lesson/LessonItemUpdate";
 
 const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {

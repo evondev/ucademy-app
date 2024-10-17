@@ -140,7 +140,7 @@
 - Hydration
 - SSG
 - Intercepting Routes
-- DragnDrop Lecture - Lesson
+- CRUD - DragnDrop Lecture - Lesson
 - Check already bought course
 - Optimize UI UX
 - Interview questions

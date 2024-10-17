@@ -1,5 +1,4 @@
 "use client";
-import { allValue, couponStatuses } from "@/constants";
 import useQueryString from "@/hooks/useQueryString";
 import {
   BadgeStatus,
@@ -26,6 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table";
+import { allValue, couponStatuses } from "@/shared/constants";
 import { CouponItem } from "@/types";
 import { CouponType } from "@/types/enums";
 import ActionDeleteCoupon from "./ActionDeleteCoupon";
