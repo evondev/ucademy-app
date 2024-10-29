@@ -1,7 +1,7 @@
 import { CouponType } from "@/types/enums";
 import { Document, Schema, model, models } from "mongoose";
 
-export interface CouponProps extends Document {
+export interface Coupon extends Document {
   _id: string;
   title: string;
   code: string;
@@ -15,7 +15,7 @@ export interface CouponProps extends Document {
   value: number;
   created_at: Date;
 }
-const couponSchema = new Schema<CouponProps>({
+const couponSchema = new Schema<Coupon>({
   title: {
     type: String,
     required: true,
@@ -60,5 +60,5 @@ const couponSchema = new Schema<CouponProps>({
     default: Date.now,
   },
 });
-const Coupon = models.Coupon || model<CouponProps>("Coupon", couponSchema);
-export default Coupon;
+const CouponSchema = models.Coupon || model<Coupon>("Coupon", couponSchema);
+export default CouponSchema;

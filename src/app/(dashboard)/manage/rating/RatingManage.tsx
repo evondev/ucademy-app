@@ -70,8 +70,8 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
             />
           </div>
           <Select
-            onValueChange={(value) => handleSelectStatus(value as RatingStatus)}
             defaultValue={allValue}
+            onValueChange={(value) => handleSelectStatus(value as RatingStatus)}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Chọn trạng thái" />
@@ -80,7 +80,7 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
               <SelectGroup>
                 <SelectItem value={allValue}>Tất cả</SelectItem>
                 {ratingStatus.map((status) => (
-                  <SelectItem value={status.value} key={status.value}>
+                  <SelectItem key={status.value} value={status.value}>
                     {status.title}
                   </SelectItem>
                 ))}
@@ -115,10 +115,10 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
                       <div className="flex items-center gap-2">
                         <strong>{rating.content}</strong>
                         <Image
-                          width={20}
-                          height={20}
                           alt=""
+                          height={20}
                           src={`/rating/${icon}.png`}
+                          width={20}
                         />
                       </div>
                       <time>
@@ -130,8 +130,8 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
                   </TableCell>
                   <TableCell>
                     <Link
-                      href={`/course/${rating.course.slug}`}
                       className="font-semibold hover:text-primary"
+                      href={`/course/${rating.course.slug}`}
                       target="_blank"
                     >
                       {rating.course.title}

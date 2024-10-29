@@ -4,7 +4,7 @@ const AlreadyEnroll = () => {
   return (
     <div className="bgDarkMode border borderDarkMode rounded-lg p-5">
       Bạn đã đăng ký khóa học này rồi. Vui lòng nhấn vào{" "}
-      <Link href="/study" className="text-primary font-bold">
+      <Link className="text-primary font-bold" href="/study">
         Khu vực học tập
       </Link>
     </div>

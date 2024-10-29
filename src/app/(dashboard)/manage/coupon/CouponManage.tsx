@@ -135,7 +135,7 @@ const CouponManage = ({
             ))}
         </TableBody>
       </Table>
-      <Pagination totalPages={totalPages} total={total}></Pagination>
+      <Pagination total={total} totalPages={totalPages}></Pagination>
     </div>
   );
 };

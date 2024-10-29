@@ -17,8 +17,8 @@ const page = async ({ searchParams }: OrderManagePageParams) => {
   return (
     <OrderManagePage
       orders={orders}
-      totalPages={totalPages}
       total={total}
+      totalPages={totalPages}
     ></OrderManagePage>
   );
 };

@@ -58,9 +58,9 @@ const page = async ({
               <CommentField
                 key={item._id}
                 comment={item}
+                comments={comments || []}
                 lessonId={commentLessonId}
                 userId={commentUserId}
-                comments={comments || []}
               ></CommentField>
             ))}
           </div>

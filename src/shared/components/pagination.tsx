@@ -11,63 +11,63 @@ interface IPaginationProps {
 
 const IconDoubleLeft = (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="currentColor"
     className="size-4"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fillRule="evenodd"
-      d="M13.28 3.97a.75.75 0 010 1.06L6.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0zm6 0a.75.75 0 010 1.06L12.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0z"
       clipRule="evenodd"
+      d="M13.28 3.97a.75.75 0 010 1.06L6.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0zm6 0a.75.75 0 010 1.06L12.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0z"
+      fillRule="evenodd"
     />
   </svg>
 );
 const IconLeft = (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
     className="size-4"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.5}
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
   >
     <path
+      d="M15.75 19.5L8.25 12l7.5-7.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      d="M15.75 19.5L8.25 12l7.5-7.5"
     />
   </svg>
 );
 const IconRight = (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
     className="size-4"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.5}
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
   >
     <path
+      d="M8.25 4.5l7.5 7.5-7.5 7.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      d="M8.25 4.5l7.5 7.5-7.5 7.5"
     />
   </svg>
 );
 const IconDoubleRight = (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
     className="size-4"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.5}
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
   >
     <path
+      d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
     />
   </svg>
 );
@@ -82,8 +82,8 @@ const Pagination = ({ totalPages, total }: IPaginationProps) => {
   return (
     <div className="mt-10 flex items-center justify-center gap-3">
       <PaginationButton
-        onClick={() => handleChangePage(1)}
         disabled={currentPage === 1}
+        onClick={() => handleChangePage(1)}
       >
         {IconDoubleLeft}
       </PaginationButton>
@@ -94,15 +94,15 @@ const Pagination = ({ totalPages, total }: IPaginationProps) => {
         {IconLeft}
       </PaginationButton>
       <input
-        type="number"
-        placeholder="1"
-        value={currentPage}
         className="w-20 h-10 rounded-full bg-white outline-none text-center px-2 font-medium"
+        placeholder="1"
+        type="number"
+        value={currentPage}
         onChange={onInputChange}
       />
       <PaginationButton
-        onClick={() => handleChangePage(currentPage + 1)}
         disabled={currentPage === totalPages}
+        onClick={() => handleChangePage(currentPage + 1)}
       >
         {IconRight}
       </PaginationButton>
@@ -130,8 +130,8 @@ function PaginationButton({
   return (
     <button
       className={paginationBtnClassNames}
-      onClick={onClick}
       disabled={disabled}
+      onClick={onClick}
     >
       {children}
     </button>

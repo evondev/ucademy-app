@@ -129,7 +129,7 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
               <SelectGroup>
                 <SelectItem value={allValue}>Tất cả</SelectItem>
                 {courseStatus.map((status) => (
-                  <SelectItem value={status.value} key={status.value}>
+                  <SelectItem key={status.value} value={status.value}>
                     {status.title}
                   </SelectItem>
                 ))}
@@ -159,10 +159,10 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
                     <div className="flex items-center gap-3">
                       <Image
                         alt=""
+                        className="flex-shrink-0 size-16 rounded-lg object-cover"
+                        height={80}
                         src={course.image}
                         width={80}
-                        height={80}
-                        className="flex-shrink-0 size-16 rounded-lg object-cover"
                       />
                       <div className="flex flex-col gap-1">
                         <h3 className="font-bold text-sm lg:text-base whitespace-nowrap">

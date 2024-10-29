@@ -150,9 +150,9 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
         {lectures.map((lecture: UpdateCourseLecture) => (
           <div key={lecture._id}>
             <Accordion
-              type="single"
-              collapsible={!lectureIdEdit}
               className="w-full"
+              collapsible={!lectureIdEdit}
+              type="single"
             >
               <AccordionItem value={lecture._id}>
                 <AccordionTrigger>
@@ -161,8 +161,8 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                       <>
                         <div className="w-full">
                           <Input
-                            placeholder="Tên chương"
                             defaultValue={lecture.title}
+                            placeholder="Tên chương"
                             onChange={(e) => setLectureEdit(e.target.value)}
                           />
                         </div>
@@ -224,9 +224,9 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                   <div className="flex flex-col gap-5">
                     {lecture.lessons.map((lesson: LessonProps) => (
                       <Accordion
-                        type="single"
-                        collapsible={!lessonEdit}
                         key={lesson._id}
+                        collapsible={!lessonEdit}
+                        type="single"
                       >
                         <AccordionItem value={lesson._id}>
                           <AccordionTrigger>
@@ -235,8 +235,8 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                                 <>
                                   <div className="w-full">
                                     <Input
-                                      placeholder="Tên bài học"
                                       defaultValue={lesson.title}
+                                      placeholder="Tên bài học"
                                       onChange={(e) =>
                                         setLessonEdit(e.target.value)
                                       }
@@ -311,15 +311,15 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
               </AccordionItem>
             </Accordion>
             <Button
-              onClick={() => handleAddNewLesson(lecture._id, course._id)}
               className="mt-5 ml-auto w-fit block"
+              onClick={() => handleAddNewLesson(lecture._id, course._id)}
             >
               Thêm bài học
             </Button>
           </div>
         ))}
       </div>
-      <Button onClick={handleAddNewLecture} className="mt-5">
+      <Button className="mt-5" onClick={handleAddNewLecture}>
         Thêm chương mới
       </Button>
     </div>

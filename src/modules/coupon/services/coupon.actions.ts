@@ -1,6 +1,6 @@
 "use server";
 
-import Coupon from "@/database/coupon.model";
+import { connectToDatabase } from "@/shared/lib/mongoose";
 import {
   CouponItem,
   CouponParams,
@@ -10,12 +10,12 @@ import {
 } from "@/types";
 import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
-import { connectToDatabase } from "../mongoose";
+import CouponSchema from "./coupon.schema";
 
 export async function createCoupon(params: CreateCouponParams) {
   try {
     connectToDatabase();
-    const existingCoupon = await Coupon.findOne({ code: params.code });
+    const existingCoupon = await CouponSchema.findOne({ code: params.code });
     if (existingCoupon?.code) {
       return { error: "Mã giảm giá đã tồn tại!" };
     }
@@ -23,7 +23,7 @@ export async function createCoupon(params: CreateCouponParams) {
     if (!couponRegex.test(params.code)) {
       return { error: "Mã giảm giá không hợp lệ" };
     }
-    const newCoupon = await Coupon.create(params);
+    const newCoupon = await CouponSchema.create(params);
     revalidatePath("/manage/coupon");
     return JSON.parse(JSON.stringify(newCoupon));
   } catch (error) {
@@ -33,7 +33,7 @@ export async function createCoupon(params: CreateCouponParams) {
 export async function updateCoupon(params: UpdateCouponParams) {
   try {
     connectToDatabase();
-    const updatedCoupon = await Coupon.findByIdAndUpdate(
+    const updatedCoupon = await CouponSchema.findByIdAndUpdate(
       params._id,
       params.updateData
     );
@@ -54,18 +54,18 @@ export async function getCoupons(params: FilterData): Promise<
     connectToDatabase();
     const { page = 1, limit = 10, search, active } = params;
     const skip = (page - 1) * limit;
-    const query: FilterQuery<typeof Coupon> = {};
+    const query: FilterQuery<typeof CouponSchema> = {};
     if (search) {
       query.$or = [{ code: { $regex: search, $options: "i" } }];
     }
     if (active) {
       query.active = Boolean(Number(active));
     }
-    const coupons = await Coupon.find(query)
+    const coupons = await CouponSchema.find(query)
       .skip(skip)
       .limit(limit)
       .sort({ created_at: -1 });
-    const total = await Coupon.countDocuments(query);
+    const total = await CouponSchema.countDocuments(query);
     return {
       coupons: JSON.parse(JSON.stringify(coupons)),
       total,
@@ -79,7 +79,7 @@ export async function getCouponByCode(
 ): Promise<CouponParams | undefined> {
   try {
     connectToDatabase();
-    const findCoupon = await Coupon.findOne({
+    const findCoupon = await CouponSchema.findOne({
       code: params.code,
     }).populate({
       path: "courses",
@@ -96,7 +96,7 @@ export async function getValidateCoupon(
 ): Promise<CouponParams | undefined> {
   try {
     connectToDatabase();
-    const findCoupon = await Coupon.findOne({
+    const findCoupon = await CouponSchema.findOne({
       code: params.code,
     }).populate({
       path: "courses",
@@ -120,7 +120,7 @@ export async function getValidateCoupon(
 export async function deleteCoupon(code: string) {
   try {
     connectToDatabase();
-    await Coupon.findOneAndDelete({ code });
+    await CouponSchema.findOneAndDelete({ code });
     revalidatePath("/manage/coupon");
   } catch (error) {
     console.log(error);

@@ -36,10 +36,10 @@ const page = async ({
         ></div>
       </div>
       <LessonContent
-        lectures={lectures}
         course={course}
-        slug={slug}
         histories={histories ? JSON.parse(JSON.stringify(histories)) : []}
+        lectures={lectures}
+        slug={slug}
       ></LessonContent>
     </div>
   );

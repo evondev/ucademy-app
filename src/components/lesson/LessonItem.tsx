@@ -42,16 +42,16 @@ const LessonItem = ({
     >
       {url && (
         <Checkbox
-          defaultChecked={isChecked}
           className="flex-shrink-0"
+          defaultChecked={isChecked}
           onCheckedChange={(checked) => handleCompleteLesson(checked)}
         />
       )}
       <IconPlay className="size-5 flex-shrink-0" />
       {url ? (
         <Link
-          href={url}
           className={cn("line-clamp-1", isActive && "pointer-events-none")}
+          href={url}
         >
           {lesson.title}
         </Link>

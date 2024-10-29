@@ -49,7 +49,7 @@ const CommentForm = ({
   const path = `${pathname}?slug=${slug}`;
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
-      const newComment = await createComment({
+      const hasComment = await createComment({
         content: values.content,
         lesson: lessonId,
         user: userId,
@@ -57,7 +57,7 @@ const CommentForm = ({
         parentId: comment?._id,
         path,
       });
-      if (!newComment) {
+      if (!hasComment) {
         toast.error("Failed to post comment");
         return;
       }
@@ -71,9 +71,9 @@ const CommentForm = ({
     <>
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
           autoComplete="off"
           className="flex flex-col gap-5 relative"
+          onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField
             control={form.control}
@@ -96,11 +96,11 @@ const CommentForm = ({
 
           <Button
             isLoading={isPending}
+            type="submit"
             variant="primary"
             className={cn("w-[140px] ml-auto rounded-lg h-10", {
               "w-24": isReply,
             })}
-            type="submit"
           >
             {isReply ? "Trả lời" : "Đăng bình luận"}
           </Button>

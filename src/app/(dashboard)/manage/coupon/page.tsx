@@ -24,8 +24,8 @@ const page = async ({
   return (
     <CouponManage
       coupons={coupons}
-      totalPages={totalPages}
       total={total}
+      totalPages={totalPages}
     ></CouponManage>
   );
 };

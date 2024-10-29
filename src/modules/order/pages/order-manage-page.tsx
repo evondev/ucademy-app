@@ -87,7 +87,7 @@ const OrderManagePage = ({
               <SelectGroup>
                 <SelectItem value={allValue}>Tất cả</SelectItem>
                 {orderStatus.map((status) => (
-                  <SelectItem value={status.value} key={status.value}>
+                  <SelectItem key={status.value} value={status.value}>
                     {status.title}
                   </SelectItem>
                 ))}
@@ -149,8 +149,8 @@ const OrderManagePage = ({
                       <div className="flex gap-3">
                         {order.status === OrderStatus.PENDING && (
                           <button
-                            type="button"
                             className={commonClassNames.action}
+                            type="button"
                             onClick={() =>
                               handleUpdateOrder({
                                 orderId: order._id,
@@ -162,8 +162,8 @@ const OrderManagePage = ({
                           </button>
                         )}
                         <button
-                          type="button"
                           className={commonClassNames.action}
+                          type="button"
                           onClick={() =>
                             handleUpdateOrder({
                               orderId: order._id,
@@ -181,7 +181,7 @@ const OrderManagePage = ({
             })}
         </TableBody>
       </Table>
-      <Pagination totalPages={totalPages} total={total}></Pagination>
+      <Pagination total={total} totalPages={totalPages}></Pagination>
     </div>
   );
 };

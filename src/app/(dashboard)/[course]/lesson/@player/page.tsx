@@ -43,16 +43,16 @@ const page = async ({
           src={`https://www.youtube.com/embed/${videoId}`}
         ></iframe> */}
       <VideoPlayer
+        data={{
+          userId: findUser?._id.toString() || "",
+          courseId,
+        }}
         nextLesson={
           !nextLesson ? "" : `/${course}/lesson?slug=${nextLesson?.slug}`
         }
         prevLesson={
           !prevLesson ? "" : `/${course}/lesson?slug=${prevLesson?.slug}`
         }
-        data={{
-          userId: findUser?._id.toString() || "",
-          courseId,
-        }}
       />
 
       <Heading className="mb-10">{lessonDetails.title}</Heading>

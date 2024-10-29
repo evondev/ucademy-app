@@ -13,7 +13,7 @@ interface CommentReplyProps {
 }
 
 const CommentReply = ({ comment, lessonId, userId }: CommentReplyProps) => {
-  const [showReply, setShowReply] = useState(false);
+  const [isShowReply, setIsShowReply] = useState(false);
   return (
     <>
       <div className="flex items-center gap-5 text-sm text-gray-400 font-medium">
@@ -22,20 +22,20 @@ const CommentReply = ({ comment, lessonId, userId }: CommentReplyProps) => {
             <button
               type="button"
               className={cn("uppercase text-gray-400 font-bold", {
-                underline: showReply,
+                underline: isShowReply,
               })}
-              onClick={() => setShowReply(!showReply)}
+              onClick={() => setIsShowReply(!isShowReply)}
             >
               Reply
             </button>
           </>
         )}
       </div>
-      {showReply && (
+      {isShowReply && (
         <div className="mt-3">
           <CommentForm
             isReply
-            closeReply={() => setShowReply(false)}
+            closeReply={() => setIsShowReply(false)}
             comment={comment}
             lessonId={lessonId}
             userId={userId}

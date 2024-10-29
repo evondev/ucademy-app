@@ -85,10 +85,10 @@ const RatingButton = ({
                     )}
                   >
                     <Image
-                      width={20}
-                      height={20}
                       alt={rating.title}
+                      height={20}
                       src={`/rating/${rating.title}.png`}
+                      width={20}
                     />
                   </span>
                   <strong className="capitalize">{rating.title}</strong>
@@ -96,17 +96,17 @@ const RatingButton = ({
               ))}
             </div>
             <Textarea
-              placeholder="Đánh giá của bạn"
               className="h-[200px] resize-none"
-              onChange={(e) => setRatingContent(e.target.value)}
+              placeholder="Đánh giá của bạn"
               value={ratingContent}
+              onChange={(e) => setRatingContent(e.target.value)}
             />
             <Button
-              variant="primary"
               className="w-full mt-5"
-              onClick={handleRatingCourse}
               disabled={isDisabled}
               isLoading={isLoading}
+              variant="primary"
+              onClick={handleRatingCourse}
             >
               Gửi đánh giá
             </Button>

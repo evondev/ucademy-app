@@ -42,12 +42,12 @@ const VideoPlayer = ({
           )}
         ></div>
         <MuxPlayer
-          streamType="on-demand"
-          playbackId="cLtCRXwXHA016mp005eh3cT5fWreC3VSv00VnhXvXzSJ9E"
           metadataVideoTitle="Placeholder (optional)"
           metadataViewerUserId="Placeholder (optional)"
+          playbackId="cLtCRXwXHA016mp005eh3cT5fWreC3VSv00VnhXvXzSJ9E"
           primaryColor="#FFFFFF"
           secondaryColor="#000000"
+          streamType="on-demand"
           onEnded={() => setIsEndedVideo(true)}
           onPlay={() => setIsEndedVideo(false)}
         />
@@ -59,8 +59,8 @@ const VideoPlayer = ({
         ></LessonNavigation>
         <div className="flex gap-5">
           <RatingButton
-            userId={data.userId}
             courseId={data.courseId}
+            userId={data.userId}
           ></RatingButton>
           <Button onClick={() => setExpandedPlayer(!expandedPlayer)}>
             {expandedPlayer ? "Mặc định" : "Mở rộng"}

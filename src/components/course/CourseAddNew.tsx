@@ -67,7 +67,7 @@ function CourseAddNew({ user }: { user: User }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off">
+      <form autoComplete="off" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 gap-8 mt-10 mb-8">
           <FormField
             control={form.control}
@@ -97,11 +97,11 @@ function CourseAddNew({ user }: { user: User }) {
           />
         </div>
         <Button
-          isLoading={isSubmitting}
-          variant="primary"
-          type="submit"
           className="w-[120px]"
           disabled={isSubmitting}
+          isLoading={isSubmitting}
+          type="submit"
+          variant="primary"
         >
           Tạo khóa học
         </Button>

@@ -23,10 +23,10 @@ const LessonContent = ({
     <div className="flex flex-col gap-5">
       {lectures.map((lecture: UpdateCourseLecture) => (
         <Accordion
-          type="single"
+          key={lecture._id}
           collapsible
           className="w-full"
-          key={lecture._id}
+          type="single"
         >
           <AccordionItem value={lecture._id.toString()}>
             <AccordionTrigger>
@@ -39,9 +39,9 @@ const LessonContent = ({
                 {lecture.lessons.map((lesson) => (
                   <LessonItem
                     key={lesson._id}
+                    isActive={!slug ? false : lesson.slug === slug}
                     lesson={lesson ? JSON.parse(JSON.stringify(lesson)) : {}}
                     url={!course ? "" : `/${course}/lesson?slug=${lesson.slug}`}
-                    isActive={!slug ? false : lesson.slug === slug}
                     isChecked={histories.some(
                       (el) => el.lesson.toString() === lesson._id.toString()
                     )}

@@ -36,14 +36,14 @@ const CommentField = ({
       >
         <div className="size-10 rounded-full border borderDarkMode bgDarkMode flex-shrink-0">
           <Image
+            alt={comment.user?.name}
+            className="size-full rounded-full object-cover"
+            height={40}
+            width={40}
             src={
               comment.user?.avatar ||
               "https://images.unsplash.com/photo-1487139975590-b4f1dce9b035?q=80&w=4912&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             }
-            alt={comment.user?.name}
-            width={40}
-            height={40}
-            className="size-full rounded-full object-cover"
           />
         </div>
         <div className="flex flex-col gap-1 w-full">
@@ -62,9 +62,9 @@ const CommentField = ({
             </p>
             {!isPending && (
               <CommentReply
+                comment={comment}
                 lessonId={lessonId}
                 userId={userId}
-                comment={comment}
               />
             )}
           </div>
@@ -75,9 +75,9 @@ const CommentField = ({
           <CommentField
             key={reply._id}
             comment={reply}
+            comments={comments}
             lessonId={lessonId}
             userId={userId}
-            comments={comments}
           />
         ))}
     </>

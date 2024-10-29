@@ -23,10 +23,10 @@ export default function RootLayout({
       <html lang="en">
         <body className={manrope.className}>
           <ThemeProvider
+            disableTransitionOnChange
+            enableSystem
             attribute="class"
             defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
           >
             {children}
             <SpeedInsights />

@@ -10,8 +10,8 @@ const Sidebar = () => {
   return (
     <div className="hidden p-5 border-r borderDarkMode bgDarkMode lg:flex flex-col fixed top-0 left-0 bottom-0 w-[300px]">
       <Link
-        href="/"
         className="font-bold text-2xl inline-flex items-center gap-2 mb-5 h-10 self-start pl-3"
+        href="/"
       >
         <span className="size-10 rounded-lg flex items-center justify-center text-lg text-primary bgDarkMode border borderDarkMode">
           U
@@ -22,9 +22,9 @@ const Sidebar = () => {
         {menuItems.map((item, index) => (
           <MenuItem
             key={index}
-            url={item.url}
-            title={item.title}
             icon={item.icon}
+            title={item.title}
+            url={item.url}
           ></MenuItem>
         ))}
       </ul>
@@ -32,8 +32,8 @@ const Sidebar = () => {
         <ModeToggle></ModeToggle>
         {!userId ? (
           <Link
-            href="/sign-in"
             className="size-10 rounded-lg bg-primary text-white flex items-center justify-center p-1"
+            href="/sign-in"
           >
             <IconUsers />
           </Link>

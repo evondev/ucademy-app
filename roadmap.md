@@ -87,10 +87,10 @@
 
 ## Types
 
-- User
-- TUser
-- EUser
-- Schema: UserSchema
+- User ✅
+- TUser ✅
+- EUser ✅
+- Schema: UserSchema ✅
 
 ## Structure
 
@@ -117,8 +117,16 @@
 
 ## Eslint
 
-- sort-imports
-- import cycle
+- Naming convention: files, variables, functions, types
+- Quote
+- Sort props
+- Sort imports
+- Sort destructure keys
+- Import/Export
+
+## Commit
+
+## Prettier
 
 ## Client side vs Server side
 

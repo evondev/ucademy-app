@@ -123,12 +123,12 @@ const LessonItemUpdate = ({ lesson }: { lesson: LessonProps }) => {
                   <FormControl>
                     <Editor
                       apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
+                      value={field.value}
                       onInit={(_evt, editor) => {
                         (editorRef.current = editor).setContent(
                           lesson.content || ""
                         );
                       }}
-                      value={field.value}
                       {...editorOptions(field, theme)}
                     />
                   </FormControl>
@@ -139,7 +139,7 @@ const LessonItemUpdate = ({ lesson }: { lesson: LessonProps }) => {
           </div>
           <div className="flex justify-end gap-5 items-center mt-8">
             <Button type="submit">Cập nhật</Button>
-            <Link href="/" className="text-sm text-slate-600">
+            <Link className="text-sm text-slate-600" href="/">
               Xem trước
             </Link>
           </div>

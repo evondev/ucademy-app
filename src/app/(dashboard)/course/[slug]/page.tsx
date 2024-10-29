@@ -49,20 +49,20 @@ const page = async ({
           {data.intro_url ? (
             <>
               <iframe
-                width="853"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                className="w-full h-full object-fill"
                 height="480"
                 src={`https://www.youtube.com/embed/${videoId}`}
                 title="BLACK MYTH WUKONG New Insane Combat Preview and Gameplay Demo | EXCLUSIVE PS5 and PC Launch"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                className="w-full h-full object-fill"
+                width="853"
               ></iframe>
             </>
           ) : (
             <Image
-              src={data.image}
-              alt=""
               fill
+              alt=""
               className="w-full h-full object-cover rounded-lg"
+              src={data.image}
             />
           )}
         </div>
@@ -91,24 +91,24 @@ const page = async ({
           </div>
         </BoxSection>
         <BoxSection title="Nội dung khóa học">
-          <LessonContent lectures={lectures} course="" slug=""></LessonContent>
+          <LessonContent course="" lectures={lectures} slug=""></LessonContent>
         </BoxSection>
         <BoxSection title="Yêu cầu">
           {data.info.requirements.map((r, index) => (
             <div key={index} className="mb-3 flex items-center gap-2">
               <span className="flex-shrink-0 size-5 bg-primary text-white p-1 rounded flex items-center justify-center">
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
                   className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
+                    d="M4.5 12.75l6 6 9-13.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
                   />
                 </svg>
               </span>
@@ -121,17 +121,17 @@ const page = async ({
             <div key={index} className="mb-3 flex items-center gap-2">
               <span className="flex-shrink-0 size-5 bg-primary text-white p-1 rounded flex items-center justify-center">
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
                   className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
+                    d="M4.5 12.75l6 6 9-13.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
                   />
                 </svg>
               </span>
@@ -141,7 +141,7 @@ const page = async ({
         </BoxSection>
         <BoxSection title="Q.A">
           {data.info.qa.map((qa, index) => (
-            <Accordion type="single" collapsible key={index}>
+            <Accordion key={index} collapsible type="single">
               <AccordionItem value={qa.question}>
                 <AccordionTrigger>{qa.question}</AccordionTrigger>
                 <AccordionContent>{qa.answer}</AccordionContent>
@@ -155,9 +155,9 @@ const page = async ({
           <AlreadyEnroll></AlreadyEnroll>
         ) : (
           <CourseWidget
-            findUser={findUser ? JSON.parse(JSON.stringify(findUser)) : null}
             data={data ? JSON.parse(JSON.stringify(data)) : null}
             duration={formatMinutesToHour(duration)}
+            findUser={findUser ? JSON.parse(JSON.stringify(findUser)) : null}
           ></CourseWidget>
         )}
       </div>

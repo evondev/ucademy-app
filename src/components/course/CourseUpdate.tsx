@@ -128,7 +128,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
   const imageWatch = form.watch("image");
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off">
+      <form autoComplete="off" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 gap-8 mt-10 mb-8">
           <FormField
             control={form.control}
@@ -164,8 +164,8 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                 <FormLabel>Giá khuyến mãi</FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
                     placeholder="599.000"
+                    type="number"
                     {...field}
                     onChange={(e) => field.onChange(Number(e.target.value))}
                   />
@@ -182,8 +182,8 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                 <FormLabel>Giá gốc</FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
                     placeholder="999.000"
+                    type="number"
                     {...field}
                     onChange={(e) => field.onChange(Number(e.target.value))}
                   />
@@ -231,10 +231,10 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                         />
                       ) : (
                         <Image
-                          alt=""
-                          src={imageWatch}
                           fill
+                          alt=""
                           className="w-full h-full object-cover rounded-md"
+                          src={imageWatch}
                         />
                       )}
                     </div>
@@ -283,15 +283,15 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                 <FormLabel>Trạng thái</FormLabel>
                 <FormControl>
                   <Select
-                    onValueChange={field.onChange}
                     defaultValue={field.value}
+                    onValueChange={field.onChange}
                   >
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Trạng thái" />
                     </SelectTrigger>
                     <SelectContent>
                       {courseStatus.map((status) => (
-                        <SelectItem value={status.value} key={status.value}>
+                        <SelectItem key={status.value} value={status.value}>
                           {status.title}
                         </SelectItem>
                       ))}
@@ -310,15 +310,15 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                 <FormLabel>Trình độ</FormLabel>
                 <FormControl>
                   <Select
-                    onValueChange={field.onChange}
                     defaultValue={field.value}
+                    onValueChange={field.onChange}
                   >
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Trình độ" />
                     </SelectTrigger>
                     <SelectContent>
                       {courseLevel.map((level) => (
-                        <SelectItem value={level.value} key={level.value}>
+                        <SelectItem key={level.value} value={level.value}>
                           {level.title}
                         </SelectItem>
                       ))}
@@ -338,12 +338,12 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                   <span>Yêu cầu</span>
                   <button
                     className="text-primary"
+                    type="button"
                     onClick={() => {
                       setCourseInfo((draft) => {
                         draft.requirements.push("");
                       });
                     }}
-                    type="button"
                   >
                     <IconAdd className="size-5" />
                   </button>
@@ -377,12 +377,12 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                   <span>Lợi ích</span>
                   <button
                     className="text-primary"
+                    type="button"
                     onClick={() => {
                       setCourseInfo((draft) => {
                         draft.benefits.push("");
                       });
                     }}
-                    type="button"
                   >
                     <IconAdd className="size-5" />
                   </button>
@@ -416,6 +416,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                   <span>Q.A</span>
                   <button
                     className="text-primary"
+                    type="button"
                     onClick={() => {
                       setCourseInfo((draft) => {
                         draft.qa.push({
@@ -424,7 +425,6 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                         });
                       });
                     }}
-                    type="button"
                   >
                     <IconAdd className="size-5" />
                   </button>
@@ -432,7 +432,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                 <FormControl>
                   <>
                     {courseInfo.qa.map((item, index) => (
-                      <div className="grid grid-cols-2 gap-5" key={index}>
+                      <div key={index} className="grid grid-cols-2 gap-5">
                         <Input
                           key={index}
                           placeholder={`Câu hỏi số ${index + 1}`}
@@ -463,11 +463,11 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
           />
         </div>
         <Button
-          isLoading={isSubmitting}
-          variant="primary"
-          type="submit"
           className="w-[150px]"
           disabled={isSubmitting}
+          isLoading={isSubmitting}
+          type="submit"
+          variant="primary"
         >
           Cập nhật khóa học
         </Button>

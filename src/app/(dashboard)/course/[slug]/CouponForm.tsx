@@ -60,10 +60,10 @@ const CouponForm = ({
   return (
     <div className="mt-5 relative">
       <Input
-        placeholder="Nhập mã giảm giá"
         className="pr-20 uppercase font-semibold"
-        onChange={handleChangeCoupon}
         defaultValue={couponCode}
+        placeholder="Nhập mã giảm giá"
+        onChange={handleChangeCoupon}
       />
       <button
         className="absolute right-5 top-1/2 -translate-y-1/2 font-medium text-sm"

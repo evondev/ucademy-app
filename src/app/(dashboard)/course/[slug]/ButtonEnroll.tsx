@@ -36,7 +36,7 @@ const ButtonEnroll = ({
     }
   };
   return (
-    <Button variant="primary" className="w-full" onClick={handleEnrollCourse}>
+    <Button className="w-full" variant="primary" onClick={handleEnrollCourse}>
       Mua khóa học
     </Button>
   );

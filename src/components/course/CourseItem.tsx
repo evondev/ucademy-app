@@ -43,15 +43,15 @@ const CourseItem = ({
   const courseUrl = url ? url : `/course/${data.slug}`;
   return (
     <div className="bg-white dark:bg-grayDarker dark:border-opacity-10 border border-gray-200 p-4 rounded-2xl flex flex-col">
-      <Link href={courseUrl} className="block h-[180px] relative">
+      <Link className="block h-[180px] relative" href={courseUrl}>
         <Image
-          src={data.image}
-          alt=""
-          width={300}
-          height={200}
-          className="w-full h-full object-cover rounded-lg"
-          sizes="@media (min-width: 640px) 300px, 100vw"
           priority
+          alt=""
+          className="w-full h-full object-cover rounded-lg"
+          height={200}
+          sizes="@media (min-width: 640px) 300px, 100vw"
+          src={data.image}
+          width={300}
         />
         {/* <span className="inline-block px-3 py-1 rounded-full absolute top-3 right-3 z-10 text-white font-medium bg-green-500 text-xs">
           New
@@ -62,7 +62,7 @@ const CourseItem = ({
         <div className="mt-auto">
           <div className="flex items-center gap-3 mb-5 text-xs text-gray-500 dark:text-grayDark">
             {courseInfo.map((item, index) => (
-              <div className="flex items-center gap-2" key={index}>
+              <div key={index} className="flex items-center gap-2">
                 {item.icon("size-4")}
                 <span>{item.title}</span>
               </div>
@@ -73,7 +73,7 @@ const CourseItem = ({
             </span>
           </div>
 
-          <Link href={courseUrl} className={commonClassNames.btnPrimary}>
+          <Link className={commonClassNames.btnPrimary} href={courseUrl}>
             {cta || "Xem chi tiết"}
           </Link>
         </div>

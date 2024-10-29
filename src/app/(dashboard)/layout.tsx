@@ -10,10 +10,10 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         {menuItems.map((item, index) => (
           <MenuItem
             key={index}
-            url={item.url}
-            title={item.title}
-            icon={item.icon}
             onlyIcon
+            icon={item.icon}
+            title={item.title}
+            url={item.url}
           ></MenuItem>
         ))}
       </ul>

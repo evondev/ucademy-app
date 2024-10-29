@@ -111,7 +111,7 @@ const NewCouponForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off">
+      <form autoComplete="off" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 gap-8 mt-10 mb-8">
           <FormField
             control={form.control}
@@ -134,8 +134,8 @@ const NewCouponForm = () => {
                 <FormLabel>Code</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Mã giảm giá"
                     className="font-bold uppercase"
+                    placeholder="Mã giảm giá"
                     {...field}
                     onChange={(e) =>
                       field.onChange(e.target.value.toUpperCase())
@@ -155,7 +155,7 @@ const NewCouponForm = () => {
                 <FormControl>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <Button variant={"outline"} className="w-full">
+                      <Button className="w-full" variant={"outline"}>
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {startDate ? (
                           format(startDate, "dd/MM/yyyy")
@@ -164,10 +164,10 @@ const NewCouponForm = () => {
                         )}
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
+                    <PopoverContent align="start" className="w-auto p-0">
                       <Calendar
-                        mode="single"
                         initialFocus
+                        mode="single"
                         selected={startDate}
                         onSelect={setStartDate}
                       />
@@ -187,7 +187,7 @@ const NewCouponForm = () => {
                 <FormControl>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <Button variant={"outline"} className="w-full">
+                      <Button className="w-full" variant={"outline"}>
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {endDate ? (
                           format(endDate, "dd/MM/yyyy")
@@ -196,10 +196,10 @@ const NewCouponForm = () => {
                         )}
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
+                    <PopoverContent align="start" className="w-auto p-0">
                       <Calendar
-                        mode="single"
                         initialFocus
+                        mode="single"
                         selected={endDate}
                         onSelect={setEndDate}
                       />
@@ -218,17 +218,17 @@ const NewCouponForm = () => {
                 <FormLabel>Loại coupon</FormLabel>
                 <FormControl className="h-12">
                   <RadioGroup
-                    defaultValue={CouponType.PERCENT}
                     className="flex gap-5"
+                    defaultValue={CouponType.PERCENT}
                     onValueChange={field.onChange}
                   >
                     {couponTypes.map((type) => (
                       <div
-                        className="flex items-center space-x-2"
                         key={type.value}
+                        className="flex items-center space-x-2"
                       >
-                        <RadioGroupItem value={type.value} id={type.value} />
-                        <Label htmlFor={type.value} className="cursor-pointer">
+                        <RadioGroupItem id={type.value} value={type.value} />
+                        <Label className="cursor-pointer" htmlFor={type.value}>
                           {type.title}
                         </Label>
                       </div>
@@ -291,8 +291,8 @@ const NewCouponForm = () => {
                 <FormLabel>Số lượng tối đa</FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
                     placeholder="100"
+                    type="number"
                     {...field}
                     onChange={(e) => field.onChange(e.target.valueAsNumber)}
                   />
@@ -323,12 +323,12 @@ const NewCouponForm = () => {
                           >
                             <Checkbox
                               id={course.title}
-                              onCheckedChange={(checked) =>
-                                handleSelectCourse(checked, course)
-                              }
                               checked={selectedCourses.some(
                                 (el) => el._id === course._id
                               )}
+                              onCheckedChange={(checked) =>
+                                handleSelectCourse(checked, course)
+                              }
                             />
                             <span>{course.title}</span>
                           </Label>
@@ -361,9 +361,9 @@ const NewCouponForm = () => {
           />
         </div>
         <Button
-          variant="primary"
-          type="submit"
           className="w-[150px] ml-auto flex"
+          type="submit"
+          variant="primary"
         >
           Tạo mã
         </Button>

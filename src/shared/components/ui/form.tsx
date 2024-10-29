@@ -93,12 +93,12 @@ const FormLabel = React.forwardRef<
   return (
     <Label
       ref={ref}
+      htmlFor={formItemId}
       className={cn(
         error && "text-red-500 dark:text-red-500",
         "text-sm font-semibold cursor-pointer",
         className
       )}
-      htmlFor={formItemId}
       {...props}
     />
   );
@@ -115,13 +115,13 @@ const FormControl = React.forwardRef<
   return (
     <Slot
       ref={ref}
+      aria-invalid={!!error}
       id={formItemId}
       aria-describedby={
         !error
           ? `${formDescriptionId}`
           : `${formDescriptionId} ${formMessageId}`
       }
-      aria-invalid={!!error}
       {...props}
     />
   );
@@ -137,8 +137,8 @@ const FormDescription = React.forwardRef<
   return (
     <p
       ref={ref}
-      id={formDescriptionId}
       className={cn("text-sm text-slate-500 dark:text-slate-400", className)}
+      id={formDescriptionId}
       {...props}
     />
   );

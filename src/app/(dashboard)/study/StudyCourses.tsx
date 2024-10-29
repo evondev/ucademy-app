@@ -32,8 +32,8 @@ const StudyCourses = ({
           return (
             <CourseItem
               key={item.slug}
-              data={item}
               cta="Tiếp tục học"
+              data={item}
               url={url || `/${item.slug}/lesson?slug=${firstLessonUrl}`}
             ></CourseItem>
           );

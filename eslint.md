@@ -1,0 +1,3 @@
+- validate = true
+- shouldValidate = true
+- [].map((\_, index) => )

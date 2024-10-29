@@ -26,7 +26,7 @@ const TableActionItem = ({
   };
   if (url)
     return (
-      <Link href={url} className={commonClassNames.action}>
+      <Link className={commonClassNames.action} href={url}>
         {icon[type]}
       </Link>
     );
