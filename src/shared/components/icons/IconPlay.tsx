@@ -1,6 +1,6 @@
-import { ComponentProps } from "react";
+import { ComponentProps } from 'react';
 
-const IconPlay = (props: ComponentProps<"svg">) => {
+const IconPlay = (props: ComponentProps<'svg'>) => {
   return (
     <svg
       fill="none"

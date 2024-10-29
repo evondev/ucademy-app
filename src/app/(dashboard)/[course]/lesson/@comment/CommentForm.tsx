@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { createComment } from "@/modules/comment/services/comment.actions";
-import { Button } from "@/shared/components/ui/button";
+import { cn } from '@/lib/utils';
+import { createComment } from '@/modules/comment/services/comment.actions';
+import { Button } from '@/shared/components/ui/button';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/shared/components/ui/form";
-import { Textarea } from "@/shared/components/ui/textarea";
-import { CommentItem } from "@/types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { z } from "zod";
+} from '@/shared/components/ui/form';
+import { Textarea } from '@/shared/components/ui/textarea';
+import { CommentItem } from '@/types';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useTransition } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { z } from 'zod';
 const formSchema = z.object({
   content: z
     .string({
-      message: "Comment must be a string",
+      message: 'Comment must be a string',
     })
-    .min(10, { message: "Comment must be at least 10 character long" }),
+    .min(10, { message: 'Comment must be at least 10 character long' }),
 });
 interface CommentFormProps {
   userId: string;
@@ -45,7 +45,7 @@ const CommentForm = ({
   });
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
-  const slug = useSearchParams().get("slug");
+  const slug = useSearchParams().get('slug');
   const path = `${pathname}?slug=${slug}`;
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
@@ -58,11 +58,11 @@ const CommentForm = ({
         path,
       });
       if (!hasComment) {
-        toast.error("Failed to post comment");
+        toast.error('Failed to post comment');
         return;
       }
-      toast.success("Comment posted successfully");
-      form.setValue("content", "");
+      toast.success('Comment posted successfully');
+      form.setValue('content', '');
       closeReply?.();
     });
   }
@@ -72,7 +72,7 @@ const CommentForm = ({
       <Form {...form}>
         <form
           autoComplete="off"
-          className="flex flex-col gap-5 relative"
+          className="relative flex flex-col gap-5"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField
@@ -83,8 +83,8 @@ const CommentForm = ({
                 <FormControl>
                   <Textarea
                     placeholder="Nhập bình luận..."
-                    className={cn("min-h-[150px]", {
-                      "bg-gray-50": isReply,
+                    className={cn('min-h-[150px]', {
+                      'bg-gray-50': isReply,
                     })}
                     {...field}
                   />
@@ -98,11 +98,11 @@ const CommentForm = ({
             isLoading={isPending}
             type="submit"
             variant="primary"
-            className={cn("w-[140px] ml-auto rounded-lg h-10", {
-              "w-24": isReply,
+            className={cn('ml-auto h-10 w-[140px] rounded-lg', {
+              'w-24': isReply,
             })}
           >
-            {isReply ? "Trả lời" : "Đăng bình luận"}
+            {isReply ? 'Trả lời' : 'Đăng bình luận'}
           </Button>
         </form>
       </Form>

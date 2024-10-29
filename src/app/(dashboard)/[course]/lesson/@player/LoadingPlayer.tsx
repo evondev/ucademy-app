@@ -1,12 +1,12 @@
 const LoadingPlayer = () => {
   return (
     <div>
-      <div className="aspect-video rounded-lg skeleton mb-5"></div>
-      <div className="flex gap-3 mb-5">
-        <div className="size-10 rounded-lg skeleton"></div>
-        <div className="size-10 rounded-lg skeleton"></div>
+      <div className="skeleton mb-5 aspect-video rounded-lg"></div>
+      <div className="mb-5 flex gap-3">
+        <div className="skeleton size-10 rounded-lg"></div>
+        <div className="skeleton size-10 rounded-lg"></div>
       </div>
-      <div className="w-full h-9 mb-10 skeleton"></div>
+      <div className="skeleton mb-10 h-9 w-full"></div>
     </div>
   );
 };

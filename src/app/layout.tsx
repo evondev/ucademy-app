@@ -1,16 +1,16 @@
-import { ThemeProvider } from "@/shared/components";
-import { manrope } from "@/utils";
-import { ClerkProvider } from "@clerk/nextjs";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata } from "next";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "./globals.scss";
+import { ThemeProvider } from '@/shared/components';
+import { manrope } from '@/utils';
+import { ClerkProvider } from '@clerk/nextjs';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import type { Metadata } from 'next';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './globals.scss';
 
 export const metadata: Metadata = {
-  title: "Ucademy",
-  description: "Nền tảng học lập trình trực tuyến siêu cấp vip pro",
+  title: 'Ucademy',
+  description: 'Nền tảng học lập trình trực tuyến siêu cấp vip pro',
 };
 
 export default function RootLayout({

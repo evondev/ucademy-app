@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import useQueryString from "@/hooks/useQueryString";
-import { ITEMS_PER_PAGE } from "@/shared/constants";
-import { debounce } from "lodash";
+import useQueryString from '@/hooks/useQueryString';
+import { ITEMS_PER_PAGE } from '@/shared/constants';
+import { debounce } from 'lodash';
 
 interface IPaginationProps {
   totalPages: number;
@@ -94,7 +94,7 @@ const Pagination = ({ totalPages, total }: IPaginationProps) => {
         {IconLeft}
       </PaginationButton>
       <input
-        className="w-20 h-10 rounded-full bg-white outline-none text-center px-2 font-medium"
+        className="h-10 w-20 rounded-full bg-white px-2 text-center font-medium outline-none"
         placeholder="1"
         type="number"
         value={currentPage}
@@ -126,7 +126,7 @@ function PaginationButton({
   children,
 }: IPaginationButtonProps) {
   const paginationBtnClassNames =
-    "size-10 rounded-full bg-white shadow-sm p-2 flex items-center justify-center disabled:bg-gray-200";
+    'size-10 rounded-full bg-white shadow-sm p-2 flex items-center justify-center disabled:bg-gray-200';
   return (
     <button
       className={paginationBtnClassNames}

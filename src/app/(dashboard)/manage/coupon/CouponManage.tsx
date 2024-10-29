@@ -1,5 +1,5 @@
-"use client";
-import useQueryString from "@/hooks/useQueryString";
+'use client';
+import useQueryString from '@/hooks/useQueryString';
 import {
   BadgeStatus,
   BouncedLink,
@@ -7,8 +7,8 @@ import {
   Pagination,
   TableAction,
   TableActionItem,
-} from "@/shared/components";
-import { Input } from "@/shared/components/ui/input";
+} from '@/shared/components';
+import { Input } from '@/shared/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -16,7 +16,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/shared/components/ui/select";
+} from '@/shared/components/ui/select';
 import {
   Table,
   TableBody,
@@ -24,11 +24,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/shared/components/ui/table";
-import { allValue, couponStatuses } from "@/shared/constants";
-import { CouponItem } from "@/types";
-import { CouponType } from "@/types/enums";
-import ActionDeleteCoupon from "./ActionDeleteCoupon";
+} from '@/shared/components/ui/table';
+import { allValue, couponStatuses } from '@/shared/constants';
+import { CouponItem } from '@/types';
+import { CouponType } from '@/types/enums';
+import ActionDeleteCoupon from './ActionDeleteCoupon';
 
 const CouponManage = ({
   coupons,
@@ -44,7 +44,7 @@ const CouponManage = ({
   return (
     <div>
       <BouncedLink url="/manage/coupon/new"></BouncedLink>
-      <div className="flex flex-col lg:flex-row lg:items-center gap-5 justify-between mb-10">
+      <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <Heading className="">Quản lý mã giảm giá</Heading>
         <div className="flex gap-3">
           <div className="w-full lg:w-[300px]">
@@ -55,7 +55,7 @@ const CouponManage = ({
           </div>
           <Select
             defaultValue={allValue}
-            onValueChange={(value) => handleChangeQs("active", value)}
+            onValueChange={(value) => handleChangeQs('active', value)}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Chọn trạng thái" />
@@ -64,7 +64,10 @@ const CouponManage = ({
               <SelectGroup>
                 <SelectItem value={allValue}>Tất cả</SelectItem>
                 {couponStatuses.map((item) => (
-                  <SelectItem key={item.value} value={`${item.value}`}>
+                  <SelectItem
+                    key={item.value}
+                    value={`${item.value}`}
+                  >
                     {item.title}
                   </SelectItem>
                 ))}
@@ -97,7 +100,7 @@ const CouponManage = ({
                 </TableCell>
                 <TableCell>
                   {coupon.type === CouponType.AMOUNT ? (
-                    <>{coupon.value.toLocaleString("us-US")}</>
+                    <>{coupon.value.toLocaleString('us-US')}</>
                   ) : (
                     <>{coupon.value}%</>
                   )}
@@ -109,15 +112,15 @@ const CouponManage = ({
                   {coupon.active ? (
                     <BadgeStatus
                       item={{
-                        title: "Đang kích hoạt",
-                        className: "text-green-500",
+                        title: 'Đang kích hoạt',
+                        className: 'text-green-500',
                       }}
                     ></BadgeStatus>
                   ) : (
                     <BadgeStatus
                       item={{
-                        title: "Chưa kích hoạt",
-                        className: "text-orange-500",
+                        title: 'Chưa kích hoạt',
+                        className: 'text-orange-500',
                       }}
                     ></BadgeStatus>
                   )}
@@ -135,7 +138,10 @@ const CouponManage = ({
             ))}
         </TableBody>
       </Table>
-      <Pagination total={total} totalPages={totalPages}></Pagination>
+      <Pagination
+        total={total}
+        totalPages={totalPages}
+      ></Pagination>
     </div>
   );
 };

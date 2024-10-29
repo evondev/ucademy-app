@@ -1,9 +1,9 @@
-import { ComponentProps } from "react";
+import { ComponentProps } from 'react';
 
-const IconLeftArrow = (props: ComponentProps<"svg">) => {
+const IconLeftArrow = (props: ComponentProps<'svg'>) => {
   return (
     <svg
-      className="w-6 h-6"
+      className="size-6"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.5}

@@ -1,19 +1,19 @@
-"use client";
-import { MenuItem, ModeToggle } from "@/shared/components";
-import { IconUsers } from "@/shared/components/icons";
-import { menuItems } from "@/shared/constants";
-import { UserButton, useAuth } from "@clerk/nextjs";
-import Link from "next/link";
+'use client';
+import { MenuItem, ModeToggle } from '@/shared/components';
+import { IconUsers } from '@/shared/components/icons';
+import { menuItems } from '@/shared/constants';
+import { UserButton, useAuth } from '@clerk/nextjs';
+import Link from 'next/link';
 
 const Sidebar = () => {
   const { userId } = useAuth();
   return (
-    <div className="hidden p-5 border-r borderDarkMode bgDarkMode lg:flex flex-col fixed top-0 left-0 bottom-0 w-[300px]">
+    <div className="borderDarkMode bgDarkMode fixed inset-y-0 left-0 hidden w-[300px] flex-col border-r p-5 lg:flex">
       <Link
-        className="font-bold text-2xl inline-flex items-center gap-2 mb-5 h-10 self-start pl-3"
+        className="mb-5 inline-flex h-10 items-center gap-2 self-start pl-3 text-2xl font-bold"
         href="/"
       >
-        <span className="size-10 rounded-lg flex items-center justify-center text-lg text-primary bgDarkMode border borderDarkMode">
+        <span className="bgDarkMode borderDarkMode flex size-10 items-center justify-center rounded-lg border text-lg text-primary">
           U
         </span>
         <span>Ucademy</span>
@@ -32,7 +32,7 @@ const Sidebar = () => {
         <ModeToggle></ModeToggle>
         {!userId ? (
           <Link
-            className="size-10 rounded-lg bg-primary text-white flex items-center justify-center p-1"
+            className="flex size-10 items-center justify-center rounded-lg bg-primary p-1 text-white"
             href="/sign-in"
           >
             <IconUsers />

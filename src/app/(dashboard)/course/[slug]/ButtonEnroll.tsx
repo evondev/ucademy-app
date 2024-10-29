@@ -1,10 +1,10 @@
-"use client";
-import { User } from "@/database/user.model";
-import { createOrder } from "@/lib/actions/order.actions";
-import { Button } from "@/shared/components/ui/button";
-import { createOrderCode } from "@/utils";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+'use client';
+import { User } from '@/database/user.model';
+import { createOrder } from '@/lib/actions/order.actions';
+import { Button } from '@/shared/components/ui/button';
+import { createOrderCode } from '@/utils';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 const ButtonEnroll = ({
   user,
@@ -20,7 +20,7 @@ const ButtonEnroll = ({
   const router = useRouter();
   const handleEnrollCourse = async () => {
     if (!user?.name) {
-      toast.error("Vui lòng đăng nhập để mua khóa học");
+      toast.error('Vui lòng đăng nhập để mua khóa học');
       return;
     }
     const newOrder = await createOrder({
@@ -36,7 +36,11 @@ const ButtonEnroll = ({
     }
   };
   return (
-    <Button className="w-full" variant="primary" onClick={handleEnrollCourse}>
+    <Button
+      className="w-full"
+      variant="primary"
+      onClick={handleEnrollCourse}
+    >
       Mua khóa học
     </Button>
   );

@@ -1,10 +1,10 @@
-import PageNotFound from "@/app/not-found";
-import { getUserInfo } from "@/lib/actions/user.actions";
-import { auth } from "@clerk/nextjs/server";
-import { Suspense } from "react";
-import LoadingOutline from "./@outline/LoadingOutline";
-import LoadingPlayer from "./@player/LoadingPlayer";
-import LessonWrapper from "./LessonWrapper";
+import PageNotFound from '@/app/not-found';
+import { getUserInfo } from '@/lib/actions/user.actions';
+import { auth } from '@clerk/nextjs/server';
+import { Suspense } from 'react';
+import LoadingOutline from './@outline/LoadingOutline';
+import LoadingPlayer from './@player/LoadingPlayer';
+import LessonWrapper from './LessonWrapper';
 
 const Layout = async ({
   player,

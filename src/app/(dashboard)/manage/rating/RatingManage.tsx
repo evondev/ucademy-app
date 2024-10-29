@@ -1,13 +1,13 @@
-"use client";
-import useQueryString from "@/hooks/useQueryString";
-import { deleteRating, updateRating } from "@/lib/actions/rating.actions";
+'use client';
+import useQueryString from '@/hooks/useQueryString';
+import { deleteRating, updateRating } from '@/lib/actions/rating.actions';
 import {
   BadgeStatus,
   Heading,
   TableAction,
   TableActionItem,
-} from "@/shared/components";
-import { Input } from "@/shared/components/ui/input";
+} from '@/shared/components';
+import { Input } from '@/shared/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -15,7 +15,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/shared/components/ui/select";
+} from '@/shared/components/ui/select';
 import {
   Table,
   TableBody,
@@ -23,13 +23,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/shared/components/ui/table";
-import { allValue, ratingList, ratingStatus } from "@/shared/constants";
-import { RatingItem } from "@/types";
-import { RatingStatus } from "@/types/enums";
-import Image from "next/image";
-import Link from "next/link";
-import Swal from "sweetalert2";
+} from '@/shared/components/ui/table';
+import { allValue, ratingList, ratingStatus } from '@/shared/constants';
+import { RatingItem } from '@/types';
+import { RatingStatus } from '@/types/enums';
+import Image from 'next/image';
+import Link from 'next/link';
+import Swal from 'sweetalert2';
 
 const RatingManage = ({ ratings }: { ratings: any }) => {
   const { handleSearchData, handleSelectStatus } = useQueryString();
@@ -44,11 +44,11 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
   const handleDeleteRating = async (id: string) => {
     try {
       Swal.fire({
-        title: "Bạn có chắc muốn xóa đánh giá này không?",
-        icon: "warning",
+        title: 'Bạn có chắc muốn xóa đánh giá này không?',
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: "Xóa luôn",
-        cancelButtonText: "Hủy",
+        confirmButtonText: 'Xóa luôn',
+        cancelButtonText: 'Hủy',
       }).then(async (result) => {
         if (result.isConfirmed) {
           await deleteRating(id);
@@ -60,7 +60,7 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
   };
   return (
     <div>
-      <div className="flex flex-col lg:flex-row lg:items-center gap-5 justify-between mb-10">
+      <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <Heading className="">Quản lý đánh giá</Heading>
         <div className="flex gap-3">
           <div className="w-full lg:w-[300px]">
@@ -80,7 +80,10 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
               <SelectGroup>
                 <SelectItem value={allValue}>Tất cả</SelectItem>
                 {ratingStatus.map((status) => (
-                  <SelectItem key={status.value} value={status.value}>
+                  <SelectItem
+                    key={status.value}
+                    value={status.value}
+                  >
                     {status.title}
                   </SelectItem>
                 ))}
@@ -103,10 +106,10 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
           {ratings.length > 0 &&
             ratings.map((rating: RatingItem) => {
               const ratingItemStatus = ratingStatus.find(
-                (item) => item.value === rating.status
+                (item) => item.value === rating.status,
               );
               const icon = ratingList.find(
-                (item) => item.value === rating.rate
+                (item) => item.value === rating.rate,
               )?.title;
               return (
                 <TableRow key={rating.rate}>
@@ -123,7 +126,7 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
                       </div>
                       <time>
                         {new Date(rating.created_at).toLocaleDateString(
-                          "vi-Vi"
+                          'vi-Vi',
                         )}
                       </time>
                     </div>

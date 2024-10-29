@@ -1,5 +1,5 @@
-import { CommentStatus } from "@/shared/types/enums";
-import { Document, Schema, model, models } from "mongoose";
+import { CommentStatus } from '@/shared/types/enums';
+import { Document, Schema, model, models } from 'mongoose';
 
 export interface Comment extends Document {
   _id: string;
@@ -18,11 +18,11 @@ const commentSchema = new Schema<Comment>({
   },
   lesson: {
     type: Schema.Types.ObjectId,
-    ref: "Lesson",
+    ref: 'Lesson',
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
   status: {
     type: String,
@@ -39,10 +39,10 @@ const commentSchema = new Schema<Comment>({
   },
   parentId: {
     type: Schema.Types.ObjectId,
-    ref: "Comment",
+    ref: 'Comment',
     default: null,
   },
 });
 const CommentSchema =
-  models.Comment || model<Comment>("Comment", commentSchema);
+  models.Comment || model<Comment>('Comment', commentSchema);
 export default CommentSchema;

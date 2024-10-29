@@ -1,5 +1,5 @@
-import { CouponType } from "@/types/enums";
-import { Document, Schema, model, models } from "mongoose";
+import { CouponType } from '@/types/enums';
+import { Document, Schema, model, models } from 'mongoose';
 
 export interface Coupon extends Document {
   _id: string;
@@ -44,7 +44,7 @@ const couponSchema = new Schema<Coupon>({
   courses: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Course",
+      ref: 'Course',
     },
   ],
   type: {
@@ -60,5 +60,5 @@ const couponSchema = new Schema<Coupon>({
     default: Date.now,
   },
 });
-const CouponSchema = models.Coupon || model<Coupon>("Coupon", couponSchema);
+const CouponSchema = models.Coupon || model<Coupon>('Coupon', couponSchema);
 export default CouponSchema;

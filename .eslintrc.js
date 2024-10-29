@@ -5,9 +5,11 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/jsx-runtime",
+    "plugin:tailwindcss/recommended",
     "plugin:prettier/recommended",
+    "prettier",
   ],
-  plugins: ["@typescript-eslint", "react", "prettier"],
+  plugins: ["@typescript-eslint", "react"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 2021,
@@ -49,11 +51,13 @@ module.exports = {
         selector: ["typeLike", "interface", "enum"],
         format: ["PascalCase"],
         custom: {
-          regex: "^[^TIE]",
+          regex: "^(?![TIE][A-Z])",
           match: true,
         },
       },
     ],
-    "prettier/prettier": ["error", { singleQuote: true, semi: false }],
+    quotes: ["error", "single"],
+    "prettier/prettier": 'error',
+    "@typescript-eslint/no-empty-object-type": "off",
   },
 };

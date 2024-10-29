@@ -1,9 +1,9 @@
-"use client";
-import CourseItem from "@/components/course/CourseItem";
-import { CourseGrid } from "@/shared/components";
-import { lastLessonKey } from "@/shared/constants";
-import { StudyCoursesProps } from "@/types";
-import { useEffect, useState } from "react";
+'use client';
+import CourseItem from '@/components/course/CourseItem';
+import { CourseGrid } from '@/shared/components';
+import { lastLessonKey } from '@/shared/constants';
+import { StudyCoursesProps } from '@/types';
+import { useEffect, useState } from 'react';
 
 const StudyCourses = ({
   courses,
@@ -12,9 +12,9 @@ const StudyCourses = ({
 }) => {
   const [lastLesson, setLastLesson] = useState<any[]>([]);
   useEffect(() => {
-    if (typeof localStorage !== "undefined") {
+    if (typeof localStorage !== 'undefined') {
       const data = localStorage
-        ? JSON.parse(localStorage?.getItem(lastLessonKey) || "[]") || []
+        ? JSON.parse(localStorage?.getItem(lastLessonKey) || '[]') || []
         : [];
       setLastLesson(data);
     }
@@ -27,7 +27,7 @@ const StudyCourses = ({
         courses.length > 0 &&
         courses?.map((item) => {
           const url =
-            lastLesson.find((el: any) => el.course === item.slug)?.lesson || "";
+            lastLesson.find((el: any) => el.course === item.slug)?.lesson || '';
           const firstLessonUrl = item.lectures[0].lessons[0].slug;
           return (
             <CourseItem

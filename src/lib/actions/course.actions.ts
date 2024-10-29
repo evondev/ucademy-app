@@ -1,8 +1,8 @@
-"use server";
-import Course, { CourseProps } from "@/database/course.model";
-import Lecture from "@/database/lecture.model";
-import Lesson from "@/database/lesson.model";
-import Rating from "@/database/rating.model";
+'use server';
+import Course, { CourseProps } from '@/database/course.model';
+import Lecture from '@/database/lecture.model';
+import Lesson from '@/database/lesson.model';
+import Rating from '@/database/rating.model';
 import {
   CourseUpdateParams,
   CreateCourseParams,
@@ -10,14 +10,14 @@ import {
   GetAllCourseParams,
   StudyCoursesProps,
   UpdateCourseParams,
-} from "@/types";
-import { CourseStatus, RatingStatus } from "@/types/enums";
-import { FilterQuery } from "mongoose";
-import { revalidatePath } from "next/cache";
-import { connectToDatabase } from "../mongoose";
+} from '@/types';
+import { CourseStatus, RatingStatus } from '@/types/enums';
+import { FilterQuery } from 'mongoose';
+import { revalidatePath } from 'next/cache';
+import { connectToDatabase } from '../mongoose';
 // fetching
 export async function getAllCoursesPublic(
-  params: GetAllCourseParams
+  params: GetAllCourseParams,
 ): Promise<StudyCoursesProps[] | undefined> {
   try {
     connectToDatabase();
@@ -25,7 +25,7 @@ export async function getAllCoursesPublic(
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof Course> = {};
     if (search) {
-      query.$or = [{ title: { $regex: search, $options: "i" } }];
+      query.$or = [{ title: { $regex: search, $options: 'i' } }];
     }
     query.status = CourseStatus.APPROVED;
     const courses = await Course.find(query)
@@ -38,7 +38,7 @@ export async function getAllCoursesPublic(
   }
 }
 export async function getAllCourses(
-  params: FilterData
+  params: FilterData,
 ): Promise<CourseProps[] | undefined> {
   try {
     connectToDatabase();
@@ -46,7 +46,7 @@ export async function getAllCourses(
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof Course> = {};
     if (search) {
-      query.$or = [{ title: { $regex: search, $options: "i" } }];
+      query.$or = [{ title: { $regex: search, $options: 'i' } }];
     }
     if (status) {
       query.status = status;
@@ -69,14 +69,14 @@ export async function getCourseBySlug({
     connectToDatabase();
     const findCourse = await Course.findOne({ slug })
       .populate({
-        path: "lectures",
+        path: 'lectures',
         model: Lecture,
-        select: "_id title",
+        select: '_id title',
         match: {
           _destroy: false,
         },
         populate: {
-          path: "lessons",
+          path: 'lessons',
           model: Lesson,
           match: {
             _destroy: false,
@@ -84,7 +84,7 @@ export async function getCourseBySlug({
         },
       })
       .populate({
-        path: "rating",
+        path: 'rating',
         model: Rating,
         match: {
           status: RatingStatus.ACTIVE,
@@ -103,7 +103,7 @@ export async function createCourse(params: CreateCourseParams) {
     if (existCourse) {
       return {
         success: false,
-        message: "Đường dẫn khóa học đã tồn tại!",
+        message: 'Đường dẫn khóa học đã tồn tại!',
       };
     }
     const course = await Course.create(params);
@@ -116,7 +116,7 @@ export async function createCourse(params: CreateCourseParams) {
   }
 }
 export async function updateCourse(params: UpdateCourseParams) {
-  console.log("updateCourse ~ params:", params);
+  console.log('updateCourse ~ params:', params);
   try {
     connectToDatabase();
     const findCourse = await Course.findOne({ slug: params.slug });
@@ -124,10 +124,10 @@ export async function updateCourse(params: UpdateCourseParams) {
     await Course.findOneAndUpdate({ slug: params.slug }, params.updateData, {
       new: true,
     });
-    revalidatePath(params.path || "/");
+    revalidatePath(params.path || '/');
     return {
       success: true,
-      message: "Cập nhật khóa học thành công!",
+      message: 'Cập nhật khóa học thành công!',
     };
   } catch (error) {
     console.log(error);
@@ -140,7 +140,7 @@ export async function updateCourseView({ slug }: { slug: string }) {
       { slug },
       {
         $inc: { views: 1 },
-      }
+      },
     );
   } catch (error) {}
 }
@@ -154,19 +154,19 @@ export async function getCourseLessonsInfo({ slug }: { slug: string }): Promise<
   try {
     connectToDatabase();
     const course = await Course.findOne({ slug })
-      .select("lectures")
+      .select('lectures')
       .populate({
-        path: "lectures",
-        select: "lessons",
+        path: 'lectures',
+        select: 'lessons',
         populate: {
-          path: "lessons",
-          select: "duration",
+          path: 'lessons',
+          select: 'duration',
         },
       });
     const lessons = course?.lectures.map((l: any) => l.lessons).flat();
     const duration = lessons.reduce(
       (acc: number, cur: any) => acc + cur.duration,
-      0
+      0,
     );
     return {
       duration,

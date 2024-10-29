@@ -1,15 +1,15 @@
-"use client";
-import useQueryString from "@/hooks/useQueryString";
-import { updateOrder } from "@/lib/actions/order.actions";
-import { cn } from "@/lib/utils";
+'use client';
+import useQueryString from '@/hooks/useQueryString';
+import { updateOrder } from '@/lib/actions/order.actions';
+import { cn } from '@/lib/utils';
 import {
   BadgeStatus,
   EmptySpace,
   Heading,
   Pagination,
-} from "@/shared/components";
-import { IconCancel, IconCheck } from "@/shared/components/icons";
-import { Input } from "@/shared/components/ui/input";
+} from '@/shared/components';
+import { IconCancel, IconCheck } from '@/shared/components/icons';
+import { Input } from '@/shared/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -17,7 +17,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/shared/components/ui/select";
+} from '@/shared/components/ui/select';
 import {
   Table,
   TableBody,
@@ -25,12 +25,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/shared/components/ui/table";
-import { allValue, commonClassNames, orderStatus } from "@/shared/constants";
-import { OrderStatus } from "@/shared/types/enums";
-import { toast } from "react-toastify";
-import Swal from "sweetalert2";
-import { OrderManagePageProps } from "../types/order.types";
+} from '@/shared/components/ui/table';
+import { allValue, commonClassNames, orderStatus } from '@/shared/constants';
+import { OrderStatus } from '@/shared/types/enums';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+import { OrderManagePageProps } from '../types/order.types';
 
 const OrderManagePage = ({
   orders = [],
@@ -46,11 +46,11 @@ const OrderManagePage = ({
   }) => {
     if (status === OrderStatus.CANCELED) {
       Swal.fire({
-        title: "Bạn có chắc muốn hủy đơn hàng không?",
-        icon: "warning",
+        title: 'Bạn có chắc muốn hủy đơn hàng không?',
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: "Hủy luôn",
-        cancelButtonText: "Thoát",
+        confirmButtonText: 'Hủy luôn',
+        cancelButtonText: 'Thoát',
       }).then(async (result) => {
         if (result.isConfirmed) {
           await updateOrder({ orderId, status });
@@ -60,7 +60,7 @@ const OrderManagePage = ({
     if (status === OrderStatus.COMPLETED) {
       const res = await updateOrder({ orderId, status });
       if (res?.success) {
-        toast.success("Cập nhật đơn hàng thành công");
+        toast.success('Cập nhật đơn hàng thành công');
       }
     }
   };
@@ -68,7 +68,7 @@ const OrderManagePage = ({
 
   return (
     <div>
-      <div className="flex flex-col lg:flex-row lg:items-center gap-5 justify-between mb-10">
+      <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <Heading className="">Quản lý đơn hàng</Heading>
         <div className="flex gap-3">
           <div className="w-full lg:w-[300px]">
@@ -87,7 +87,10 @@ const OrderManagePage = ({
               <SelectGroup>
                 <SelectItem value={allValue}>Tất cả</SelectItem>
                 {orderStatus.map((status) => (
-                  <SelectItem key={status.value} value={status.value}>
+                  <SelectItem
+                    key={status.value}
+                    value={status.value}
+                  >
                     {status.title}
                   </SelectItem>
                 ))}
@@ -113,7 +116,7 @@ const OrderManagePage = ({
           {orders.length > 0 &&
             orders.map((order) => {
               const orderStatusItem = orderStatus.find(
-                (item) => item.value === order.status
+                (item) => item.value === order.status,
               );
               return (
                 <TableRow key={order.code}>
@@ -124,22 +127,22 @@ const OrderManagePage = ({
                   <TableCell>{order.user?.name}</TableCell>
                   <TableCell>
                     <div className="flex flex-col gap-2">
-                      <span>{order.amount.toLocaleString("us-US")}</span>
+                      <span>{order.amount.toLocaleString('us-US')}</span>
                       {order.discount > 0 && (
-                        <span>{order.discount.toLocaleString("us-US")}</span>
+                        <span>{order.discount.toLocaleString('us-US')}</span>
                       )}
                       <strong
                         className={cn(
                           orderStatusItem?.className,
-                          "bg-transparent"
+                          'bg-transparent',
                         )}
                       >
-                        {order.total.toLocaleString("us-US")}
+                        {order.total.toLocaleString('us-US')}
                       </strong>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <strong>{order.coupon?.code || ""}</strong>
+                    <strong>{order.coupon?.code || ''}</strong>
                   </TableCell>
                   <TableCell>
                     <BadgeStatus item={orderStatusItem}></BadgeStatus>
@@ -181,7 +184,10 @@ const OrderManagePage = ({
             })}
         </TableBody>
       </Table>
-      <Pagination total={total} totalPages={totalPages}></Pagination>
+      <Pagination
+        total={total}
+        totalPages={totalPages}
+      ></Pagination>
     </div>
   );
 };

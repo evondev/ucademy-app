@@ -1,30 +1,30 @@
-"use server";
+'use server';
 
-import { connectToDatabase } from "@/shared/lib/mongoose";
+import { connectToDatabase } from '@/shared/lib/mongoose';
 import {
   CouponItem,
   CouponParams,
   CreateCouponParams,
   FilterData,
   UpdateCouponParams,
-} from "@/types";
-import { FilterQuery } from "mongoose";
-import { revalidatePath } from "next/cache";
-import CouponSchema from "./coupon.schema";
+} from '@/types';
+import { FilterQuery } from 'mongoose';
+import { revalidatePath } from 'next/cache';
+import CouponSchema from './coupon.schema';
 
 export async function createCoupon(params: CreateCouponParams) {
   try {
     connectToDatabase();
     const existingCoupon = await CouponSchema.findOne({ code: params.code });
     if (existingCoupon?.code) {
-      return { error: "Mã giảm giá đã tồn tại!" };
+      return { error: 'Mã giảm giá đã tồn tại!' };
     }
     const couponRegex = /^[A-Z0-9]{3,10}$/;
     if (!couponRegex.test(params.code)) {
-      return { error: "Mã giảm giá không hợp lệ" };
+      return { error: 'Mã giảm giá không hợp lệ' };
     }
     const newCoupon = await CouponSchema.create(params);
-    revalidatePath("/manage/coupon");
+    revalidatePath('/manage/coupon');
     return JSON.parse(JSON.stringify(newCoupon));
   } catch (error) {
     console.log(error);
@@ -35,9 +35,9 @@ export async function updateCoupon(params: UpdateCouponParams) {
     connectToDatabase();
     const updatedCoupon = await CouponSchema.findByIdAndUpdate(
       params._id,
-      params.updateData
+      params.updateData,
     );
-    revalidatePath("/manage/coupon");
+    revalidatePath('/manage/coupon');
     return JSON.parse(JSON.stringify(updatedCoupon));
   } catch (error) {
     console.log(error);
@@ -56,7 +56,7 @@ export async function getCoupons(params: FilterData): Promise<
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof CouponSchema> = {};
     if (search) {
-      query.$or = [{ code: { $regex: search, $options: "i" } }];
+      query.$or = [{ code: { $regex: search, $options: 'i' } }];
     }
     if (active) {
       query.active = Boolean(Number(active));
@@ -75,15 +75,15 @@ export async function getCoupons(params: FilterData): Promise<
   }
 }
 export async function getCouponByCode(
-  params: any
+  params: any,
 ): Promise<CouponParams | undefined> {
   try {
     connectToDatabase();
     const findCoupon = await CouponSchema.findOne({
       code: params.code,
     }).populate({
-      path: "courses",
-      select: "_id title",
+      path: 'courses',
+      select: '_id title',
     });
     const coupon = JSON.parse(JSON.stringify(findCoupon));
     return coupon;
@@ -92,15 +92,15 @@ export async function getCouponByCode(
   }
 }
 export async function getValidateCoupon(
-  params: any
+  params: any,
 ): Promise<CouponParams | undefined> {
   try {
     connectToDatabase();
     const findCoupon = await CouponSchema.findOne({
       code: params.code,
     }).populate({
-      path: "courses",
-      select: "_id title",
+      path: 'courses',
+      select: '_id title',
     });
     const coupon = JSON.parse(JSON.stringify(findCoupon));
     const couponCourses = coupon?.courses.map((course: any) => course._id);
@@ -121,7 +121,7 @@ export async function deleteCoupon(code: string) {
   try {
     connectToDatabase();
     await CouponSchema.findOneAndDelete({ code });
-    revalidatePath("/manage/coupon");
+    revalidatePath('/manage/coupon');
   } catch (error) {
     console.log(error);
   }

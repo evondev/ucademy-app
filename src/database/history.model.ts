@@ -1,4 +1,4 @@
-import { Document, Schema, model, models } from "mongoose";
+import { Document, Schema, model, models } from 'mongoose';
 
 export interface HistoryProps extends Document {
   _id: string;
@@ -10,20 +10,20 @@ export interface HistoryProps extends Document {
 const historySchema = new Schema<HistoryProps>({
   course: {
     type: Schema.Types.ObjectId,
-    ref: "Course",
+    ref: 'Course',
   },
   lesson: {
     type: Schema.Types.ObjectId,
-    ref: "Lesson",
+    ref: 'Lesson',
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
   created_at: {
     type: Date,
     default: Date.now,
   },
 });
-const History = models.History || model<HistoryProps>("History", historySchema);
+const History = models.History || model<HistoryProps>('History', historySchema);
 export default History;

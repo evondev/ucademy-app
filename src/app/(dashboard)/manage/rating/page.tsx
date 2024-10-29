@@ -1,6 +1,6 @@
-import { getRatings } from "@/lib/actions/rating.actions";
-import { RatingStatus } from "@/types/enums";
-import RatingManage from "./RatingManage";
+import { getRatings } from '@/lib/actions/rating.actions';
+import { RatingStatus } from '@/types/enums';
+import RatingManage from './RatingManage';
 
 const page = async ({
   searchParams,

@@ -1,5 +1,5 @@
-import { LessonType } from "@/types/enums";
-import { Schema, model, models } from "mongoose";
+import { LessonType } from '@/types/enums';
+import { Schema, model, models } from 'mongoose';
 
 export interface LessonProps extends Document {
   _id: string;
@@ -48,11 +48,11 @@ const lessonSchema = new Schema<LessonProps>({
   },
   lecture: {
     type: Schema.Types.ObjectId,
-    ref: "Lecture",
+    ref: 'Lecture',
   },
   course: {
     type: Schema.Types.ObjectId,
-    ref: "Course",
+    ref: 'Course',
   },
   type: {
     type: String,
@@ -60,5 +60,5 @@ const lessonSchema = new Schema<LessonProps>({
     default: LessonType.VIDEO,
   },
 });
-const Lesson = models.Lesson || model<LessonProps>("Lesson", lessonSchema);
+const Lesson = models.Lesson || model<LessonProps>('Lesson', lessonSchema);
 export default Lesson;

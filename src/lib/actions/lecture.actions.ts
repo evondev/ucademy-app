@@ -1,9 +1,9 @@
-"use server";
-import Course from "@/database/course.model";
-import Lecture from "@/database/lecture.model";
-import { CreateLectureParams, UpdateLectureParams } from "@/types";
-import { revalidatePath } from "next/cache";
-import { connectToDatabase } from "../mongoose";
+'use server';
+import Course from '@/database/course.model';
+import Lecture from '@/database/lecture.model';
+import { CreateLectureParams, UpdateLectureParams } from '@/types';
+import { revalidatePath } from 'next/cache';
+import { connectToDatabase } from '../mongoose';
 
 export async function createLecture(params: CreateLectureParams) {
   try {
@@ -13,7 +13,7 @@ export async function createLecture(params: CreateLectureParams) {
     const newLecture = await Lecture.create(params);
     findCourse.lectures.push(newLecture._id);
     findCourse.save();
-    revalidatePath(params.path || "/");
+    revalidatePath(params.path || '/');
     return {
       sucess: true,
     };
@@ -27,9 +27,9 @@ export async function updateLecture(params: UpdateLectureParams) {
       params.updateData,
       {
         new: true,
-      }
+      },
     );
-    revalidatePath(params.updateData.path || "/");
+    revalidatePath(params.updateData.path || '/');
     if (!res) return;
     return {
       success: true,

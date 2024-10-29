@@ -1,12 +1,12 @@
-import { MenuItem, Sidebar } from "@/shared/components";
-import { menuItems } from "@/shared/constants";
-import React from "react";
+import { MenuItem, Sidebar } from '@/shared/components';
+import { menuItems } from '@/shared/constants';
+import React from 'react';
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="wrapper block pb-20 lg:pb-0 lg:grid lg:grid-cols-[300px,minmax(0,1fr)] min-h-screen">
+    <div className="wrapper block min-h-screen pb-20 lg:grid lg:grid-cols-[300px,minmax(0,1fr)] lg:pb-0">
       <Sidebar />
-      <ul className="flex p-3 bgDarkMode border-t borderDarkMode lg:hidden fixed bottom-0 left-0 w-full justify-center gap-5 h-16 z-50">
+      <ul className="bgDarkMode borderDarkMode fixed bottom-0 left-0 z-50 flex h-16 w-full justify-center gap-5 border-t p-3 lg:hidden">
         {menuItems.map((item, index) => (
           <MenuItem
             key={index}

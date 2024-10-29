@@ -1,7 +1,7 @@
-import CourseAddNew from "@/components/course/CourseAddNew";
-import { getUserInfo } from "@/lib/actions/user.actions";
-import { Heading } from "@/shared/components";
-import { auth } from "@clerk/nextjs/server";
+import CourseAddNew from '@/components/course/CourseAddNew';
+import { getUserInfo } from '@/lib/actions/user.actions';
+import { Heading } from '@/shared/components';
+import { auth } from '@clerk/nextjs/server';
 
 const page = async () => {
   const { userId } = auth();

@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 const IconLeftArrow = (
   <svg
-    className="w-6 h-6"
+    className="size-6"
     fill="none"
     stroke="currentColor"
     strokeWidth={1.5}
@@ -18,10 +18,13 @@ const IconLeftArrow = (
 );
 const PageNotFound = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="font-bold text-7xl">404</h1>
+    <div className="flex h-screen flex-col items-center justify-center">
+      <h1 className="text-7xl font-bold">404</h1>
       <h2 className="mb-5">Page not found</h2>
-      <Link className="flex items-center gap-2 hover:text-primary" href="/">
+      <Link
+        className="flex items-center gap-2 hover:text-primary"
+        href="/"
+      >
         {IconLeftArrow}
         Trang chủ
       </Link>

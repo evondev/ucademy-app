@@ -1,10 +1,10 @@
-"use client";
-import { getValidateCoupon } from "@/lib/actions/coupon.actions";
-import { Input } from "@/shared/components/ui/input";
-import { CouponType } from "@/types/enums";
-import { debounce } from "lodash";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+'use client';
+import { getValidateCoupon } from '@/lib/actions/coupon.actions';
+import { Input } from '@/shared/components/ui/input';
+import { CouponType } from '@/types/enums';
+import { debounce } from 'lodash';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const CouponForm = ({
   setPrice,
@@ -18,7 +18,7 @@ const CouponForm = ({
   setCouponId: Dispatch<SetStateAction<string>>;
 }) => {
   const [isApplied, setIsApplied] = useState(false);
-  const [couponCode, setCouponCode] = useState("");
+  const [couponCode, setCouponCode] = useState('');
 
   useEffect(() => {
     setIsApplied(false);
@@ -35,9 +35,9 @@ const CouponForm = ({
       const couponType = response?.type;
       let finalPrice = originalPrice;
       if (!response) {
-        toast.error("Mã giảm giá không hợp lệ");
-        setCouponCode("");
-        setCouponId("");
+        toast.error('Mã giảm giá không hợp lệ');
+        setCouponCode('');
+        setCouponId('');
         return;
       }
 
@@ -47,7 +47,7 @@ const CouponForm = ({
         finalPrice = originalPrice - response?.value;
       }
       setPrice(finalPrice);
-      toast.success("Áp dụng mã giảm giá thành công");
+      toast.success('Áp dụng mã giảm giá thành công');
       setIsApplied(true);
       setCouponId(response._id);
     } catch (error) {
@@ -58,15 +58,15 @@ const CouponForm = ({
     setCouponCode(e.target.value);
   }, 500);
   return (
-    <div className="mt-5 relative">
+    <div className="relative mt-5">
       <Input
-        className="pr-20 uppercase font-semibold"
+        className="pr-20 font-semibold uppercase"
         defaultValue={couponCode}
         placeholder="Nhập mã giảm giá"
         onChange={handleChangeCoupon}
       />
       <button
-        className="absolute right-5 top-1/2 -translate-y-1/2 font-medium text-sm"
+        className="absolute right-5 top-1/2 -translate-y-1/2 text-sm font-medium"
         onClick={handleApplyCoupon}
       >
         Áp dụng

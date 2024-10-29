@@ -1,14 +1,14 @@
-"use client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+'use client';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-import { createCoupon } from "@/lib/actions/coupon.actions";
-import { getAllCourses } from "@/lib/actions/course.actions";
-import { IconClose } from "@/shared/components/icons";
-import { Button } from "@/shared/components/ui/button";
-import { Calendar } from "@/shared/components/ui/calendar";
-import { Checkbox } from "@/shared/components/ui/checkbox";
+import { createCoupon } from '@/lib/actions/coupon.actions';
+import { getAllCourses } from '@/lib/actions/course.actions';
+import { IconClose } from '@/shared/components/icons';
+import { Button } from '@/shared/components/ui/button';
+import { Calendar } from '@/shared/components/ui/calendar';
+import { Checkbox } from '@/shared/components/ui/checkbox';
 import {
   Form,
   FormControl,
@@ -16,25 +16,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/shared/components/ui/form";
-import { Input } from "@/shared/components/ui/input";
-import InputFormatCurrency from "@/shared/components/ui/input-format";
-import { Label } from "@/shared/components/ui/label";
+} from '@/shared/components/ui/form';
+import { Input } from '@/shared/components/ui/input';
+import InputFormatCurrency from '@/shared/components/ui/input-format';
+import { Label } from '@/shared/components/ui/label';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/shared/components/ui/popover";
-import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
-import { Switch } from "@/shared/components/ui/switch";
-import { couponFormSchema, couponTypes } from "@/shared/constants";
-import { CouponType } from "@/types/enums";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import { format } from "date-fns";
-import { debounce } from "lodash";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "react-toastify";
+} from '@/shared/components/ui/popover';
+import { RadioGroup, RadioGroupItem } from '@/shared/components/ui/radio-group';
+import { Switch } from '@/shared/components/ui/switch';
+import { couponFormSchema, couponTypes } from '@/shared/constants';
+import { CouponType } from '@/types/enums';
+import { CalendarIcon } from '@radix-ui/react-icons';
+import { format } from 'date-fns';
+import { debounce } from 'lodash';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const NewCouponForm = () => {
   const [startDate, setStartDate] = useState<Date>();
@@ -46,28 +46,28 @@ const NewCouponForm = () => {
     defaultValues: {
       active: true,
       type: CouponType.PERCENT,
-      value: "0",
+      value: '0',
       limit: 0,
-      title: "",
-      code: "",
-      start_date: "",
-      end_date: "",
+      title: '',
+      code: '',
+      start_date: '',
+      end_date: '',
       courses: [],
     },
   });
-  const couponTypeWatch = form.watch("type");
+  const couponTypeWatch = form.watch('type');
   const router = useRouter();
   async function onSubmit(values: z.infer<typeof couponFormSchema>) {
     try {
       const couponType = values.type;
-      const couponValue = Number(values.value?.replace(/,/g, ""));
+      const couponValue = Number(values.value?.replace(/,/g, ''));
       if (
         couponType === CouponType.PERCENT &&
         couponValue &&
         (couponValue > 100 || couponValue < 0)
       ) {
-        form.setError("value", {
-          message: "Giá trị không hợp lệ",
+        form.setError('value', {
+          message: 'Giá trị không hợp lệ',
         });
       }
       const newCoupon = await createCoupon({
@@ -82,8 +82,8 @@ const NewCouponForm = () => {
         return;
       }
       if (newCoupon.code) {
-        toast.success("Tạo mã giảm giá thành công");
-        router.push("/manage/coupon");
+        toast.success('Tạo mã giảm giá thành công');
+        router.push('/manage/coupon');
       }
     } catch (error) {
       console.log(error);
@@ -96,7 +96,7 @@ const NewCouponForm = () => {
       setFindCourse(courseList);
       if (!value) setFindCourse([]);
     },
-    250
+    250,
   );
 
   const handleSelectCourse = (checked: boolean | string, course: any) => {
@@ -104,15 +104,18 @@ const NewCouponForm = () => {
       setSelectedCourses((prev) => [...prev, course]);
     } else {
       setSelectedCourses((prev) =>
-        prev.filter((selectedCourse) => selectedCourse._id !== course._id)
+        prev.filter((selectedCourse) => selectedCourse._id !== course._id),
       );
     }
   };
 
   return (
     <Form {...form}>
-      <form autoComplete="off" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-2 gap-8 mt-10 mb-8">
+      <form
+        autoComplete="off"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <div className="mb-8 mt-10 grid grid-cols-2 gap-8">
           <FormField
             control={form.control}
             name="title"
@@ -120,7 +123,10 @@ const NewCouponForm = () => {
               <FormItem>
                 <FormLabel>Tiêu đề</FormLabel>
                 <FormControl>
-                  <Input placeholder="Tiêu đề" {...field} />
+                  <Input
+                    placeholder="Tiêu đề"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -155,16 +161,22 @@ const NewCouponForm = () => {
                 <FormControl>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <Button className="w-full" variant={"outline"}>
-                        <CalendarIcon className="mr-2 h-4 w-4" />
+                      <Button
+                        className="w-full"
+                        variant={'outline'}
+                      >
+                        <CalendarIcon className="mr-2 size-4" />
                         {startDate ? (
-                          format(startDate, "dd/MM/yyyy")
+                          format(startDate, 'dd/MM/yyyy')
                         ) : (
                           <span>Pick a date</span>
                         )}
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent align="start" className="w-auto p-0">
+                    <PopoverContent
+                      align="start"
+                      className="w-auto p-0"
+                    >
                       <Calendar
                         initialFocus
                         mode="single"
@@ -187,16 +199,22 @@ const NewCouponForm = () => {
                 <FormControl>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <Button className="w-full" variant={"outline"}>
-                        <CalendarIcon className="mr-2 h-4 w-4" />
+                      <Button
+                        className="w-full"
+                        variant={'outline'}
+                      >
+                        <CalendarIcon className="mr-2 size-4" />
                         {endDate ? (
-                          format(endDate, "dd/MM/yyyy")
+                          format(endDate, 'dd/MM/yyyy')
                         ) : (
                           <span>Pick a date</span>
                         )}
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent align="start" className="w-auto p-0">
+                    <PopoverContent
+                      align="start"
+                      className="w-auto p-0"
+                    >
                       <Calendar
                         initialFocus
                         mode="single"
@@ -227,8 +245,14 @@ const NewCouponForm = () => {
                         key={type.value}
                         className="flex items-center space-x-2"
                       >
-                        <RadioGroupItem id={type.value} value={type.value} />
-                        <Label className="cursor-pointer" htmlFor={type.value}>
+                        <RadioGroupItem
+                          id={type.value}
+                          value={type.value}
+                        />
+                        <Label
+                          className="cursor-pointer"
+                          htmlFor={type.value}
+                        >
                           {type.title}
                         </Label>
                       </div>
@@ -314,17 +338,17 @@ const NewCouponForm = () => {
                       onChange={handleSearchCourse}
                     />
                     {findCourse && findCourse.length > 0 && (
-                      <div className="flex flex-col gap-2 !mt-5">
+                      <div className="!mt-5 flex flex-col gap-2">
                         {findCourse?.map((course) => (
                           <Label
                             key={course.title}
-                            className="flex items-center gap-2 font-medium text-sm cursor-pointer"
+                            className="flex cursor-pointer items-center gap-2 text-sm font-medium"
                             htmlFor={course.title}
                           >
                             <Checkbox
                               id={course.title}
                               checked={selectedCourses.some(
-                                (el) => el._id === course._id
+                                (el) => el._id === course._id,
                               )}
                               onCheckedChange={(checked) =>
                                 handleSelectCourse(checked, course)
@@ -336,11 +360,11 @@ const NewCouponForm = () => {
                       </div>
                     )}
                     {selectedCourses.length > 0 && (
-                      <div className="flex items-start flex-wrap gap-2 !mt-5">
+                      <div className="!mt-5 flex flex-wrap items-start gap-2">
                         {selectedCourses?.map((course) => (
                           <div
                             key={course.title}
-                            className="inline-flex items-center gap-2 font-semibold text-sm px-3 py-1 rounded-lg border borderDarkMode bgDarkMode"
+                            className="borderDarkMode bgDarkMode inline-flex items-center gap-2 rounded-lg border px-3 py-1 text-sm font-semibold"
                           >
                             <span>{course.title}</span>
                             <button
@@ -361,7 +385,7 @@ const NewCouponForm = () => {
           />
         </div>
         <Button
-          className="w-[150px] ml-auto flex"
+          className="ml-auto flex w-[150px]"
           type="submit"
           variant="primary"
         >

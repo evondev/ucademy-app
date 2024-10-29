@@ -1,6 +1,6 @@
-import CourseManage from "@/components/course/CourseManage";
-import { getAllCourses } from "@/lib/actions/course.actions";
-import { CourseStatus } from "@/types/enums";
+import CourseManage from '@/components/course/CourseManage';
+import { getAllCourses } from '@/lib/actions/course.actions';
+import { CourseStatus } from '@/types/enums';
 
 const page = async ({
   searchParams,

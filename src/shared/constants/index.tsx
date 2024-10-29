@@ -7,56 +7,56 @@ import {
   IconStar,
   IconStudy,
   IconUsers,
-} from "@/shared/components/icons";
-import { MenuField, RatingIcon } from "@/types";
+} from '@/shared/components/icons';
+import { MenuField, RatingIcon } from '@/types';
 import {
   CouponType,
   CourseLevel,
   CourseStatus,
   OrderStatus,
   RatingStatus,
-} from "@/types/enums";
-import { z } from "zod";
+} from '@/types/enums';
+import { z } from 'zod';
 
 export const menuItems: MenuField[] = [
   {
-    url: "/",
-    title: "Khám phá",
+    url: '/',
+    title: 'Khám phá',
     icon: <IconPlay className="size-5" />,
   },
   {
-    url: "/study",
-    title: "Khu vực học tập",
+    url: '/study',
+    title: 'Khu vực học tập',
     icon: <IconStudy className="size-5" />,
   },
   {
-    url: "/manage/course",
-    title: "Quản lý khóa học",
+    url: '/manage/course',
+    title: 'Quản lý khóa học',
     icon: <IconExplore className="size-5" />,
   },
   {
-    url: "/manage/member",
-    title: "Quản lý thành viên",
+    url: '/manage/member',
+    title: 'Quản lý thành viên',
     icon: <IconUsers className="size-5" />,
   },
   {
-    url: "/manage/order",
-    title: "Quản lý đơn hàng",
+    url: '/manage/order',
+    title: 'Quản lý đơn hàng',
     icon: <IconOrder className="size-5" />,
   },
   {
-    url: "/manage/coupon",
-    title: "Quản lý coupon",
+    url: '/manage/coupon',
+    title: 'Quản lý coupon',
     icon: <IconCoupon className="size-5" />,
   },
   {
-    url: "/manage/rating",
-    title: "Quản lý đánh giá",
+    url: '/manage/rating',
+    title: 'Quản lý đánh giá',
     icon: <IconStar className="size-5" />,
   },
   {
-    url: "/manage/comment",
-    title: "Quản lý bình luận",
+    url: '/manage/comment',
+    title: 'Quản lý bình luận',
     icon: <IconComment className="size-5" />,
   },
 ];
@@ -66,19 +66,19 @@ export const courseStatus: {
   className?: string;
 }[] = [
   {
-    title: "Đã duyệt",
+    title: 'Đã duyệt',
     value: CourseStatus.APPROVED,
-    className: "text-green-500 bg-green-500",
+    className: 'text-green-500 bg-green-500',
   },
   {
-    title: "Chờ duyệt",
+    title: 'Chờ duyệt',
     value: CourseStatus.PENDING,
-    className: "text-orange-500 bg-orange-500",
+    className: 'text-orange-500 bg-orange-500',
   },
   {
-    title: "Từ chối",
+    title: 'Từ chối',
     value: CourseStatus.REJECTED,
-    className: "text-red-500 bg-red-500",
+    className: 'text-red-500 bg-red-500',
   },
 ];
 export const courseLevel: {
@@ -86,90 +86,91 @@ export const courseLevel: {
   value: CourseLevel;
 }[] = [
   {
-    title: "Dễ",
+    title: 'Dễ',
     value: CourseLevel.BEGINNER,
   },
   {
-    title: "Trung bình",
+    title: 'Trung bình',
     value: CourseLevel.INTERMEDIATE,
   },
   {
-    title: "Khó",
+    title: 'Khó',
     value: CourseLevel.ADVANCED,
   },
 ];
 export const courseLevelTitle: Record<CourseLevel, string> = {
-  [CourseLevel.BEGINNER]: "Dễ",
-  [CourseLevel.INTERMEDIATE]: "Trung bình",
-  [CourseLevel.ADVANCED]: "Khó",
+  [CourseLevel.BEGINNER]: 'Dễ',
+  [CourseLevel.INTERMEDIATE]: 'Trung bình',
+  [CourseLevel.ADVANCED]: 'Khó',
 };
 export const commonClassNames = {
   status:
-    "bg-opacity-10 border border-current rounded-md font-medium px-3 py-1 text-xs whitespace-nowrap",
+    'bg-opacity-10 border border-current rounded-md font-medium px-3 py-1 text-xs whitespace-nowrap',
   action:
-    "size-8 rounded-md border flex items-center justify-center p-2  text-gray-500 hover:border-opacity-80 dark:bg-transparent borderDarkMode dark:hover:border-opacity-20",
+    'size-8 rounded-md border flex items-center justify-center p-2  text-gray-500 hover:border-opacity-80 dark:bg-transparent borderDarkMode dark:hover:border-opacity-20',
   paginationButton:
-    "size-10 rounded-md borderDarkMode bgDarkMode border flex items-center justify-center hover:border-primary transition-all hover:text-primary p-2.5",
+    'size-10 rounded-md borderDarkMode bgDarkMode border flex items-center justify-center hover:border-primary transition-all hover:text-primary p-2.5',
   btnPrimary:
-    "flex items-center justify-center w-full mt-10 rounded-lg text-white font-bold bg-primary h-12 button-primary",
+    'flex items-center justify-center w-full mt-10 rounded-lg text-white font-bold bg-primary h-12 button-primary',
 };
 export const editorOptions = (field: any, theme: any) => ({
-  initialValue: "",
+  initialValue: '',
   onBlur: field.onBlur,
   onEditorChange: (content: any) => field.onChange(content),
   init: {
     codesample_global_prismjs: true,
-    skin: theme === "dark" ? "oxide-dark" : "oxide",
+    skin: theme === 'dark' ? 'oxide-dark' : 'oxide',
     height: 300,
     menubar: false,
     plugins: [
-      "advlist",
-      "autolink",
-      "lists",
-      "link",
-      "image",
-      "charmap",
-      "preview",
-      "anchor",
-      "searchreplace",
-      "visualblocks",
-      "codesample",
-      "fullscreen",
-      "insertdatetime",
-      "media",
-      "table",
-      "heading",
+      'advlist',
+      'autolink',
+      'lists',
+      'link',
+      'image',
+      'charmap',
+      'preview',
+      'anchor',
+      'searchreplace',
+      'visualblocks',
+      'codesample',
+      'fullscreen',
+      'insertdatetime',
+      'media',
+      'table',
+      'heading',
     ],
     toolbar:
-      "undo redo | " +
-      "codesample | bold italic forecolor | alignleft aligncenter |" +
-      "alignright alignjustify | bullist numlist |" +
-      "image |" +
-      "h1 h2 h3 h4 h5 h6 | preview | fullscreen |" +
-      "link",
-    content_style: `@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');body { font-family: Manrope,Helvetica,Arial,sans-serif; font-size:14px; line-height: 2; padding-bottom: 32px; } img { max-width: 100%; height: auto; display: block; margin: 0 auto; };`,
+      'undo redo | ' +
+      'codesample | bold italic forecolor | alignleft aligncenter |' +
+      'alignright alignjustify | bullist numlist |' +
+      'image |' +
+      'h1 h2 h3 h4 h5 h6 | preview | fullscreen |' +
+      'link',
+    content_style:
+      "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');body { font-family: Manrope,Helvetica,Arial,sans-serif; font-size:14px; line-height: 2; padding-bottom: 32px; } img { max-width: 100%; height: auto; display: block; margin: 0 auto; };",
   },
 });
-export const lastLessonKey = "lastLesson";
+export const lastLessonKey = 'lastLesson';
 export const orderStatus: {
   title: string;
   value: OrderStatus;
   className?: string;
 }[] = [
   {
-    title: "Đã duyệt",
+    title: 'Đã duyệt',
     value: OrderStatus.COMPLETED,
-    className: "text-green-500 bg-green-500",
+    className: 'text-green-500 bg-green-500',
   },
   {
-    title: "Chờ duyệt",
+    title: 'Chờ duyệt',
     value: OrderStatus.PENDING,
-    className: "text-orange-500 bg-orange-500",
+    className: 'text-orange-500 bg-orange-500',
   },
   {
-    title: "Đã hủy",
+    title: 'Đã hủy',
     value: OrderStatus.CANCELED,
-    className: "text-red-500 bg-red-500",
+    className: 'text-red-500 bg-red-500',
   },
 ];
 export const couponTypes: {
@@ -177,26 +178,26 @@ export const couponTypes: {
   value: CouponType;
 }[] = [
   {
-    title: "Phần trăm",
+    title: 'Phần trăm',
     value: CouponType.PERCENT,
   },
   {
-    title: "Giá trị",
+    title: 'Giá trị',
     value: CouponType.AMOUNT,
   },
 ];
 export const couponFormSchema = z.object({
   title: z
     .string({
-      message: "Tiêu đề không được để trống",
+      message: 'Tiêu đề không được để trống',
     })
-    .min(10, "Tiêu đề phải có ít nhất 10 ký tự"),
+    .min(10, 'Tiêu đề phải có ít nhất 10 ký tự'),
   code: z
     .string({
-      message: "Mã giảm giá không được để trống",
+      message: 'Mã giảm giá không được để trống',
     })
-    .min(3, "Mã giảm giá phải có ít nhất 3 ký tự")
-    .max(10, "Mã giảm giá không được quá 10 ký tự"),
+    .min(3, 'Mã giảm giá phải có ít nhất 3 ký tự')
+    .max(10, 'Mã giảm giá không được quá 10 ký tự'),
   start_date: z.string().optional(),
   end_date: z.string().optional(),
   active: z.boolean().optional(),
@@ -210,23 +211,23 @@ export const ratingList: {
   value: number;
 }[] = [
   {
-    title: "awesome",
+    title: 'awesome',
     value: 5,
   },
   {
-    title: "good",
+    title: 'good',
     value: 4,
   },
   {
-    title: "meh",
+    title: 'meh',
     value: 3,
   },
   {
-    title: "bad",
+    title: 'bad',
     value: 2,
   },
   {
-    title: "terrible",
+    title: 'terrible',
     value: 1,
   },
 ];
@@ -236,25 +237,25 @@ export const ratingStatus: {
   className?: string;
 }[] = [
   {
-    title: "Đã duyệt",
+    title: 'Đã duyệt',
     value: RatingStatus.ACTIVE,
-    className: "text-green-500 bg-green-500",
+    className: 'text-green-500 bg-green-500',
   },
   {
-    title: "Chờ duyệt",
+    title: 'Chờ duyệt',
     value: RatingStatus.UNACTIVE,
-    className: "text-orange-500 bg-orange-500",
+    className: 'text-orange-500 bg-orange-500',
   },
 ];
-export const allValue = "ALL";
+export const allValue = 'ALL';
 export const ITEMS_PER_PAGE = 10;
 export const couponStatuses = [
   {
-    title: "Đang kích hoạt",
+    title: 'Đang kích hoạt',
     value: 1,
   },
   {
-    title: "Chưa kích hoạt",
+    title: 'Chưa kích hoạt',
     value: 0,
   },
 ];

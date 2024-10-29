@@ -2,13 +2,13 @@ import {
   InputAttributes,
   NumericFormat,
   NumericFormatProps,
-} from "react-number-format";
+} from 'react-number-format';
 
 const InputFormatCurrency = (props: NumericFormatProps<InputAttributes>) => {
   return (
     <NumericFormat
       thousandSeparator
-      className="flex outline-none h-12 rounded-md font-medium px-3 w-full text-sm border border-gray-200 focus:!border-primary transition-all dark:border-opacity-10 bg-white dark:bg-grayDarker  focus-primary"
+      className="focus-primary flex h-12 w-full rounded-md border border-gray-200 bg-white px-3 text-sm font-medium outline-none transition-all focus:!border-primary dark:border-opacity-10 dark:bg-grayDarker"
       {...props}
     />
   );

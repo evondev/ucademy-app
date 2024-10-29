@@ -1,10 +1,10 @@
-"use server";
-import Course from "@/database/course.model";
-import Lecture from "@/database/lecture.model";
-import Lesson, { LessonProps } from "@/database/lesson.model";
-import { CreateLessonParams, UpdateLessonParams } from "@/types";
-import { revalidatePath } from "next/cache";
-import { connectToDatabase } from "../mongoose";
+'use server';
+import Course from '@/database/course.model';
+import Lecture from '@/database/lecture.model';
+import Lesson, { LessonProps } from '@/database/lesson.model';
+import { CreateLessonParams, UpdateLessonParams } from '@/types';
+import { revalidatePath } from 'next/cache';
+import { connectToDatabase } from '../mongoose';
 
 export async function createLesson(params: CreateLessonParams) {
   try {
@@ -16,7 +16,7 @@ export async function createLesson(params: CreateLessonParams) {
     const newLesson = await Lesson.create(params);
     findLecture.lessons.push(newLesson._id);
     await findLecture.save();
-    revalidatePath(params.path || "/");
+    revalidatePath(params.path || '/');
     if (!newLesson) return;
     return {
       success: true,
@@ -29,14 +29,14 @@ export async function updateLesson(params: UpdateLessonParams) {
     const res = await Lesson.findByIdAndUpdate(
       params.lessonId,
       params.updateData,
-      { new: true }
+      { new: true },
     );
-    revalidatePath(params.path || "/");
+    revalidatePath(params.path || '/');
     if (!res) return;
     return {
       success: true,
     };
-    revalidatePath(params.path || "/");
+    revalidatePath(params.path || '/');
   } catch (error) {}
 }
 export async function getLessonBySlug({
@@ -51,7 +51,7 @@ export async function getLessonBySlug({
     const findLesson = await Lesson.findOne({
       slug,
       course,
-    }).select("title video_url content");
+    }).select('title video_url content');
     return findLesson;
   } catch (error) {
     console.log(error);
@@ -66,7 +66,7 @@ export async function findAllLessons({
     connectToDatabase();
     const lessons = await Lesson.find({
       course,
-    }).select("title video_url content slug");
+    }).select('title video_url content slug');
     return lessons;
   } catch (error) {
     console.log(error);

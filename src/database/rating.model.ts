@@ -1,5 +1,5 @@
-import { RatingStatus } from "@/types/enums";
-import { Document, Schema, model, models } from "mongoose";
+import { RatingStatus } from '@/types/enums';
+import { Document, Schema, model, models } from 'mongoose';
 
 export interface RatingProps extends Document {
   _id: string;
@@ -27,16 +27,16 @@ const ratingSchema = new Schema<RatingProps>({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
   course: {
     type: Schema.Types.ObjectId,
-    ref: "Course",
+    ref: 'Course',
   },
   created_at: {
     type: Date,
     default: Date.now,
   },
 });
-const Rating = models.Rating || model<RatingProps>("Rating", ratingSchema);
+const Rating = models.Rating || model<RatingProps>('Rating', ratingSchema);
 export default Rating;

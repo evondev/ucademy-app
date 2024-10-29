@@ -1,10 +1,10 @@
-import { IconPlus } from "@/shared/components/icons";
-import Link from "next/link";
+import { IconPlus } from '@/shared/components/icons';
+import Link from 'next/link';
 
 const BouncedLink = ({ url }: { url: string }) => {
   return (
     <Link
-      className="size-10 rounded-full bg-primary flexCenter text-white fixed right-5 bottom-5 animate-bounce"
+      className="flexCenter fixed bottom-5 right-5 size-10 animate-bounce rounded-full bg-primary text-white"
       href={url}
     >
       <IconPlus></IconPlus>

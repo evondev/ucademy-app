@@ -1,10 +1,10 @@
-"use server";
+'use server';
 
-import UserSchema from "@/database/user.model";
-import { connectToDatabase } from "@/lib/mongoose";
-import { CommentItem } from "@/types";
-import { revalidatePath } from "next/cache";
-import CommentSchema from "./comment.schema";
+import UserSchema from '@/database/user.model';
+import { connectToDatabase } from '@/lib/mongoose';
+import { CommentItem } from '@/types';
+import { revalidatePath } from 'next/cache';
+import CommentSchema from './comment.schema';
 
 export async function createComment(params: {
   content: string;
@@ -17,7 +17,7 @@ export async function createComment(params: {
   try {
     connectToDatabase();
     const newComment = await CommentSchema.create(params);
-    revalidatePath(params.path || "/");
+    revalidatePath(params.path || '/');
     if (!newComment) return false;
     return true;
   } catch (error) {
@@ -26,18 +26,18 @@ export async function createComment(params: {
 }
 export async function getCommentsByLesson(
   lessonId: string,
-  sort: "recent" | "oldest" = "recent"
+  sort: 'recent' | 'oldest' = 'recent',
 ): Promise<CommentItem[] | undefined> {
   try {
     connectToDatabase();
     const comments = await CommentSchema.find<CommentItem>({
       lesson: lessonId,
     })
-      .sort({ created_at: sort === "recent" ? -1 : 1 })
+      .sort({ created_at: sort === 'recent' ? -1 : 1 })
       .populate({
-        path: "user",
+        path: 'user',
         model: UserSchema,
-        select: "name avatar",
+        select: 'name avatar',
       });
     return JSON.parse(JSON.stringify(comments));
   } catch (error) {

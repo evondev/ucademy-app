@@ -1,15 +1,15 @@
-"use client";
-import { CourseProps } from "@/database/course.model";
-import useQueryString from "@/hooks/useQueryString";
-import { updateCourse } from "@/lib/actions/course.actions";
+'use client';
+import { CourseProps } from '@/database/course.model';
+import useQueryString from '@/hooks/useQueryString';
+import { updateCourse } from '@/lib/actions/course.actions';
 import {
   BadgeStatus,
   BouncedLink,
   Heading,
   TableAction,
   TableActionItem,
-} from "@/shared/components";
-import { Input } from "@/shared/components/ui/input";
+} from '@/shared/components';
+import { Input } from '@/shared/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -17,7 +17,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/shared/components/ui/select";
+} from '@/shared/components/ui/select';
 import {
   Table,
   TableBody,
@@ -25,14 +25,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/shared/components/ui/table";
-import { allValue, courseStatus } from "@/shared/constants";
-import { CourseStatus } from "@/types/enums";
-import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import Swal from "sweetalert2";
+} from '@/shared/components/ui/table';
+import { allValue, courseStatus } from '@/shared/constants';
+import { CourseStatus } from '@/types/enums';
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
   const router = useRouter();
@@ -41,13 +41,13 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
 
   const handleDeleteCourse = (slug: string) => {
     Swal.fire({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: "warning",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
     }).then(async (result) => {
       if (result.isConfirmed) {
         await updateCourse({
@@ -56,20 +56,20 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
             status: CourseStatus.PENDING,
             _destroy: true,
           },
-          path: "/manage/course",
+          path: '/manage/course',
         });
-        toast.success("Xóa khóa học thành công!");
+        toast.success('Xóa khóa học thành công!');
       }
     });
   };
   const handleChangeStatus = async (slug: string, status: CourseStatus) => {
     try {
       Swal.fire({
-        title: "Bạn có chắc muốn đổi trạng thái không?",
-        icon: "warning",
+        title: 'Bạn có chắc muốn đổi trạng thái không?',
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: "Cập nhật",
-        cancelButtonText: "Hủy",
+        confirmButtonText: 'Cập nhật',
+        cancelButtonText: 'Hủy',
       }).then(async (result) => {
         if (result.isConfirmed) {
           await updateCourse({
@@ -81,9 +81,9 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
                   : CourseStatus.PENDING,
               _destroy: false,
             },
-            path: "/manage/course",
+            path: '/manage/course',
           });
-          toast.success("Cập nhật trạng thái thành công!");
+          toast.success('Cập nhật trạng thái thành công!');
           // router.push(
           //   `${pathname}?${createQueryString("status", "")}&${createQueryString(
           //     "search",
@@ -98,10 +98,10 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
   };
 
   const [page, setPage] = useState(1);
-  const handleChangePage = (type: "prev" | "next") => {
-    if (type === "prev" && page === 1) return;
-    if (type === "prev") setPage((prev) => prev - 1);
-    if (type === "next") setPage((prev) => prev + 1);
+  const handleChangePage = (type: 'prev' | 'next') => {
+    if (type === 'prev' && page === 1) return;
+    if (type === 'prev') setPage((prev) => prev - 1);
+    if (type === 'next') setPage((prev) => prev + 1);
   };
   // useEffect(() => {
   //   router.push(`${pathname}?${createQueryString("page", page.toString())}`);
@@ -110,7 +110,7 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
   return (
     <>
       <BouncedLink url="/manage/course/new"></BouncedLink>
-      <div className="flex flex-col lg:flex-row lg:items-center gap-5 justify-between mb-10">
+      <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <Heading className="">Quản lý khóa học</Heading>
         <div className="flex gap-3">
           <div className="w-full lg:w-[300px]">
@@ -129,7 +129,10 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
               <SelectGroup>
                 <SelectItem value={allValue}>Tất cả</SelectItem>
                 {courseStatus.map((status) => (
-                  <SelectItem key={status.value} value={status.value}>
+                  <SelectItem
+                    key={status.value}
+                    value={status.value}
+                  >
                     {status.title}
                   </SelectItem>
                 ))}
@@ -151,7 +154,7 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
           {courses.length > 0 &&
             courses.map((course) => {
               const courseStatusItem = courseStatus.find(
-                (item) => item.value === course.status
+                (item) => item.value === course.status,
               );
               return (
                 <TableRow key={course.slug}>
@@ -159,25 +162,25 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
                     <div className="flex items-center gap-3">
                       <Image
                         alt=""
-                        className="flex-shrink-0 size-16 rounded-lg object-cover"
+                        className="size-16 shrink-0 rounded-lg object-cover"
                         height={80}
                         src={course.image}
                         width={80}
                       />
                       <div className="flex flex-col gap-1">
-                        <h3 className="font-bold text-sm lg:text-base whitespace-nowrap">
+                        <h3 className="whitespace-nowrap text-sm font-bold lg:text-base">
                           {course.title}
                         </h3>
-                        <h4 className="text-xs lg:text-sm text-slate-500">
+                        <h4 className="text-xs text-slate-500 lg:text-sm">
                           {new Date(course.created_at).toLocaleDateString(
-                            "vi-VI"
+                            'vi-VI',
                           )}
                         </h4>
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <span className="font-bold text-sm lg:text-base">
+                    <span className="text-sm font-bold lg:text-base">
                       {course.price.toLocaleString()}đ
                     </span>
                   </TableCell>

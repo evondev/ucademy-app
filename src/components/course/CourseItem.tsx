@@ -1,16 +1,16 @@
-"use client";
-import { getCourseLessonsInfo } from "@/lib/actions/course.actions";
-import { commonClassNames } from "@/shared/constants";
-import { StudyCoursesProps } from "@/types";
-import { formatMinutesToHour, formatNumberToK } from "@/utils";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { IconClock, IconEye, IconStar } from "../../shared/components/icons";
+'use client';
+import { getCourseLessonsInfo } from '@/lib/actions/course.actions';
+import { commonClassNames } from '@/shared/constants';
+import { StudyCoursesProps } from '@/types';
+import { formatMinutesToHour, formatNumberToK } from '@/utils';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { IconClock, IconEye, IconStar } from '../../shared/components/icons';
 const CourseItem = ({
   data,
   cta,
-  url = "",
+  url = '',
 }: {
   data: StudyCoursesProps;
   cta?: string;
@@ -42,12 +42,15 @@ const CourseItem = ({
   ];
   const courseUrl = url ? url : `/course/${data.slug}`;
   return (
-    <div className="bg-white dark:bg-grayDarker dark:border-opacity-10 border border-gray-200 p-4 rounded-2xl flex flex-col">
-      <Link className="block h-[180px] relative" href={courseUrl}>
+    <div className="flex flex-col rounded-2xl border border-gray-200 bg-white p-4 dark:border-opacity-10 dark:bg-grayDarker">
+      <Link
+        className="relative block h-[180px]"
+        href={courseUrl}
+      >
         <Image
           priority
           alt=""
-          className="w-full h-full object-cover rounded-lg"
+          className="size-full rounded-lg object-cover"
           height={200}
           sizes="@media (min-width: 640px) 300px, 100vw"
           src={data.image}
@@ -57,24 +60,30 @@ const CourseItem = ({
           New
         </span> */}
       </Link>
-      <div className="pt-4 flex flex-col flex-1">
-        <h3 className="font-bold text-lg mb-3">{data.title}</h3>
+      <div className="flex flex-1 flex-col pt-4">
+        <h3 className="mb-3 text-lg font-bold">{data.title}</h3>
         <div className="mt-auto">
-          <div className="flex items-center gap-3 mb-5 text-xs text-gray-500 dark:text-grayDark">
+          <div className="mb-5 flex items-center gap-3 text-xs text-gray-500 dark:text-grayDark">
             {courseInfo.map((item, index) => (
-              <div key={index} className="flex items-center gap-2">
-                {item.icon("size-4")}
+              <div
+                key={index}
+                className="flex items-center gap-2"
+              >
+                {item.icon('size-4')}
                 <span>{item.title}</span>
               </div>
             ))}
 
-            <span className="font-bold text-primary ml-auto text-base">
+            <span className="ml-auto text-base font-bold text-primary">
               {data.price.toLocaleString()}đ
             </span>
           </div>
 
-          <Link className={commonClassNames.btnPrimary} href={courseUrl}>
-            {cta || "Xem chi tiết"}
+          <Link
+            className={commonClassNames.btnPrimary}
+            href={courseUrl}
+          >
+            {cta || 'Xem chi tiết'}
           </Link>
         </div>
       </div>

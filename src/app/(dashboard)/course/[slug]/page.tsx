@@ -1,24 +1,24 @@
-import PageNotFound from "@/app/not-found";
-import LessonContent from "@/components/lesson/LessonContent";
+import PageNotFound from '@/app/not-found';
+import LessonContent from '@/components/lesson/LessonContent';
 import {
   getCourseBySlug,
   getCourseLessonsInfo,
   updateCourseView,
-} from "@/lib/actions/course.actions";
-import { getUserInfo } from "@/lib/actions/user.actions";
+} from '@/lib/actions/course.actions';
+import { getUserInfo } from '@/lib/actions/user.actions';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/shared/components/ui/accordion";
-import { courseLevelTitle } from "@/shared/constants";
-import { CourseStatus } from "@/types/enums";
-import { formatMinutesToHour } from "@/utils";
-import { auth } from "@clerk/nextjs/server";
-import Image from "next/image";
-import AlreadyEnroll from "./AlreadyEnroll";
-import CourseWidget from "./CourseWidget";
+} from '@/shared/components/ui/accordion';
+import { courseLevelTitle } from '@/shared/constants';
+import { CourseStatus } from '@/types/enums';
+import { formatMinutesToHour } from '@/utils';
+import { auth } from '@clerk/nextjs/server';
+import Image from 'next/image';
+import AlreadyEnroll from './AlreadyEnroll';
+import CourseWidget from './CourseWidget';
 
 const page = async ({
   params,
@@ -34,23 +34,23 @@ const page = async ({
   if (!data) return null;
   if (data.status !== CourseStatus.APPROVED) return <PageNotFound />;
   const { userId } = auth();
-  const findUser = await getUserInfo({ userId: userId || "" });
+  const findUser = await getUserInfo({ userId: userId || '' });
   const userCourses = findUser?.courses.map((c) => c.toString());
-  const videoId = data.intro_url?.split("v=")[1];
+  const videoId = data.intro_url?.split('v=')[1];
   const lectures = data.lectures || [];
   const { duration, lessons }: any = await getCourseLessonsInfo({
     slug: data.slug,
   });
   const ratings = data.rating.map((r: any) => r.content);
   return (
-    <div className="grid lg:grid-cols-[2fr,1fr] gap-10 min-h-screen">
+    <div className="grid min-h-screen gap-10 lg:grid-cols-[2fr,1fr]">
       <div>
-        <div className="relative aspect-video mb-5">
+        <div className="relative mb-5 aspect-video">
           {data.intro_url ? (
             <>
               <iframe
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                className="w-full h-full object-fill"
+                className="size-full object-fill"
                 height="480"
                 src={`https://www.youtube.com/embed/${videoId}`}
                 title="BLACK MYTH WUKONG New Insane Combat Preview and Gameplay Demo | EXCLUSIVE PS5 and PC Launch"
@@ -61,27 +61,27 @@ const page = async ({
             <Image
               fill
               alt=""
-              className="w-full h-full object-cover rounded-lg"
+              className="size-full rounded-lg object-cover"
               src={data.image}
             />
           )}
         </div>
-        <div className="flex flex-wrap gap-2 mb-5">
+        <div className="mb-5 flex flex-wrap gap-2">
           {ratings.map((rating: string, index: number) => (
             <div
               key={index}
-              className="p-2 px-4 text-sm font-semibold rounded-full text-white bg-gradient-to-tr from-primary to-secondary"
+              className="rounded-full bg-gradient-to-tr from-primary to-secondary p-2 px-4 text-sm font-semibold text-white"
             >
               {rating}
             </div>
           ))}
         </div>
-        <h1 className="font-bold text-3xl mb-5">{data?.title}</h1>
+        <h1 className="mb-5 text-3xl font-bold">{data?.title}</h1>
         <BoxSection title="Mô tả">
           <div className="leading-normal">{data.desc}</div>
         </BoxSection>
         <BoxSection title="Thông tin">
-          <div className="grid grid-cols-4 gap-5 mb-10">
+          <div className="mb-10 grid grid-cols-4 gap-5">
             <BoxInfo title="Bài học">{lessons}</BoxInfo>
             <BoxInfo title="Lượt xem">{data.views.toLocaleString()}</BoxInfo>
             <BoxInfo title="Trình độ">{courseLevelTitle[data.level]}</BoxInfo>
@@ -91,14 +91,21 @@ const page = async ({
           </div>
         </BoxSection>
         <BoxSection title="Nội dung khóa học">
-          <LessonContent course="" lectures={lectures} slug=""></LessonContent>
+          <LessonContent
+            course=""
+            lectures={lectures}
+            slug=""
+          ></LessonContent>
         </BoxSection>
         <BoxSection title="Yêu cầu">
           {data.info.requirements.map((r, index) => (
-            <div key={index} className="mb-3 flex items-center gap-2">
-              <span className="flex-shrink-0 size-5 bg-primary text-white p-1 rounded flex items-center justify-center">
+            <div
+              key={index}
+              className="mb-3 flex items-center gap-2"
+            >
+              <span className="flex size-5 shrink-0 items-center justify-center rounded bg-primary p-1 text-white">
                 <svg
-                  className="w-6 h-6"
+                  className="size-6"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth={1.5}
@@ -118,10 +125,13 @@ const page = async ({
         </BoxSection>
         <BoxSection title="Lợi ích">
           {data.info.benefits.map((r, index) => (
-            <div key={index} className="mb-3 flex items-center gap-2">
-              <span className="flex-shrink-0 size-5 bg-primary text-white p-1 rounded flex items-center justify-center">
+            <div
+              key={index}
+              className="mb-3 flex items-center gap-2"
+            >
+              <span className="flex size-5 shrink-0 items-center justify-center rounded bg-primary p-1 text-white">
                 <svg
-                  className="w-6 h-6"
+                  className="size-6"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth={1.5}
@@ -141,7 +151,11 @@ const page = async ({
         </BoxSection>
         <BoxSection title="Q.A">
           {data.info.qa.map((qa, index) => (
-            <Accordion key={index} collapsible type="single">
+            <Accordion
+              key={index}
+              collapsible
+              type="single"
+            >
               <AccordionItem value={qa.question}>
                 <AccordionTrigger>{qa.question}</AccordionTrigger>
                 <AccordionContent>{qa.answer}</AccordionContent>
@@ -173,8 +187,8 @@ function BoxInfo({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bgDarkMode border borderDarkMode rounded-lg p-5">
-      <h4 className="text-sm text-slate-400 font-normal">{title}</h4>
+    <div className="bgDarkMode borderDarkMode rounded-lg border p-5">
+      <h4 className="text-sm font-normal text-slate-400">{title}</h4>
       <h3 className="font-bold">{children}</h3>
     </div>
   );
@@ -189,7 +203,7 @@ function BoxSection({
 }) {
   return (
     <>
-      <h2 className="font-bold text-xl mb-5">{title}</h2>
+      <h2 className="mb-5 text-xl font-bold">{title}</h2>
       <div className="mb-10">{children}</div>
     </>
   );

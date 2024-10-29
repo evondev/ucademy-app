@@ -1,6 +1,6 @@
-import CourseUpdate from "@/components/course/CourseUpdate";
-import { getCourseBySlug } from "@/lib/actions/course.actions";
-import { Heading } from "@/shared/components";
+import CourseUpdate from '@/components/course/CourseUpdate';
+import { getCourseBySlug } from '@/lib/actions/course.actions';
+import { Heading } from '@/shared/components';
 
 const page = async ({
   searchParams,

@@ -1,6 +1,6 @@
-import { ComponentProps } from "react";
+import { ComponentProps } from 'react';
 
-const IconExplore = (props: ComponentProps<"svg">) => {
+const IconExplore = (props: ComponentProps<'svg'>) => {
   return (
     <svg
       fill="none"

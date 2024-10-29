@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { IconLeftArrow, IconRightArrow } from "@/shared/components/icons";
-import { Button } from "@/shared/components/ui/button";
-import { useRouter } from "next/navigation";
+import { IconLeftArrow, IconRightArrow } from '@/shared/components/icons';
+import { Button } from '@/shared/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 const LessonNavigation = ({
   nextLesson,

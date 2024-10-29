@@ -1,4 +1,4 @@
-import { Document, Schema, model, models } from "mongoose";
+import { Document, Schema, model, models } from 'mongoose';
 
 export interface LectureProps extends Document {
   _id: string;
@@ -24,12 +24,12 @@ const lectureSchema = new Schema<LectureProps>({
   },
   course: {
     type: Schema.Types.ObjectId,
-    ref: "Course",
+    ref: 'Course',
   },
   lessons: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Lesson",
+      ref: 'Lesson',
     },
   ],
   order: {
@@ -37,5 +37,5 @@ const lectureSchema = new Schema<LectureProps>({
     default: 0,
   },
 });
-const Lecture = models.Lecture || model<LectureProps>("Lecture", lectureSchema);
+const Lecture = models.Lecture || model<LectureProps>('Lecture', lectureSchema);
 export default Lecture;

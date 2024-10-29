@@ -1,12 +1,12 @@
-"use client";
-import { cn } from "@/lib/utils";
-import { Button } from "@/shared/components/ui/button";
-import useGlobalStore from "@/store";
-import MuxPlayer from "@mux/mux-player-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import LessonNavigation from "../LessonNavigation";
-import RatingButton from "./RatingButton";
+'use client';
+import { cn } from '@/lib/utils';
+import { Button } from '@/shared/components/ui/button';
+import useGlobalStore from '@/store';
+import MuxPlayer from '@mux/mux-player-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import LessonNavigation from '../LessonNavigation';
+import RatingButton from './RatingButton';
 
 const VideoPlayer = ({
   nextLesson,
@@ -37,8 +37,8 @@ const VideoPlayer = ({
       <div className="relative mb-5 aspect-video">
         <div
           className={cn(
-            "h-1.5 bg-gradient-to-r from-primary to-secondary absolute top-0 right-0 z-10",
-            isEndedVideo ? "animate-bar" : ""
+            'absolute right-0 top-0 z-10 h-1.5 bg-gradient-to-r from-primary to-secondary',
+            isEndedVideo ? 'animate-bar' : '',
           )}
         ></div>
         <MuxPlayer
@@ -52,7 +52,7 @@ const VideoPlayer = ({
           onPlay={() => setIsEndedVideo(false)}
         />
       </div>
-      <div className="flex items-center justify-between mb-5">
+      <div className="mb-5 flex items-center justify-between">
         <LessonNavigation
           nextLesson={nextLesson}
           prevLesson={prevLesson}
@@ -63,7 +63,7 @@ const VideoPlayer = ({
             userId={data.userId}
           ></RatingButton>
           <Button onClick={() => setExpandedPlayer(!expandedPlayer)}>
-            {expandedPlayer ? "Mặc định" : "Mở rộng"}
+            {expandedPlayer ? 'Mặc định' : 'Mở rộng'}
           </Button>
         </div>
       </div>

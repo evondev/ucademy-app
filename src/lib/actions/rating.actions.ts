@@ -1,21 +1,21 @@
-"use server";
+'use server';
 
-import Course from "@/database/course.model";
-import Rating from "@/database/rating.model";
-import { CreateRatingParams, FilterData, RatingItem } from "@/types";
-import { RatingStatus } from "@/types/enums";
-import { FilterQuery } from "mongoose";
-import { revalidatePath } from "next/cache";
-import { connectToDatabase } from "../mongoose";
+import Course from '@/database/course.model';
+import Rating from '@/database/rating.model';
+import { CreateRatingParams, FilterData, RatingItem } from '@/types';
+import { RatingStatus } from '@/types/enums';
+import { FilterQuery } from 'mongoose';
+import { revalidatePath } from 'next/cache';
+import { connectToDatabase } from '../mongoose';
 
 export async function createRating(
-  params: CreateRatingParams
+  params: CreateRatingParams,
 ): Promise<boolean | undefined> {
   try {
     connectToDatabase();
     const newRating = await Rating.create(params);
     const findCourse = await Course.findOne({ _id: params.course }).populate({
-      path: "rating",
+      path: 'rating',
       model: Rating,
     });
     if (findCourse.rating) {
@@ -30,7 +30,7 @@ export async function createRating(
 }
 
 export async function getRatingByUserId(
-  userId: string
+  userId: string,
 ): Promise<boolean | undefined> {
   try {
     connectToDatabase();
@@ -44,7 +44,7 @@ export async function updateRating(id: string): Promise<boolean | undefined> {
   try {
     connectToDatabase();
     await Rating.findByIdAndUpdate(id, { status: RatingStatus.ACTIVE });
-    revalidatePath("/admin/manage/rating");
+    revalidatePath('/admin/manage/rating');
     return true;
   } catch (error) {
     console.log(error);
@@ -54,14 +54,14 @@ export async function deleteRating(id: string): Promise<boolean | undefined> {
   try {
     connectToDatabase();
     await Rating.findByIdAndDelete(id);
-    revalidatePath("/admin/manage/rating");
+    revalidatePath('/admin/manage/rating');
     return true;
   } catch (error) {
     console.log(error);
   }
 }
 export async function getRatings(
-  params: FilterData
+  params: FilterData,
 ): Promise<RatingItem[] | undefined> {
   try {
     connectToDatabase();
@@ -69,19 +69,19 @@ export async function getRatings(
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof Rating> = {};
     if (search) {
-      query.$or = [{ content: { $regex: search, $options: "i" } }];
+      query.$or = [{ content: { $regex: search, $options: 'i' } }];
     }
     if (status) {
       query.status = status;
     }
     const ratings = await Rating.find(query)
       .populate({
-        path: "course",
-        select: "title slug",
+        path: 'course',
+        select: 'title slug',
       })
       .populate({
-        path: "user",
-        select: "name",
+        path: 'user',
+        select: 'name',
       })
       .skip(skip)
       .limit(limit)

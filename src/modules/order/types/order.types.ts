@@ -1,4 +1,4 @@
-import { OrderStatus } from "@/shared/types/enums";
+import { OrderStatus } from '@/shared/types/enums';
 
 export interface OrderManagePageProps {
   totalPages: number;

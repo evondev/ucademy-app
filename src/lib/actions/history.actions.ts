@@ -1,11 +1,11 @@
-"use server";
+'use server';
 
-import History from "@/database/history.model";
-import UserSchema from "@/database/user.model";
-import { CreateHistoryParams } from "@/types";
-import { auth } from "@clerk/nextjs/server";
-import { revalidatePath } from "next/cache";
-import { connectToDatabase } from "../mongoose";
+import History from '@/database/history.model';
+import UserSchema from '@/database/user.model';
+import { CreateHistoryParams } from '@/types';
+import { auth } from '@clerk/nextjs/server';
+import { revalidatePath } from 'next/cache';
+import { connectToDatabase } from '../mongoose';
 
 export async function createHistory(params: CreateHistoryParams) {
   try {

@@ -1,6 +1,6 @@
-import { getCouponByCode } from "@/lib/actions/coupon.actions";
-import { Heading } from "@/shared/components";
-import UpdateCouponForm from "./UpdateCouponForm";
+import { getCouponByCode } from '@/lib/actions/coupon.actions';
+import { Heading } from '@/shared/components';
+import UpdateCouponForm from './UpdateCouponForm';
 
 const page = async ({
   searchParams,

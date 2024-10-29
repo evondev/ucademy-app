@@ -1,8 +1,8 @@
-"use client";
-import { createRating, getRatingByUserId } from "@/lib/actions/rating.actions";
-import { cn } from "@/lib/utils";
-import { IconStar } from "@/shared/components/icons";
-import { Button } from "@/shared/components/ui/button";
+'use client';
+import { createRating, getRatingByUserId } from '@/lib/actions/rating.actions';
+import { cn } from '@/lib/utils';
+import { IconStar } from '@/shared/components/icons';
+import { Button } from '@/shared/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -10,12 +10,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/shared/components/ui/dialog";
-import { Textarea } from "@/shared/components/ui/textarea";
-import { ratingList } from "@/shared/constants";
-import Image from "next/image";
-import { useState } from "react";
-import { toast } from "react-toastify";
+} from '@/shared/components/ui/dialog';
+import { Textarea } from '@/shared/components/ui/textarea';
+import { ratingList } from '@/shared/constants';
+import Image from 'next/image';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const RatingButton = ({
   courseId,
@@ -25,7 +25,7 @@ const RatingButton = ({
   userId: string;
 }) => {
   const [ratingValue, setRatingValue] = useState(-1);
-  const [ratingContent, setRatingContent] = useState("");
+  const [ratingContent, setRatingContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRatingCourse = async () => {
@@ -33,12 +33,12 @@ const RatingButton = ({
     try {
       const isAlreadyRated = await getRatingByUserId(userId);
       if (isAlreadyRated) {
-        toast.warning("Bạn đã đánh giá khóa học này rồi");
+        toast.warning('Bạn đã đánh giá khóa học này rồi');
         setIsLoading(false);
         return;
       }
       if (!ratingContent || ratingValue === -1) {
-        toast.warning("Vui lòng chọn đánh giá và nhập nội dung đánh giá");
+        toast.warning('Vui lòng chọn đánh giá và nhập nội dung đánh giá');
         return;
       }
       const res = await createRating({
@@ -48,8 +48,8 @@ const RatingButton = ({
         course: courseId,
       });
       if (res) {
-        toast.success("Đánh giá thành công");
-        setRatingContent("");
+        toast.success('Đánh giá thành công');
+        setRatingContent('');
         setRatingValue(-1);
       }
     } catch (error) {
@@ -60,28 +60,28 @@ const RatingButton = ({
   const isDisabled = isLoading || ratingValue === -1 || !ratingContent;
   return (
     <Dialog>
-      <DialogTrigger className="flex items-center gap-3 rounded-lg h-12 bg-primary text-sm font-semibold px-5 text-white disabled:opacity-50 disabled:cursor-not-allowed">
+      <DialogTrigger className="flex h-12 items-center gap-3 rounded-lg bg-primary px-5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50">
         <IconStar />
         <span>Đánh giá khóa học</span>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="tracking-tight font-bold mb-5 text-xl">
+          <DialogTitle className="mb-5 text-xl font-bold tracking-tight">
             Đánh giá
           </DialogTitle>
           <DialogDescription>
-            <div className="flex justify-between gap-5 mb-5">
+            <div className="mb-5 flex justify-between gap-5">
               {ratingList.map((rating) => (
                 <button
                   key={rating.title}
-                  className="flex flex-col gap-3 text-center text-xs items-center"
+                  className="flex flex-col items-center gap-3 text-center text-xs"
                   type="button"
                   onClick={() => setRatingValue(rating.value)}
                 >
                   <span
                     className={cn(
-                      "flex items-center justify-center size-10 rounded-full bg-gray-200",
-                      ratingValue === rating.value && "bg-[#ffb86c]"
+                      'flex size-10 items-center justify-center rounded-full bg-gray-200',
+                      ratingValue === rating.value && 'bg-[#ffb86c]',
                     )}
                   >
                     <Image
@@ -102,7 +102,7 @@ const RatingButton = ({
               onChange={(e) => setRatingContent(e.target.value)}
             />
             <Button
-              className="w-full mt-5"
+              className="mt-5 w-full"
               disabled={isDisabled}
               isLoading={isLoading}
               variant="primary"

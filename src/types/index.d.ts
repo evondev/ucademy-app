@@ -1,8 +1,8 @@
-import { CommentProps } from "@/database/comment.model";
-import { CouponProps } from "@/database/coupon.model";
-import { CourseProps } from "@/database/course.model";
-import { LessonProps } from "@/database/lesson.model";
-import { CouponType } from "./enums";
+import { CommentProps } from '@/database/comment.model';
+import { CouponProps } from '@/database/coupon.model';
+import { CourseProps } from '@/database/course.model';
+import { LessonProps } from '@/database/lesson.model';
+import { CouponType } from './enums';
 
 export type ActiveLinkProps = {
   url: string;
@@ -38,7 +38,7 @@ export type UpdateCourseLecture = {
   title: string;
   lessons: LessonProps[];
 };
-export interface CourseUpdateParams extends Omit<CourseProps, "lectures"> {
+export interface CourseUpdateParams extends Omit<CourseProps, 'lectures'> {
   lectures: UpdateCourseLecture[];
 }
 export type GetAllCourseParams = {
@@ -116,20 +116,20 @@ export type UpdateCouponParams = {
   _id: string;
   updateData: Partial<CreateCouponParams>;
 };
-export type CouponParams = Omit<CouponProps, "courses"> & {
+export type CouponParams = Omit<CouponProps, 'courses'> & {
   courses: {
     _id: string;
     title: string;
   }[];
 };
-export interface StudyCoursesProps extends Omit<CourseProps, "lectures"> {
+export interface StudyCoursesProps extends Omit<CourseProps, 'lectures'> {
   lectures: {
     lessons: {
       slug: string;
     }[];
   }[];
 }
-export type RatingIcon = "awesome" | "good" | "meh" | "bad" | "terrible";
+export type RatingIcon = 'awesome' | 'good' | 'meh' | 'bad' | 'terrible';
 export type CreateRatingParams = {
   rate: number;
   content: string;
@@ -150,7 +150,7 @@ export type RatingItem = {
   };
   status: RatingStatus;
 };
-export type CouponItem = Omit<CouponProps, "_id" | "courses">;
+export type CouponItem = Omit<CouponProps, '_id' | 'courses'>;
 // Filter, pagination
 export type FilterData = {
   page?: number;
@@ -160,7 +160,7 @@ export type FilterData = {
   active?: boolean;
 };
 // Comment
-export interface CommentItem extends Omit<CommentProps, "user"> {
+export interface CommentItem extends Omit<CommentProps, 'user'> {
   user: {
     name: string;
     avatar: string;

@@ -1,44 +1,44 @@
 enum UserStatus {
-  ACTIVE = "ACTIVE",
-  UNACTIVE = "UNACTIVE",
-  BANNED = "BANNED",
+  ACTIVE = 'ACTIVE',
+  UNACTIVE = 'UNACTIVE',
+  BANNED = 'BANNED',
 }
 enum UserRole {
-  ADMIN = "ADMIN",
-  USER = "USER",
-  EXPERT = "EXPERT",
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+  EXPERT = 'EXPERT',
 }
 enum CourseStatus {
-  APPROVED = "APPROVED",
-  PENDING = "PENDING",
-  REJECTED = "REJECTED",
+  APPROVED = 'APPROVED',
+  PENDING = 'PENDING',
+  REJECTED = 'REJECTED',
 }
 enum CommentStatus {
-  APPROVED = "APPROVED",
-  PENDING = "PENDING",
-  REJECTED = "REJECTED",
+  APPROVED = 'APPROVED',
+  PENDING = 'PENDING',
+  REJECTED = 'REJECTED',
 }
 enum CourseLevel {
-  BEGINNER = "BEGINNER",
-  INTERMEDIATE = "INTERMEDIATE",
-  ADVANCED = "ADVANCED",
+  BEGINNER = 'BEGINNER',
+  INTERMEDIATE = 'INTERMEDIATE',
+  ADVANCED = 'ADVANCED',
 }
 enum LessonType {
-  VIDEO = "VIDEO",
-  TEXT = "TEXT",
+  VIDEO = 'VIDEO',
+  TEXT = 'TEXT',
 }
 enum OrderStatus {
-  PENDING = "PENDING",
-  COMPLETED = "COMPLETED",
-  CANCELED = "CANCELED",
+  PENDING = 'PENDING',
+  COMPLETED = 'COMPLETED',
+  CANCELED = 'CANCELED',
 }
 enum CouponType {
-  PERCENT = "PERCENT",
-  AMOUNT = "AMOUNT",
+  PERCENT = 'PERCENT',
+  AMOUNT = 'AMOUNT',
 }
 enum RatingStatus {
-  ACTIVE = "ACTIVE",
-  UNACTIVE = "UNACTIVE",
+  ACTIVE = 'ACTIVE',
+  UNACTIVE = 'UNACTIVE',
 }
 export {
   CommentStatus,

@@ -1,13 +1,13 @@
-"use server";
-import Coupon from "@/database/coupon.model";
-import Course from "@/database/course.model";
-import Order from "@/database/order.model";
-import { default as UserSchema } from "@/database/user.model";
-import { CreateOrderParams } from "@/types";
-import { OrderStatus } from "@/types/enums";
-import { FilterQuery } from "mongoose";
-import { revalidatePath } from "next/cache";
-import { connectToDatabase } from "../mongoose";
+'use server';
+import Coupon from '@/database/coupon.model';
+import Course from '@/database/course.model';
+import Order from '@/database/order.model';
+import { default as UserSchema } from '@/database/user.model';
+import { CreateOrderParams } from '@/types';
+import { OrderStatus } from '@/types/enums';
+import { FilterQuery } from 'mongoose';
+import { revalidatePath } from 'next/cache';
+import { connectToDatabase } from '../mongoose';
 export async function fetchOrders(params: any) {
   try {
     connectToDatabase();
@@ -15,7 +15,7 @@ export async function fetchOrders(params: any) {
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof Course> = {};
     if (search) {
-      query.$or = [{ code: { $regex: search, $options: "i" } }];
+      query.$or = [{ code: { $regex: search, $options: 'i' } }];
     }
     if (status) {
       query.status = status;
@@ -23,17 +23,17 @@ export async function fetchOrders(params: any) {
     const orders = await Order.find(query)
       .populate({
         model: Course,
-        select: "title",
-        path: "course",
+        select: 'title',
+        path: 'course',
       })
       .populate({
-        path: "user",
+        path: 'user',
         model: UserSchema,
-        select: "name",
+        select: 'name',
       })
       .populate({
-        path: "coupon",
-        select: "code",
+        path: 'coupon',
+        select: 'code',
       })
       .sort({ created_at: -1 })
       .skip(skip)
@@ -71,14 +71,14 @@ export async function updateOrder({
     connectToDatabase();
     const findOrder = await Order.findById(orderId)
       .populate({
-        path: "course",
+        path: 'course',
         model: Course,
-        select: "_id",
+        select: '_id',
       })
       .populate({
-        path: "user",
+        path: 'user',
         model: UserSchema,
-        select: "_id",
+        select: '_id',
       });
     if (!findOrder) return;
     if (findOrder.status === OrderStatus.CANCELED) return;
@@ -99,11 +99,11 @@ export async function updateOrder({
       findOrder.status === OrderStatus.COMPLETED
     ) {
       findUser.courses = findUser.courses.filter(
-        (el: any) => el.toString() !== findOrder.course._id.toString()
+        (el: any) => el.toString() !== findOrder.course._id.toString(),
       );
       await findUser.save();
     }
-    revalidatePath("/manage/order");
+    revalidatePath('/manage/order');
     return {
       success: true,
     };
@@ -117,8 +117,8 @@ export async function getOrderDetails({ code }: { code: string }) {
     const order = await Order.findOne({
       code,
     }).populate({
-      path: "course",
-      select: "title",
+      path: 'course',
+      select: 'title',
     });
     return JSON.parse(JSON.stringify(order));
   } catch (error) {

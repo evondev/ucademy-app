@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-import { User } from "@/database/user.model";
-import { createCourse } from "@/lib/actions/course.actions";
-import { Button } from "@/shared/components/ui/button";
+import { User } from '@/database/user.model';
+import { createCourse } from '@/lib/actions/course.actions';
+import { Button } from '@/shared/components/ui/button';
 import {
   Form,
   FormControl,
@@ -14,15 +14,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/shared/components/ui/form";
-import { Input } from "@/shared/components/ui/input";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import slugify from "slugify";
+} from '@/shared/components/ui/form';
+import { Input } from '@/shared/components/ui/input';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import slugify from 'slugify';
 
 const formSchema = z.object({
-  title: z.string().min(10, "Tên khóa học phải có ít nhất 10 ký tự"),
+  title: z.string().min(10, 'Tên khóa học phải có ít nhất 10 ký tự'),
   slug: z.string().optional(),
 });
 
@@ -32,8 +32,8 @@ function CourseAddNew({ user }: { user: User }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      slug: "",
+      title: '',
+      slug: '',
     },
   });
 
@@ -46,7 +46,7 @@ function CourseAddNew({ user }: { user: User }) {
           values.slug ||
           slugify(values.title, {
             lower: true,
-            locale: "vi",
+            locale: 'vi',
           }),
         author: user._id,
       };
@@ -55,7 +55,7 @@ function CourseAddNew({ user }: { user: User }) {
         toast.error(res?.message);
         return;
       }
-      toast.success("Tạo khóa học thành công");
+      toast.success('Tạo khóa học thành công');
       if (res?.data) {
         router.push(`/manage/course/update?slug=${res.data.slug}`);
       }
@@ -67,8 +67,11 @@ function CourseAddNew({ user }: { user: User }) {
 
   return (
     <Form {...form}>
-      <form autoComplete="off" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-2 gap-8 mt-10 mb-8">
+      <form
+        autoComplete="off"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <div className="mb-8 mt-10 grid grid-cols-2 gap-8">
           <FormField
             control={form.control}
             name="title"
@@ -76,7 +79,10 @@ function CourseAddNew({ user }: { user: User }) {
               <FormItem>
                 <FormLabel>Tên khóa học *</FormLabel>
                 <FormControl>
-                  <Input placeholder="Tên khóa học" {...field} />
+                  <Input
+                    placeholder="Tên khóa học"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -89,7 +95,10 @@ function CourseAddNew({ user }: { user: User }) {
               <FormItem>
                 <FormLabel>Đường dẫn khóa học</FormLabel>
                 <FormControl>
-                  <Input placeholder="khoa-hoc-lap-trinh" {...field} />
+                  <Input
+                    placeholder="khoa-hoc-lap-trinh"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

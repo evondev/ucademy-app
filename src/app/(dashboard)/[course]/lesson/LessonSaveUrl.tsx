@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { lastLessonKey } from "@/shared/constants";
-import { useEffect } from "react";
+import { lastLessonKey } from '@/shared/constants';
+import { useEffect } from 'react';
 
 const LessonSaveUrl = ({ url, course }: { url: string; course: string }) => {
   useEffect(() => {
     let results: any[] =
-      JSON.parse(localStorage?.getItem(lastLessonKey) || "[]") || [];
+      JSON.parse(localStorage?.getItem(lastLessonKey) || '[]') || [];
     const item = {
       course,
       lesson: url,

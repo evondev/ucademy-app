@@ -1,8 +1,8 @@
-import { CommentItem } from "@/types";
-import { ObjectId } from "mongoose";
-import { Manrope } from "next/font/google";
+import { CommentItem } from '@/types';
+import { ObjectId } from 'mongoose';
+import { Manrope } from 'next/font/google';
 
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
+const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
 
 export const createOrderCode = () =>
   `DH-${new Date().getTime().toString().slice(-6)}`;
@@ -19,7 +19,7 @@ export const formatMinutesToHour = (minutes: number) => {
 };
 
 export const formatDate = (date: string | Date) => {
-  return new Date(date).toLocaleDateString("vi-VN");
+  return new Date(date).toLocaleDateString('vi-VN');
 };
 export const timeAgo = (date: string | Date) => {
   const now = new Date();
@@ -41,10 +41,10 @@ export const timeAgo = (date: string | Date) => {
 
 export const getRepliesComment = (
   comments: CommentItem[],
-  parentId: string | ObjectId
+  parentId: string | ObjectId,
 ) => {
   return comments.filter(
-    (item) => item.parentId?.toString() === parentId.toString()
+    (item) => item.parentId?.toString() === parentId.toString(),
   );
 };
 

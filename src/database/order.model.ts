@@ -1,5 +1,5 @@
-import { OrderStatus } from "@/types/enums";
-import { Document, Schema, model, models } from "mongoose";
+import { OrderStatus } from '@/types/enums';
+import { Document, Schema, model, models } from 'mongoose';
 
 export interface OrderProps extends Document {
   _id: string;
@@ -35,15 +35,15 @@ const orderSchema = new Schema<OrderProps>({
   },
   course: {
     type: Schema.Types.ObjectId,
-    ref: "Course",
+    ref: 'Course',
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
   coupon: {
     type: Schema.Types.ObjectId,
-    ref: "Coupon",
+    ref: 'Coupon',
   },
   status: {
     type: String,
@@ -51,5 +51,5 @@ const orderSchema = new Schema<OrderProps>({
     default: OrderStatus.PENDING,
   },
 });
-const Order = models.Order || model<OrderProps>("Order", orderSchema);
+const Order = models.Order || model<OrderProps>('Order', orderSchema);
 export default Order;

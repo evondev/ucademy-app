@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-import { CourseProps } from "@/database/course.model";
-import { updateCourse } from "@/lib/actions/course.actions";
-import { Button } from "@/shared/components/ui/button";
+import { CourseProps } from '@/database/course.model';
+import { updateCourse } from '@/lib/actions/course.actions';
+import { Button } from '@/shared/components/ui/button';
 import {
   Form,
   FormControl,
@@ -14,28 +14,28 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/shared/components/ui/form";
-import { Input } from "@/shared/components/ui/input";
+} from '@/shared/components/ui/form';
+import { Input } from '@/shared/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/shared/components/ui/select";
-import { Textarea } from "@/shared/components/ui/textarea";
-import { courseLevel, courseStatus } from "@/shared/constants";
-import { CourseLevel, CourseStatus } from "@/types/enums";
-import { UploadButton } from "@/utils/uploadthing";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import { useImmer } from "use-immer";
-import { IconAdd } from "../../shared/components/icons";
+} from '@/shared/components/ui/select';
+import { Textarea } from '@/shared/components/ui/textarea';
+import { courseLevel, courseStatus } from '@/shared/constants';
+import { CourseLevel, CourseStatus } from '@/types/enums';
+import { UploadButton } from '@/utils/uploadthing';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useImmer } from 'use-immer';
+import { IconAdd } from '../../shared/components/icons';
 
 const formSchema = z.object({
-  title: z.string().min(10, "Tên khóa học phải có ít nhất 10 ký tự"),
+  title: z.string().min(10, 'Tên khóa học phải có ít nhất 10 ký tự'),
   slug: z.string().optional(),
   price: z.number().int().positive().optional(),
   sale_price: z.number().int().positive().optional(),
@@ -125,11 +125,14 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
       setIsSubmitting(false);
     }
   }
-  const imageWatch = form.watch("image");
+  const imageWatch = form.watch('image');
   return (
     <Form {...form}>
-      <form autoComplete="off" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-2 gap-8 mt-10 mb-8">
+      <form
+        autoComplete="off"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <div className="mb-8 mt-10 grid grid-cols-2 gap-8">
           <FormField
             control={form.control}
             name="title"
@@ -137,7 +140,10 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
               <FormItem>
                 <FormLabel>Tên khóa học *</FormLabel>
                 <FormControl>
-                  <Input placeholder="Tên khóa học" {...field} />
+                  <Input
+                    placeholder="Tên khóa học"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -150,7 +156,10 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
               <FormItem>
                 <FormLabel>Đường dẫn khóa học</FormLabel>
                 <FormControl>
-                  <Input placeholder="khoa-hoc-lap-trinh" {...field} />
+                  <Input
+                    placeholder="khoa-hoc-lap-trinh"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -217,13 +226,13 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                 <FormLabel>Ảnh đại diện</FormLabel>
                 <FormControl>
                   <>
-                    <div className="h-[250px] bg-white rounded-md border border-gray-200 flex items-center justify-center relative">
+                    <div className="relative flex h-[250px] items-center justify-center rounded-md border border-gray-200 bg-white">
                       {!imageWatch ? (
                         <UploadButton
                           endpoint="imageUploader"
                           onClientUploadComplete={(res) => {
                             // Do something with the response
-                            form.setValue("image", res[0].url);
+                            form.setValue('image', res[0].url);
                           }}
                           onUploadError={(error: Error) => {
                             console.error(`ERROR! ${error.message}`);
@@ -233,7 +242,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                         <Image
                           fill
                           alt=""
-                          className="w-full h-full object-cover rounded-md"
+                          className="size-full rounded-md object-cover"
                           src={imageWatch}
                         />
                       )}
@@ -251,7 +260,10 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
               <FormItem>
                 <FormLabel>Youtube URL</FormLabel>
                 <FormControl>
-                  <Input placeholder="https://youtube.com/axfgdr5" {...field} />
+                  <Input
+                    placeholder="https://youtube.com/axfgdr5"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -291,7 +303,10 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                     </SelectTrigger>
                     <SelectContent>
                       {courseStatus.map((status) => (
-                        <SelectItem key={status.value} value={status.value}>
+                        <SelectItem
+                          key={status.value}
+                          value={status.value}
+                        >
                           {status.title}
                         </SelectItem>
                       ))}
@@ -318,7 +333,10 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                     </SelectTrigger>
                     <SelectContent>
                       {courseLevel.map((level) => (
-                        <SelectItem key={level.value} value={level.value}>
+                        <SelectItem
+                          key={level.value}
+                          value={level.value}
+                        >
                           {level.title}
                         </SelectItem>
                       ))}
@@ -341,7 +359,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                     type="button"
                     onClick={() => {
                       setCourseInfo((draft) => {
-                        draft.requirements.push("");
+                        draft.requirements.push('');
                       });
                     }}
                   >
@@ -380,7 +398,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                     type="button"
                     onClick={() => {
                       setCourseInfo((draft) => {
-                        draft.benefits.push("");
+                        draft.benefits.push('');
                       });
                     }}
                   >
@@ -420,8 +438,8 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                     onClick={() => {
                       setCourseInfo((draft) => {
                         draft.qa.push({
-                          question: "",
-                          answer: "",
+                          question: '',
+                          answer: '',
                         });
                       });
                     }}
@@ -432,7 +450,10 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                 <FormControl>
                   <>
                     {courseInfo.qa.map((item, index) => (
-                      <div key={index} className="grid grid-cols-2 gap-5">
+                      <div
+                        key={index}
+                        className="grid grid-cols-2 gap-5"
+                      >
                         <Input
                           key={index}
                           placeholder={`Câu hỏi số ${index + 1}`}
