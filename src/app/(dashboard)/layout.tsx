@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { MenuItem, Sidebar } from '@/shared/components';
 import { menuItems } from '@/shared/constants';
-import React from 'react';
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -14,10 +15,10 @@ const layout = ({ children }: { children: React.ReactNode }) => {
             icon={item.icon}
             title={item.title}
             url={item.url}
-          ></MenuItem>
+          />
         ))}
       </ul>
-      <div className="hidden lg:block"></div>
+      <div className="hidden lg:block" />
       <main className="p-5">{children}</main>
     </div>
   );

@@ -1,11 +1,13 @@
 'use server';
 
+import { FilterQuery } from 'mongoose';
+import { revalidatePath } from 'next/cache';
+
 import Course from '@/database/course.model';
 import Rating from '@/database/rating.model';
 import { CreateRatingParams, FilterData, RatingItem } from '@/types';
 import { RatingStatus } from '@/types/enums';
-import { FilterQuery } from 'mongoose';
-import { revalidatePath } from 'next/cache';
+
 import { connectToDatabase } from '../mongoose';
 
 export async function createRating(
@@ -18,11 +20,13 @@ export async function createRating(
       path: 'rating',
       model: Rating,
     });
+
     if (findCourse.rating) {
       await findCourse.rating.push(newRating._id);
       await findCourse.save();
     }
     if (!newRating) return false;
+
     return true;
   } catch (error) {
     console.log(error);
@@ -35,6 +39,7 @@ export async function getRatingByUserId(
   try {
     connectToDatabase();
     const findRating = await Rating.findOne({ user: userId });
+
     return findRating?._id ? true : false;
   } catch (error) {
     console.log(error);
@@ -45,6 +50,7 @@ export async function updateRating(id: string): Promise<boolean | undefined> {
     connectToDatabase();
     await Rating.findByIdAndUpdate(id, { status: RatingStatus.ACTIVE });
     revalidatePath('/admin/manage/rating');
+
     return true;
   } catch (error) {
     console.log(error);
@@ -55,6 +61,7 @@ export async function deleteRating(id: string): Promise<boolean | undefined> {
     connectToDatabase();
     await Rating.findByIdAndDelete(id);
     revalidatePath('/admin/manage/rating');
+
     return true;
   } catch (error) {
     console.log(error);
@@ -65,9 +72,10 @@ export async function getRatings(
 ): Promise<RatingItem[] | undefined> {
   try {
     connectToDatabase();
-    const { page = 1, limit = 10, search, status } = params;
+    const { limit = 10, page = 1, search, status } = params;
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof Rating> = {};
+
     if (search) {
       query.$or = [{ content: { $regex: search, $options: 'i' } }];
     }
@@ -86,6 +94,7 @@ export async function getRatings(
       .skip(skip)
       .limit(limit)
       .sort({ created_at: -1 });
+
     return JSON.parse(JSON.stringify(ratings));
   } catch (error) {
     console.log(error);

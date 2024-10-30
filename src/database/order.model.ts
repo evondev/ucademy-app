@@ -1,5 +1,6 @@
+import { Document, model, models, Schema } from 'mongoose';
+
 import { OrderStatus } from '@/types/enums';
-import { Document, Schema, model, models } from 'mongoose';
 
 export interface OrderProps extends Document {
   _id: string;
@@ -52,4 +53,5 @@ const orderSchema = new Schema<OrderProps>({
   },
 });
 const Order = models.Order || model<OrderProps>('Order', orderSchema);
+
 export default Order;

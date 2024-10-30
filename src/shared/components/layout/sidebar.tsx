@@ -1,12 +1,14 @@
 'use client';
+import { useAuth, UserButton } from '@clerk/nextjs';
+import Link from 'next/link';
+
 import { MenuItem, ModeToggle } from '@/shared/components';
 import { IconUsers } from '@/shared/components/icons';
 import { menuItems } from '@/shared/constants';
-import { UserButton, useAuth } from '@clerk/nextjs';
-import Link from 'next/link';
 
 const Sidebar = () => {
   const { userId } = useAuth();
+
   return (
     <div className="borderDarkMode bgDarkMode fixed inset-y-0 left-0 hidden w-[300px] flex-col border-r p-5 lg:flex">
       <Link
@@ -25,11 +27,11 @@ const Sidebar = () => {
             icon={item.icon}
             title={item.title}
             url={item.url}
-          ></MenuItem>
+          />
         ))}
       </ul>
       <div className="mt-auto flex items-center justify-end gap-2">
-        <ModeToggle></ModeToggle>
+        <ModeToggle />
         {!userId ? (
           <Link
             className="flex size-10 items-center justify-center rounded-lg bg-primary p-1 text-white"

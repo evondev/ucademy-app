@@ -1,15 +1,17 @@
 'use client';
+import Link from 'next/link';
+
 import { createHistory } from '@/lib/actions/history.actions';
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/shared/components/ui/checkbox';
-import Link from 'next/link';
+
 import { IconPlay } from '../../shared/components/icons';
 
 const LessonItem = ({
-  lesson,
-  url,
   isActive = false,
   isChecked = false,
+  lesson,
+  url,
 }: {
   lesson: {
     title: string;
@@ -33,6 +35,7 @@ const LessonItem = ({
       console.log(error);
     }
   };
+
   return (
     <div
       className={cn(
@@ -40,7 +43,7 @@ const LessonItem = ({
         isActive ? 'font-bold' : '',
       )}
     >
-      {url && (
+      {!!url && (
         <Checkbox
           className="shrink-0"
           defaultChecked={isChecked}

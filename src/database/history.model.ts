@@ -1,4 +1,4 @@
-import { Document, Schema, model, models } from 'mongoose';
+import { Document, model, models, Schema } from 'mongoose';
 
 export interface HistoryProps extends Document {
   _id: string;
@@ -26,4 +26,5 @@ const historySchema = new Schema<HistoryProps>({
   },
 });
 const History = models.History || model<HistoryProps>('History', historySchema);
+
 export default History;

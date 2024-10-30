@@ -1,9 +1,11 @@
 'use client';
 
+import { useState } from 'react';
+
 import { cn } from '@/lib/utils';
 import { MAX_COMMENT_LEVEL } from '@/shared/constants';
 import { CommentItem } from '@/types';
-import { useState } from 'react';
+
 import CommentForm from './CommentForm';
 
 interface CommentReplyProps {
@@ -14,6 +16,7 @@ interface CommentReplyProps {
 
 const CommentReply = ({ comment, lessonId, userId }: CommentReplyProps) => {
   const [isShowReply, setIsShowReply] = useState(false);
+
   return (
     <>
       <div className="flex items-center gap-5 text-sm font-medium text-gray-400">
@@ -31,7 +34,7 @@ const CommentReply = ({ comment, lessonId, userId }: CommentReplyProps) => {
           </>
         )}
       </div>
-      {isShowReply && (
+      {!!isShowReply && (
         <div className="mt-3">
           <CommentForm
             isReply

@@ -1,4 +1,8 @@
 'use client';
+import Image from 'next/image';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+
 import { createRating, getRatingByUserId } from '@/lib/actions/rating.actions';
 import { cn } from '@/lib/utils';
 import { IconStar } from '@/shared/components/icons';
@@ -13,9 +17,6 @@ import {
 } from '@/shared/components/ui/dialog';
 import { Textarea } from '@/shared/components/ui/textarea';
 import { ratingList } from '@/shared/constants';
-import Image from 'next/image';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
 
 const RatingButton = ({
   courseId,
@@ -32,13 +33,16 @@ const RatingButton = ({
     setIsLoading(true);
     try {
       const isAlreadyRated = await getRatingByUserId(userId);
+
       if (isAlreadyRated) {
         toast.warning('Bạn đã đánh giá khóa học này rồi');
         setIsLoading(false);
+
         return;
       }
       if (!ratingContent || ratingValue === -1) {
         toast.warning('Vui lòng chọn đánh giá và nhập nội dung đánh giá');
+
         return;
       }
       const res = await createRating({
@@ -47,6 +51,7 @@ const RatingButton = ({
         user: userId,
         course: courseId,
       });
+
       if (res) {
         toast.success('Đánh giá thành công');
         setRatingContent('');
@@ -58,6 +63,7 @@ const RatingButton = ({
     }
   };
   const isDisabled = isLoading || ratingValue === -1 || !ratingContent;
+
   return (
     <Dialog>
       <DialogTrigger className="flex h-12 items-center gap-3 rounded-lg bg-primary px-5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50">

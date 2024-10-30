@@ -1,4 +1,8 @@
 'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import Swal from 'sweetalert2';
+
 import useQueryString from '@/hooks/useQueryString';
 import { deleteRating, updateRating } from '@/lib/actions/rating.actions';
 import {
@@ -27,9 +31,6 @@ import {
 import { allValue, ratingList, ratingStatus } from '@/shared/constants';
 import { RatingItem } from '@/types';
 import { RatingStatus } from '@/types/enums';
-import Image from 'next/image';
-import Link from 'next/link';
-import Swal from 'sweetalert2';
 
 const RatingManage = ({ ratings }: { ratings: any }) => {
   const { handleSearchData, handleSelectStatus } = useQueryString();
@@ -58,6 +59,7 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
       console.log(error);
     }
   };
+
   return (
     <div>
       <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
@@ -111,6 +113,7 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
               const icon = ratingList.find(
                 (item) => item.value === rating.rate,
               )?.title;
+
               return (
                 <TableRow key={rating.rate}>
                   <TableCell>
@@ -144,7 +147,7 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
                     <strong>{rating.user?.name}</strong>
                   </TableCell>
                   <TableCell>
-                    <BadgeStatus item={ratingItemStatus}></BadgeStatus>
+                    <BadgeStatus item={ratingItemStatus} />
                   </TableCell>
                   <TableCell>
                     <TableAction>
@@ -152,12 +155,12 @@ const RatingManage = ({ ratings }: { ratings: any }) => {
                         <TableActionItem
                           type="approve"
                           onClick={() => handleUpdateRating(rating._id)}
-                        ></TableActionItem>
+                        />
                       )}
                       <TableActionItem
                         type="delete"
                         onClick={() => handleDeleteRating(rating._id)}
-                      ></TableActionItem>
+                      />
                     </TableAction>
                   </TableCell>
                 </TableRow>

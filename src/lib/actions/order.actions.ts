@@ -1,19 +1,23 @@
 'use server';
+import { FilterQuery } from 'mongoose';
+import { revalidatePath } from 'next/cache';
+
 import Coupon from '@/database/coupon.model';
 import Course from '@/database/course.model';
 import Order from '@/database/order.model';
 import { default as UserSchema } from '@/database/user.model';
 import { CreateOrderParams } from '@/types';
 import { OrderStatus } from '@/types/enums';
-import { FilterQuery } from 'mongoose';
-import { revalidatePath } from 'next/cache';
+
 import { connectToDatabase } from '../mongoose';
+
 export async function fetchOrders(params: any) {
   try {
     connectToDatabase();
-    const { page = 1, limit = 10, search, status } = params;
+    const { limit = 10, page = 1, search, status } = params;
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof Course> = {};
+
     if (search) {
       query.$or = [{ code: { $regex: search, $options: 'i' } }];
     }
@@ -39,6 +43,7 @@ export async function fetchOrders(params: any) {
       .skip(skip)
       .limit(limit);
     const total = await Order.countDocuments(query);
+
     return {
       orders: JSON.parse(JSON.stringify(orders)),
       total,
@@ -50,11 +55,13 @@ export async function createOrder(params: CreateOrderParams) {
     connectToDatabase();
     if (!params.coupon) delete params.coupon;
     const newOrder = await Order.create(params);
+
     if (params.coupon) {
       await Coupon.findByIdAndUpdate(params.coupon, {
         $inc: { used: 1 },
       });
     }
+
     return JSON.parse(JSON.stringify(newOrder));
   } catch (error) {
     console.log(error);
@@ -80,6 +87,7 @@ export async function updateOrder({
         model: UserSchema,
         select: '_id',
       });
+
     if (!findOrder) return;
     if (findOrder.status === OrderStatus.CANCELED) return;
     const findUser = await UserSchema.findById(findOrder.user._id);
@@ -104,6 +112,7 @@ export async function updateOrder({
       await findUser.save();
     }
     revalidatePath('/manage/order');
+
     return {
       success: true,
     };
@@ -120,6 +129,7 @@ export async function getOrderDetails({ code }: { code: string }) {
       path: 'course',
       select: 'title',
     });
+
     return JSON.parse(JSON.stringify(order));
   } catch (error) {
     console.log(error);

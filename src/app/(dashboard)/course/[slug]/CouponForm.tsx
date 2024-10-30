@@ -1,16 +1,17 @@
 'use client';
-import { getValidateCoupon } from '@/lib/actions/coupon.actions';
-import { Input } from '@/shared/components/ui/input';
-import { CouponType } from '@/types/enums';
 import { debounce } from 'lodash';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
+import { getValidateCoupon } from '@/lib/actions/coupon.actions';
+import { Input } from '@/shared/components/ui/input';
+import { CouponType } from '@/types/enums';
+
 const CouponForm = ({
-  setPrice,
   courseId,
   originalPrice,
   setCouponId,
+  setPrice,
 }: {
   originalPrice: number;
   courseId: string;
@@ -34,10 +35,12 @@ const CouponForm = ({
       });
       const couponType = response?.type;
       let finalPrice = originalPrice;
+
       if (!response) {
         toast.error('Mã giảm giá không hợp lệ');
         setCouponCode('');
         setCouponId('');
+
         return;
       }
 
@@ -57,6 +60,7 @@ const CouponForm = ({
   const handleChangeCoupon = debounce((e: any) => {
     setCouponCode(e.target.value);
   }, 500);
+
   return (
     <div className="relative mt-5">
       <Input

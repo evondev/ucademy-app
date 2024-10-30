@@ -1,6 +1,11 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { CalendarIcon } from '@radix-ui/react-icons';
+import { format } from 'date-fns';
+import { debounce } from 'lodash';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { z } from 'zod';
 
 import { updateCoupon } from '@/lib/actions/coupon.actions';
@@ -30,11 +35,6 @@ import { Switch } from '@/shared/components/ui/switch';
 import { couponFormSchema, couponTypes } from '@/shared/constants';
 import { CouponParams } from '@/types';
 import { CouponType } from '@/types/enums';
-import { CalendarIcon } from '@radix-ui/react-icons';
-import { format } from 'date-fns';
-import { debounce } from 'lodash';
-import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 
 const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
   const [findCourse, setFindCourse] = useState<any[] | undefined>([]);
@@ -54,6 +54,7 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
       type: data.type,
     },
   });
+
   useEffect(() => {
     if (data.courses) {
       setSelectedCourses(data.courses);
@@ -64,6 +65,7 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
     try {
       const couponType = values.type;
       const couponValue = Number(values.value?.replace(/,/g, ''));
+
       if (
         couponType === CouponType.PERCENT &&
         couponValue &&
@@ -83,6 +85,7 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
           courses: selectedCourses,
         },
       });
+
       if (updatedCoupon.code) {
         toast.success('Cập nhật coupon thành công');
       }
@@ -94,6 +97,7 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       const courseList = await getAllCourses({ search: value });
+
       setFindCourse(courseList);
       if (!value) setFindCourse([]);
     },
@@ -334,7 +338,7 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
                       placeholder="Tìm kiếm khóa học..."
                       onChange={handleSearchCourse}
                     />
-                    {findCourse && findCourse.length > 0 && (
+                    {!!findCourse && findCourse.length > 0 && (
                       <div className="!mt-5 flex flex-col gap-2">
                         {findCourse?.map((course) => (
                           <Label

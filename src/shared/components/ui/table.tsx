@@ -14,6 +14,7 @@ const Table = React.forwardRef<
     />
   </div>
 ));
+
 Table.displayName = 'Table';
 
 const TableHeader = React.forwardRef<
@@ -26,6 +27,7 @@ const TableHeader = React.forwardRef<
     {...props}
   />
 ));
+
 TableHeader.displayName = 'TableHeader';
 
 const TableBody = React.forwardRef<
@@ -38,6 +40,7 @@ const TableBody = React.forwardRef<
     {...props}
   />
 ));
+
 TableBody.displayName = 'TableBody';
 
 const TableFooter = React.forwardRef<
@@ -53,6 +56,7 @@ const TableFooter = React.forwardRef<
     {...props}
   />
 ));
+
 TableFooter.displayName = 'TableFooter';
 
 const TableRow = React.forwardRef<
@@ -68,6 +72,7 @@ const TableRow = React.forwardRef<
     {...props}
   />
 ));
+
 TableRow.displayName = 'TableRow';
 
 const TableHead = React.forwardRef<
@@ -83,6 +88,7 @@ const TableHead = React.forwardRef<
     {...props}
   />
 ));
+
 TableHead.displayName = 'TableHead';
 
 const TableCell = React.forwardRef<
@@ -95,6 +101,7 @@ const TableCell = React.forwardRef<
     {...props}
   />
 ));
+
 TableCell.displayName = 'TableCell';
 
 const TableCaption = React.forwardRef<
@@ -107,6 +114,7 @@ const TableCaption = React.forwardRef<
     {...props}
   />
 ));
+
 TableCaption.displayName = 'TableCaption';
 
 export {

@@ -1,4 +1,4 @@
-import { Document, Schema, model, models } from 'mongoose';
+import { Document, model, models, Schema } from 'mongoose';
 
 export interface LectureProps extends Document {
   _id: string;
@@ -38,4 +38,5 @@ const lectureSchema = new Schema<LectureProps>({
   },
 });
 const Lecture = models.Lecture || model<LectureProps>('Lecture', lectureSchema);
+
 export default Lecture;

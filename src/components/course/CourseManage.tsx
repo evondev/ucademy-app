@@ -1,4 +1,10 @@
 'use client';
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+
 import { CourseProps } from '@/database/course.model';
 import useQueryString from '@/hooks/useQueryString';
 import { updateCourse } from '@/lib/actions/course.actions';
@@ -28,11 +34,6 @@ import {
 } from '@/shared/components/ui/table';
 import { allValue, courseStatus } from '@/shared/constants';
 import { CourseStatus } from '@/types/enums';
-import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import Swal from 'sweetalert2';
 
 const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
   const router = useRouter();
@@ -103,13 +104,14 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
     if (type === 'prev') setPage((prev) => prev - 1);
     if (type === 'next') setPage((prev) => prev + 1);
   };
+
   // useEffect(() => {
   //   router.push(`${pathname}?${createQueryString("page", page.toString())}`);
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [page]);
   return (
     <>
-      <BouncedLink url="/manage/course/new"></BouncedLink>
+      <BouncedLink url="/manage/course/new" />
       <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <Heading className="">Quản lý khóa học</Heading>
         <div className="flex gap-3">
@@ -156,6 +158,7 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
               const courseStatusItem = courseStatus.find(
                 (item) => item.value === course.status,
               );
+
               return (
                 <TableRow key={course.slug}>
                   <TableCell>
@@ -190,26 +193,26 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
                       onClick={() =>
                         handleChangeStatus(course.slug, course.status)
                       }
-                    ></BadgeStatus>
+                    />
                   </TableCell>
                   <TableCell>
                     <TableAction>
                       <TableActionItem
                         type="study"
                         url={`/manage/course/update-content?slug=${course.slug}`}
-                      ></TableActionItem>
+                      />
                       <TableActionItem
                         type="view"
                         url={`/course/${course.slug}`}
-                      ></TableActionItem>
+                      />
                       <TableActionItem
                         type="edit"
                         url={`/manage/course/update?slug=${course.slug}`}
-                      ></TableActionItem>
+                      />
                       <TableActionItem
                         type="delete"
                         onClick={() => handleDeleteCourse(course.slug)}
-                      ></TableActionItem>
+                      />
                     </TableAction>
                   </TableCell>
                 </TableRow>

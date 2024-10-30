@@ -1,6 +1,12 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { CalendarIcon } from '@radix-ui/react-icons';
+import { format } from 'date-fns';
+import { debounce } from 'lodash';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { z } from 'zod';
 
 import { createCoupon } from '@/lib/actions/coupon.actions';
@@ -29,12 +35,6 @@ import { RadioGroup, RadioGroupItem } from '@/shared/components/ui/radio-group';
 import { Switch } from '@/shared/components/ui/switch';
 import { couponFormSchema, couponTypes } from '@/shared/constants';
 import { CouponType } from '@/types/enums';
-import { CalendarIcon } from '@radix-ui/react-icons';
-import { format } from 'date-fns';
-import { debounce } from 'lodash';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
 
 const NewCouponForm = () => {
   const [startDate, setStartDate] = useState<Date>();
@@ -57,10 +57,12 @@ const NewCouponForm = () => {
   });
   const couponTypeWatch = form.watch('type');
   const router = useRouter();
+
   async function onSubmit(values: z.infer<typeof couponFormSchema>) {
     try {
       const couponType = values.type;
       const couponValue = Number(values.value?.replace(/,/g, ''));
+
       if (
         couponType === CouponType.PERCENT &&
         couponValue &&
@@ -77,8 +79,10 @@ const NewCouponForm = () => {
         end_date: endDate,
         courses: selectedCourses.map((course) => course._id),
       });
+
       if (newCoupon.error) {
         toast.error(newCoupon.error);
+
         return;
       }
       if (newCoupon.code) {
@@ -93,6 +97,7 @@ const NewCouponForm = () => {
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       const courseList = await getAllCourses({ search: value });
+
       setFindCourse(courseList);
       if (!value) setFindCourse([]);
     },
@@ -337,7 +342,7 @@ const NewCouponForm = () => {
                       placeholder="Tìm kiếm khóa học..."
                       onChange={handleSearchCourse}
                     />
-                    {findCourse && findCourse.length > 0 && (
+                    {!!findCourse && findCourse.length > 0 && (
                       <div className="!mt-5 flex flex-col gap-2">
                         {findCourse?.map((course) => (
                           <Label

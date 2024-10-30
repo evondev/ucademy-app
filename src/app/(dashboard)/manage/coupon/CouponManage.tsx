@@ -28,22 +28,23 @@ import {
 import { allValue, couponStatuses } from '@/shared/constants';
 import { CouponItem } from '@/types';
 import { CouponType } from '@/types/enums';
+
 import ActionDeleteCoupon from './ActionDeleteCoupon';
 
 const CouponManage = ({
   coupons,
-  totalPages,
   total,
+  totalPages,
 }: {
   coupons: CouponItem[] | undefined;
   totalPages: number;
   total: number;
 }) => {
-  const { handleSearchData, handleChangeQs } = useQueryString();
+  const { handleChangeQs, handleSearchData } = useQueryString();
 
   return (
     <div>
-      <BouncedLink url="/manage/coupon/new"></BouncedLink>
+      <BouncedLink url="/manage/coupon/new" />
       <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <Heading className="">Quản lý mã giảm giá</Heading>
         <div className="flex gap-3">
@@ -88,7 +89,7 @@ const CouponManage = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {coupons &&
+          {!!coupons &&
             coupons.length > 0 &&
             coupons.map((coupon) => (
               <TableRow key={coupon.code}>
@@ -115,14 +116,14 @@ const CouponManage = ({
                         title: 'Đang kích hoạt',
                         className: 'text-green-500',
                       }}
-                    ></BadgeStatus>
+                    />
                   ) : (
                     <BadgeStatus
                       item={{
                         title: 'Chưa kích hoạt',
                         className: 'text-orange-500',
                       }}
-                    ></BadgeStatus>
+                    />
                   )}
                 </TableCell>
                 <TableCell>
@@ -130,8 +131,8 @@ const CouponManage = ({
                     <TableActionItem
                       type="edit"
                       url={`/manage/coupon/update?code=${coupon.code}`}
-                    ></TableActionItem>
-                    <ActionDeleteCoupon code={coupon.code}></ActionDeleteCoupon>
+                    />
+                    <ActionDeleteCoupon code={coupon.code} />
                   </TableAction>
                 </TableCell>
               </TableRow>
@@ -141,7 +142,7 @@ const CouponManage = ({
       <Pagination
         total={total}
         totalPages={totalPages}
-      ></Pagination>
+      />
     </div>
   );
 };

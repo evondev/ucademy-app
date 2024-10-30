@@ -1,8 +1,10 @@
+import { auth } from '@clerk/nextjs/server';
+
 import { getCourseBySlug } from '@/lib/actions/course.actions';
 import { getLessonBySlug } from '@/lib/actions/lesson.actions';
 import { getUserInfo } from '@/lib/actions/user.actions';
 import { getCommentsByLesson } from '@/modules/comment/services/comment.actions';
-import { auth } from '@clerk/nextjs/server';
+
 import CommentField from './CommentField';
 import CommentForm from './CommentForm';
 import CommentSorting from './CommentSorting';
@@ -24,6 +26,7 @@ const page = async ({
   const course = params.course;
   const slug = searchParams.slug;
   const findCourse = await getCourseBySlug({ slug: course });
+
   if (!findCourse) return null;
   const lesson = await getLessonBySlug({
     slug: slug,
@@ -36,13 +39,14 @@ const page = async ({
   const commentLessonId = lesson?._id.toString() || '';
   const commentUserId = findUser?._id.toString() || '';
   const rootComments = comments?.filter((item) => !item.parentId);
+
   return (
     <div>
       <CommentForm
         lessonId={commentLessonId}
         userId={commentUserId}
-      ></CommentForm>
-      {rootComments && rootComments?.length > 0 && (
+      />
+      {!!rootComments && rootComments?.length > 0 && (
         <div className="mt-10 flex flex-col gap-10">
           <div className="flex items-center justify-between">
             <h2 className="flex items-center gap-2 text-xl font-bold">
@@ -51,7 +55,7 @@ const page = async ({
                 {comments?.length}
               </span>
             </h2>
-            <CommentSorting></CommentSorting>
+            <CommentSorting />
           </div>
           <div className="flex flex-col gap-5">
             {rootComments?.map((item) => (
@@ -61,7 +65,7 @@ const page = async ({
                 comments={comments || []}
                 lessonId={commentLessonId}
                 userId={commentUserId}
-              ></CommentField>
+              />
             ))}
           </div>
         </div>

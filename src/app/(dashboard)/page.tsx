@@ -4,6 +4,7 @@ import { CourseGrid, Heading } from '@/shared/components';
 
 const page = async () => {
   const courses = (await getAllCoursesPublic({})) || [];
+
   return (
     <div>
       <Heading>Khám phá</Heading>
@@ -13,7 +14,7 @@ const page = async () => {
             <CourseItem
               key={item.slug}
               data={item}
-            ></CourseItem>
+            />
           ))}
       </CourseGrid>
     </div>

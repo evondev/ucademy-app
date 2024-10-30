@@ -1,4 +1,7 @@
 'use server';
+import { FilterQuery } from 'mongoose';
+import { revalidatePath } from 'next/cache';
+
 import Course, { CourseProps } from '@/database/course.model';
 import Lecture from '@/database/lecture.model';
 import Lesson from '@/database/lesson.model';
@@ -12,8 +15,7 @@ import {
   UpdateCourseParams,
 } from '@/types';
 import { CourseStatus, RatingStatus } from '@/types/enums';
-import { FilterQuery } from 'mongoose';
-import { revalidatePath } from 'next/cache';
+
 import { connectToDatabase } from '../mongoose';
 // fetching
 export async function getAllCoursesPublic(
@@ -21,9 +23,10 @@ export async function getAllCoursesPublic(
 ): Promise<StudyCoursesProps[] | undefined> {
   try {
     connectToDatabase();
-    const { page = 1, limit = 10, search } = params;
+    const { limit = 10, page = 1, search } = params;
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof Course> = {};
+
     if (search) {
       query.$or = [{ title: { $regex: search, $options: 'i' } }];
     }
@@ -32,6 +35,7 @@ export async function getAllCoursesPublic(
       .skip(skip)
       .limit(limit)
       .sort({ created_at: -1 });
+
     return JSON.parse(JSON.stringify(courses));
   } catch (error) {
     console.log(error);
@@ -42,9 +46,10 @@ export async function getAllCourses(
 ): Promise<CourseProps[] | undefined> {
   try {
     connectToDatabase();
-    const { page = 1, limit = 10, search, status } = params;
+    const { limit = 10, page = 1, search, status } = params;
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof Course> = {};
+
     if (search) {
       query.$or = [{ title: { $regex: search, $options: 'i' } }];
     }
@@ -55,6 +60,7 @@ export async function getAllCourses(
       .skip(skip)
       .limit(limit)
       .sort({ created_at: -1 });
+
     return JSON.parse(JSON.stringify(courses));
   } catch (error) {
     console.log(error);
@@ -90,6 +96,7 @@ export async function getCourseBySlug({
           status: RatingStatus.ACTIVE,
         },
       });
+
     return findCourse;
   } catch (error) {
     console.log(error);
@@ -100,6 +107,7 @@ export async function createCourse(params: CreateCourseParams) {
   try {
     connectToDatabase();
     const existCourse = await Course.findOne({ slug: params.slug });
+
     if (existCourse) {
       return {
         success: false,
@@ -107,6 +115,7 @@ export async function createCourse(params: CreateCourseParams) {
       };
     }
     const course = await Course.create(params);
+
     return {
       success: true,
       data: JSON.parse(JSON.stringify(course)),
@@ -120,11 +129,13 @@ export async function updateCourse(params: UpdateCourseParams) {
   try {
     connectToDatabase();
     const findCourse = await Course.findOne({ slug: params.slug });
+
     if (!findCourse) return;
     await Course.findOneAndUpdate({ slug: params.slug }, params.updateData, {
       new: true,
     });
     revalidatePath(params.path || '/');
+
     return {
       success: true,
       message: 'Cập nhật khóa học thành công!',
@@ -168,6 +179,7 @@ export async function getCourseLessonsInfo({ slug }: { slug: string }): Promise<
       (acc: number, cur: any) => acc + cur.duration,
       0,
     );
+
     return {
       duration,
       lessons: lessons.length,

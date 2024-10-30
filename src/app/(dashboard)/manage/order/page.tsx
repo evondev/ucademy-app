@@ -10,6 +10,7 @@ const page = async ({ searchParams }: OrderManagePageParams) => {
     search: searchParams.search,
     status: searchParams.status,
   });
+
   if (!data) return null;
   const { orders, total } = data;
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
@@ -19,7 +20,7 @@ const page = async ({ searchParams }: OrderManagePageParams) => {
       orders={orders}
       total={total}
       totalPages={totalPages}
-    ></OrderManagePage>
+    />
   );
 };
 

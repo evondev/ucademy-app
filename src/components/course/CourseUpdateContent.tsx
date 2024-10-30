@@ -1,4 +1,9 @@
 'use client';
+import { MouseEvent, useState } from 'react';
+import { toast } from 'react-toastify';
+import slugify from 'slugify';
+import Swal from 'sweetalert2';
+
 import { LessonProps } from '@/database/lesson.model';
 import { createLecture, updateLecture } from '@/lib/actions/lecture.actions';
 import { createLesson, updateLesson } from '@/lib/actions/lesson.actions';
@@ -13,10 +18,7 @@ import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
 import { commonClassNames } from '@/shared/constants';
 import { CourseUpdateParams, UpdateCourseLecture } from '@/types';
-import { MouseEvent, useState } from 'react';
-import { toast } from 'react-toastify';
-import slugify from 'slugify';
-import Swal from 'sweetalert2';
+
 import {
   IconCancel,
   IconCheck,
@@ -39,6 +41,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
         order: lectures.length + 1,
         path: `/manage/course/update-content?slug=${course.slug}`,
       });
+
       if (res?.sucess) {
         toast.success('Thêm chương mới thành công!');
       }
@@ -88,6 +91,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
           path: `/manage/course/update-content?slug=${course.slug}`,
         },
       });
+
       if (res?.success) {
         toast.success('Cập nhật thành công!');
         setLectureIdEdit('');
@@ -109,8 +113,10 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
           .toString()
           .slice(-3)}`,
       });
+
       if (res?.success) {
         toast.success('Thêm bài học mới thành công!');
+
         return;
       }
       toast.error('Thêm bài học mới thất bại!');
@@ -136,6 +142,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
           }),
         },
       });
+
       if (res?.success) {
         toast.success('Cập nhật bài học thành công!');
         setLessonEdit('');
@@ -186,7 +193,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                               setLectureIdEdit('');
                             }}
                           >
-                            <IconCancel></IconCancel>
+                            <IconCancel />
                           </span>
                         </div>
                       </>
@@ -264,7 +271,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                                         setLessonIdEdit('');
                                       }}
                                     >
-                                      <IconCancel></IconCancel>
+                                      <IconCancel />
                                     </span>
                                   </div>
                                 </>
@@ -299,9 +306,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                             </div>
                           </AccordionTrigger>
                           <AccordionContent>
-                            <LessonItemUpdate
-                              lesson={lesson}
-                            ></LessonItemUpdate>
+                            <LessonItemUpdate lesson={lesson} />
                           </AccordionContent>
                         </AccordionItem>
                       </Accordion>

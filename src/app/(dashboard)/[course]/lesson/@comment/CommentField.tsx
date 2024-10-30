@@ -1,9 +1,11 @@
 'use client';
+import Image from 'next/image';
+
 import { cn } from '@/lib/utils';
 import { CommentItem } from '@/types';
 import { CommentStatus } from '@/types/enums';
 import { getRepliesComment, timeAgo } from '@/utils';
-import Image from 'next/image';
+
 import CommentReply from './CommentReply';
 
 interface CommentItemProps {
@@ -15,14 +17,15 @@ interface CommentItemProps {
 
 const CommentField = ({
   comment,
+  comments = [],
   lessonId,
   userId,
-  comments = [],
 }: CommentItemProps) => {
   const replies = getRepliesComment(comments, comment._id);
   const level = comment.level || 0;
   const COMMENT_SPACING = 55;
   const isPending = comment.status === CommentStatus.PENDING;
+
   return (
     <>
       <div
@@ -51,7 +54,7 @@ const CommentField = ({
             <h4 className="text-sm font-medium">
               {comment.user?.name || 'Anonymous'}
             </h4>
-            <span className="size-1 rounded-full bg-gray-500"></span>
+            <span className="size-1 rounded-full bg-gray-500" />
             <span className="text-xs font-medium text-gray-500">
               {timeAgo(comment.created_at)}
             </span>

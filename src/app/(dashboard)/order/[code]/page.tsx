@@ -11,7 +11,9 @@ const OrderDetails = async ({
   const orderDetails = await getOrderDetails({
     code: params.code,
   });
+
   if (!orderDetails) return <PageNotFound />;
+
   return (
     <div className="flex flex-col gap-5">
       <p>

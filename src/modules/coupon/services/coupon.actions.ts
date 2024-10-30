@@ -1,5 +1,8 @@
 'use server';
 
+import { FilterQuery } from 'mongoose';
+import { revalidatePath } from 'next/cache';
+
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import {
   CouponItem,
@@ -8,23 +11,26 @@ import {
   FilterData,
   UpdateCouponParams,
 } from '@/types';
-import { FilterQuery } from 'mongoose';
-import { revalidatePath } from 'next/cache';
+
 import CouponSchema from './coupon.schema';
 
 export async function createCoupon(params: CreateCouponParams) {
   try {
     connectToDatabase();
     const existingCoupon = await CouponSchema.findOne({ code: params.code });
+
     if (existingCoupon?.code) {
       return { error: 'Mã giảm giá đã tồn tại!' };
     }
     const couponRegex = /^[A-Z0-9]{3,10}$/;
+
     if (!couponRegex.test(params.code)) {
       return { error: 'Mã giảm giá không hợp lệ' };
     }
     const newCoupon = await CouponSchema.create(params);
+
     revalidatePath('/manage/coupon');
+
     return JSON.parse(JSON.stringify(newCoupon));
   } catch (error) {
     console.log(error);
@@ -37,7 +43,9 @@ export async function updateCoupon(params: UpdateCouponParams) {
       params._id,
       params.updateData,
     );
+
     revalidatePath('/manage/coupon');
+
     return JSON.parse(JSON.stringify(updatedCoupon));
   } catch (error) {
     console.log(error);
@@ -52,9 +60,10 @@ export async function getCoupons(params: FilterData): Promise<
 > {
   try {
     connectToDatabase();
-    const { page = 1, limit = 10, search, active } = params;
+    const { active, limit = 10, page = 1, search } = params;
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof CouponSchema> = {};
+
     if (search) {
       query.$or = [{ code: { $regex: search, $options: 'i' } }];
     }
@@ -66,6 +75,7 @@ export async function getCoupons(params: FilterData): Promise<
       .limit(limit)
       .sort({ created_at: -1 });
     const total = await CouponSchema.countDocuments(query);
+
     return {
       coupons: JSON.parse(JSON.stringify(coupons)),
       total,
@@ -86,6 +96,7 @@ export async function getCouponByCode(
       select: '_id title',
     });
     const coupon = JSON.parse(JSON.stringify(findCoupon));
+
     return coupon;
   } catch (error) {
     console.log(error);
@@ -105,6 +116,7 @@ export async function getValidateCoupon(
     const coupon = JSON.parse(JSON.stringify(findCoupon));
     const couponCourses = coupon?.courses.map((course: any) => course._id);
     let isActive = true;
+
     if (!couponCourses.includes(params.courseId)) isActive = false;
     if (!coupon?.active) isActive = false;
     if (coupon?.used >= coupon?.limit) isActive = false;
@@ -112,6 +124,7 @@ export async function getValidateCoupon(
       isActive = false;
     if (coupon?.end_date && new Date(coupon?.end_date) < new Date())
       isActive = false;
+
     return isActive ? coupon : undefined;
   } catch (error) {
     console.log(error);

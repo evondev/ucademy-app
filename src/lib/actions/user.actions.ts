@@ -6,12 +6,14 @@ import Lesson from '@/database/lesson.model';
 import UserSchema, { User } from '@/database/user.model';
 import { CreateUserParams } from '@/types';
 import { CourseStatus } from '@/types/enums';
+
 import { connectToDatabase } from '../mongoose';
 
 export async function createUser(params: CreateUserParams) {
   try {
     connectToDatabase();
     const user = await UserSchema.create(params);
+
     return user;
   } catch (error) {
     console.log(error);
@@ -25,7 +27,9 @@ export async function getUserInfo({
   try {
     connectToDatabase();
     const findUser = await UserSchema.findOne({ clerkId: userId });
+
     if (!findUser) return null;
+
     return findUser;
   } catch (error) {
     console.log(error);
@@ -53,7 +57,9 @@ export async function getUserCourses(
         },
       },
     });
+
     if (!findUser) return null;
+
     return findUser.courses;
   } catch (error) {
     console.log(error);

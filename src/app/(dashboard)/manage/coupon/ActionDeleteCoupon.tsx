@@ -1,7 +1,8 @@
 'use client';
+import Swal from 'sweetalert2';
+
 import { deleteCoupon } from '@/lib/actions/coupon.actions';
 import { TableActionItem } from '@/shared/components';
-import Swal from 'sweetalert2';
 
 const ActionDeleteCoupon = ({ code }: { code: string }) => {
   const handleDeleteCoupon = async (code: string) => {
@@ -21,11 +22,12 @@ const ActionDeleteCoupon = ({ code }: { code: string }) => {
       console.log(error);
     }
   };
+
   return (
     <TableActionItem
       type="delete"
       onClick={() => handleDeleteCoupon(code)}
-    ></TableActionItem>
+    />
   );
 };
 

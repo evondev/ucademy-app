@@ -17,6 +17,7 @@ const page = async ({
   const course = params.course;
   const slug = searchParams.slug;
   const findCourse = await getCourseBySlug({ slug: course });
+
   if (!findCourse) return null;
   const courseId = findCourse?._id.toString();
   const lectures = findCourse.lectures || [];
@@ -33,14 +34,14 @@ const page = async ({
           style={{
             width: `${completePercentage}%`,
           }}
-        ></div>
+        />
       </div>
       <LessonContent
         course={course}
         histories={histories ? JSON.parse(JSON.stringify(histories)) : []}
         lectures={lectures}
         slug={slug}
-      ></LessonContent>
+      />
     </div>
   );
 };

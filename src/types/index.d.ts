@@ -2,6 +2,7 @@ import { CommentProps } from '@/database/comment.model';
 import { CouponProps } from '@/database/coupon.model';
 import { CourseProps } from '@/database/course.model';
 import { LessonProps } from '@/database/lesson.model';
+
 import { CouponType } from './enums';
 
 export type ActiveLinkProps = {

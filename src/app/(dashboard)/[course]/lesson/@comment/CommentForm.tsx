@@ -1,5 +1,12 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useTransition } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { z } from 'zod';
+
 import { cn } from '@/lib/utils';
 import { createComment } from '@/modules/comment/services/comment.actions';
 import { Button } from '@/shared/components/ui/button';
@@ -12,12 +19,7 @@ import {
 } from '@/shared/components/ui/form';
 import { Textarea } from '@/shared/components/ui/textarea';
 import { CommentItem } from '@/types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useTransition } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { z } from 'zod';
+
 const formSchema = z.object({
   content: z
     .string({
@@ -25,6 +27,7 @@ const formSchema = z.object({
     })
     .min(10, { message: 'Comment must be at least 10 character long' }),
 });
+
 interface CommentFormProps {
   userId: string;
   lessonId: string;
@@ -33,11 +36,11 @@ interface CommentFormProps {
   closeReply?: () => void;
 }
 const CommentForm = ({
-  userId,
-  lessonId,
+  closeReply,
   comment,
   isReply,
-  closeReply,
+  lessonId,
+  userId,
 }: CommentFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,6 +50,7 @@ const CommentForm = ({
   const pathname = usePathname();
   const slug = useSearchParams().get('slug');
   const path = `${pathname}?slug=${slug}`;
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
       const hasComment = await createComment({
@@ -57,8 +61,10 @@ const CommentForm = ({
         parentId: comment?._id,
         path,
       });
+
       if (!hasComment) {
         toast.error('Failed to post comment');
+
         return;
       }
       toast.success('Comment posted successfully');

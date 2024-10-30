@@ -1,5 +1,6 @@
+import { Document, model, models, Schema } from 'mongoose';
+
 import { UserRole, UserStatus } from '@/types/enums';
-import { Document, Schema, model, models } from 'mongoose';
 
 export interface User extends Document {
   _id: string;
@@ -55,4 +56,5 @@ const userSchema = new Schema<User>({
   },
 });
 const UserSchema = models.User || model<User>('User', userSchema);
+
 export default UserSchema;

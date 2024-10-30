@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 import {
   IconComment,
   IconCoupon,
@@ -16,7 +18,6 @@ import {
   OrderStatus,
   RatingStatus,
 } from '@/types/enums';
-import { z } from 'zod';
 
 export const menuItems: MenuField[] = [
   {

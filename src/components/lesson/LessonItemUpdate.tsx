@@ -1,4 +1,13 @@
 'use client';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Editor } from '@tinymce/tinymce-react';
+import Link from 'next/link';
+import { useTheme } from 'next-themes';
+import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { z } from 'zod';
+
 import { LessonProps } from '@/database/lesson.model';
 import { updateLesson } from '@/lib/actions/lesson.actions';
 import { Button } from '@/shared/components/ui/button';
@@ -12,14 +21,6 @@ import {
 } from '@/shared/components/ui/form';
 import { Input } from '@/shared/components/ui/input';
 import { editorOptions } from '@/shared/constants';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Editor } from '@tinymce/tinymce-react';
-import { useTheme } from 'next-themes';
-import Link from 'next/link';
-import { useRef } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { z } from 'zod';
 
 const formSchema = z.object({
   slug: z.string().optional(),
@@ -53,6 +54,7 @@ const LessonItemUpdate = ({ lesson }: { lesson: LessonProps }) => {
         lessonId: lesson._id,
         updateData: values,
       });
+
       if (res?.success) {
         toast.success('Cập nhật bài học thành công');
       }
@@ -62,6 +64,7 @@ const LessonItemUpdate = ({ lesson }: { lesson: LessonProps }) => {
     }
   }
   const { theme } = useTheme();
+
   return (
     <div>
       <Form {...form}>
@@ -116,7 +119,7 @@ const LessonItemUpdate = ({ lesson }: { lesson: LessonProps }) => {
                 </FormItem>
               )}
             />
-            <div></div>
+            <div />
             <FormField
               control={form.control}
               name="content"

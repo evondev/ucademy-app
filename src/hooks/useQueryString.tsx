@@ -1,7 +1,8 @@
 'use client';
-import { allValue } from '@/shared/constants';
 import { debounce } from 'lodash';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+import { allValue } from '@/shared/constants';
 
 export default function useQueryString() {
   const searchParams = useSearchParams();
@@ -10,6 +11,7 @@ export default function useQueryString() {
   const currentPage = Number(searchParams.get('page')) || 1;
   const createQueryString = (name: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
+
     params.set(name, value);
     if (value === '' || value === allValue) {
       params.delete(name);
@@ -33,6 +35,7 @@ export default function useQueryString() {
   const handleChangeQs = (key: string, value: string) => {
     createQueryString(key, value);
   };
+
   return {
     createQueryString,
     router,

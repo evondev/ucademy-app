@@ -1,4 +1,7 @@
 'use client';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+
 import useQueryString from '@/hooks/useQueryString';
 import { updateOrder } from '@/lib/actions/order.actions';
 import { cn } from '@/lib/utils';
@@ -28,14 +31,13 @@ import {
 } from '@/shared/components/ui/table';
 import { allValue, commonClassNames, orderStatus } from '@/shared/constants';
 import { OrderStatus } from '@/shared/types/enums';
-import { toast } from 'react-toastify';
-import Swal from 'sweetalert2';
+
 import { OrderManagePageProps } from '../types/order.types';
 
 const OrderManagePage = ({
   orders = [],
-  totalPages = 1,
   total,
+  totalPages = 1,
 }: OrderManagePageProps) => {
   const handleUpdateOrder = async ({
     orderId,
@@ -59,6 +61,7 @@ const OrderManagePage = ({
     }
     if (status === OrderStatus.COMPLETED) {
       const res = await updateOrder({ orderId, status });
+
       if (res?.success) {
         toast.success('Cập nhật đơn hàng thành công');
       }
@@ -118,6 +121,7 @@ const OrderManagePage = ({
               const orderStatusItem = orderStatus.find(
                 (item) => item.value === order.status,
               );
+
               return (
                 <TableRow key={order.code}>
                   <TableCell>
@@ -145,7 +149,7 @@ const OrderManagePage = ({
                     <strong>{order.coupon?.code || ''}</strong>
                   </TableCell>
                   <TableCell>
-                    <BadgeStatus item={orderStatusItem}></BadgeStatus>
+                    <BadgeStatus item={orderStatusItem} />
                   </TableCell>
                   <TableCell>
                     {order.status !== OrderStatus.CANCELED && (
@@ -187,7 +191,7 @@ const OrderManagePage = ({
       <Pagination
         total={total}
         totalPages={totalPages}
-      ></Pagination>
+      />
     </div>
   );
 };

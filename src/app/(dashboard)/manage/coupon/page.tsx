@@ -1,5 +1,6 @@
 import { getCoupons } from '@/lib/actions/coupon.actions';
 import { ITEMS_PER_PAGE } from '@/shared/constants';
+
 import CouponManage from './CouponManage';
 
 const page = async ({
@@ -17,6 +18,7 @@ const page = async ({
     search: searchParams.search,
     active: searchParams.active,
   });
+
   if (!data) return null;
   const { coupons, total } = data;
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
@@ -26,7 +28,7 @@ const page = async ({
       coupons={coupons}
       total={total}
       totalPages={totalPages}
-    ></CouponManage>
+    />
   );
 };
 

@@ -1,5 +1,6 @@
+import { Document, model, models, Schema } from 'mongoose';
+
 import { CourseLevel, CourseStatus } from '@/types/enums';
-import { Document, Schema, model, models } from 'mongoose';
 
 export interface CourseProps extends Document {
   _id: string;
@@ -112,4 +113,5 @@ const courseSchema = new Schema<CourseProps>({
   },
 });
 const Course = models.Course || model<CourseProps>('Course', courseSchema);
+
 export default Course;

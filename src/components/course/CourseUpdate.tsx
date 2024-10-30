@@ -1,7 +1,12 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { useImmer } from 'use-immer';
 import { z } from 'zod';
 
 import { CourseProps } from '@/database/course.model';
@@ -27,11 +32,7 @@ import { Textarea } from '@/shared/components/ui/textarea';
 import { courseLevel, courseStatus } from '@/shared/constants';
 import { CourseLevel, CourseStatus } from '@/types/enums';
 import { UploadButton } from '@/utils/uploadthing';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { useImmer } from 'use-immer';
+
 import { IconAdd } from '../../shared/components/icons';
 
 const formSchema = z.object({
@@ -113,6 +114,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
           image: values.image,
         },
       });
+
       if (values.slug !== data.slug) {
         router.replace(`/manage/course/update?slug=${values.slug}`);
       }
@@ -126,6 +128,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
     }
   }
   const imageWatch = form.watch('image');
+
   return (
     <Form {...form}>
       <form

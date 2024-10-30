@@ -1,6 +1,7 @@
-import { CommentItem } from '@/types';
 import { ObjectId } from 'mongoose';
 import { Manrope } from 'next/font/google';
+
+import { CommentItem } from '@/types';
 
 const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
 
@@ -9,12 +10,14 @@ export const createOrderCode = () =>
 
 export const formatNumberToK = (views: number) => {
   if (views < 1000) return views;
+
   return `${(views / 1000).toFixed(1)}k`;
 };
 
 export const formatMinutesToHour = (minutes: number) => {
   const hours = Math.floor(minutes / 60);
   const remainMinutes = minutes % 60;
+
   return `${hours}h${remainMinutes}p`;
 };
 
@@ -31,11 +34,13 @@ export const timeAgo = (date: string | Date) => {
   const days = Math.floor(hours / 24);
   const months = Math.floor(days / 30);
   const years = Math.floor(months / 12);
+
   if (years) return `${years} năm trước`;
   if (months) return `${months} tháng trước`;
   if (days) return `${days} ngày trước`;
   if (hours) return `${hours} giờ trước`;
   if (minutes) return `${minutes} phút trước`;
+
   return `${seconds} giây trước`;
 };
 

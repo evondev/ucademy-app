@@ -1,9 +1,11 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import UserSchema from '@/database/user.model';
 import { connectToDatabase } from '@/lib/mongoose';
 import { CommentItem } from '@/types';
-import { revalidatePath } from 'next/cache';
+
 import CommentSchema from './comment.schema';
 
 export async function createComment(params: {
@@ -17,8 +19,10 @@ export async function createComment(params: {
   try {
     connectToDatabase();
     const newComment = await CommentSchema.create(params);
+
     revalidatePath(params.path || '/');
     if (!newComment) return false;
+
     return true;
   } catch (error) {
     console.log(error);
@@ -39,6 +43,7 @@ export async function getCommentsByLesson(
         model: UserSchema,
         select: 'name avatar',
       });
+
     return JSON.parse(JSON.stringify(comments));
   } catch (error) {
     console.log(error);

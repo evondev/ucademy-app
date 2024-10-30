@@ -1,7 +1,11 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import slugify from 'slugify';
 import { z } from 'zod';
 
 import { User } from '@/database/user.model';
@@ -16,10 +20,6 @@ import {
   FormMessage,
 } from '@/shared/components/ui/form';
 import { Input } from '@/shared/components/ui/input';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import slugify from 'slugify';
 
 const formSchema = z.object({
   title: z.string().min(10, 'Tên khóa học phải có ít nhất 10 ký tự'),
@@ -51,8 +51,10 @@ function CourseAddNew({ user }: { user: User }) {
         author: user._id,
       };
       const res = await createCourse(data);
+
       if (!res?.success) {
         toast.error(res?.message);
+
         return;
       }
       toast.success('Tạo khóa học thành công');

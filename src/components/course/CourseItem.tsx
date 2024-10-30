@@ -1,15 +1,18 @@
 'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
 import { getCourseLessonsInfo } from '@/lib/actions/course.actions';
 import { commonClassNames } from '@/shared/constants';
 import { StudyCoursesProps } from '@/types';
 import { formatMinutesToHour, formatNumberToK } from '@/utils';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+
 import { IconClock, IconEye, IconStar } from '../../shared/components/icons';
+
 const CourseItem = ({
-  data,
   cta,
+  data,
   url = '',
 }: {
   data: StudyCoursesProps;
@@ -17,9 +20,11 @@ const CourseItem = ({
   url?: string;
 }) => {
   const [duration, setDuration] = useState(0);
+
   useEffect(() => {
     async function getDuration() {
       const res = await getCourseLessonsInfo({ slug: data.slug });
+
       setDuration(res?.duration || 0);
     }
     getDuration();
@@ -27,20 +32,19 @@ const CourseItem = ({
   const courseInfo = [
     {
       title: formatNumberToK(data.views),
-      icon: (className?: string) => <IconEye className={className}></IconEye>,
+      icon: (className?: string) => <IconEye className={className} />,
     },
     {
       title: 5,
-      icon: (className?: string) => <IconStar className={className}></IconStar>,
+      icon: (className?: string) => <IconStar className={className} />,
     },
     {
       title: formatMinutesToHour(duration),
-      icon: (className?: string) => (
-        <IconClock className={className}></IconClock>
-      ),
+      icon: (className?: string) => <IconClock className={className} />,
     },
   ];
   const courseUrl = url ? url : `/course/${data.slug}`;
+
   return (
     <div className="flex flex-col rounded-2xl border border-gray-200 bg-white p-4 dark:border-opacity-10 dark:bg-grayDarker">
       <Link

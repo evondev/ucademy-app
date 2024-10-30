@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {
   IconCheck,
   IconDelete,
@@ -6,7 +8,7 @@ import {
   IconStudy,
 } from '@/shared/components/icons';
 import { commonClassNames } from '@/shared/constants';
-import Link from 'next/link';
+
 type TableActionIcon = 'edit' | 'delete' | 'view' | 'study' | 'approve';
 const TableActionItem = ({
   onClick,
@@ -24,6 +26,7 @@ const TableActionItem = ({
     study: <IconStudy />,
     approve: <IconCheck />,
   };
+
   if (url)
     return (
       <Link
@@ -33,6 +36,7 @@ const TableActionItem = ({
         {icon[type]}
       </Link>
     );
+
   return (
     <button
       className={commonClassNames.action}

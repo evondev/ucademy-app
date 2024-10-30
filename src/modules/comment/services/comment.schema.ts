@@ -1,5 +1,6 @@
+import { Document, model, models, Schema } from 'mongoose';
+
 import { CommentStatus } from '@/shared/types/enums';
-import { Document, Schema, model, models } from 'mongoose';
 
 export interface Comment extends Document {
   _id: string;
@@ -45,4 +46,5 @@ const commentSchema = new Schema<Comment>({
 });
 const CommentSchema =
   models.Comment || model<Comment>('Comment', commentSchema);
+
 export default CommentSchema;

@@ -17,10 +17,11 @@ const page = async ({
     search: searchParams.search,
     status: searchParams.status,
   });
+
   return (
     <CourseManage
       courses={courses ? JSON.parse(JSON.stringify(courses)) : []}
-    ></CourseManage>
+    />
   );
 };
 

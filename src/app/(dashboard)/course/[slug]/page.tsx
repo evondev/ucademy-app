@@ -1,3 +1,6 @@
+import { auth } from '@clerk/nextjs/server';
+import Image from 'next/image';
+
 import PageNotFound from '@/app/not-found';
 import LessonContent from '@/components/lesson/LessonContent';
 import {
@@ -15,8 +18,7 @@ import {
 import { courseLevelTitle } from '@/shared/constants';
 import { CourseStatus } from '@/types/enums';
 import { formatMinutesToHour } from '@/utils';
-import { auth } from '@clerk/nextjs/server';
-import Image from 'next/image';
+
 import AlreadyEnroll from './AlreadyEnroll';
 import CourseWidget from './CourseWidget';
 
@@ -31,6 +33,7 @@ const page = async ({
   const data = await getCourseBySlug({
     slug: params.slug,
   });
+
   if (!data) return null;
   if (data.status !== CourseStatus.APPROVED) return <PageNotFound />;
   const { userId } = auth();
@@ -42,6 +45,7 @@ const page = async ({
     slug: data.slug,
   });
   const ratings = data.rating.map((r: any) => r.content);
+
   return (
     <div className="grid min-h-screen gap-10 lg:grid-cols-[2fr,1fr]">
       <div>
@@ -55,7 +59,7 @@ const page = async ({
                 src={`https://www.youtube.com/embed/${videoId}`}
                 title="BLACK MYTH WUKONG New Insane Combat Preview and Gameplay Demo | EXCLUSIVE PS5 and PC Launch"
                 width="853"
-              ></iframe>
+              />
             </>
           ) : (
             <Image
@@ -95,7 +99,7 @@ const page = async ({
             course=""
             lectures={lectures}
             slug=""
-          ></LessonContent>
+          />
         </BoxSection>
         <BoxSection title="Yêu cầu">
           {data.info.requirements.map((r, index) => (
@@ -166,13 +170,13 @@ const page = async ({
       </div>
       <div>
         {userCourses?.includes(data._id.toString()) ? (
-          <AlreadyEnroll></AlreadyEnroll>
+          <AlreadyEnroll />
         ) : (
           <CourseWidget
             data={data ? JSON.parse(JSON.stringify(data)) : null}
             duration={formatMinutesToHour(duration)}
             findUser={findUser ? JSON.parse(JSON.stringify(findUser)) : null}
-          ></CourseWidget>
+          />
         )}
       </div>
     </div>
@@ -180,8 +184,8 @@ const page = async ({
 };
 
 function BoxInfo({
-  title,
   children,
+  title,
 }: {
   title: string;
   children: React.ReactNode;
@@ -195,8 +199,8 @@ function BoxInfo({
 }
 
 function BoxSection({
-  title,
   children,
+  title,
 }: {
   title: string;
   children: React.ReactNode;

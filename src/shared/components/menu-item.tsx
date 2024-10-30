@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ActiveLink from './active-link';
 
 interface MenuItemProps {
@@ -8,7 +9,7 @@ interface MenuItemProps {
   onlyIcon?: boolean;
 }
 
-const MenuItem = ({ url = '/', title = '', icon, onlyIcon }: MenuItemProps) => {
+const MenuItem = ({ icon, onlyIcon, title = '', url = '/' }: MenuItemProps) => {
   return (
     <li>
       <ActiveLink url={url}>

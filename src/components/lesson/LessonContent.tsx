@@ -6,13 +6,14 @@ import {
   AccordionTrigger,
 } from '@/shared/components/ui/accordion';
 import { UpdateCourseLecture } from '@/types';
+
 import LessonItem from './LessonItem';
 
 const LessonContent = ({
-  lectures,
   course,
-  slug,
   histories = [],
+  lectures,
+  slug,
 }: {
   lectures: UpdateCourseLecture[];
   course: string;
@@ -45,7 +46,7 @@ const LessonContent = ({
                     isChecked={histories.some(
                       (el) => el.lesson.toString() === lesson._id.toString(),
                     )}
-                  ></LessonItem>
+                  />
                 ))}
               </div>
             </AccordionContent>

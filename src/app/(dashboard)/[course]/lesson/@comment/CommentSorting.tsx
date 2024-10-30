@@ -1,7 +1,8 @@
 'use client';
 
-import useQueryString from '@/hooks/useQueryString';
 import { useSearchParams } from 'next/navigation';
+
+import useQueryString from '@/hooks/useQueryString';
 
 const CommentSorting = () => {
   const params = useSearchParams();
@@ -10,6 +11,7 @@ const CommentSorting = () => {
   const handleSortComment = () => {
     createQueryString('sort', sortValue === 'recent' ? 'oldest' : 'recent');
   };
+
   return (
     <button
       className="flex items-center gap-2 text-sm font-medium"
