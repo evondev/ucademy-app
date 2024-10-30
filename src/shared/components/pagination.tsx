@@ -130,12 +130,12 @@ function PaginationButton({
   disabled,
   onClick,
 }: IPaginationButtonProps) {
-  const paginationBtnClassNames =
+  const paginationButtonClassNames =
     'size-10 rounded-full bg-white shadow-sm p-2 flex items-center justify-center disabled:bg-gray-200';
 
   return (
     <button
-      className={paginationBtnClassNames}
+      className={paginationButtonClassNames}
       disabled={disabled}
       onClick={onClick}
     >

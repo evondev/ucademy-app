@@ -101,8 +101,8 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
   const [page, setPage] = useState(1);
   const handleChangePage = (type: 'prev' | 'next') => {
     if (type === 'prev' && page === 1) return;
-    if (type === 'prev') setPage((prev) => prev - 1);
-    if (type === 'next') setPage((prev) => prev + 1);
+    if (type === 'prev') setPage((previous) => previous - 1);
+    if (type === 'next') setPage((previous) => previous + 1);
   };
 
   // useEffect(() => {

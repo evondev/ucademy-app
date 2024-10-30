@@ -105,10 +105,10 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
   );
   const handleSelectCourse = (checked: boolean | string, course: any) => {
     if (checked) {
-      setSelectedCourses((prev) => [...prev, course]);
+      setSelectedCourses((previous) => [...previous, course]);
     } else {
-      setSelectedCourses((prev) =>
-        prev.filter((selectedCourse) => selectedCourse._id !== course._id),
+      setSelectedCourses((previous) =>
+        previous.filter((selectedCourse) => selectedCourse._id !== course._id),
       );
     }
   };
@@ -349,7 +349,7 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
                             <Checkbox
                               id={course.title}
                               checked={selectedCourses.some(
-                                (el) => el._id === course._id,
+                                (element) => element._id === course._id,
                               )}
                               onCheckedChange={(checked) =>
                                 handleSelectCourse(checked, course)

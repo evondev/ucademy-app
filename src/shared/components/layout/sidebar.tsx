@@ -32,15 +32,15 @@ const Sidebar = () => {
       </ul>
       <div className="mt-auto flex items-center justify-end gap-2">
         <ModeToggle />
-        {!userId ? (
+        {userId ? (
+          <UserButton />
+        ) : (
           <Link
             className="flex size-10 items-center justify-center rounded-lg bg-primary p-1 text-white"
             href="/sign-in"
           >
             <IconUsers />
           </Link>
-        ) : (
-          <UserButton />
         )}
       </div>
     </div>

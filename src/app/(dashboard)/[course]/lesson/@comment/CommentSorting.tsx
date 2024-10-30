@@ -32,7 +32,7 @@ const CommentSorting = () => {
           strokeLinejoin="round"
         />
       </svg>
-      {sortValue !== 'recent' ? 'Oldest' : 'Most recent'}
+      {sortValue === 'recent' ? 'Most recent' : 'Oldest'}
     </button>
   );
 };

@@ -61,7 +61,7 @@ function CourseAddNew({ user }: { user: User }) {
       if (res?.data) {
         router.push(`/manage/course/update?slug=${res.data.slug}`);
       }
-    } catch (error) {
+    } catch {
     } finally {
       setIsSubmitting(false);
     }

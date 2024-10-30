@@ -22,7 +22,7 @@ export async function createLecture(params: CreateLectureParams) {
     return {
       sucess: true,
     };
-  } catch (error) {}
+  } catch {}
 }
 export async function updateLecture(params: UpdateLectureParams) {
   try {

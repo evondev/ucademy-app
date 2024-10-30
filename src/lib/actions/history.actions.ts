@@ -16,19 +16,17 @@ export async function createHistory(params: CreateHistoryParams) {
     const findUser = await UserSchema.findOne({ clerkId: userId });
 
     if (!findUser) return;
-    if (params.checked) {
-      await History.create({
-        course: params.course,
-        lesson: params.lesson,
-        user: findUser._id,
-      });
-    } else {
-      await History.findOneAndDelete({
-        course: params.course,
-        lesson: params.lesson,
-        user: findUser._id,
-      });
-    }
+    await (params.checked
+      ? History.create({
+          course: params.course,
+          lesson: params.lesson,
+          user: findUser._id,
+        })
+      : History.findOneAndDelete({
+          course: params.course,
+          lesson: params.lesson,
+          user: findUser._id,
+        }));
     revalidatePath(params.path);
   } catch (error) {
     console.log(error);
@@ -49,5 +47,5 @@ export async function getHistory(params: {
     });
 
     return histories;
-  } catch (error) {}
+  } catch {}
 }

@@ -153,7 +153,7 @@ export async function updateCourseView({ slug }: { slug: string }) {
         $inc: { views: 1 },
       },
     );
-  } catch (error) {}
+  } catch {}
 }
 export async function getCourseLessonsInfo({ slug }: { slug: string }): Promise<
   | {
@@ -174,9 +174,9 @@ export async function getCourseLessonsInfo({ slug }: { slug: string }): Promise<
           select: 'duration',
         },
       });
-    const lessons = course?.lectures.map((l: any) => l.lessons).flat();
+    const lessons = course?.lectures.flatMap((l: any) => l.lessons);
     const duration = lessons.reduce(
-      (acc: number, cur: any) => acc + cur.duration,
+      (accumulator: number, current: any) => accumulator + current.duration,
       0,
     );
 
@@ -184,5 +184,5 @@ export async function getCourseLessonsInfo({ slug }: { slug: string }): Promise<
       duration,
       lessons: lessons.length,
     };
-  } catch (error) {}
+  } catch {}
 }

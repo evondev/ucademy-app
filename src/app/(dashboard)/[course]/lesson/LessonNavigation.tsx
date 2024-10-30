@@ -19,14 +19,14 @@ const LessonNavigation = ({
       <Button
         className="size-10 p-3"
         disabled={!prevLesson}
-        onClick={() => (!prevLesson ? null : router.push(prevLesson))}
+        onClick={() => (prevLesson ? router.push(prevLesson) : null)}
       >
         <IconLeftArrow />
       </Button>
       <Button
         className="size-10 p-3"
         disabled={!nextLesson}
-        onClick={() => (!nextLesson ? null : router.push(nextLesson))}
+        onClick={() => (nextLesson ? router.push(nextLesson) : null)}
       >
         <IconRightArrow />
       </Button>

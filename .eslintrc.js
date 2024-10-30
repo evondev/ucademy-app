@@ -5,6 +5,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/jsx-runtime',
+    'plugin:unicorn/recommended',
     'plugin:tailwindcss/recommended',
     'plugin:import/recommended',
     'plugin:prettier/recommended',
@@ -16,6 +17,7 @@ module.exports = {
     'import',
     'simple-import-sort',
     'sort-destructure-keys',
+    'unicorn',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -56,7 +58,7 @@ module.exports = {
       'error',
       {
         selector: 'variableLike',
-        format: ['camelCase'],
+        format: ['camelCase', 'UPPER_CASE'],
       },
       {
         selector: 'variable',
@@ -112,5 +114,26 @@ module.exports = {
       'error',
       { caseSensitive: true },
     ],
+    'unicorn/prevent-abbreviations': [
+      'error',
+      {
+        allowList: {
+          props: true,
+          Props: true,
+          ref: true,
+          Ref: true,
+          params: true,
+          Params: true,
+        },
+      },
+    ],
+    'unicorn/filename-case': [
+      'error',
+      {
+        case: 'kebabCase',
+      },
+    ],
+    'unicorn/no-null': 'off',
+    'unicorn/prefer-structured-clone': 'off',
   },
 };

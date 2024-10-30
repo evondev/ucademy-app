@@ -48,7 +48,7 @@ export async function fetchOrders(params: any) {
       orders: JSON.parse(JSON.stringify(orders)),
       total,
     };
-  } catch (error) {}
+  } catch {}
 }
 export async function createOrder(params: CreateOrderParams) {
   try {
@@ -107,7 +107,8 @@ export async function updateOrder({
       findOrder.status === OrderStatus.COMPLETED
     ) {
       findUser.courses = findUser.courses.filter(
-        (el: any) => el.toString() !== findOrder.course._id.toString(),
+        (element: any) =>
+          element.toString() !== findOrder.course._id.toString(),
       );
       await findUser.save();
     }

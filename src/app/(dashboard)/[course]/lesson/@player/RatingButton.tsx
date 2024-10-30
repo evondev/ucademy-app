@@ -57,7 +57,7 @@ const RatingButton = ({
         setRatingContent('');
         setRatingValue(-1);
       }
-    } catch (error) {
+    } catch {
     } finally {
       setIsLoading(false);
     }

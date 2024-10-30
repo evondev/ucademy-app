@@ -28,13 +28,13 @@ const page = async ({
   if (!findCourse) return null;
   const courseId = findCourse?._id.toString();
   const lessonList = await findAllLessons({ course: courseId || '' });
-  const lessonDetails = lessonList?.find((el) => el.slug === slug);
+  const lessonDetails = lessonList?.find((element) => element.slug === slug);
 
   if (!lessonDetails) return null;
   const currentLessonIndex =
-    lessonList?.findIndex((el) => el.slug === slug) || 0;
+    lessonList?.findIndex((element) => element.slug === slug) || 0;
   const nextLesson = lessonList?.[currentLessonIndex + 1];
-  const prevLesson = lessonList?.[currentLessonIndex - 1];
+  const previousLesson = lessonList?.[currentLessonIndex - 1];
   const videoId = lessonDetails.video_url?.split('v=').at(-1);
 
   return (
@@ -53,10 +53,10 @@ const page = async ({
           courseId,
         }}
         nextLesson={
-          !nextLesson ? '' : `/${course}/lesson?slug=${nextLesson?.slug}`
+          nextLesson ? `/${course}/lesson?slug=${nextLesson?.slug}` : ''
         }
         prevLesson={
-          !prevLesson ? '' : `/${course}/lesson?slug=${prevLesson?.slug}`
+          previousLesson ? `/${course}/lesson?slug=${previousLesson?.slug}` : ''
         }
       />
 

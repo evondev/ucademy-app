@@ -230,7 +230,14 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                 <FormControl>
                   <>
                     <div className="relative flex h-[250px] items-center justify-center rounded-md border border-gray-200 bg-white">
-                      {!imageWatch ? (
+                      {imageWatch ? (
+                        <Image
+                          fill
+                          alt=""
+                          className="size-full rounded-md object-cover"
+                          src={imageWatch}
+                        />
+                      ) : (
                         <UploadButton
                           endpoint="imageUploader"
                           onClientUploadComplete={(res) => {
@@ -240,13 +247,6 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                           onUploadError={(error: Error) => {
                             console.error(`ERROR! ${error.message}`);
                           }}
-                        />
-                      ) : (
-                        <Image
-                          fill
-                          alt=""
-                          className="size-full rounded-md object-cover"
-                          src={imageWatch}
                         />
                       )}
                     </div>

@@ -27,7 +27,7 @@ export async function createLesson(params: CreateLessonParams) {
     return {
       success: true,
     };
-  } catch (error) {}
+  } catch {}
 }
 export async function updateLesson(params: UpdateLessonParams) {
   try {
@@ -45,7 +45,7 @@ export async function updateLesson(params: UpdateLessonParams) {
       success: true,
     };
     revalidatePath(params.path || '/');
-  } catch (error) {}
+  } catch {}
 }
 export async function getLessonBySlug({
   course,

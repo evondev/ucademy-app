@@ -130,7 +130,7 @@ const LessonItemUpdate = ({ lesson }: { lesson: LessonProps }) => {
                     <Editor
                       apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
                       value={field.value}
-                      onInit={(_evt, editor) => {
+                      onInit={(_event, editor) => {
                         (editorRef.current = editor).setContent(
                           lesson.content || '',
                         );

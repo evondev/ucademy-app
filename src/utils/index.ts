@@ -5,8 +5,7 @@ import { CommentItem } from '@/types';
 
 const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
 
-export const createOrderCode = () =>
-  `DH-${new Date().getTime().toString().slice(-6)}`;
+export const createOrderCode = () => `DH-${Date.now().toString().slice(-6)}`;
 
 export const formatNumberToK = (views: number) => {
   if (views < 1000) return views;

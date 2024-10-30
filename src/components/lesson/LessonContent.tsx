@@ -40,11 +40,12 @@ const LessonContent = ({
                 {lecture.lessons.map((lesson) => (
                   <LessonItem
                     key={lesson._id}
-                    isActive={!slug ? false : lesson.slug === slug}
+                    isActive={slug ? lesson.slug === slug : false}
                     lesson={lesson ? JSON.parse(JSON.stringify(lesson)) : {}}
-                    url={!course ? '' : `/${course}/lesson?slug=${lesson.slug}`}
+                    url={course ? `/${course}/lesson?slug=${lesson.slug}` : ''}
                     isChecked={histories.some(
-                      (el) => el.lesson.toString() === lesson._id.toString(),
+                      (element) =>
+                        element.lesson.toString() === lesson._id.toString(),
                     )}
                   />
                 ))}

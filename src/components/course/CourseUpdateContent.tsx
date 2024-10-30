@@ -108,10 +108,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
         lecture: lectureId,
         course: courseId,
         title: 'Tiêu đề bài học mới',
-        slug: `tieu-de-bai-hoc-moi-${new Date()
-          .getTime()
-          .toString()
-          .slice(-3)}`,
+        slug: `tieu-de-bai-hoc-moi-${Date.now().toString().slice(-3)}`,
       });
 
       if (res?.success) {
@@ -148,7 +145,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
         setLessonEdit('');
         setLessonIdEdit('');
       }
-    } catch (error) {}
+    } catch {}
   };
 
   return (

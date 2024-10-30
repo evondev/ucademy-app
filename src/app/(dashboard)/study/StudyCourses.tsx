@@ -30,7 +30,8 @@ const StudyCourses = ({
         courses.length > 0 &&
         courses?.map((item) => {
           const url =
-            lastLesson.find((el: any) => el.course === item.slug)?.lesson || '';
+            lastLesson.find((element: any) => element.course === item.slug)
+              ?.lesson || '';
           const firstLessonUrl = item.lectures[0].lessons[0].slug;
 
           return (
