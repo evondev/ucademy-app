@@ -107,13 +107,15 @@
 - kebab-case ✅
 - camelCase
 
-## Components
+## Components ✅
 
 - Icon component svg
 - props: on, handle, destructuring
 - Nếu props truyền vào component mà là sự kiện thì nên đặt tên bắt đầu với on ví dụ: `onChange`, `onOpenModal` `onRemoveText`
 - Những function xử lý bên trong component, gọi là internal function thì thường hay bắt đầu với từ handle. Ví dụ: `handleUpdateData`, `handleChangeValue`
 - Nếu mà props truyền vào từ 2 trở lên thì nên sử dụng destructuring
+
+## Prettier ✅
 
 ## Eslint
 
@@ -124,32 +126,61 @@
 - Sort destructure keys
 - Import/Export
 
+## Structure
+
 ## Commit
 
-## Prettier
+- Commitlint with Husky
 
 ## Client side vs Server side
 
-- Tanstack query
-- Client components
-- Server components
-- Server actions
+## Tanstack query
+
+## Client components
+
+## Server components
+
+## Server actions
+
+## Routes
+
+- Parallel routes
+- Intercepting routes
 
 ## Performance
 
 ## Data Fetching
 
-# Notification
+## Caching
 
-# User
+## Streaming
+
+## Linking
+
+## Navigating
+
+## Error handling
+
+## Loading UI
+
+## Redirecting
+
+## Partial Prerendering
+
+## Storybook
+
+# Other features
+
+## Notification
+
+## User
+
+## Optimize UI UX
 
 # Final
 
-- Hydration
-- SSG
-- Intercepting Routes
-- CRUD - DragnDrop Lecture - Lesson
-- Check already bought course
-- Optimize UI UX
+- DragnDrop Lecture - Lesson
+- Test project features
 - Interview questions
-- English interview tips
+
+# What's next?
