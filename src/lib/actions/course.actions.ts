@@ -153,7 +153,9 @@ export async function updateCourseView({ slug }: { slug: string }) {
         $inc: { views: 1 },
       },
     );
-  } catch {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 export async function getCourseLessonsInfo({ slug }: { slug: string }): Promise<
   | {
@@ -184,5 +186,7 @@ export async function getCourseLessonsInfo({ slug }: { slug: string }): Promise<
       duration,
       lessons: lessons.length,
     };
-  } catch {}
+  } catch (error) {
+    console.log(error);
+  }
 }

@@ -7,12 +7,7 @@ import { Checkbox } from '@/shared/components/ui/checkbox';
 
 import { IconPlay } from '../../shared/components/icons';
 
-const LessonItem = ({
-  isActive = false,
-  isChecked = false,
-  lesson,
-  url,
-}: {
+interface LessonItemProps {
   lesson: {
     title: string;
     duration: number;
@@ -22,7 +17,13 @@ const LessonItem = ({
   url?: string;
   isActive?: boolean;
   isChecked?: boolean;
-}) => {
+}
+const LessonItem = ({
+  isActive = false,
+  isChecked = false,
+  lesson,
+  url,
+}: LessonItemProps) => {
   const handleCompleteLesson = async (checked: boolean | string) => {
     try {
       await createHistory({

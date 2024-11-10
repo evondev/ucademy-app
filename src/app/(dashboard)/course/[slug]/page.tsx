@@ -2,7 +2,7 @@ import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image';
 
 import PageNotFound from '@/app/not-found';
-import LessonContent from '@/components/lesson/LessonContent';
+import LessonContent from '@/components/lesson/lesson-content';
 import {
   getCourseBySlug,
   getCourseLessonsInfo,
@@ -19,8 +19,8 @@ import { courseLevelTitle } from '@/shared/constants';
 import { CourseStatus } from '@/types/enums';
 import { formatMinutesToHour } from '@/utils';
 
-import AlreadyEnroll from './AlreadyEnroll';
-import CourseWidget from './CourseWidget';
+import AlreadyEnroll from './already-enroll';
+import CourseWidget from './course-widget';
 
 const page = async ({
   params,

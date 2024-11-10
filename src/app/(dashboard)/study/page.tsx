@@ -3,7 +3,7 @@ import { auth } from '@clerk/nextjs/server';
 import { getUserCourses } from '@/lib/actions/user.actions';
 import { Heading } from '@/shared/components';
 
-import StudyCourses from './StudyCourses';
+import StudyCourses from './studey-courses';
 
 const page = async () => {
   const { userId } = auth();

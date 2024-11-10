@@ -1,4 +1,4 @@
-import LessonContent from '@/components/lesson/LessonContent';
+import LessonContent from '@/components/lesson/lesson-content';
 import { getCourseBySlug } from '@/lib/actions/course.actions';
 import { getHistory } from '@/lib/actions/history.actions';
 import { countLessonByCourseId } from '@/lib/actions/lesson.actions';

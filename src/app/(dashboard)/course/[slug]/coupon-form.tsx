@@ -1,23 +1,30 @@
 'use client';
 import { debounce } from 'lodash';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import { toast } from 'react-toastify';
 
-import { getValidateCoupon } from '@/lib/actions/coupon.actions';
+import { getValidateCoupon } from '@/modules/coupon/services/coupon.actions';
 import { Input } from '@/shared/components/ui/input';
 import { CouponType } from '@/types/enums';
 
+interface CouponFormProps {
+  originalPrice: number;
+  courseId: string;
+  setPrice: Dispatch<SetStateAction<number>>;
+  setCouponId: Dispatch<SetStateAction<string>>;
+}
 const CouponForm = ({
   courseId,
   originalPrice,
   setCouponId,
   setPrice,
-}: {
-  originalPrice: number;
-  courseId: string;
-  setPrice: Dispatch<SetStateAction<number>>;
-  setCouponId: Dispatch<SetStateAction<string>>;
-}) => {
+}: CouponFormProps) => {
   const [isApplied, setIsApplied] = useState(false);
   const [couponCode, setCouponCode] = useState('');
 
@@ -57,9 +64,12 @@ const CouponForm = ({
       console.log(error);
     }
   };
-  const handleChangeCoupon = debounce((e: any) => {
-    setCouponCode(e.target.value);
-  }, 500);
+  const handleChangeCoupon = debounce(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setCouponCode(event.target.value);
+    },
+    500,
+  );
 
   return (
     <div className="relative mt-5">

@@ -29,7 +29,7 @@ import { allValue, couponStatuses } from '@/shared/constants';
 import { CouponItem } from '@/types';
 import { CouponType } from '@/types/enums';
 
-import ActionDeleteCoupon from './ActionDeleteCoupon';
+import ActionDeleteCoupon from './action-delete-coupon';
 
 const CouponManage = ({
   coupons,

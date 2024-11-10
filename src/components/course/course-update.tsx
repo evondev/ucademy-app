@@ -94,7 +94,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      const res = await updateCourse({
+      const response = await updateCourse({
         slug: data.slug,
         updateData: {
           title: values.title,
@@ -118,8 +118,8 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
       if (values.slug !== data.slug) {
         router.replace(`/manage/course/update?slug=${values.slug}`);
       }
-      if (res?.success) {
-        toast.success(res.message);
+      if (response?.success) {
+        toast.success(response.message);
       }
     } catch (error) {
       console.log(error);
@@ -179,7 +179,9 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                     placeholder="599.000"
                     type="number"
                     {...field}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
+                    onChange={(event) =>
+                      field.onChange(Number(event.target.value))
+                    }
                   />
                 </FormControl>
                 <FormMessage />
@@ -197,7 +199,9 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                     placeholder="999.000"
                     type="number"
                     {...field}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
+                    onChange={(event) =>
+                      field.onChange(Number(event.target.value))
+                    }
                   />
                 </FormControl>
                 <FormMessage />
@@ -224,7 +228,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
           <FormField
             control={form.control}
             name="image"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormLabel>Ảnh đại diện</FormLabel>
                 <FormControl>
@@ -240,9 +244,9 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                       ) : (
                         <UploadButton
                           endpoint="imageUploader"
-                          onClientUploadComplete={(res) => {
+                          onClientUploadComplete={(response) => {
                             // Do something with the response
-                            form.setValue('image', res[0].url);
+                            form.setValue('image', response[0].url);
                           }}
                           onUploadError={(error: Error) => {
                             console.error(`ERROR! ${error.message}`);
@@ -283,7 +287,9 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                     placeholder="1000"
                     type="number"
                     {...field}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
+                    onChange={(event) =>
+                      field.onChange(Number(event.target.value))
+                    }
                   />
                 </FormControl>
                 <FormMessage />
@@ -353,7 +359,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
           <FormField
             control={form.control}
             name="info.requirements"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormLabel className="flex items-center justify-between gap-5">
                   <span>Yêu cầu</span>
@@ -376,9 +382,9 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                         key={index}
                         placeholder={`Yêu cầu số ${index + 1}`}
                         value={r}
-                        onChange={(e) => {
+                        onChange={(event) => {
                           setCourseInfo((draft) => {
-                            draft.requirements[index] = e.target.value;
+                            draft.requirements[index] = event.target.value;
                           });
                         }}
                       />
@@ -392,7 +398,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
           <FormField
             control={form.control}
             name="info.benefits"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormLabel className="flex items-center justify-between gap-5">
                   <span>Lợi ích</span>
@@ -415,9 +421,9 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                         key={index}
                         placeholder={`Lợi ích số ${index + 1}`}
                         value={r}
-                        onChange={(e) => {
+                        onChange={(event) => {
                           setCourseInfo((draft) => {
-                            draft.benefits[index] = e.target.value;
+                            draft.benefits[index] = event.target.value;
                           });
                         }}
                       />
@@ -431,7 +437,7 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
           <FormField
             control={form.control}
             name="info.qa"
-            render={({ field }) => (
+            render={() => (
               <FormItem className="col-start-1 col-end-3">
                 <FormLabel className="flex items-center justify-between gap-5">
                   <span>Q.A</span>
@@ -461,9 +467,9 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                           key={index}
                           placeholder={`Câu hỏi số ${index + 1}`}
                           value={item.question}
-                          onChange={(e) => {
+                          onChange={(event) => {
                             setCourseInfo((draft) => {
-                              draft.qa[index].question = e.target.value;
+                              draft.qa[index].question = event.target.value;
                             });
                           }}
                         />
@@ -471,9 +477,9 @@ const CourseUpdate = ({ data }: { data: CourseProps }) => {
                           key={index}
                           placeholder={`Câu trả lời số ${index + 1}`}
                           value={item.answer}
-                          onChange={(e) => {
+                          onChange={(event) => {
                             setCourseInfo((draft) => {
-                              draft.qa[index].answer = e.target.value;
+                              draft.qa[index].answer = event.target.value;
                             });
                           }}
                         />

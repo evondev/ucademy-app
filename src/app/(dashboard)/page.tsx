@@ -1,4 +1,4 @@
-import CourseItem from '@/components/course/CourseItem';
+import CourseItem from '@/components/course/course-item';
 import { getAllCoursesPublic } from '@/lib/actions/course.actions';
 import { CourseGrid, Heading } from '@/shared/components';
 

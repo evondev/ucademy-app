@@ -1,7 +1,7 @@
 'use client';
 import Swal from 'sweetalert2';
 
-import { deleteCoupon } from '@/lib/actions/coupon.actions';
+import { deleteCoupon } from '@/modules/coupon/services/coupon.actions';
 import { TableActionItem } from '@/shared/components';
 
 const ActionDeleteCoupon = ({ code }: { code: string }) => {

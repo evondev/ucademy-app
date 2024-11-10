@@ -1,4 +1,4 @@
-import CourseUpdateContent from '@/components/course/CourseUpdateContent';
+import CourseUpdateContent from '@/components/course/course-update-content';
 import { getCourseBySlug } from '@/lib/actions/course.actions';
 import { Heading } from '@/shared/components';
 

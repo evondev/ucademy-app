@@ -58,7 +58,9 @@ module.exports = {
       'error',
       {
         selector: 'variableLike',
-        format: ['camelCase', 'UPPER_CASE'],
+        format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+        leadingUnderscore: 'allow',
+        trailingUnderscore: 'allow',
       },
       {
         selector: 'variable',
@@ -135,5 +137,9 @@ module.exports = {
     ],
     'unicorn/no-null': 'off',
     'unicorn/prefer-structured-clone': 'off',
+    'unicorn/consistent-function-scoping': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    'unicorn/no-array-callback-reference': 'off',
+    'import/named': 'off',
   },
 };

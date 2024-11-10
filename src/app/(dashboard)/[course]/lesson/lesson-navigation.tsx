@@ -5,13 +5,14 @@ import { useRouter } from 'next/navigation';
 import { IconLeftArrow, IconRightArrow } from '@/shared/components/icons';
 import { Button } from '@/shared/components/ui/button';
 
+interface LessonNavigationProps {
+  nextLesson: string;
+  prevLesson: string;
+}
 const LessonNavigation = ({
   nextLesson,
   prevLesson,
-}: {
-  nextLesson: string;
-  prevLesson: string;
-}) => {
+}: LessonNavigationProps) => {
   const router = useRouter();
 
   return (

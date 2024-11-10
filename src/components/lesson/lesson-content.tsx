@@ -7,19 +7,20 @@ import {
 } from '@/shared/components/ui/accordion';
 import { UpdateCourseLecture } from '@/types';
 
-import LessonItem from './LessonItem';
+import LessonItem from './lesson-item';
 
+interface LessonContentProps {
+  lectures: UpdateCourseLecture[];
+  course: string;
+  slug: string;
+  histories?: HistoryProps[];
+}
 const LessonContent = ({
   course,
   histories = [],
   lectures,
   slug,
-}: {
-  lectures: UpdateCourseLecture[];
-  course: string;
-  slug: string;
-  histories?: HistoryProps[];
-}) => {
+}: LessonContentProps) => {
   return (
     <div className="flex flex-col gap-5">
       {lectures.map((lecture: UpdateCourseLecture) => (

@@ -2,10 +2,10 @@
 import { FilterQuery } from 'mongoose';
 import { revalidatePath } from 'next/cache';
 
-import Coupon from '@/database/coupon.model';
 import Course from '@/database/course.model';
 import Order from '@/database/order.model';
 import { default as UserSchema } from '@/database/user.model';
+import CouponSchema from '@/modules/coupon/services/coupon.schema';
 import { CreateOrderParams } from '@/types';
 import { OrderStatus } from '@/types/enums';
 
@@ -48,7 +48,9 @@ export async function fetchOrders(params: any) {
       orders: JSON.parse(JSON.stringify(orders)),
       total,
     };
-  } catch {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 export async function createOrder(params: CreateOrderParams) {
   try {
@@ -57,7 +59,7 @@ export async function createOrder(params: CreateOrderParams) {
     const newOrder = await Order.create(params);
 
     if (params.coupon) {
-      await Coupon.findByIdAndUpdate(params.coupon, {
+      await CouponSchema.findByIdAndUpdate(params.coupon, {
         $inc: { used: 1 },
       });
     }

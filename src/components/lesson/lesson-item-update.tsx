@@ -1,8 +1,8 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Editor } from '@tinymce/tinymce-react';
-import Link from 'next/link';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -50,17 +50,16 @@ const LessonItemUpdate = ({ lesson }: { lesson: LessonProps }) => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const res = await updateLesson({
+      const response = await updateLesson({
         lessonId: lesson._id,
         updateData: values,
       });
 
-      if (res?.success) {
+      if (response?.success) {
         toast.success('Cập nhật bài học thành công');
       }
     } catch (error) {
       console.log(error);
-    } finally {
     }
   }
   const { theme } = useTheme();
@@ -96,7 +95,9 @@ const LessonItemUpdate = ({ lesson }: { lesson: LessonProps }) => {
                     <Input
                       placeholder="bai-1-tong-quan"
                       {...field}
-                      onChange={(e) => field.onChange(Number(e.target.value))}
+                      onChange={(event) =>
+                        field.onChange(Number(event.target.value))
+                      }
                     />
                   </FormControl>
                   <FormMessage />

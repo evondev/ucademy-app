@@ -7,24 +7,21 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/shared/components/ui/button';
 import useGlobalStore from '@/store';
 
-import LessonNavigation from '../LessonNavigation';
-import RatingButton from './RatingButton';
+import LessonNavigation from '../lesson-navigation';
+import RatingButton from './rating-button';
 
-const VideoPlayer = ({
-  data,
-  nextLesson,
-  prevLesson,
-}: {
+interface VideoPlayerProps {
   nextLesson: string;
   prevLesson: string;
   data: {
     userId: string;
     courseId: string;
   };
-}) => {
+}
+const VideoPlayer = ({ data, nextLesson, prevLesson }: VideoPlayerProps) => {
   const duration = 5000;
   const [isEndedVideo, setIsEndedVideo] = useState(false);
-  const { expandedPlayer, setExpandedPlayer } = useGlobalStore();
+  const { setShouldExpandedPlayer, shouldExpandedPlayer } = useGlobalStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -67,8 +64,10 @@ const VideoPlayer = ({
             courseId={data.courseId}
             userId={data.userId}
           />
-          <Button onClick={() => setExpandedPlayer(!expandedPlayer)}>
-            {expandedPlayer ? 'Mặc định' : 'Mở rộng'}
+          <Button
+            onClick={() => setShouldExpandedPlayer(!shouldExpandedPlayer)}
+          >
+            {shouldExpandedPlayer ? 'Mặc định' : 'Mở rộng'}
           </Button>
         </div>
       </div>

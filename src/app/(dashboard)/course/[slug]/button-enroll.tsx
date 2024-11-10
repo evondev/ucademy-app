@@ -7,17 +7,18 @@ import { createOrder } from '@/lib/actions/order.actions';
 import { Button } from '@/shared/components/ui/button';
 import { createOrderCode } from '@/utils';
 
+interface ButtonEnrollProps {
+  user: User | null | undefined;
+  courseId: string;
+  amount: number;
+  coupon: string;
+}
 const ButtonEnroll = ({
   amount,
   coupon,
   courseId,
   user,
-}: {
-  user: User | null | undefined;
-  courseId: string;
-  amount: number;
-  coupon: string;
-}) => {
+}: ButtonEnrollProps) => {
   const router = useRouter();
   const handleEnrollCourse = async () => {
     if (!user?.name) {

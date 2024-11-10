@@ -4,10 +4,15 @@ import { useEffect } from 'react';
 
 import { lastLessonKey } from '@/shared/constants';
 
-const LessonSaveUrl = ({ course, url }: { url: string; course: string }) => {
+interface LessonSaveUrlProps {
+  url: string;
+  course: string;
+}
+const LessonSaveUrl = ({ course, url }: LessonSaveUrlProps) => {
   useEffect(() => {
-    let results: any[] =
-      JSON.parse(localStorage?.getItem(lastLessonKey) || '[]') || [];
+    let results: {
+      course: string;
+    }[] = JSON.parse(localStorage?.getItem(lastLessonKey) || '[]') || [];
     const item = {
       course,
       lesson: url,

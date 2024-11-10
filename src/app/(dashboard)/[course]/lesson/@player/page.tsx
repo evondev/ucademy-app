@@ -5,8 +5,8 @@ import { findAllLessons } from '@/lib/actions/lesson.actions';
 import { getUserInfo } from '@/lib/actions/user.actions';
 import { Heading } from '@/shared/components';
 
-import LessonSaveUrl from '../LessonSaveUrl';
-import VideoPlayer from './VideoPlayer';
+import LessonSaveUrl from '../lesson-save-url';
+import VideoPlayer from './video-player';
 
 const page = async ({
   params,
@@ -35,7 +35,6 @@ const page = async ({
     lessonList?.findIndex((element) => element.slug === slug) || 0;
   const nextLesson = lessonList?.[currentLessonIndex + 1];
   const previousLesson = lessonList?.[currentLessonIndex - 1];
-  const videoId = lessonDetails.video_url?.split('v=').at(-1);
 
   return (
     <div className="mb-5">

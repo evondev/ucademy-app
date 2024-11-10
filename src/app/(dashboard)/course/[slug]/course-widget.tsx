@@ -3,18 +3,15 @@ import { useState } from 'react';
 
 import { IconPlay, IconStudy, IconUsers } from '@/shared/components/icons';
 
-import ButtonEnroll from './ButtonEnroll';
-import CouponForm from './CouponForm';
+import ButtonEnroll from './button-enroll';
+import CouponForm from './coupon-form';
 
-const CourseWidget = ({
-  data,
-  duration,
-  findUser,
-}: {
+interface CourseWidgetProps {
   data: any;
   findUser: any;
   duration: string;
-}) => {
+}
+const CourseWidget = ({ data, duration, findUser }: CourseWidgetProps) => {
   const [price, setPrice] = useState<number>(data.price);
   const [coupon, setCoupon] = useState('');
 
@@ -28,7 +25,7 @@ const CourseWidget = ({
           <span className="text-sm text-slate-400 line-through">
             {data.sale_price.toLocaleString('en-EN')}
           </span>
-          <span className="ml-auto inline-block rounded-lg bg-primary bg-opacity-10 px-3 py-1 text-sm font-semibold text-primary">
+          <span className="bg-opacity/10 ml-auto inline-block rounded-lg bg-primary px-3 py-1 text-sm font-semibold text-primary">
             {Math.floor((data.price / data.sale_price) * 100)}%
           </span>
         </div>

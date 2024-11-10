@@ -18,13 +18,11 @@ import {
 import { Textarea } from '@/shared/components/ui/textarea';
 import { ratingList } from '@/shared/constants';
 
-const RatingButton = ({
-  courseId,
-  userId,
-}: {
+interface RatingButtonProps {
   courseId: string;
   userId: string;
-}) => {
+}
+const RatingButton = ({ courseId, userId }: RatingButtonProps) => {
   const [ratingValue, setRatingValue] = useState(-1);
   const [ratingContent, setRatingContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -45,19 +43,18 @@ const RatingButton = ({
 
         return;
       }
-      const res = await createRating({
+      const hasResult = await createRating({
         rate: ratingValue,
         content: ratingContent,
         user: userId,
         course: courseId,
       });
 
-      if (res) {
+      if (hasResult) {
         toast.success('Đánh giá thành công');
         setRatingContent('');
         setRatingValue(-1);
       }
-    } catch {
     } finally {
       setIsLoading(false);
     }
@@ -105,7 +102,7 @@ const RatingButton = ({
               className="h-[200px] resize-none"
               placeholder="Đánh giá của bạn"
               value={ratingContent}
-              onChange={(e) => setRatingContent(e.target.value)}
+              onChange={(event) => setRatingContent(event.target.value)}
             />
             <Button
               className="mt-5 w-full"

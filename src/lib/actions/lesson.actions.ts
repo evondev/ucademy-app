@@ -27,25 +27,29 @@ export async function createLesson(params: CreateLessonParams) {
     return {
       success: true,
     };
-  } catch {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 export async function updateLesson(params: UpdateLessonParams) {
   try {
     connectToDatabase();
-    const res = await Lesson.findByIdAndUpdate(
+    const reponse = await Lesson.findByIdAndUpdate(
       params.lessonId,
       params.updateData,
       { new: true },
     );
 
     revalidatePath(params.path || '/');
-    if (!res) return;
+    if (!reponse) return;
 
     return {
       success: true,
     };
     revalidatePath(params.path || '/');
-  } catch {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 export async function getLessonBySlug({
   course,

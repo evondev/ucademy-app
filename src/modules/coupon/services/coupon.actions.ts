@@ -60,15 +60,15 @@ export async function getCoupons(params: FilterData): Promise<
 > {
   try {
     connectToDatabase();
-    const { active, limit = 10, page = 1, search } = params;
+    const { active: isActive, limit = 10, page = 1, search } = params;
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof CouponSchema> = {};
 
     if (search) {
       query.$or = [{ code: { $regex: search, $options: 'i' } }];
     }
-    if (active) {
-      query.active = Boolean(Number(active));
+    if (isActive) {
+      query.active = Boolean(Number(isActive));
     }
     const coupons = await CouponSchema.find(query)
       .skip(skip)

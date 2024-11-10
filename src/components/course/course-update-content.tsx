@@ -25,7 +25,7 @@ import {
   IconDelete,
   IconEdit,
 } from '../../shared/components/icons';
-import LessonItemUpdate from '../lesson/LessonItemUpdate';
+import LessonItemUpdate from '../lesson/lesson-item-update';
 
 const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
   const lectures = course.lectures;

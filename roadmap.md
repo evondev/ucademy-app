@@ -128,10 +128,6 @@
 
 ## Structure
 
-## Commit
-
-- Commitlint with Husky
-
 ## Client side vs Server side
 
 ## Tanstack query
@@ -176,6 +172,10 @@
 ## User
 
 ## Optimize UI UX
+
+## Commit
+
+- Commitlint with Husky
 
 # Final
 
