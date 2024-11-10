@@ -2,10 +2,10 @@
 
 import { debounce } from 'lodash';
 
-import useQueryString from '@/hooks/useQueryString';
+import useQueryString from '@/hooks/use-query-string';
 import { ITEMS_PER_PAGE } from '@/shared/constants';
 
-interface IPaginationProps {
+interface PaginationProps {
   totalPages: number;
   total: number;
 }
@@ -72,14 +72,17 @@ const IconDoubleRight = (
     />
   </svg>
 );
-const Pagination = ({ total, totalPages }: IPaginationProps) => {
+const Pagination = ({ total, totalPages }: PaginationProps) => {
   const { currentPage, handleChangePage } = useQueryString();
-  const onInputChange = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
+  const onInputChange = debounce(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = Number(event.target.value);
 
-    if (value < 1) return;
-    handleChangePage(Number(e.target.value));
-  }, 250);
+      if (value < 1) return;
+      handleChangePage(Number(event.target.value));
+    },
+    250,
+  );
 
   if (total <= ITEMS_PER_PAGE) return null;
 
@@ -120,7 +123,7 @@ const Pagination = ({ total, totalPages }: IPaginationProps) => {
   );
 };
 
-interface IPaginationButtonProps {
+interface PaginationButtonProps {
   onClick: () => void;
   disabled: boolean;
   children: React.ReactNode;
@@ -129,7 +132,7 @@ function PaginationButton({
   children,
   disabled,
   onClick,
-}: IPaginationButtonProps) {
+}: PaginationButtonProps) {
   const paginationButtonClassNames =
     'size-10 rounded-full bg-white shadow-sm p-2 flex items-center justify-center disabled:bg-gray-200';
 

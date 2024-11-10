@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import PageNotFound from '@/app/not-found';
 import { getUserInfo } from '@/lib/actions/user.actions';
 
-import LoadingOutline from './@outline/LoadingOutline';
+import LoadingOutline from './@outline/loading-outline';
 import LoadingPlayer from './@player/LoadingPlayer';
 import LessonWrapper from './lesson-wrapper';
 

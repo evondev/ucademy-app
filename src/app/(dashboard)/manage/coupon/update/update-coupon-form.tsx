@@ -94,8 +94,8 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
     }
   }
   const handleSearchCourse = debounce(
-    async (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
       const courseList = await getAllCourses({ search: value });
 
       setFindCourse(courseList);
@@ -149,8 +149,8 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
                     {...field}
                     disabled
                     className="font-bold uppercase"
-                    onChange={(e) =>
-                      field.onChange(e.target.value.toUpperCase())
+                    onChange={(event) =>
+                      field.onChange(event.target.value.toUpperCase())
                     }
                   />
                 </FormControl>
@@ -161,7 +161,7 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
           <FormField
             control={form.control}
             name="start_date"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormLabel>Ngày bắt đầu</FormLabel>
                 <FormControl>
@@ -199,7 +199,7 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
           <FormField
             control={form.control}
             name="end_date"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormLabel>Ngày kết thúc</FormLabel>
                 <FormControl>
@@ -276,12 +276,12 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
                       <Input
                         placeholder="100"
                         {...field}
-                        onChange={(e) => field.onChange(e.target.value)}
+                        onChange={(event) => field.onChange(event.target.value)}
                       />
                     ) : (
                       <InputFormatCurrency
                         {...field}
-                        onChange={(e) => field.onChange(e.target.value)}
+                        onChange={(event) => field.onChange(event.target.value)}
                       />
                     )}
                   </>
@@ -319,7 +319,9 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
                     placeholder="100"
                     type="number"
                     {...field}
-                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                    onChange={(event) =>
+                      field.onChange(event.target.valueAsNumber)
+                    }
                   />
                 </FormControl>
                 <FormMessage />
@@ -329,7 +331,7 @@ const UpdateCouponForm = ({ data }: { data: CouponParams }) => {
           <FormField
             control={form.control}
             name="courses"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormLabel>Khóa học</FormLabel>
                 <FormControl>

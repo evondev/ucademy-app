@@ -21,8 +21,8 @@ export default function useQueryString() {
     });
   };
   const handleSearchData = debounce(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      createQueryString('search', e.target.value);
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      createQueryString('search', event.target.value);
     },
     250,
   );

@@ -1,5 +1,5 @@
 'use client';
-import useQueryString from '@/hooks/useQueryString';
+import useQueryString from '@/hooks/use-query-string';
 import {
   BadgeStatus,
   BouncedLink,

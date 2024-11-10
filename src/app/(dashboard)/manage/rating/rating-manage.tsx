@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 
-import useQueryString from '@/hooks/useQueryString';
+import useQueryString from '@/hooks/use-query-string';
 import { deleteRating, updateRating } from '@/lib/actions/rating.actions';
 import {
   BadgeStatus,

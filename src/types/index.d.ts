@@ -1,7 +1,6 @@
-import { CommentProps } from '@/database/comment.model';
-import { CouponProps } from '@/database/coupon.model';
 import { CourseProps } from '@/database/course.model';
 import { LessonProps } from '@/database/lesson.model';
+import { Comment } from '@/modules/comment/services/comment.schema';
 
 import { CouponType } from './enums';
 
@@ -161,7 +160,7 @@ export type FilterData = {
   active?: boolean;
 };
 // Comment
-export interface CommentItem extends Omit<CommentProps, 'user'> {
+export interface CommentItem extends Omit<Comment, 'user'> {
   user: {
     name: string;
     avatar: string;

@@ -2,7 +2,7 @@
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
-import useQueryString from '@/hooks/useQueryString';
+import useQueryString from '@/hooks/use-query-string';
 import { updateOrder } from '@/lib/actions/order.actions';
 import { cn } from '@/lib/utils';
 import {
@@ -60,9 +60,9 @@ const OrderManagePage = ({
       });
     }
     if (status === OrderStatus.COMPLETED) {
-      const res = await updateOrder({ orderId, status });
+      const response = await updateOrder({ orderId, status });
 
-      if (res?.success) {
+      if (response?.success) {
         toast.success('Cập nhật đơn hàng thành công');
       }
     }

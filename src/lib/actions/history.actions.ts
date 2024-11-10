@@ -47,5 +47,7 @@ export async function getHistory(params: {
     });
 
     return histories;
-  } catch {}
+  } catch (error) {
+    console.log(error);
+  }
 }

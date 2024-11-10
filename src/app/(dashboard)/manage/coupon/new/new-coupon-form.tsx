@@ -148,8 +148,8 @@ const NewCouponForm = () => {
                     className="font-bold uppercase"
                     placeholder="Mã giảm giá"
                     {...field}
-                    onChange={(e) =>
-                      field.onChange(e.target.value.toUpperCase())
+                    onChange={(event) =>
+                      field.onChange(event.target.value.toUpperCase())
                     }
                   />
                 </FormControl>

@@ -6,7 +6,7 @@ import { CommentItem } from '@/types';
 import { CommentStatus } from '@/types/enums';
 import { getRepliesComment, timeAgo } from '@/utils';
 
-import CommentReply from './CommentReply';
+import CommentReply from './comment-reply';
 
 interface CommentItemProps {
   comment: CommentItem;

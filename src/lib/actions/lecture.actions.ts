@@ -22,12 +22,14 @@ export async function createLecture(params: CreateLectureParams) {
     return {
       sucess: true,
     };
-  } catch {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 export async function updateLecture(params: UpdateLectureParams) {
   try {
     connectToDatabase();
-    const res = await Lecture.findByIdAndUpdate(
+    const response = await Lecture.findByIdAndUpdate(
       params.lectureId,
       params.updateData,
       {
@@ -36,7 +38,7 @@ export async function updateLecture(params: UpdateLectureParams) {
     );
 
     revalidatePath(params.updateData.path || '/');
-    if (!res) return;
+    if (!response) return;
 
     return {
       success: true,

@@ -50,18 +50,17 @@ function CourseAddNew({ user }: { user: User }) {
           }),
         author: user._id,
       };
-      const res = await createCourse(data);
+      const response = await createCourse(data);
 
-      if (!res?.success) {
-        toast.error(res?.message);
+      if (!response?.success) {
+        toast.error(response?.message);
 
         return;
       }
       toast.success('Tạo khóa học thành công');
-      if (res?.data) {
-        router.push(`/manage/course/update?slug=${res.data.slug}`);
+      if (response?.data) {
+        router.push(`/manage/course/update?slug=${response.data.slug}`);
       }
-    } catch {
     } finally {
       setIsSubmitting(false);
     }

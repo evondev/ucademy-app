@@ -1,12 +1,10 @@
 'use client';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
 import { CourseProps } from '@/database/course.model';
-import useQueryString from '@/hooks/useQueryString';
+import useQueryString from '@/hooks/use-query-string';
 import { updateCourse } from '@/lib/actions/course.actions';
 import {
   BadgeStatus,
@@ -36,8 +34,6 @@ import { allValue, courseStatus } from '@/shared/constants';
 import { CourseStatus } from '@/types/enums';
 
 const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
-  const router = useRouter();
-  const pathname = usePathname();
   const { handleSearchData, handleSelectStatus } = useQueryString();
 
   const handleDeleteCourse = (slug: string) => {
@@ -98,17 +94,6 @@ const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
     }
   };
 
-  const [page, setPage] = useState(1);
-  const handleChangePage = (type: 'prev' | 'next') => {
-    if (type === 'prev' && page === 1) return;
-    if (type === 'prev') setPage((previous) => previous - 1);
-    if (type === 'next') setPage((previous) => previous + 1);
-  };
-
-  // useEffect(() => {
-  //   router.push(`${pathname}?${createQueryString("page", page.toString())}`);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [page]);
   return (
     <>
       <BouncedLink url="/manage/course/new" />

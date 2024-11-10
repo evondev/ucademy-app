@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { MAX_COMMENT_LEVEL } from '@/shared/constants';
 import { CommentItem } from '@/types';
 
-import CommentForm from './CommentForm';
+import CommentForm from './comment-form';
 
 interface CommentReplyProps {
   comment: CommentItem;

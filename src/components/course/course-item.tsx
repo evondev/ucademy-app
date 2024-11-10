@@ -23,9 +23,9 @@ const CourseItem = ({
 
   useEffect(() => {
     async function getDuration() {
-      const res = await getCourseLessonsInfo({ slug: data.slug });
+      const response = await getCourseLessonsInfo({ slug: data.slug });
 
-      setDuration(res?.duration || 0);
+      setDuration(response?.duration || 0);
     }
     getDuration();
   }, [data.slug]);
@@ -43,10 +43,10 @@ const CourseItem = ({
       icon: (className?: string) => <IconClock className={className} />,
     },
   ];
-  const courseUrl = url ? url : `/course/${data.slug}`;
+  const courseUrl = url || `/course/${data.slug}`;
 
   return (
-    <div className="flex flex-col rounded-2xl border border-gray-200 bg-white p-4 dark:border-opacity-10 dark:bg-grayDarker">
+    <div className="dark:border-/10 flex flex-col rounded-2xl border border-gray-200 bg-white p-4 dark:bg-grayDarker">
       <Link
         className="relative block h-[180px]"
         href={courseUrl}

@@ -35,14 +35,14 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
   const [lessonIdEdit, setLessonIdEdit] = useState('');
   const handleAddNewLecture = async () => {
     try {
-      const res = await createLecture({
+      const response = await createLecture({
         title: 'Chương mới',
         course: course._id,
         order: lectures.length + 1,
         path: `/manage/course/update-content?slug=${course.slug}`,
       });
 
-      if (res?.sucess) {
+      if (response?.sucess) {
         toast.success('Thêm chương mới thành công!');
       }
     } catch (error) {
@@ -50,10 +50,10 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
     }
   };
   const handleDeleteLecture = async (
-    e: MouseEvent<HTMLSpanElement>,
+    event: MouseEvent<HTMLSpanElement>,
     lectureId: string,
   ) => {
-    e.stopPropagation();
+    event.stopPropagation();
     try {
       Swal.fire({
         title: 'Are you sure?',
@@ -79,12 +79,12 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
     }
   };
   const handleUpdateLecture = async (
-    e: MouseEvent<HTMLSpanElement>,
+    event: MouseEvent<HTMLSpanElement>,
     lectureId: string,
   ) => {
-    e.stopPropagation();
+    event.stopPropagation();
     try {
-      const res = await updateLecture({
+      const response = await updateLecture({
         lectureId,
         updateData: {
           title: lectureEdit,
@@ -92,7 +92,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
         },
       });
 
-      if (res?.success) {
+      if (response?.success) {
         toast.success('Cập nhật thành công!');
         setLectureIdEdit('');
         setLectureEdit('');
@@ -103,7 +103,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
   };
   const handleAddNewLesson = async (lectureId: string, courseId: string) => {
     try {
-      const res = await createLesson({
+      const response = await createLesson({
         path: `/manage/course/update-content?slug=${course.slug}`,
         lecture: lectureId,
         course: courseId,
@@ -111,7 +111,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
         slug: `tieu-de-bai-hoc-moi-${Date.now().toString().slice(-3)}`,
       });
 
-      if (res?.success) {
+      if (response?.success) {
         toast.success('Thêm bài học mới thành công!');
 
         return;
@@ -122,12 +122,12 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
     }
   };
   const handleUpdateLesson = async (
-    e: MouseEvent<HTMLSpanElement>,
+    event: MouseEvent<HTMLSpanElement>,
     lessonId: string,
   ) => {
-    e.stopPropagation();
+    event.stopPropagation();
     try {
-      const res = await updateLesson({
+      const response = await updateLesson({
         lessonId,
         path: `/manage/course/update-content?slug=${course.slug}`,
         updateData: {
@@ -140,12 +140,14 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
         },
       });
 
-      if (res?.success) {
+      if (response?.success) {
         toast.success('Cập nhật bài học thành công!');
         setLessonEdit('');
         setLessonIdEdit('');
       }
-    } catch {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -167,7 +169,9 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                           <Input
                             defaultValue={lecture.title}
                             placeholder="Tên chương"
-                            onChange={(e) => setLectureEdit(e.target.value)}
+                            onChange={(event) =>
+                              setLectureEdit(event.target.value)
+                            }
                           />
                         </div>
                         <div className="flex gap-2">
@@ -176,7 +180,9 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                               commonClassNames.action,
                               'text-green-500',
                             )}
-                            onClick={(e) => handleUpdateLecture(e, lecture._id)}
+                            onClick={(event) =>
+                              handleUpdateLecture(event, lecture._id)
+                            }
                           >
                             <IconCheck />
                           </span>
@@ -185,8 +191,8 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                               commonClassNames.action,
                               'text-red-500',
                             )}
-                            onClick={(e) => {
-                              e.stopPropagation();
+                            onClick={(event) => {
+                              event.stopPropagation();
                               setLectureIdEdit('');
                             }}
                           >
@@ -203,8 +209,8 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                               commonClassNames.action,
                               'text-blue-500',
                             )}
-                            onClick={(e) => {
-                              e.stopPropagation();
+                            onClick={(event) => {
+                              event.stopPropagation();
                               setLectureIdEdit(lecture._id);
                             }}
                           >
@@ -215,7 +221,9 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                               commonClassNames.action,
                               'text-red-500',
                             )}
-                            onClick={(e) => handleDeleteLecture(e, lecture._id)}
+                            onClick={(event) =>
+                              handleDeleteLecture(event, lecture._id)
+                            }
                           >
                             <IconDelete />
                           </span>
@@ -241,8 +249,8 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                                     <Input
                                       defaultValue={lesson.title}
                                       placeholder="Tên bài học"
-                                      onChange={(e) =>
-                                        setLessonEdit(e.target.value)
+                                      onChange={(event) =>
+                                        setLessonEdit(event.target.value)
                                       }
                                     />
                                   </div>
@@ -252,8 +260,8 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                                         commonClassNames.action,
                                         'text-green-500',
                                       )}
-                                      onClick={(e) =>
-                                        handleUpdateLesson(e, lesson._id)
+                                      onClick={(event) =>
+                                        handleUpdateLesson(event, lesson._id)
                                       }
                                     >
                                       <IconCheck />
@@ -263,8 +271,8 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                                         commonClassNames.action,
                                         'text-red-500',
                                       )}
-                                      onClick={(e) => {
-                                        e.stopPropagation();
+                                      onClick={(event) => {
+                                        event.stopPropagation();
                                         setLessonIdEdit('');
                                       }}
                                     >
@@ -281,8 +289,8 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                                         commonClassNames.action,
                                         'text-blue-500',
                                       )}
-                                      onClick={(e) => {
-                                        e.stopPropagation();
+                                      onClick={(event) => {
+                                        event.stopPropagation();
                                         setLessonIdEdit(lesson._id);
                                       }}
                                     >
