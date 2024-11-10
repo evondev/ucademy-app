@@ -1,22 +1,13 @@
-import { auth } from '@clerk/nextjs/server';
-
-import { getUserCourses } from '@/lib/actions/user.actions';
+import { StudyPageContainer } from '@/modules/course/pages';
 import { Heading } from '@/shared/components';
 
-import StudyCourses from './studey-courses';
-
-const page = async () => {
-  const { userId } = auth();
-  const courses = await getUserCourses(userId || '');
-
+const StudyPageRoot = async () => {
   return (
     <>
       <Heading>Khu vực học tập</Heading>
-      <StudyCourses
-        courses={courses ? JSON.parse(JSON.stringify(courses)) : []}
-      />
+      <StudyPageContainer />
     </>
   );
 };
 
-export default page;
+export default StudyPageRoot;

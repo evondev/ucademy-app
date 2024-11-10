@@ -6,7 +6,7 @@ import { getUserInfo } from '@/lib/actions/user.actions';
 import { UserRole } from '@/types/enums';
 
 const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) return redirect('/sign-in');
   const user = await getUserInfo({ userId });

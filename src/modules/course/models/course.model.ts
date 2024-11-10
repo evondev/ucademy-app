@@ -2,7 +2,7 @@ import { Document, model, models, Schema } from 'mongoose';
 
 import { CourseLevel, CourseStatus } from '@/shared/constants';
 
-export interface CourseProps extends Document {
+export interface CourseModelProps extends Document {
   _id: string;
   title: string;
   image: string;
@@ -28,7 +28,7 @@ export interface CourseProps extends Document {
   author: Schema.Types.ObjectId;
   _destroy: boolean;
 }
-const courseSchema = new Schema<CourseProps>({
+const courseSchema = new Schema<CourseModelProps>({
   title: {
     type: String,
     required: true,
@@ -112,6 +112,7 @@ const courseSchema = new Schema<CourseProps>({
     default: CourseLevel.BEGINNER,
   },
 });
-const Course = models.Course || model<CourseProps>('Course', courseSchema);
+const CourseModel =
+  models.Course || model<CourseModelProps>('Course', courseSchema);
 
-export default Course;
+export default CourseModel;

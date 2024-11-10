@@ -1,49 +1,29 @@
-'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
-import { getCourseLessonsInfo } from '@/lib/actions/course.actions';
-import { commonClassNames } from '@/shared/constants';
-import { StudyCoursesProps } from '@/types';
-import { formatMinutesToHour, formatNumberToK } from '@/utils';
+import { IconEye, IconStar } from '@/shared/components/icons';
+import { formatNumberToK } from '@/utils';
 
-import { IconClock, IconEye, IconStar } from '../../shared/components/icons';
+import { CourseProps } from '../../types';
+import CourseItemDuration from './course-item-duration';
 
-const CourseItem = ({
-  cta,
-  data,
-  url = '',
-}: {
-  data: StudyCoursesProps;
+interface CourseItemProps {
+  data: CourseProps;
   cta?: string;
   url?: string;
-}) => {
-  const [duration, setDuration] = useState(0);
-
-  useEffect(() => {
-    async function getDuration() {
-      const response = await getCourseLessonsInfo({ slug: data.slug });
-
-      setDuration(response?.duration || 0);
-    }
-    getDuration();
-  }, [data.slug]);
+}
+const CourseItem = ({ cta, data, url = '' }: CourseItemProps) => {
+  const courseUrl = url || `/course/${data.slug}`;
   const courseInfo = [
     {
       title: formatNumberToK(data.views),
-      icon: (className?: string) => <IconEye className={className} />,
+      icon: <IconEye className="size-4" />,
     },
     {
       title: 5,
-      icon: (className?: string) => <IconStar className={className} />,
-    },
-    {
-      title: formatMinutesToHour(duration),
-      icon: (className?: string) => <IconClock className={className} />,
+      icon: <IconStar className="size-4" />,
     },
   ];
-  const courseUrl = url || `/course/${data.slug}`;
 
   return (
     <div className="dark:border-/10 flex flex-col rounded-2xl border border-gray-200 bg-white p-4 dark:bg-grayDarker">
@@ -53,30 +33,28 @@ const CourseItem = ({
       >
         <Image
           priority
-          alt=""
+          alt={data.title}
           className="size-full rounded-lg object-cover"
           height={200}
           sizes="@media (min-width: 640px) 300px, 100vw"
           src={data.image}
           width={300}
         />
-        {/* <span className="inline-block px-3 py-1 rounded-full absolute top-3 right-3 z-10 text-white font-medium bg-green-500 text-xs">
-          New
-        </span> */}
       </Link>
       <div className="flex flex-1 flex-col pt-4">
         <h3 className="mb-3 text-lg font-bold">{data.title}</h3>
         <div className="mt-auto">
           <div className="mb-5 flex items-center gap-3 text-xs text-gray-500 dark:text-grayDark">
-            {courseInfo.map((item, index) => (
+            {courseInfo.map((item) => (
               <div
-                key={index}
+                key={item.title}
                 className="flex items-center gap-2"
               >
-                {item.icon('size-4')}
+                {item.icon}
                 <span>{item.title}</span>
               </div>
             ))}
+            <CourseItemDuration slug={data.slug} />
 
             <span className="ml-auto text-base font-bold text-primary">
               {data.price.toLocaleString()}đ
@@ -84,7 +62,7 @@ const CourseItem = ({
           </div>
 
           <Link
-            className={commonClassNames.btnPrimary}
+            className="button-primary mt-10 flex h-12 w-full items-center justify-center rounded-lg bg-primary font-bold text-white"
             href={courseUrl}
           >
             {cta || 'Xem chi tiết'}

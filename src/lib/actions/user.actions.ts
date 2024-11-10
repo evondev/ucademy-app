@@ -59,8 +59,9 @@ export async function getUserCourses(
     });
 
     if (!findUser) return null;
+    const courses = JSON.parse(JSON.stringify(findUser.courses));
 
-    return findUser.courses;
+    return courses;
   } catch (error) {
     console.log(error);
   }
