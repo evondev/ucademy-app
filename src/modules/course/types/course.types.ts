@@ -1,3 +1,13 @@
-import { CourseModelProps } from '../models';
+import { CourseModelProps } from '@/shared/types';
 
-export interface CourseProps extends CourseModelProps {}
+export interface CourseItemData extends Omit<CourseModelProps, 'lectures'> {
+  lectures: {
+    lessons: {
+      slug: string;
+    }[];
+  }[];
+}
+export interface LassLessonData {
+  course: string;
+  lesson: string;
+}

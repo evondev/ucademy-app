@@ -1,33 +1,8 @@
-import { Document, model, models, Schema } from 'mongoose';
+import { model, models, Schema } from 'mongoose';
 
-import { CourseLevel, CourseStatus } from '@/shared/constants';
+import { CourseLevel, CourseStatus } from '../constants';
+import { CourseModelProps } from '../types';
 
-export interface CourseModelProps extends Document {
-  _id: string;
-  title: string;
-  image: string;
-  intro_url: string;
-  desc: string;
-  price: number;
-  sale_price: number;
-  slug: string;
-  status: CourseStatus;
-  level: CourseLevel;
-  views: number;
-  rating: Schema.Types.ObjectId[];
-  info: {
-    requirements: string[];
-    benefits: string[];
-    qa: {
-      question: string;
-      answer: string;
-    }[];
-  };
-  lectures: Schema.Types.ObjectId[];
-  created_at: Date;
-  author: Schema.Types.ObjectId;
-  _destroy: boolean;
-}
 const courseSchema = new Schema<CourseModelProps>({
   title: {
     type: String,
@@ -112,7 +87,6 @@ const courseSchema = new Schema<CourseModelProps>({
     default: CourseLevel.BEGINNER,
   },
 });
-const CourseModel =
-  models.Course || model<CourseModelProps>('Course', courseSchema);
 
-export default CourseModel;
+export const CourseModel =
+  models.Course || model<CourseModelProps>('Course', courseSchema);

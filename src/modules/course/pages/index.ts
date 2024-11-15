@@ -1,2 +1,2 @@
 export * from './course-dashboard';
-export * from './study-page';
+export * from './study';

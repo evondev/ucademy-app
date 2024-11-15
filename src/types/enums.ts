@@ -8,11 +8,7 @@ enum UserRole {
   USER = 'USER',
   EXPERT = 'EXPERT',
 }
-enum CourseStatus {
-  APPROVED = 'APPROVED',
-  PENDING = 'PENDING',
-  REJECTED = 'REJECTED',
-}
+
 enum CommentStatus {
   APPROVED = 'APPROVED',
   PENDING = 'PENDING',
@@ -44,7 +40,6 @@ export {
   CommentStatus,
   CouponType,
   CourseLevel,
-  CourseStatus,
   LessonType,
   OrderStatus,
   RatingStatus,

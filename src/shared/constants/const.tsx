@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { z } from 'zod';
 
 import {
@@ -14,10 +15,11 @@ import { MenuField, RatingIcon } from '@/types';
 import {
   CouponType,
   CourseLevel,
-  CourseStatus,
   OrderStatus,
   RatingStatus,
 } from '@/types/enums';
+
+import { CourseStatus } from './enums';
 
 export const menuItems: MenuField[] = [
   {

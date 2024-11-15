@@ -4,15 +4,19 @@ import Link from 'next/link';
 import { IconEye, IconStar } from '@/shared/components/icons';
 import { formatNumberToK } from '@/utils';
 
-import { CourseProps } from '../../types';
+import { CourseItemData } from '../../types';
 import CourseItemDuration from './course-item-duration';
 
 interface CourseItemProps {
-  data: CourseProps;
+  data: CourseItemData;
   cta?: string;
   url?: string;
 }
-const CourseItem = ({ cta, data, url = '' }: CourseItemProps) => {
+const CourseItem = ({
+  cta = 'Xem chi tiết',
+  data,
+  url = '',
+}: CourseItemProps) => {
   const courseUrl = url || `/course/${data.slug}`;
   const courseInfo = [
     {
@@ -65,7 +69,7 @@ const CourseItem = ({ cta, data, url = '' }: CourseItemProps) => {
             className="button-primary mt-10 flex h-12 w-full items-center justify-center rounded-lg bg-primary font-bold text-white"
             href={courseUrl}
           >
-            {cta || 'Xem chi tiết'}
+            {cta}
           </Link>
         </div>
       </div>

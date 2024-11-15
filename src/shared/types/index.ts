@@ -1,5 +1,2 @@
-export interface QueryFilter {
-  limit?: number;
-  page?: number;
-  search?: string;
-}
+export * from './common';
+export * from './course.model';
