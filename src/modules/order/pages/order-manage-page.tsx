@@ -2,9 +2,8 @@
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
-import useQueryString from '@/hooks/use-query-string';
-import { updateOrder } from '@/lib/actions/order.actions';
 import { cn } from '@/lib/utils';
+import { updateOrder } from '@/modules/order/actions/order.actions';
 import {
   BadgeStatus,
   EmptySpace,
@@ -30,6 +29,7 @@ import {
   TableRow,
 } from '@/shared/components/ui/table';
 import { allValue, commonClassNames, orderStatus } from '@/shared/constants';
+import useQueryString from '@/shared/hooks/use-query-string';
 import { OrderStatus } from '@/shared/types/enums';
 
 import { OrderManagePageProps } from '../types/order.types';

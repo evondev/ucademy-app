@@ -12,14 +12,14 @@ import {
   IconUsers,
 } from '@/shared/components/icons';
 import { MenuField, RatingIcon } from '@/types';
+
 import {
   CouponType,
   CourseLevel,
+  CourseStatus,
   OrderStatus,
   RatingStatus,
-} from '@/types/enums';
-
-import { CourseStatus } from './enums';
+} from './enums';
 
 export const menuItems: MenuField[] = [
   {

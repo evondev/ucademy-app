@@ -1,7 +1,7 @@
 import LessonContent from '@/components/lesson/lesson-content';
 import { getCourseBySlug } from '@/lib/actions/course.actions';
-import { getHistory } from '@/lib/actions/history.actions';
-import { countLessonByCourseId } from '@/lib/actions/lesson.actions';
+import { getHistory } from '@/modules/history/actions/history.actions';
+import { countLessonByCourseId } from '@/modules/lesson/actions/lesson.actions';
 
 const page = async ({
   params,

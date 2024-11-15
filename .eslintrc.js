@@ -140,5 +140,6 @@ module.exports = {
     'unicorn/consistent-function-scoping': 'off',
     'unicorn/no-array-callback-reference': 'off',
     'import/named': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
   },
 };

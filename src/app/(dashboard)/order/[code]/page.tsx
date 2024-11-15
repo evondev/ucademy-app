@@ -1,5 +1,5 @@
 import PageNotFound from '@/app/not-found';
-import { getOrderDetails } from '@/lib/actions/order.actions';
+import { getOrderDetails } from '@/modules/order/actions/order.actions';
 
 const OrderDetails = async ({
   params,

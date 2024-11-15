@@ -3,8 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 
-import useQueryString from '@/hooks/use-query-string';
-import { deleteRating, updateRating } from '@/lib/actions/rating.actions';
+import {
+  deleteRating,
+  updateRating,
+} from '@/modules/rating/actions/rating.actions';
 import {
   BadgeStatus,
   Heading,
@@ -29,6 +31,7 @@ import {
   TableRow,
 } from '@/shared/components/ui/table';
 import { allValue, ratingList, ratingStatus } from '@/shared/constants';
+import useQueryString from '@/shared/hooks/use-query-string';
 import { RatingItem } from '@/types';
 import { RatingStatus } from '@/types/enums';
 

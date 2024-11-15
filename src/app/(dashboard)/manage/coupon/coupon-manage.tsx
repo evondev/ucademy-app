@@ -1,5 +1,4 @@
 'use client';
-import useQueryString from '@/hooks/use-query-string';
 import {
   BadgeStatus,
   BouncedLink,
@@ -26,6 +25,7 @@ import {
   TableRow,
 } from '@/shared/components/ui/table';
 import { allValue, couponStatuses } from '@/shared/constants';
+import useQueryString from '@/shared/hooks/use-query-string';
 import { CouponItem } from '@/types';
 import { CouponType } from '@/types/enums';
 

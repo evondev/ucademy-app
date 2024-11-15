@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
 import { CourseProps } from '@/database/course.model';
-import useQueryString from '@/hooks/use-query-string';
 import { updateCourse } from '@/lib/actions/course.actions';
 import {
   BadgeStatus,
@@ -31,6 +30,7 @@ import {
   TableRow,
 } from '@/shared/components/ui/table';
 import { allValue, courseStatus } from '@/shared/constants';
+import useQueryString from '@/shared/hooks/use-query-string';
 import { CourseStatus } from '@/types/enums';
 
 const CourseManage = ({ courses }: { courses: CourseProps[] }) => {

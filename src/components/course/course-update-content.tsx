@@ -5,9 +5,15 @@ import slugify from 'slugify';
 import Swal from 'sweetalert2';
 
 import { LessonProps } from '@/database/lesson.model';
-import { createLecture, updateLecture } from '@/lib/actions/lecture.actions';
-import { createLesson, updateLesson } from '@/lib/actions/lesson.actions';
 import { cn } from '@/lib/utils';
+import {
+  createLecture,
+  updateLecture,
+} from '@/modules/lecture/actions/lecture.actions';
+import {
+  createLesson,
+  updateLesson,
+} from '@/modules/lesson/actions/lesson.actions';
 import {
   Accordion,
   AccordionContent,

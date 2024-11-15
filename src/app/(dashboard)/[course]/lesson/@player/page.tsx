@@ -1,8 +1,8 @@
 import { auth } from '@clerk/nextjs/server';
 
 import { getCourseBySlug } from '@/lib/actions/course.actions';
-import { findAllLessons } from '@/lib/actions/lesson.actions';
 import { getUserInfo } from '@/lib/actions/user.actions';
+import { findAllLessons } from '@/modules/lesson/actions/lesson.actions';
 import { Heading } from '@/shared/components';
 
 import LessonSaveUrl from '../lesson-save-url';

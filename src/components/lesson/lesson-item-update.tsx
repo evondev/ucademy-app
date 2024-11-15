@@ -1,15 +1,15 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Editor } from '@tinymce/tinymce-react';
-import Link from 'next/link';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { z } from 'zod';
 
 import { LessonProps } from '@/database/lesson.model';
-import { updateLesson } from '@/lib/actions/lesson.actions';
+import { updateLesson } from '@/modules/lesson/actions/lesson.actions';
 import { Button } from '@/shared/components/ui/button';
 import {
   Form,

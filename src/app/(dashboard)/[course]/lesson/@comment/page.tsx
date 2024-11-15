@@ -1,9 +1,9 @@
 import { auth } from '@clerk/nextjs/server';
 
 import { getCourseBySlug } from '@/lib/actions/course.actions';
-import { getLessonBySlug } from '@/lib/actions/lesson.actions';
 import { getUserInfo } from '@/lib/actions/user.actions';
 import { getCommentsByLesson } from '@/modules/comment/services/comment.actions';
+import { getLessonBySlug } from '@/modules/lesson/actions/lesson.actions';
 
 import CommentField from './comment-field';
 import CommentForm from './comment-form';

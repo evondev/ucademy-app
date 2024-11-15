@@ -3,8 +3,11 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { createRating, getRatingByUserId } from '@/lib/actions/rating.actions';
 import { cn } from '@/lib/utils';
+import {
+  createRating,
+  getRatingByUserId,
+} from '@/modules/rating/actions/rating.actions';
 import { IconStar } from '@/shared/components/icons';
 import { Button } from '@/shared/components/ui/button';
 import {

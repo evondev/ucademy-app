@@ -1,4 +1,4 @@
-import { getRatings } from '@/lib/actions/rating.actions';
+import { getRatings } from '@/modules/rating/actions/rating.actions';
 import { RatingStatus } from '@/types/enums';
 
 import RatingManage from './rating-manage';

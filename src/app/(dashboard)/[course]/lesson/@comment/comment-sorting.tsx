@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 
-import useQueryString from '@/hooks/use-query-string';
+import useQueryString from '@/shared/hooks/use-query-string';
 
 const CommentSorting = () => {
   const params = useSearchParams();
