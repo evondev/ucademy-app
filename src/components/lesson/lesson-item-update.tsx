@@ -8,8 +8,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { z } from 'zod';
 
-import { LessonProps } from '@/database/lesson.model';
-import { updateLesson } from '@/modules/lesson/actions/lesson.actions';
+import { updateLesson } from '@/modules/lesson/actions';
 import { Button } from '@/shared/components/ui/button';
 import {
   Form,
@@ -21,6 +20,7 @@ import {
 } from '@/shared/components/ui/form';
 import { Input } from '@/shared/components/ui/input';
 import { editorOptions } from '@/shared/constants';
+import { LessonModelProps } from '@/shared/types';
 
 const formSchema = z.object({
   slug: z.string().optional(),
@@ -29,7 +29,7 @@ const formSchema = z.object({
   content: z.string().optional(),
 });
 
-const LessonItemUpdate = ({ lesson }: { lesson: LessonProps }) => {
+const LessonItemUpdate = ({ lesson }: { lesson: LessonModelProps }) => {
   const editorRef = useRef<any>(null);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

@@ -24,10 +24,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/components/ui/table';
-import { allValue, couponStatuses } from '@/shared/constants';
-import useQueryString from '@/shared/hooks/use-query-string';
+import { allValue, couponStatuses, CouponType } from '@/shared/constants';
+import { useQueryString } from '@/shared/hooks';
 import { CouponItem } from '@/types';
-import { CouponType } from '@/types/enums';
 
 import ActionDeleteCoupon from './action-delete-coupon';
 

@@ -1,9 +1,9 @@
 'use client';
 import Link from 'next/link';
 
-import { cn } from '@/lib/utils';
 import { createHistory } from '@/modules/history/actions/history.actions';
 import { Checkbox } from '@/shared/components/ui/checkbox';
+import { cn } from '@/shared/utils';
 
 import { IconPlay } from '../../shared/components/icons';
 

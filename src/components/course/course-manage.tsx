@@ -3,8 +3,7 @@ import Image from 'next/image';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
-import { CourseProps } from '@/database/course.model';
-import { updateCourse } from '@/lib/actions/course.actions';
+import { updateCourse } from '@/modules/course/actions';
 import {
   BadgeStatus,
   BouncedLink,
@@ -29,11 +28,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/components/ui/table';
-import { allValue, courseStatus } from '@/shared/constants';
-import useQueryString from '@/shared/hooks/use-query-string';
-import { CourseStatus } from '@/types/enums';
+import { allValue, CourseStatus, courseStatus } from '@/shared/constants';
+import { useQueryString } from '@/shared/hooks';
+import { CourseModelProps } from '@/shared/types';
 
-const CourseManage = ({ courses }: { courses: CourseProps[] }) => {
+const CourseManage = ({ courses }: { courses: CourseModelProps[] }) => {
   const { handleSearchData, handleSelectStatus } = useQueryString();
 
   const handleDeleteCourse = (slug: string) => {

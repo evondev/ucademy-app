@@ -1,6 +1,6 @@
 import { CourseManagePageRootProps } from '@/app/(dashboard)/manage/course/page';
-import { getAllCourses } from '@/lib/actions/course.actions';
 
+import { fetchCourses } from '../../actions';
 import CourseManage from './components/course-manage';
 
 export interface CourseManageContainerProps extends CourseManagePageRootProps {}
@@ -9,7 +9,7 @@ async function CourseManageContainer({
   searchParams,
 }: CourseManageContainerProps) {
   const courses =
-    (await getAllCourses({
+    (await fetchCourses({
       page: searchParams.page || 1,
       limit: 10,
       search: searchParams.search,

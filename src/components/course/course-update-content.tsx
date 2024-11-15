@@ -4,8 +4,6 @@ import { toast } from 'react-toastify';
 import slugify from 'slugify';
 import Swal from 'sweetalert2';
 
-import { LessonProps } from '@/database/lesson.model';
-import { cn } from '@/lib/utils';
 import {
   createLecture,
   updateLecture,
@@ -23,6 +21,8 @@ import {
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
 import { commonClassNames } from '@/shared/constants';
+import { LessonModelProps } from '@/shared/types';
+import { cn } from '@/shared/utils';
 import { CourseUpdateParams, UpdateCourseLecture } from '@/types';
 
 import {
@@ -240,7 +240,7 @@ const CourseUpdateContent = ({ course }: { course: CourseUpdateParams }) => {
                 </AccordionTrigger>
                 <AccordionContent className="border-none !bg-transparent">
                   <div className="flex flex-col gap-5">
-                    {lecture.lessons.map((lesson: LessonProps) => (
+                    {lecture.lessons.map((lesson: LessonModelProps) => (
                       <Accordion
                         key={lesson._id}
                         collapsible={!lessonEdit}

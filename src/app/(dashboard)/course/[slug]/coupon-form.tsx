@@ -9,9 +9,9 @@ import {
 } from 'react';
 import { toast } from 'react-toastify';
 
-import { getValidateCoupon } from '@/modules/coupon/services/coupon.actions';
+import { getValidateCoupon } from '@/modules/coupon/actions';
 import { Input } from '@/shared/components/ui/input';
-import { CouponType } from '@/types/enums';
+import { CouponType } from '@/shared/constants';
 
 interface CouponFormProps {
   originalPrice: number;

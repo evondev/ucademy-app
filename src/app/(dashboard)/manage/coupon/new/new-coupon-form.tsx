@@ -9,8 +9,8 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { z } from 'zod';
 
-import { getAllCourses } from '@/lib/actions/course.actions';
-import { createCoupon } from '@/modules/coupon/services/coupon.actions';
+import { createCoupon } from '@/modules/coupon/actions';
+import { fetchCourses } from '@/modules/course/actions';
 import { IconClose } from '@/shared/components/icons';
 import { Button } from '@/shared/components/ui/button';
 import { Calendar } from '@/shared/components/ui/calendar';
@@ -33,8 +33,7 @@ import {
 } from '@/shared/components/ui/popover';
 import { RadioGroup, RadioGroupItem } from '@/shared/components/ui/radio-group';
 import { Switch } from '@/shared/components/ui/switch';
-import { couponFormSchema, couponTypes } from '@/shared/constants';
-import { CouponType } from '@/types/enums';
+import { couponFormSchema, CouponType, couponTypes } from '@/shared/constants';
 
 const NewCouponForm = () => {
   const [startDate, setStartDate] = useState<Date>();
@@ -96,7 +95,7 @@ const NewCouponForm = () => {
   const handleSearchCourse = debounce(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value;
-      const courseList = await getAllCourses({ search: value });
+      const courseList = await fetchCourses({ search: value });
 
       setFindCourse(courseList);
       if (!value) setFindCourse([]);

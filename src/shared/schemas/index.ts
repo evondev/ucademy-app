@@ -1,3 +1,4 @@
+export * from './comment.schema';
 export * from './coupon.schema';
 export * from './course.schema';
 export * from './history.schema';

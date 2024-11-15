@@ -2,10 +2,14 @@
 import { FilterQuery } from 'mongoose';
 import { revalidatePath } from 'next/cache';
 
-import Course from '@/database/course.model';
 import { OrderStatus } from '@/shared/constants';
 import { connectToDatabase } from '@/shared/lib/mongoose';
-import { CouponModel, OrderModel, UserModel } from '@/shared/schemas';
+import {
+  CouponModel,
+  CourseModel,
+  OrderModel,
+  UserModel,
+} from '@/shared/schemas';
 import { CreateOrderParams } from '@/types';
 
 export async function fetchOrders(params: any) {
@@ -13,7 +17,7 @@ export async function fetchOrders(params: any) {
     connectToDatabase();
     const { limit = 10, page = 1, search, status } = params;
     const skip = (page - 1) * limit;
-    const query: FilterQuery<typeof Course> = {};
+    const query: FilterQuery<typeof CourseModel> = {};
 
     if (search) {
       query.$or = [{ code: { $regex: search, $options: 'i' } }];
@@ -23,7 +27,7 @@ export async function fetchOrders(params: any) {
     }
     const orders = await OrderModel.find(query)
       .populate({
-        model: Course,
+        model: CourseModel,
         select: 'title',
         path: 'course',
       })
@@ -78,7 +82,7 @@ export async function updateOrder({
     const findOrder = await OrderModel.findById(orderId)
       .populate({
         path: 'course',
-        model: Course,
+        model: CourseModel,
         select: '_id',
       })
       .populate({

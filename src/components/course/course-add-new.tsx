@@ -8,8 +8,7 @@ import { toast } from 'react-toastify';
 import slugify from 'slugify';
 import { z } from 'zod';
 
-import { User } from '@/database/user.model';
-import { createCourse } from '@/lib/actions/course.actions';
+import { createCourse } from '@/modules/course/actions';
 import { Button } from '@/shared/components/ui/button';
 import {
   Form,
@@ -20,13 +19,14 @@ import {
   FormMessage,
 } from '@/shared/components/ui/form';
 import { Input } from '@/shared/components/ui/input';
+import { UserModelProps } from '@/shared/types';
 
 const formSchema = z.object({
   title: z.string().min(10, 'Tên khóa học phải có ít nhất 10 ký tự'),
   slug: z.string().optional(),
 });
 
-function CourseAddNew({ user }: { user: User }) {
+function CourseAddNew({ user }: { user: UserModelProps }) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({

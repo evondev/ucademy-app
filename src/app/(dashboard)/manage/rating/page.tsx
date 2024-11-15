@@ -1,5 +1,5 @@
 import { getRatings } from '@/modules/rating/actions/rating.actions';
-import { RatingStatus } from '@/types/enums';
+import { RatingStatus } from '@/shared/constants';
 
 import RatingManage from './rating-manage';
 

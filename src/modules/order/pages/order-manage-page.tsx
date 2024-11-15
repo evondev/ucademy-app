@@ -2,7 +2,6 @@
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
-import { cn } from '@/lib/utils';
 import { updateOrder } from '@/modules/order/actions/order.actions';
 import {
   BadgeStatus,
@@ -28,9 +27,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/components/ui/table';
-import { allValue, commonClassNames, orderStatus } from '@/shared/constants';
-import useQueryString from '@/shared/hooks/use-query-string';
-import { OrderStatus } from '@/shared/types/enums';
+import {
+  allValue,
+  commonClassNames,
+  OrderStatus,
+  orderStatus,
+} from '@/shared/constants';
+import { useQueryString } from '@/shared/hooks';
+import { cn } from '@/shared/utils';
 
 import { OrderManagePageProps } from '../types/order.types';
 

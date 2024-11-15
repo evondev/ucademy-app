@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/utils';
 
 interface HeadingProps {
   children: React.ReactNode;

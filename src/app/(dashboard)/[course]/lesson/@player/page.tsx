@@ -1,8 +1,8 @@
 import { auth } from '@clerk/nextjs/server';
 
-import { getCourseBySlug } from '@/lib/actions/course.actions';
-import { getUserInfo } from '@/lib/actions/user.actions';
+import { fetchCourseBySlug } from '@/modules/course/actions';
 import { findAllLessons } from '@/modules/lesson/actions/lesson.actions';
+import { getUserInfo } from '@/modules/user/actions';
 import { Heading } from '@/shared/components';
 
 import LessonSaveUrl from '../lesson-save-url';
@@ -23,7 +23,7 @@ const page = async ({
   const findUser = await getUserInfo({ userId: userId! });
   const course = params.course;
   const slug = searchParams.slug;
-  const findCourse = await getCourseBySlug({ slug: course });
+  const findCourse = await fetchCourseBySlug({ slug: course });
 
   if (!findCourse) return null;
   const courseId = findCourse?._id.toString();

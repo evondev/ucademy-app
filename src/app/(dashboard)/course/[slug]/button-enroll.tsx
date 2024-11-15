@@ -2,13 +2,13 @@
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
-import { User } from '@/database/user.model';
 import { createOrder } from '@/modules/order/actions/order.actions';
 import { Button } from '@/shared/components/ui/button';
+import { UserModelProps } from '@/shared/types';
 import { createOrderCode } from '@/utils';
 
 interface ButtonEnrollProps {
-  user: User | null | undefined;
+  user: UserModelProps | null | undefined;
   courseId: string;
   amount: number;
   coupon: string;

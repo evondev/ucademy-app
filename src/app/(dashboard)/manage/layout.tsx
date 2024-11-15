@@ -2,8 +2,8 @@ import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 
 import PageNotFound from '@/app/not-found';
-import { getUserInfo } from '@/lib/actions/user.actions';
-import { UserRole } from '@/types/enums';
+import { getUserInfo } from '@/modules/user/actions';
+import { UserRole } from '@/shared/constants';
 
 const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
   const { userId } = await auth();

@@ -9,8 +9,7 @@ import { toast } from 'react-toastify';
 import { useImmer } from 'use-immer';
 import { z } from 'zod';
 
-import { CourseProps } from '@/database/course.model';
-import { updateCourse } from '@/lib/actions/course.actions';
+import { updateCourse } from '@/modules/course/actions';
 import { Button } from '@/shared/components/ui/button';
 import {
   Form,
@@ -29,9 +28,14 @@ import {
   SelectValue,
 } from '@/shared/components/ui/select';
 import { Textarea } from '@/shared/components/ui/textarea';
-import { courseLevel, courseStatus } from '@/shared/constants';
-import { CourseLevel, CourseStatus } from '@/types/enums';
-import { UploadButton } from '@/utils/uploadthing';
+import {
+  CourseLevel,
+  courseLevel,
+  CourseStatus,
+  courseStatus,
+} from '@/shared/constants';
+import { CourseModelProps } from '@/shared/types';
+import { UploadButton } from '@/shared/utils/uploadthing';
 
 import { IconAdd } from '../../shared/components/icons';
 
@@ -62,7 +66,7 @@ const formSchema = z.object({
       .optional(),
   }),
 });
-const CourseUpdate = ({ data }: { data: CourseProps }) => {
+const CourseUpdate = ({ data }: { data: CourseModelProps }) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [courseInfo, setCourseInfo] = useImmer({

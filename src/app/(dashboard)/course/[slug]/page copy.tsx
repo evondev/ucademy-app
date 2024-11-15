@@ -4,7 +4,7 @@ import Image from 'next/image';
 import PageNotFound from '@/app/not-found';
 import LessonContent from '@/components/lesson/lesson-content';
 import {
-  getCourseBySlug,
+  fetchCourseBySlug,
   getCourseLessonsInfo,
   updateCourseView,
 } from '@/lib/actions/course.actions';
@@ -30,7 +30,7 @@ const page = async ({
   };
 }) => {
   await updateCourseView({ slug: params.slug });
-  const data = await getCourseBySlug({
+  const data = await fetchCourseBySlug({
     slug: params.slug,
   });
 

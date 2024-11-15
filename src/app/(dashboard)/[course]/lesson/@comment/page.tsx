@@ -1,9 +1,9 @@
 import { auth } from '@clerk/nextjs/server';
 
-import { getCourseBySlug } from '@/lib/actions/course.actions';
-import { getUserInfo } from '@/lib/actions/user.actions';
 import { getCommentsByLesson } from '@/modules/comment/services/comment.actions';
+import { fetchCourseBySlug } from '@/modules/course/actions';
 import { getLessonBySlug } from '@/modules/lesson/actions/lesson.actions';
+import { getUserInfo } from '@/modules/user/actions';
 
 import CommentField from './comment-field';
 import CommentForm from './comment-form';
@@ -25,7 +25,7 @@ const page = async ({
   const findUser = await getUserInfo({ userId: userId! });
   const course = params.course;
   const slug = searchParams.slug;
-  const findCourse = await getCourseBySlug({ slug: course });
+  const findCourse = await fetchCourseBySlug({ slug: course });
 
   if (!findCourse) return null;
   const lesson = await getLessonBySlug({

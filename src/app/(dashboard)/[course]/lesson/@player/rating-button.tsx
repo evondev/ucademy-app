@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { cn } from '@/lib/utils';
 import {
   createRating,
   getRatingByUserId,
@@ -20,6 +19,7 @@ import {
 } from '@/shared/components/ui/dialog';
 import { Textarea } from '@/shared/components/ui/textarea';
 import { ratingList } from '@/shared/constants';
+import { cn } from '@/shared/utils';
 
 interface RatingButtonProps {
   courseId: string;

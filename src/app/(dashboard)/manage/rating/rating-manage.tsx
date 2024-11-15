@@ -30,10 +30,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/components/ui/table';
-import { allValue, ratingList, ratingStatus } from '@/shared/constants';
-import useQueryString from '@/shared/hooks/use-query-string';
+import {
+  allValue,
+  ratingList,
+  RatingStatus,
+  ratingStatus,
+} from '@/shared/constants';
+import { useQueryString } from '@/shared/hooks';
 import { RatingItem } from '@/types';
-import { RatingStatus } from '@/types/enums';
 
 const RatingManage = ({ ratings }: { ratings: any }) => {
   const { handleSearchData, handleSelectStatus } = useQueryString();

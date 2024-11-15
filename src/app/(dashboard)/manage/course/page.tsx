@@ -1,5 +1,5 @@
-import { CourseManageContainer } from '@/modules/course/pages';
-import { CourseStatus } from '@/types/enums';
+import { CourseManageContainer } from '@/modules/course/pages/course-manage-page';
+import { CourseStatus } from '@/shared/constants';
 
 export interface CourseManagePageRootProps {
   searchParams: {

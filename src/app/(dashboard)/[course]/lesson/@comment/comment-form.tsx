@@ -7,7 +7,6 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { z } from 'zod';
 
-import { cn } from '@/lib/utils';
 import { createComment } from '@/modules/comment/services/comment.actions';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -18,6 +17,7 @@ import {
   FormMessage,
 } from '@/shared/components/ui/form';
 import { Textarea } from '@/shared/components/ui/textarea';
+import { cn } from '@/shared/utils';
 import { CommentItem } from '@/types';
 
 const formSchema = z.object({

@@ -1,5 +1,5 @@
 import LessonContent from '@/components/lesson/lesson-content';
-import { getCourseBySlug } from '@/lib/actions/course.actions';
+import { fetchCourseBySlug } from '@/modules/course/actions';
 import { getHistory } from '@/modules/history/actions/history.actions';
 import { countLessonByCourseId } from '@/modules/lesson/actions/lesson.actions';
 
@@ -16,7 +16,7 @@ const page = async ({
 }) => {
   const course = params.course;
   const slug = searchParams.slug;
-  const findCourse = await getCourseBySlug({ slug: course });
+  const findCourse = await fetchCourseBySlug({ slug: course });
 
   if (!findCourse) return null;
   const courseId = findCourse?._id.toString();

@@ -1,5 +1,5 @@
 import CourseManage from '@/components/course/course-manage';
-import { getAllCourses } from '@/lib/actions/course.actions';
+import { fetchCourses } from '@/lib/actions/course.actions';
 import { CourseStatus } from '@/types/enums';
 
 const CourseManagePageRoot = async ({
@@ -11,7 +11,7 @@ const CourseManagePageRoot = async ({
     status: CourseStatus;
   };
 }) => {
-  const courses = await getAllCourses({
+  const courses = await fetchCourses({
     page: searchParams.page || 1,
     limit: 10,
     search: searchParams.search,

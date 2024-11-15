@@ -2,7 +2,7 @@ import { auth } from '@clerk/nextjs/server';
 import { Suspense } from 'react';
 
 import PageNotFound from '@/app/not-found';
-import { getUserInfo } from '@/lib/actions/user.actions';
+import { getUserInfo } from '@/modules/user/actions';
 
 import LoadingOutline from './@outline/loading-outline';
 import LoadingPlayer from './@player/loading-player';

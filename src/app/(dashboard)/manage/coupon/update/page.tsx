@@ -1,4 +1,4 @@
-import { getCouponByCode } from '@/modules/coupon/services/coupon.actions';
+import { getCouponByCode } from '@/modules/coupon/actions';
 import { Heading } from '@/shared/components';
 
 import UpdateCouponForm from './update-coupon-form';

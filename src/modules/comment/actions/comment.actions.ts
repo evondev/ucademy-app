@@ -2,11 +2,9 @@
 
 import { revalidatePath } from 'next/cache';
 
-import UserSchema from '@/database/user.model';
-import { connectToDatabase } from '@/lib/mongoose';
+import { connectToDatabase } from '@/shared/lib/mongoose';
+import { CommentModel, UserModel } from '@/shared/schemas';
 import { CommentItem } from '@/types';
-
-import CommentSchema from './comment.schema';
 
 export async function createComment(params: {
   content: string;
@@ -18,7 +16,7 @@ export async function createComment(params: {
 }): Promise<boolean | undefined> {
   try {
     connectToDatabase();
-    const newComment = await CommentSchema.create(params);
+    const newComment = await CommentModel.create(params);
 
     revalidatePath(params.path || '/');
     if (!newComment) return false;
@@ -34,13 +32,13 @@ export async function getCommentsByLesson(
 ): Promise<CommentItem[] | undefined> {
   try {
     connectToDatabase();
-    const comments = await CommentSchema.find<CommentItem>({
+    const comments = await CommentModel.find<CommentItem>({
       lesson: lessonId,
     })
       .sort({ created_at: sort === 'recent' ? -1 : 1 })
       .populate({
         path: 'user',
-        model: UserSchema,
+        model: UserModel,
         select: 'name avatar',
       });
 

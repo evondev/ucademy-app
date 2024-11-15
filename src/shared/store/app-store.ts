@@ -6,7 +6,7 @@ interface GlobalState {
   setShouldExpandedPlayer: (expanded: boolean) => void;
 }
 
-const useGlobalStore = create<GlobalState>()(
+export const useGlobalStore = create<GlobalState>()(
   devtools(
     persist(
       (set) => ({
@@ -20,5 +20,3 @@ const useGlobalStore = create<GlobalState>()(
     ),
   ),
 );
-
-export default useGlobalStore;

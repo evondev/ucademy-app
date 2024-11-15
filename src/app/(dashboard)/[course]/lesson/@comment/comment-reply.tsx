@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-import { cn } from '@/lib/utils';
 import { MAX_COMMENT_LEVEL } from '@/shared/constants';
+import { cn } from '@/shared/utils';
 import { CommentItem } from '@/types';
 
 import CommentForm from './comment-form';

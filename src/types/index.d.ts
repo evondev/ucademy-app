@@ -1,8 +1,9 @@
-import { CourseProps } from '@/database/course.model';
-import { LessonProps } from '@/database/lesson.model';
 import { Comment } from '@/modules/comment/services/comment.schema';
-
-import { CouponType } from './enums';
+import {
+  CouponModelProps,
+  CourseModelProps,
+  LessonModelProps,
+} from '@/shared/types';
 
 export type ActiveLinkProps = {
   url: string;
@@ -30,15 +31,15 @@ export type CreateCourseParams = {
 };
 export type UpdateCourseParams = {
   slug: string;
-  updateData: Partial<CourseProps>;
+  updateData: Partial<CourseModelProps>;
   path?: string;
 };
 export type UpdateCourseLecture = {
   _id: string;
   title: string;
-  lessons: LessonProps[];
+  lessons: LessonModelProps[];
 };
-export interface CourseUpdateParams extends Omit<CourseProps, 'lectures'> {
+export interface CourseUpdateParams extends Omit<CourseModelProps, 'lectures'> {
   lectures: UpdateCourseLecture[];
 }
 export type GetAllCourseParams = {
@@ -116,13 +117,13 @@ export type UpdateCouponParams = {
   _id: string;
   updateData: Partial<CreateCouponParams>;
 };
-export type CouponParams = Omit<CouponProps, 'courses'> & {
+export type CouponParams = Omit<CouponModelProps, 'courses'> & {
   courses: {
     _id: string;
     title: string;
   }[];
 };
-export interface StudyCoursesProps extends Omit<CourseProps, 'lectures'> {
+export interface StudyCoursesProps extends Omit<CourseModelProps, 'lectures'> {
   lectures: {
     lessons: {
       slug: string;

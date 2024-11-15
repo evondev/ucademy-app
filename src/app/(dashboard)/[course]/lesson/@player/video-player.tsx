@@ -3,9 +3,9 @@ import MuxPlayer from '@mux/mux-player-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { cn } from '@/lib/utils';
 import { Button } from '@/shared/components/ui/button';
-import useGlobalStore from '@/store';
+import { useGlobalStore } from '@/shared/store';
+import { cn } from '@/shared/utils';
 
 import LessonNavigation from '../lesson-navigation';
 import RatingButton from './rating-button';

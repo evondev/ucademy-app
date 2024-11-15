@@ -1,5 +1,5 @@
 import CourseUpdate from '@/components/course/course-update';
-import { getCourseBySlug } from '@/lib/actions/course.actions';
+import { fetchCourseBySlug } from '@/modules/course/actions';
 import { Heading } from '@/shared/components';
 
 const page = async ({
@@ -9,7 +9,7 @@ const page = async ({
     slug: string;
   };
 }) => {
-  const findCourse = await getCourseBySlug({
+  const findCourse = await fetchCourseBySlug({
     slug: searchParams.slug,
   });
 

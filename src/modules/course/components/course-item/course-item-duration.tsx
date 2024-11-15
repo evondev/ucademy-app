@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react';
 
-import { getCourseLessonsInfo } from '@/lib/actions/course.actions';
 import { IconClock } from '@/shared/components/icons';
 import { formatMinutesToHour } from '@/utils';
+
+import { getCourseLessonsInfo } from '../../actions';
 
 export interface CourseItemDurationProps {
   slug: string;

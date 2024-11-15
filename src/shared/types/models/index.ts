@@ -1,3 +1,4 @@
+export * from './comment.model';
 export * from './coupon.model';
 export * from './course.model';
 export * from './history.model';

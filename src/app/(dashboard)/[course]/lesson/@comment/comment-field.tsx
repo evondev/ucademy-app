@@ -1,9 +1,9 @@
 'use client';
 import Image from 'next/image';
 
-import { cn } from '@/lib/utils';
+import { CommentStatus } from '@/shared/constants';
+import { cn } from '@/shared/utils';
 import { CommentItem } from '@/types';
-import { CommentStatus } from '@/types/enums';
 import { getRepliesComment, timeAgo } from '@/utils';
 
 import CommentReply from './comment-reply';

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import useGlobalStore from '@/store';
+import { useGlobalStore } from '@/shared/store';
 
 const LessonWrapper = ({ children }: { children: React.ReactNode }) => {
   const { shouldExpandedPlayer } = useGlobalStore();
