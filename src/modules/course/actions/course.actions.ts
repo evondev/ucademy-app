@@ -13,6 +13,7 @@ import {
   UserModel,
 } from '@/shared/schemas';
 import { CourseModelProps, QueryFilter } from '@/shared/types';
+import { CourseLessonData } from '@/shared/types/course.type';
 import {
   CreateCourseParams,
   GetAllCourseParams,
@@ -199,16 +200,14 @@ export async function updateCourseView({ slug }: { slug: string }) {
     console.log(error);
   }
 }
-export async function getCourseLessonsInfo({ slug }: { slug: string }): Promise<
-  | {
-      duration: number;
-      lessons: number;
-    }
-  | undefined
-> {
+export async function getCourseLessonsInfo({
+  slug,
+}: {
+  slug: string;
+}): Promise<CourseLessonData | undefined> {
   try {
     connectToDatabase();
-    const course = await CourseModel.findOne({ slug })
+    const course: CourseItemData = await CourseModel.findOne({ slug })
       .select('lectures')
       .populate({
         path: 'lectures',
@@ -218,11 +217,13 @@ export async function getCourseLessonsInfo({ slug }: { slug: string }): Promise<
           select: 'duration',
         },
       });
-    const lessons = course?.lectures.flatMap((l: any) => l.lessons);
-    const duration = lessons.reduce(
-      (accumulator: number, current: any) => accumulator + current.duration,
-      0,
-    );
+    const lessons =
+      course?.lectures.flatMap((lecture) => lecture.lessons) || [];
+    const duration =
+      lessons.reduce(
+        (accumulator: number, current) => accumulator + current.duration,
+        0,
+      ) || 0;
 
     return {
       duration,

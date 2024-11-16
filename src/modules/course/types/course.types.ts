@@ -1,12 +1,10 @@
-import { CourseModelProps } from '@/shared/types';
-import { LessonModelProps } from '@/shared/types/models/lesson.model';
+import { CourseModelProps, RatingModelProps } from '@/shared/types';
+import { LectureItemData } from '@/shared/types/lecture.type';
 
-export interface CourseItemData extends Omit<CourseModelProps, 'lectures'> {
-  lectures: {
-    _id: string;
-    title: string;
-    lessons: LessonModelProps[];
-  }[];
+export interface CourseItemData
+  extends Omit<CourseModelProps, 'lectures' | 'rating'> {
+  lectures: LectureItemData[];
+  rating: RatingModelProps[];
 }
 export interface LassLessonData {
   course: string;

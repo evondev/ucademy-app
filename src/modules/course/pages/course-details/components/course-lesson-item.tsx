@@ -1,29 +1,24 @@
 'use client';
 import Link from 'next/link';
 
-import { createHistory } from '@/modules/history/actions/history.actions';
+import { createHistory } from '@/modules/history/actions';
+import { IconPlay } from '@/shared/components/icons';
 import { Checkbox } from '@/shared/components/ui/checkbox';
+import { LessonItemData } from '@/shared/types';
 import { cn } from '@/shared/utils';
 
-import { IconPlay } from '../../shared/components/icons';
-
-interface LessonItemProps {
-  lesson: {
-    title: string;
-    duration: number;
-    course: string;
-    _id: string;
-  };
+interface CourseLessonItemProps {
+  lesson: LessonItemData;
   url?: string;
   isActive?: boolean;
   isChecked?: boolean;
 }
-const LessonItem = ({
+const CourseLessonItem = ({
   isActive = false,
   isChecked = false,
   lesson,
   url,
-}: LessonItemProps) => {
+}: CourseLessonItemProps) => {
   const handleCompleteLesson = async (checked: boolean | string) => {
     try {
       await createHistory({
@@ -69,4 +64,4 @@ const LessonItem = ({
   );
 };
 
-export default LessonItem;
+export default CourseLessonItem;

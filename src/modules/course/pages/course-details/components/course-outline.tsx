@@ -4,26 +4,25 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/shared/components/ui/accordion';
-import { HistoryModelProps } from '@/shared/types';
-import { UpdateCourseLecture } from '@/types';
+import { HistoryItemData, LectureItemData } from '@/shared/types';
 
-import LessonItem from './lesson-item';
+import CourseLessonItem from './course-lesson-item';
 
-interface LessonContentProps {
-  lectures: UpdateCourseLecture[];
+interface CourseOutlineProps {
+  lectures: LectureItemData[];
   course: string;
   slug: string;
-  histories?: HistoryModelProps[];
+  histories?: HistoryItemData[];
 }
-const LessonContent = ({
+const CourseOutline = ({
   course,
   histories = [],
   lectures,
   slug,
-}: LessonContentProps) => {
+}: CourseOutlineProps) => {
   return (
     <div className="flex flex-col gap-5">
-      {lectures.map((lecture: UpdateCourseLecture) => (
+      {lectures.map((lecture) => (
         <Accordion
           key={lecture._id}
           collapsible
@@ -39,7 +38,7 @@ const LessonContent = ({
             <AccordionContent className="border-none !bg-transparent p-0">
               <div className="mt-5 flex flex-col gap-3">
                 {lecture.lessons.map((lesson) => (
-                  <LessonItem
+                  <CourseLessonItem
                     key={lesson._id}
                     isActive={slug ? lesson.slug === slug : false}
                     lesson={lesson ? JSON.parse(JSON.stringify(lesson)) : {}}
@@ -59,4 +58,4 @@ const LessonContent = ({
   );
 };
 
-export default LessonContent;
+export default CourseOutline;

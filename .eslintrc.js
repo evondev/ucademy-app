@@ -94,7 +94,7 @@ module.exports = {
     'import/no-cycle': 'warn',
     'import/no-unresolved': 'error',
     'import/order': 'off',
-    'react/no-multi-comp': 'off',
+    'react/no-multi-comp': 'warn',
     'react/prop-types': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
@@ -140,6 +140,5 @@ module.exports = {
     'unicorn/consistent-function-scoping': 'off',
     'unicorn/no-array-callback-reference': 'off',
     'import/named': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
   },
 };

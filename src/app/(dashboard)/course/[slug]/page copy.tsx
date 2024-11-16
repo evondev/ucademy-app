@@ -2,13 +2,13 @@ import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image';
 
 import PageNotFound from '@/app/not-found';
-import LessonContent from '@/components/lesson/lesson-content';
 import {
   fetchCourseBySlug,
   getCourseLessonsInfo,
   updateCourseView,
 } from '@/lib/actions/course.actions';
 import { getUserInfo } from '@/lib/actions/user.actions';
+import LessonContent from '@/modules/course/pages/course-details/components/course-outline';
 import {
   Accordion,
   AccordionContent,
