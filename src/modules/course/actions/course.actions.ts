@@ -110,7 +110,7 @@ export async function fetchCourseBySlug({
         },
       });
 
-    return findCourse;
+    return JSON.parse(JSON.stringify(findCourse)) as CourseItemData;
   } catch (error) {
     console.log(error);
   }

@@ -9,6 +9,7 @@ import { formatMinutesToHour } from '@/shared/utils';
 
 import BenefitItem from './benefit-item';
 import CourseOutline from './course-outline';
+import CourseWidget from './course-widget';
 import QaItem from './qa-item';
 import RatingItem from './rating-item';
 import RequirementItem from './requirement-item';
@@ -35,9 +36,95 @@ async function CourseDetailsContainer({
   const requirements = courseDetails.info.requirements || [];
   const benefits = courseDetails.info.benefits || [];
   const questionAnswers = courseDetails.info.qa || [];
+  const courseDetailsMeta: {
+    title: string;
+    content: React.ReactNode;
+  }[] = [
+    {
+      title: 'Bài học',
+      content: lessonInfo.lessons,
+    },
+    {
+      title: 'Lượt xem',
+      content: courseDetails.views.toLocaleString(),
+    },
+    {
+      title: 'Trình độ',
+      content: courseLevelTitle[courseDetails.level],
+    },
+    {
+      title: 'Thời lượng',
+      content: formatMinutesToHour(lessonInfo.duration),
+    },
+  ];
+  const courseDetailsInfo: {
+    title: string;
+    content: React.ReactNode;
+  }[] = [
+    {
+      title: 'Mô tả',
+      content: <div className="leading-normal">{courseDetails.desc}</div>,
+    },
+    {
+      title: 'Thông tin',
+      content: (
+        <div className="mb-10 grid grid-cols-4 gap-5">
+          {courseDetailsMeta.map((item) => (
+            <SectionInfoItem
+              key={item.title}
+              title={item.title}
+            >
+              {item.content}
+            </SectionInfoItem>
+          ))}
+        </div>
+      ),
+    },
+    {
+      title: 'Nội dung khóa học',
+      content: (
+        <CourseOutline
+          course=""
+          lectures={courseDetails.lectures}
+          slug=""
+        />
+      ),
+    },
+    {
+      title: 'Yêu cầu',
+      content: requirements.map((item) => (
+        <RequirementItem
+          key={item}
+          title={item}
+        />
+      )),
+    },
+    {
+      title: 'Lợi ích',
+      content: benefits.map((item) => (
+        <BenefitItem
+          key={item}
+          title={item}
+        />
+      )),
+    },
+    {
+      title: 'Q.A',
+      content: (
+        <div className="flex flex-col gap-5">
+          {questionAnswers.map((item: CourseQAData) => (
+            <QaItem
+              key={item.question}
+              item={item}
+            />
+          ))}
+        </div>
+      ),
+    },
+  ];
 
   return (
-    <div className="grid min-h-screen gap-10 lg:grid-cols-[2fr,1fr]">
+    <div className="grid min-h-screen items-start gap-10 lg:grid-cols-[2fr,1fr]">
       <div>
         <div className="relative mb-5 aspect-video">
           {courseDetails.intro_url ? (
@@ -69,60 +156,19 @@ async function CourseDetailsContainer({
           ))}
         </div>
         <h1 className="mb-5 text-3xl font-bold">{courseDetails?.title}</h1>
-        <SectionItem title="Mô tả">
-          <div className="leading-normal">{courseDetails.desc}</div>
-        </SectionItem>
-        <SectionItem title="Thông tin">
-          <div className="mb-10 grid grid-cols-4 gap-5">
-            <SectionInfoItem title="Bài học">
-              {lessonInfo.lessons}
-            </SectionInfoItem>
-            <SectionInfoItem title="Lượt xem">
-              {courseDetails.views.toLocaleString()}
-            </SectionInfoItem>
-            <SectionInfoItem title="Trình độ">
-              {courseLevelTitle[courseDetails.level]}
-            </SectionInfoItem>
-            <SectionInfoItem title="Thời lượng">
-              {formatMinutesToHour(lessonInfo.duration)}
-            </SectionInfoItem>
-          </div>
-        </SectionItem>
-        <SectionItem title="Nội dung khóa học">
-          <CourseOutline
-            course=""
-            lectures={courseDetails.lectures}
-            slug=""
-          />
-        </SectionItem>
-        <SectionItem title="Yêu cầu">
-          {requirements.map((item) => (
-            <RequirementItem
-              key={item}
-              title={item}
-            />
-          ))}
-        </SectionItem>
-        <SectionItem title="Lợi ích">
-          {benefits.map((item) => (
-            <BenefitItem
-              key={item}
-              title={item}
-            />
-          ))}
-        </SectionItem>
-        <SectionItem title="Q.A">
-          <div className="flex flex-col gap-5">
-            {questionAnswers.map((item: CourseQAData) => (
-              <QaItem
-                key={item.question}
-                item={item}
-              />
-            ))}
-          </div>
-        </SectionItem>
+        {courseDetailsInfo.map((item) => (
+          <SectionItem
+            key={item.title}
+            title={item.title}
+          >
+            {item.content}
+          </SectionItem>
+        ))}
       </div>
-      <div />
+      <CourseWidget
+        data={courseDetails}
+        duration={formatMinutesToHour(lessonInfo.duration)}
+      />
     </div>
   );
 }

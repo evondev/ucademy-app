@@ -35,7 +35,6 @@ const CouponForm = ({
   const handleApplyCoupon = async () => {
     if (isApplied) return;
     try {
-      // handle valid coupon code
       const response = await getValidateCoupon({
         code: couponCode.toUpperCase(),
         courseId,

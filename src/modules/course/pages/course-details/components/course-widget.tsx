@@ -1,19 +1,38 @@
 'use client';
+import Link from 'next/link';
 import { useState } from 'react';
 
+import { CourseItemData } from '@/modules/course/types';
 import { IconPlay, IconStudy, IconUsers } from '@/shared/components/icons';
+import { useUserContext } from '@/shared/contexts';
 
 import ButtonEnroll from './button-enroll';
 import CouponForm from './coupon-form';
 
 interface CourseWidgetProps {
-  data: any;
-  findUser: any;
+  data: CourseItemData;
   duration: string;
 }
-const CourseWidget = ({ data, duration, findUser }: CourseWidgetProps) => {
+const CourseWidget = ({ data, duration }: CourseWidgetProps) => {
   const [price, setPrice] = useState<number>(data.price);
   const [coupon, setCoupon] = useState('');
+  const { userInfo } = useUserContext();
+
+  const isAlreadyEnrolled = userInfo?.courses
+    ? JSON.parse(JSON.stringify(userInfo?.courses)).includes(data._id)
+    : false;
+
+  if (isAlreadyEnrolled)
+    return (
+      <div className="bgDarkMode borderDarkMode rounded-lg border p-5">
+        <Link
+          className="flex h-12 w-full items-center justify-center rounded-lg bg-primary font-bold text-white"
+          href="/study"
+        >
+          Khu vực học tập
+        </Link>
+      </div>
+    );
 
   return (
     <>
@@ -25,7 +44,7 @@ const CourseWidget = ({ data, duration, findUser }: CourseWidgetProps) => {
           <span className="text-sm text-slate-400 line-through">
             {data.sale_price.toLocaleString('en-EN')}
           </span>
-          <span className="bg-opacity/10 ml-auto inline-block rounded-lg bg-primary px-3 py-1 text-sm font-semibold text-primary">
+          <span className="ml-auto inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
             {Math.floor((data.price / data.sale_price) * 100)}%
           </span>
         </div>
@@ -52,7 +71,6 @@ const CourseWidget = ({ data, duration, findUser }: CourseWidgetProps) => {
           amount={price}
           coupon={coupon}
           courseId={data ? JSON.parse(JSON.stringify(data._id)) : null}
-          user={findUser ? JSON.parse(JSON.stringify(findUser)) : null}
         />
         <CouponForm
           courseId={data ? JSON.parse(JSON.stringify(data._id)) : null}

@@ -1,3 +1,4 @@
+'use client';
 export interface BenefitItemProps {
   title: string;
 }

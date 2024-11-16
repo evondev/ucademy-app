@@ -1,3 +1,5 @@
+'use server';
+
 import { FilterQuery } from 'mongoose';
 import { revalidatePath } from 'next/cache';
 
@@ -81,9 +83,9 @@ export async function getCoupons(params: FilterData): Promise<
     console.log(error);
   }
 }
-export async function getCouponByCode(
-  params: any,
-): Promise<CouponModelProps | undefined> {
+export async function getCouponByCode(params: {
+  code: string;
+}): Promise<CouponModelProps | undefined> {
   try {
     connectToDatabase();
     const findCoupon = await CouponModel.findOne({
@@ -99,9 +101,10 @@ export async function getCouponByCode(
     console.log(error);
   }
 }
-export async function getValidateCoupon(
-  params: any,
-): Promise<CouponModelProps | undefined> {
+export async function getValidateCoupon(params: {
+  code: string;
+  courseId: string;
+}): Promise<CouponModelProps | undefined> {
   try {
     connectToDatabase();
     const findCoupon = await CouponModel.findOne({
@@ -111,7 +114,7 @@ export async function getValidateCoupon(
       select: '_id title',
     });
     const coupon = JSON.parse(JSON.stringify(findCoupon));
-    const couponCourses = coupon?.courses.map((course: any) => course._id);
+    const couponCourses = coupon?.courses.map((course) => course._id);
     let isActive = true;
 
     if (!couponCourses.includes(params.courseId)) isActive = false;

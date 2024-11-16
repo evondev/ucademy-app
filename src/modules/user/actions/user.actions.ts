@@ -24,9 +24,9 @@ export async function getUserInfo({
     connectToDatabase();
     const findUser = await UserModel.findOne({ clerkId: userId });
 
-    if (!findUser) return null;
+    if (!findUser._id) return null;
 
-    return findUser;
+    return JSON.parse(JSON.stringify(findUser));
   } catch (error) {
     console.log(error);
   }

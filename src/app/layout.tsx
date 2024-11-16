@@ -8,6 +8,7 @@ import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
 
 import { ThemeProvider } from '@/shared/components';
+import { UserProvider } from '@/shared/contexts';
 import { manrope } from '@/utils';
 
 export const metadata: Metadata = {
@@ -30,7 +31,7 @@ export default function RootLayout({
             attribute="class"
             defaultTheme="system"
           >
-            {children}
+            <UserProvider>{children}</UserProvider>
             <SpeedInsights />
             <Analytics />
             <ToastContainer
