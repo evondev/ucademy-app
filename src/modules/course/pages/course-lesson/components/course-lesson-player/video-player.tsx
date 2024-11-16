@@ -7,18 +7,19 @@ import { Button } from '@/shared/components/ui/button';
 import { useGlobalStore } from '@/shared/store';
 import { cn } from '@/shared/utils';
 
-import LessonNavigation from '../lesson-navigation';
+import LessonNavigation from './lesson-navigation';
 import RatingButton from './rating-button';
 
 interface VideoPlayerProps {
   nextLesson: string;
   prevLesson: string;
-  data: {
-    userId: string;
-    courseId: string;
-  };
+  courseId: string;
 }
-const VideoPlayer = ({ data, nextLesson, prevLesson }: VideoPlayerProps) => {
+const VideoPlayer = ({
+  courseId,
+  nextLesson,
+  prevLesson,
+}: VideoPlayerProps) => {
   const duration = 5000;
   const [isEndedVideo, setIsEndedVideo] = useState(false);
   const { setShouldExpandedPlayer, shouldExpandedPlayer } = useGlobalStore();
@@ -31,8 +32,7 @@ const VideoPlayer = ({ data, nextLesson, prevLesson }: VideoPlayerProps) => {
     }, duration);
 
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEndedVideo, nextLesson]);
+  }, [isEndedVideo, nextLesson, router]);
 
   return (
     <>
@@ -60,10 +60,7 @@ const VideoPlayer = ({ data, nextLesson, prevLesson }: VideoPlayerProps) => {
           prevLesson={prevLesson}
         />
         <div className="flex gap-5">
-          <RatingButton
-            courseId={data.courseId}
-            userId={data.userId}
-          />
+          <RatingButton courseId={courseId} />
           <Button
             onClick={() => setShouldExpandedPlayer(!shouldExpandedPlayer)}
           >

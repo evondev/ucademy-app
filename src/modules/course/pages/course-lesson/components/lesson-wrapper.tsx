@@ -1,10 +1,21 @@
 'use client';
 import React from 'react';
 
+import { useUserContext } from '@/shared/contexts';
 import { useGlobalStore } from '@/shared/store';
 
-const LessonWrapper = ({ children }: { children: React.ReactNode }) => {
+interface LessonWrapperProps {
+  children: React.ReactNode;
+  courseId: string;
+}
+const LessonWrapper = ({ children, courseId }: LessonWrapperProps) => {
   const { shouldExpandedPlayer } = useGlobalStore();
+  const { userInfo } = useUserContext();
+  const userCourses = userInfo?.courses
+    ? JSON.parse(JSON.stringify(userInfo?.courses))
+    : [];
+
+  if (!userCourses.includes(courseId) || !userInfo?._id) return null;
 
   return (
     <div

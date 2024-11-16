@@ -107,7 +107,7 @@
 - kebab-case ✅
 - camelCase
 
-## Components ✅
+## Components
 
 - Icon component svg
 - props: on, handle, destructuring
@@ -117,7 +117,7 @@
 
 ## Prettier ✅
 
-## Eslint
+## Eslint ✅
 
 - Naming convention: files, variables, functions, types
 - Quote

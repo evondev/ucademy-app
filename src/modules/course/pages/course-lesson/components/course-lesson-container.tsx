@@ -8,6 +8,8 @@ import { CourseLessonPageRootProps } from '@/shared/types';
 
 import CourseLessonComment from './course-lesson-comment';
 import CourseLessonOutline from './course-lesson-outline';
+import CourseLessonPlayer from './course-lesson-player';
+import LoadingPlayer from './course-lesson-player/loading-player';
 import LessonWrapper from './lesson-wrapper';
 
 export interface CourseLessonContainerProps extends CourseLessonPageRootProps {}
@@ -29,9 +31,15 @@ async function CourseLessonContainer({
   const completeNumber = ((histories?.length || 0) / (lessonCount || 1)) * 100;
 
   return (
-    <LessonWrapper>
+    <LessonWrapper courseId={courseId}>
       <div>
-        <div>Player</div>
+        <Suspense fallback={<LoadingPlayer />}>
+          <CourseLessonPlayer
+            courseId={courseId}
+            courseSlug={courseSlug}
+            lessonSlug={lessonSlug}
+          />
+        </Suspense>
         <Suspense fallback={<Loading />}>
           <CourseLessonComment
             courseId={courseId}

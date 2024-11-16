@@ -19,13 +19,15 @@ import {
 } from '@/shared/components/ui/dialog';
 import { Textarea } from '@/shared/components/ui/textarea';
 import { ratingList } from '@/shared/constants';
+import { useUserContext } from '@/shared/contexts';
 import { cn } from '@/shared/utils';
 
 interface RatingButtonProps {
   courseId: string;
-  userId: string;
 }
-const RatingButton = ({ courseId, userId }: RatingButtonProps) => {
+const RatingButton = ({ courseId }: RatingButtonProps) => {
+  const { userInfo } = useUserContext();
+  const userId = userInfo?._id || '';
   const [ratingValue, setRatingValue] = useState(-1);
   const [ratingContent, setRatingContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);

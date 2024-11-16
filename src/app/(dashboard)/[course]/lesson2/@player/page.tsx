@@ -5,8 +5,8 @@ import { findAllLessons } from '@/modules/lesson/actions/lesson.actions';
 import { getUserInfo } from '@/modules/user/actions';
 import { Heading } from '@/shared/components';
 
-import LessonSaveUrl from '../lesson-save-url';
-import VideoPlayer from './video-player';
+import LessonSaveUrl from '../../../../../modules/course/pages/course-lesson/components/course-lesson-player/lesson-save-url';
+import VideoPlayer from '../../../../../modules/course/pages/course-lesson/components/course-lesson-player/video-player';
 
 const page = async ({
   params,
