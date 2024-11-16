@@ -1,6 +1,6 @@
 import CourseManage from '@/components/course/course-manage';
-import { fetchCourses } from '@/lib/actions/course.actions';
-import { CourseStatus } from '@/types/enums';
+import { fetchCourses } from '@/modules/course/actions';
+import { CourseStatus } from '@/shared/constants';
 
 const CourseManagePageRoot = async ({
   searchParams,

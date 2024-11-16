@@ -1,5 +1,5 @@
-import { Comment } from '@/modules/comment/services/comment.schema';
 import {
+  CommentModelProps,
   CouponModelProps,
   CourseModelProps,
   LessonModelProps,
@@ -161,7 +161,7 @@ export type FilterData = {
   active?: boolean;
 };
 // Comment
-export interface CommentItem extends Omit<Comment, 'user'> {
+export interface CommentItem extends Omit<CommentModelProps, 'user'> {
   user: {
     name: string;
     avatar: string;

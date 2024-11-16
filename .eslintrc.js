@@ -94,7 +94,7 @@ module.exports = {
     'import/no-cycle': 'warn',
     'import/no-unresolved': 'error',
     'import/order': 'off',
-    'react/no-multi-comp': 'warn',
+    'react/no-multi-comp': 'off',
     'react/prop-types': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
