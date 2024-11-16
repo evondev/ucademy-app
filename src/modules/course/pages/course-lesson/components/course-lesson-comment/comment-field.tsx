@@ -11,7 +11,6 @@ import CommentReply from './comment-reply';
 interface CommentItemProps {
   comment: CommentItem;
   lessonId: string;
-  userId: string;
   comments: CommentItem[];
 }
 
@@ -19,7 +18,6 @@ const CommentField = ({
   comment,
   comments = [],
   lessonId,
-  userId,
 }: CommentItemProps) => {
   const replies = getRepliesComment(comments, comment._id);
   const level = comment.level || 0;
@@ -67,7 +65,6 @@ const CommentField = ({
               <CommentReply
                 comment={comment}
                 lessonId={lessonId}
-                userId={userId}
               />
             )}
           </div>
@@ -80,7 +77,6 @@ const CommentField = ({
             comment={reply}
             comments={comments}
             lessonId={lessonId}
-            userId={userId}
           />
         ))}
     </>

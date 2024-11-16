@@ -5,9 +5,8 @@ import { fetchCourseBySlug } from '@/modules/course/actions';
 import { getLessonBySlug } from '@/modules/lesson/actions/lesson.actions';
 import { getUserInfo } from '@/modules/user/actions';
 
-import CommentField from './comment-field';
-import CommentForm from './comment-form';
-import CommentSorting from './comment-sorting';
+import CommentField from '../../../../../modules/course/pages/course-lesson/components/course-lesson-comment/comment-field';
+import CommentSorting from '../../../../../modules/course/pages/course-lesson/components/course-lesson-comment/comment-sorting';
 
 const page = async ({
   params,
@@ -42,10 +41,10 @@ const page = async ({
 
   return (
     <div>
-      <CommentForm
+      {/* <CommentForm
         lessonId={commentLessonId}
         userId={commentUserId}
-      />
+      /> */}
       {!!rootComments && rootComments?.length > 0 && (
         <div className="mt-10 flex flex-col gap-10">
           <div className="flex items-center justify-between">

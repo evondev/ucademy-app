@@ -5,9 +5,10 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { z } from 'zod';
 
-import { createComment } from '@/modules/comment/services/comment.actions';
+import { createComment } from '@/modules/comment/actions';
+import { CourseCommentFormSchema } from '@/modules/course/schemas';
+import { CourseCommentFormValues } from '@/modules/course/types';
 import { Button } from '@/shared/components/ui/button';
 import {
   Form,
@@ -17,19 +18,11 @@ import {
   FormMessage,
 } from '@/shared/components/ui/form';
 import { Textarea } from '@/shared/components/ui/textarea';
+import { useUserContext } from '@/shared/contexts';
 import { cn } from '@/shared/utils';
 import { CommentItem } from '@/types';
 
-const formSchema = z.object({
-  content: z
-    .string({
-      message: 'Comment must be a string',
-    })
-    .min(10, { message: 'Comment must be at least 10 character long' }),
-});
-
 interface CommentFormProps {
-  userId: string;
   lessonId: string;
   comment?: CommentItem;
   isReply?: boolean;
@@ -40,10 +33,12 @@ const CommentForm = ({
   comment,
   isReply,
   lessonId,
-  userId,
 }: CommentFormProps) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { userInfo } = useUserContext();
+  const userId = userInfo?._id.toString() || '';
+
+  const commentForm = useForm<CourseCommentFormValues>({
+    resolver: zodResolver(CourseCommentFormSchema),
     defaultValues: {},
   });
   const [isPending, startTransition] = useTransition();
@@ -51,38 +46,38 @@ const CommentForm = ({
   const slug = useSearchParams().get('slug');
   const path = `${pathname}?slug=${slug}`;
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    startTransition(async () => {
-      const hasComment = await createComment({
-        content: values.content,
-        lesson: lessonId,
-        user: userId,
-        level: comment && comment?.level >= 0 ? comment?.level + 1 : 0,
-        parentId: comment?._id,
-        path,
-      });
+  async function onSubmit(values: CourseCommentFormValues) {
+    const hasComment = await createComment({
+      content: values.content,
+      lesson: lessonId,
+      user: userId,
+      level: comment && comment?.level >= 0 ? comment?.level + 1 : 0,
+      parentId: comment?._id,
+      path,
+    });
 
+    startTransition(() => {
       if (!hasComment) {
         toast.error('Failed to post comment');
 
         return;
       }
       toast.success('Comment posted successfully');
-      form.setValue('content', '');
+      commentForm.setValue('content', '');
       closeReply?.();
     });
   }
 
   return (
     <>
-      <Form {...form}>
+      <Form {...commentForm}>
         <form
           autoComplete="off"
           className="relative flex flex-col gap-5"
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={commentForm.handleSubmit(onSubmit)}
         >
           <FormField
-            control={form.control}
+            control={commentForm.control}
             name="content"
             render={({ field }) => (
               <FormItem>

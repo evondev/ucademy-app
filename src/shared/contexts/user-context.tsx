@@ -15,8 +15,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [userInfo, setUserInfo] = useState<UserModelProps | null>(null);
   const { userId } = useAuth();
 
-  console.log('UserProvider ~ userId:', userId);
-
   useEffect(() => {
     async function fetchUserInfo() {
       const user = await getUserInfo({ userId: userId || '' });

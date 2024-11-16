@@ -3,12 +3,12 @@ import Image from 'next/image';
 import PageNotFound from '@/app/not-found';
 import { getCourseLessonsInfo } from '@/modules/course/actions';
 import { CourseItemData } from '@/modules/course/types';
+import { CourseOutline } from '@/shared/components';
 import { courseLevelTitle, CourseStatus } from '@/shared/constants';
 import { CourseLessonData, CourseQAData } from '@/shared/types/course.type';
 import { formatMinutesToHour } from '@/shared/utils';
 
 import BenefitItem from './benefit-item';
-import CourseOutline from './course-outline';
 import CourseWidget from './course-widget';
 import QaItem from './qa-item';
 import RatingItem from './rating-item';

@@ -3,3 +3,4 @@ export interface QueryFilter {
   page?: number;
   search?: string;
 }
+export type QuerySortFilter = 'recent' | 'oldest';

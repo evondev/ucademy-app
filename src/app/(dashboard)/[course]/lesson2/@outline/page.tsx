@@ -1,7 +1,7 @@
 import { fetchCourseBySlug } from '@/modules/course/actions';
-import LessonContent from '@/modules/course/pages/course-details/components/course-outline';
 import { getHistory } from '@/modules/history/actions/history.actions';
 import { countLessonByCourseId } from '@/modules/lesson/actions/lesson.actions';
+import LessonContent from '@/shared/components/course/course-outline';
 
 const page = async ({
   params,

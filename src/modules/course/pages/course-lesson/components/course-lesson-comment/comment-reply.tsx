@@ -11,10 +11,9 @@ import CommentForm from './comment-form';
 interface CommentReplyProps {
   comment: CommentItem;
   lessonId: string;
-  userId: string;
 }
 
-const CommentReply = ({ comment, lessonId, userId }: CommentReplyProps) => {
+const CommentReply = ({ comment, lessonId }: CommentReplyProps) => {
   const [isShowReply, setIsShowReply] = useState(false);
 
   return (
@@ -41,7 +40,6 @@ const CommentReply = ({ comment, lessonId, userId }: CommentReplyProps) => {
             closeReply={() => setIsShowReply(false)}
             comment={comment}
             lessonId={lessonId}
-            userId={userId}
           />
         </div>
       )}

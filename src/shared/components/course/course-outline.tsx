@@ -14,12 +14,12 @@ interface CourseOutlineProps {
   slug: string;
   histories?: HistoryItemData[];
 }
-const CourseOutline = ({
-  course,
+function CourseOutline({
+  course = '',
   histories = [],
-  lectures,
-  slug,
-}: CourseOutlineProps) => {
+  lectures = [],
+  slug = '',
+}: CourseOutlineProps) {
   return (
     <div className="flex flex-col gap-5">
       {lectures.map((lecture) => (
@@ -56,6 +56,6 @@ const CourseOutline = ({
       ))}
     </div>
   );
-};
+}
 
 export default CourseOutline;
