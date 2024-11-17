@@ -10,9 +10,17 @@ import {
   OrderModel,
   UserModel,
 } from '@/shared/schemas';
+import { QueryFilter } from '@/shared/types';
+import { OrderItemData } from '@/shared/types/order.type';
 import { CreateOrderParams } from '@/types';
 
-export async function fetchOrders(params: any) {
+export async function fetchOrders(params: QueryFilter): Promise<
+  | {
+      total: number;
+      orders: OrderItemData[];
+    }
+  | undefined
+> {
   try {
     connectToDatabase();
     const { limit = 10, page = 1, search, status } = params;
@@ -124,7 +132,11 @@ export async function updateOrder({
     console.log(error);
   }
 }
-export async function getOrderDetails({ code }: { code: string }) {
+export async function getOrderDetails({
+  code,
+}: {
+  code: string;
+}): Promise<OrderItemData | undefined> {
   try {
     connectToDatabase();
     const order = await OrderModel.findOne({

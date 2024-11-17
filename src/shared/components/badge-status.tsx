@@ -1,21 +1,38 @@
 import { commonClassNames } from '@/shared/constants';
 import { cn } from '@/shared/utils';
 
+import { BadgeStatusVariant } from '../types';
+
 interface BadgeStatusProps {
-  item?: {
-    className?: string;
-    title: string;
-  };
+  title?: string;
   onClick?: () => void;
+  variant?: BadgeStatusVariant;
+  className?: string;
 }
 
-const BadgeStatus = ({ item, onClick }: BadgeStatusProps) => {
+const BadgeStatus = ({
+  className = '',
+  onClick,
+  title,
+  variant = 'default',
+}: BadgeStatusProps) => {
+  const variantsClassNames: Record<BadgeStatusVariant, string> = {
+    default: '',
+    success: 'text-green-500',
+    warning: 'text-orange-500',
+    danger: 'text-red-500',
+  };
+
   return (
     <span
-      className={cn(commonClassNames.status, item?.className)}
+      className={cn(
+        commonClassNames.status,
+        variantsClassNames[variant],
+        className,
+      )}
       onClick={onClick}
     >
-      {item?.title}
+      {title}
     </span>
   );
 };

@@ -1,26 +1,19 @@
-import CourseUpdate from '@/components/course/course-update';
-import { fetchCourseBySlug } from '@/modules/course/actions';
+import { UpdateCoursePage } from '@/modules/course/pages';
 import { Heading } from '@/shared/components';
 
-const page = async ({
-  searchParams,
-}: {
+export interface UpdateCoursePageRootProps {
   searchParams: {
     slug: string;
   };
-}) => {
-  const findCourse = await fetchCourseBySlug({
-    slug: searchParams.slug,
-  });
+}
 
-  if (!findCourse) return null;
-
+function UpdateCoursePageRoot({ searchParams }: UpdateCoursePageRootProps) {
   return (
     <>
-      <Heading className="mb-8">Cập nhật khóa học</Heading>
-      <CourseUpdate data={JSON.parse(JSON.stringify(findCourse))} />
+      <Heading>Cập nhật khóa học</Heading>
+      <UpdateCoursePage slug={searchParams.slug} />
     </>
   );
-};
+}
 
-export default page;
+export default UpdateCoursePageRoot;

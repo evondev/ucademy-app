@@ -1,13 +1,12 @@
 import PageNotFound from '@/app/not-found';
 import { getOrderDetails } from '@/modules/order/actions/order.actions';
 
-const OrderDetails = async ({
-  params,
-}: {
+interface OrderDetailsPageRootProps {
   params: {
     code: string;
   };
-}) => {
+}
+const OrderDetailsPageRoot = async ({ params }: OrderDetailsPageRootProps) => {
   const orderDetails = await getOrderDetails({
     code: params.code,
   });
@@ -30,4 +29,4 @@ const OrderDetails = async ({
   );
 };
 
-export default OrderDetails;
+export default OrderDetailsPageRoot;

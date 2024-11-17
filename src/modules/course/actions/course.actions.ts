@@ -12,7 +12,7 @@ import {
   RatingModel,
   UserModel,
 } from '@/shared/schemas';
-import { CourseModelProps, QueryFilter } from '@/shared/types';
+import { QueryFilter } from '@/shared/types';
 import { CourseLessonData } from '@/shared/types/course.type';
 import {
   CreateCourseParams,
@@ -25,7 +25,7 @@ import { CourseItemData } from '../types';
 
 export async function fetchCourses(
   params: QueryFilter,
-): Promise<CourseModelProps[] | undefined> {
+): Promise<CourseItemData[] | undefined> {
   try {
     connectToDatabase();
     const { limit = 10, page = 1, search } = params;

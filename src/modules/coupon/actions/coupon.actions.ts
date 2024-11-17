@@ -5,13 +5,8 @@ import { revalidatePath } from 'next/cache';
 
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import { CouponModel } from '@/shared/schemas';
-import { CouponModelProps } from '@/shared/types';
-import {
-  CouponItem,
-  CreateCouponParams,
-  FilterData,
-  UpdateCouponParams,
-} from '@/types';
+import { CouponItemData } from '@/shared/types/coupon.type';
+import { CreateCouponParams, FilterData, UpdateCouponParams } from '@/types';
 
 export async function createCoupon(params: CreateCouponParams) {
   try {
@@ -52,7 +47,7 @@ export async function updateCoupon(params: UpdateCouponParams) {
 }
 export async function getCoupons(params: FilterData): Promise<
   | {
-      coupons: CouponItem[] | undefined;
+      coupons: CouponItemData[] | undefined;
       total: number;
     }
   | undefined
@@ -85,7 +80,7 @@ export async function getCoupons(params: FilterData): Promise<
 }
 export async function getCouponByCode(params: {
   code: string;
-}): Promise<CouponModelProps | undefined> {
+}): Promise<CouponItemData | undefined> {
   try {
     connectToDatabase();
     const findCoupon = await CouponModel.findOne({
@@ -104,7 +99,7 @@ export async function getCouponByCode(params: {
 export async function getValidateCoupon(params: {
   code: string;
   courseId: string;
-}): Promise<CouponModelProps | undefined> {
+}): Promise<CouponItemData | undefined> {
   try {
     connectToDatabase();
     const findCoupon = await CouponModel.findOne({
@@ -113,7 +108,7 @@ export async function getValidateCoupon(params: {
       path: 'courses',
       select: '_id title',
     });
-    const coupon = JSON.parse(JSON.stringify(findCoupon));
+    const coupon: CouponItemData = JSON.parse(JSON.stringify(findCoupon));
     const couponCourses = coupon?.courses.map((course) => course._id);
     let isActive = true;
 

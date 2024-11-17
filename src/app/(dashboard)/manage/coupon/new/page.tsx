@@ -1,14 +1,15 @@
+import CreateCouponPage from '@/modules/coupon/pages/create';
 import { Heading } from '@/shared/components';
 
-import NewCouponForm from './new-coupon-form';
+export interface CreateCouponPageRootProps {}
 
-const page = () => {
+function CreateCouponPageRoot(_props: CreateCouponPageRootProps) {
   return (
-    <div>
-      <Heading className="mb-10">Tạo mới mã giảm giá</Heading>
-      <NewCouponForm />
-    </div>
+    <>
+      <Heading>Create Coupon</Heading>
+      <CreateCouponPage />
+    </>
   );
-};
+}
 
-export default page;
+export default CreateCouponPageRoot;

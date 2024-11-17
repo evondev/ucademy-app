@@ -6,7 +6,9 @@ import { revalidatePath } from 'next/cache';
 import { RatingStatus } from '@/shared/constants';
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import { CourseModel, RatingModel } from '@/shared/schemas';
-import { CreateRatingParams, FilterData, RatingItem } from '@/types';
+import { QueryFilter } from '@/shared/types';
+import { RatingItemData } from '@/shared/types/rating.type';
+import { CreateRatingParams } from '@/types';
 
 export async function createRating(
   params: CreateRatingParams,
@@ -67,9 +69,9 @@ export async function deleteRating(id: string): Promise<boolean | undefined> {
     console.log(error);
   }
 }
-export async function getRatings(
-  params: FilterData,
-): Promise<RatingItem[] | undefined> {
+export async function fetchRatings(
+  params: QueryFilter,
+): Promise<RatingItemData[] | undefined> {
   try {
     connectToDatabase();
     const { limit = 10, page = 1, search, status } = params;

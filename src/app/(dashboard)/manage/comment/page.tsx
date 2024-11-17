@@ -1,5 +1,7 @@
-const page = () => {
-  return <div>Manage comment</div>;
-};
+export interface CommentPageRootProps {}
 
-export default page;
+function CommentPageRoot(_props: CommentPageRootProps) {
+  return <div>CommentPageRoot</div>;
+}
+
+export default CommentPageRoot;

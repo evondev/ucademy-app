@@ -13,6 +13,7 @@ import {
 } from '@/shared/components/icons';
 import { MenuField, RatingIcon } from '@/types';
 
+import { BadgeStatusVariant } from '../types';
 import {
   CouponType,
   CourseLevel,
@@ -67,21 +68,25 @@ export const courseStatus: {
   title: string;
   value: CourseStatus;
   className?: string;
+  variant?: BadgeStatusVariant;
 }[] = [
   {
     title: 'Đã duyệt',
     value: CourseStatus.APPROVED,
     className: 'text-green-500 bg-green-500',
+    variant: 'success',
   },
   {
     title: 'Chờ duyệt',
     value: CourseStatus.PENDING,
     className: 'text-orange-500 bg-orange-500',
+    variant: 'warning',
   },
   {
     title: 'Từ chối',
     value: CourseStatus.REJECTED,
     className: 'text-red-500 bg-red-500',
+    variant: 'danger',
   },
 ];
 export const courseLevel: {
@@ -158,22 +163,26 @@ export const lastLessonKey = 'lastLesson';
 export const orderStatus: {
   title: string;
   value: OrderStatus;
+  variant: BadgeStatusVariant;
   className?: string;
 }[] = [
   {
     title: 'Đã duyệt',
     value: OrderStatus.COMPLETED,
     className: 'text-green-500 bg-green-500',
+    variant: 'success',
   },
   {
     title: 'Chờ duyệt',
     value: OrderStatus.PENDING,
     className: 'text-orange-500 bg-orange-500',
+    variant: 'warning',
   },
   {
     title: 'Đã hủy',
     value: OrderStatus.CANCELED,
     className: 'text-red-500 bg-red-500',
+    variant: 'danger',
   },
 ];
 export const couponTypes: {
@@ -237,17 +246,17 @@ export const ratingList: {
 export const ratingStatus: {
   title: string;
   value: RatingStatus;
-  className?: string;
+  variant?: BadgeStatusVariant;
 }[] = [
   {
     title: 'Đã duyệt',
     value: RatingStatus.ACTIVE,
-    className: 'text-green-500 bg-green-500',
+    variant: 'success',
   },
   {
     title: 'Chờ duyệt',
     value: RatingStatus.UNACTIVE,
-    className: 'text-orange-500 bg-orange-500',
+    variant: 'warning',
   },
 ];
 export const allValue = 'ALL';

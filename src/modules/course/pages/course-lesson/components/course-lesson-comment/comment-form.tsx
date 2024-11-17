@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { createComment } from '@/modules/comment/actions';
-import { CourseCommentFormSchema } from '@/modules/course/schemas';
+import { courseCommentFormSchema } from '@/modules/course/schemas';
 import { CourseCommentFormValues } from '@/modules/course/types';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -38,7 +38,7 @@ const CommentForm = ({
   const userId = userInfo?._id.toString() || '';
 
   const commentForm = useForm<CourseCommentFormValues>({
-    resolver: zodResolver(CourseCommentFormSchema),
+    resolver: zodResolver(courseCommentFormSchema),
     defaultValues: {},
   });
   const [isPending, startTransition] = useTransition();

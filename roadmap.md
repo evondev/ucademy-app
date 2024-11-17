@@ -128,6 +128,10 @@
 
 ## Structure
 
+- Coupon
+- Course
+- Order
+
 ## Client side vs Server side
 
 ## Tanstack query
