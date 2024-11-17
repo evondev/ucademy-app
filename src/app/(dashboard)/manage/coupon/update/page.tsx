@@ -1,4 +1,4 @@
-import UpdateCouponPage from '@/modules/coupon/pages/update';
+import { UpdateCouponPage } from '@/modules/coupon/pages';
 import { Heading } from '@/shared/components';
 
 export interface UpdateCouponPageRootProps {

@@ -1,4 +1,4 @@
-import CreateCouponPage from '@/modules/coupon/pages/create';
+import { CreateCouponPage } from '@/modules/coupon/pages';
 import { Heading } from '@/shared/components';
 
 export interface CreateCouponPageRootProps {}

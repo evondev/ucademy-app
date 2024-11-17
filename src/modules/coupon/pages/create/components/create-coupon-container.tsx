@@ -7,10 +7,12 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { z } from 'zod';
 
 import { createCoupon } from '@/modules/coupon/actions';
+import { couponCreateSchema } from '@/modules/coupon/schemas';
+import { CouponCreateFormValues } from '@/modules/coupon/types';
 import { fetchCourses } from '@/modules/course/actions';
+import { CourseItemData } from '@/modules/course/types';
 import { IconClose } from '@/shared/components/icons';
 import {
   Button,
@@ -32,15 +34,17 @@ import {
   RadioGroupItem,
   Switch,
 } from '@/shared/components/ui';
-import { couponFormSchema, CouponType, couponTypes } from '@/shared/constants';
+import { CouponType, couponTypes } from '@/shared/constants';
 
 const CreateCouponContainer = () => {
   const [startDate, setStartDate] = useState<Date>();
-  const [findCourse, setFindCourse] = useState<any[] | undefined>([]);
-  const [selectedCourses, setSelectedCourses] = useState<any[]>([]);
+  const [findCourse, setFindCourse] = useState<CourseItemData[] | undefined>(
+    [],
+  );
+  const [selectedCourses, setSelectedCourses] = useState<CourseItemData[]>([]);
   const [endDate, setEndDate] = useState<Date>();
-  const form = useForm<z.infer<typeof couponFormSchema>>({
-    resolver: zodResolver(couponFormSchema),
+  const form = useForm<CouponCreateFormValues>({
+    resolver: zodResolver(couponCreateSchema),
     defaultValues: {
       active: true,
       type: CouponType.PERCENT,
@@ -56,7 +60,7 @@ const CreateCouponContainer = () => {
   const couponTypeWatch = form.watch('type');
   const router = useRouter();
 
-  async function onSubmit(values: z.infer<typeof couponFormSchema>) {
+  async function onSubmit(values: CouponCreateFormValues) {
     try {
       const couponType = values.type;
       const couponValue = Number(values.value?.replace(/,/g, ''));
@@ -75,7 +79,7 @@ const CreateCouponContainer = () => {
         value: couponValue,
         start_date: startDate,
         end_date: endDate,
-        courses: selectedCourses.map((course) => course._id),
+        courses: selectedCourses.map((course) => course._id.toString()),
       });
 
       if (newCoupon.error) {
@@ -102,7 +106,10 @@ const CreateCouponContainer = () => {
     250,
   );
 
-  const handleSelectCourse = (checked: boolean | string, course: any) => {
+  const handleSelectCourse = (
+    checked: boolean | string,
+    course: CourseItemData,
+  ) => {
     if (checked) {
       setSelectedCourses((previous) => [...previous, course]);
     } else {

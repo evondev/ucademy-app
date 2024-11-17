@@ -3,7 +3,7 @@ import { Document, Schema } from 'mongoose';
 import { CourseLevel, CourseStatus } from '@/shared/constants';
 
 export interface CourseModelProps extends Document {
-  _id: string;
+  _id: string | Schema.Types.ObjectId;
   title: string;
   image: string;
   intro_url: string;

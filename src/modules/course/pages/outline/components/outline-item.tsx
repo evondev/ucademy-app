@@ -33,7 +33,7 @@ interface OutlineItemProps {
   lesson: LessonItemData;
 }
 const OutlineItem = ({ lesson }: OutlineItemProps) => {
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<unknown>(null);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

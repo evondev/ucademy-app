@@ -1,5 +1,5 @@
 'use server';
-import { FilterQuery } from 'mongoose';
+import { FilterQuery, ObjectId } from 'mongoose';
 import { revalidatePath } from 'next/cache';
 
 import { OrderStatus } from '@/shared/constants';
@@ -12,6 +12,7 @@ import {
 } from '@/shared/schemas';
 import { QueryFilter } from '@/shared/types';
 import { OrderItemData } from '@/shared/types/order.type';
+import { UserItemData } from '@/shared/types/user.type';
 import { CreateOrderParams } from '@/types';
 
 export async function fetchOrders(params: QueryFilter): Promise<
@@ -87,7 +88,7 @@ export async function updateOrder({
 }) {
   try {
     connectToDatabase();
-    const findOrder = await OrderModel.findById(orderId)
+    const findOrder: OrderItemData = await OrderModel.findById(orderId)
       .populate({
         path: 'course',
         model: CourseModel,
@@ -101,7 +102,11 @@ export async function updateOrder({
 
     if (!findOrder) return;
     if (findOrder.status === OrderStatus.CANCELED) return;
-    const findUser = await UserModel.findById(findOrder.user._id);
+    const findUser: UserItemData | null = await UserModel.findById(
+      findOrder.user._id,
+    );
+
+    if (!findUser) return;
 
     await OrderModel.findByIdAndUpdate(orderId, {
       status,
@@ -110,7 +115,7 @@ export async function updateOrder({
       status === OrderStatus.COMPLETED &&
       findOrder.status === OrderStatus.PENDING
     ) {
-      findUser.courses.push(findOrder.course._id);
+      findUser.courses.push(findOrder.course._id as ObjectId);
       await findUser.save();
     }
     if (
@@ -118,8 +123,7 @@ export async function updateOrder({
       findOrder.status === OrderStatus.COMPLETED
     ) {
       findUser.courses = findUser.courses.filter(
-        (element: any) =>
-          element.toString() !== findOrder.course._id.toString(),
+        (element) => element.toString() !== findOrder.course._id.toString(),
       );
       await findUser.save();
     }

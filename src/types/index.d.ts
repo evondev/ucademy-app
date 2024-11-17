@@ -9,12 +9,7 @@ export type ActiveLinkProps = {
   url: string;
   children: React.ReactNode;
 };
-export type MenuField = {
-  url: string;
-  title: string;
-  icon: React.ReactNode;
-  onlyIcon?: boolean;
-};
+
 // User
 export type CreateUserParams = {
   clerkId: string;
@@ -130,7 +125,6 @@ export interface StudyCoursesProps extends Omit<CourseModelProps, 'lectures'> {
     }[];
   }[];
 }
-export type RatingIcon = 'awesome' | 'good' | 'meh' | 'bad' | 'terrible';
 export type CreateRatingParams = {
   rate: number;
   content: string;

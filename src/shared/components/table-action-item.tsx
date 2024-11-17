@@ -10,16 +10,13 @@ import {
 import { commonClassNames } from '@/shared/constants';
 
 type TableActionIcon = 'edit' | 'delete' | 'view' | 'study' | 'approve';
-const TableActionItem = ({
-  onClick,
-  type,
-  url,
-}: {
+interface TableActionItemProps {
   onClick?: () => void;
   type: TableActionIcon;
   url?: string;
-}) => {
-  const icon: Record<TableActionIcon, any> = {
+}
+const TableActionItem = ({ onClick, type, url }: TableActionItemProps) => {
+  const icon: Record<TableActionIcon, JSX.Element> = {
     edit: <IconEdit />,
     delete: <IconDelete />,
     view: <IconEye />,

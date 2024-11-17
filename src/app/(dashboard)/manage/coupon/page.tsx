@@ -1,4 +1,4 @@
-import ManageCouponPage from '@/modules/coupon/pages/manage';
+import { ManageCouponPage } from '@/modules/coupon/pages';
 import { QuerySearchParams } from '@/shared/types';
 
 export interface ManageCouponPageRootProps {}

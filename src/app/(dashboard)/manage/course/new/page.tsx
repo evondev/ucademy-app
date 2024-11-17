@@ -1,4 +1,4 @@
-import CreateCoursePage from '@/modules/course/pages/create';
+import { CreateCoursePage } from '@/modules/course/pages';
 import { Heading } from '@/shared/components';
 
 export interface CreateCoursePageRootProps {}

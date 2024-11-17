@@ -10,6 +10,7 @@ import { z } from 'zod';
 
 import { updateCoupon } from '@/modules/coupon/actions';
 import { fetchCourses } from '@/modules/course/actions';
+import { CourseItemData } from '@/modules/course/types';
 import { IconClose } from '@/shared/components/icons';
 import { InputFormatCurrency } from '@/shared/components/ui';
 import { Button } from '@/shared/components/ui/button';
@@ -33,17 +34,19 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/shared/components/ui/radio-group';
 import { Switch } from '@/shared/components/ui/switch';
 import { couponFormSchema, CouponType, couponTypes } from '@/shared/constants';
-import { CouponParams } from '@/types';
+import { CouponItemData } from '@/shared/types/coupon.type';
 
 export interface UpdateCouponContainerProps {
-  couponDetails: CouponParams;
+  couponDetails: CouponItemData;
 }
 
 const UpdateCouponContainer = ({
   couponDetails,
 }: UpdateCouponContainerProps) => {
-  const [findCourse, setFindCourse] = useState<any[] | undefined>([]);
-  const [selectedCourses, setSelectedCourses] = useState<any[]>([]);
+  const [findCourse, setFindCourse] = useState<CourseItemData[] | undefined>(
+    [],
+  );
+  const [selectedCourses, setSelectedCourses] = useState<CourseItemData[]>([]);
   const [startDate, setStartDate] = useState<Date>(
     couponDetails.start_date || new Date(),
   );
@@ -89,7 +92,7 @@ const UpdateCouponContainer = ({
           value: couponValue,
           start_date: startDate,
           end_date: endDate,
-          courses: selectedCourses,
+          courses: selectedCourses.map((course) => course._id),
         },
       });
 
@@ -110,7 +113,10 @@ const UpdateCouponContainer = ({
     },
     250,
   );
-  const handleSelectCourse = (checked: boolean | string, course: any) => {
+  const handleSelectCourse = (
+    checked: boolean | string,
+    course: CourseItemData,
+  ) => {
     if (checked) {
       setSelectedCourses((previous) => [...previous, course]);
     } else {
@@ -194,7 +200,7 @@ const UpdateCouponContainer = ({
                         initialFocus
                         mode="single"
                         selected={startDate}
-                        onSelect={setStartDate as any}
+                        onSelect={(day) => day && setStartDate(day)}
                       />
                     </PopoverContent>
                   </Popover>
@@ -232,7 +238,7 @@ const UpdateCouponContainer = ({
                         initialFocus
                         mode="single"
                         selected={endDate}
-                        onSelect={setEndDate as any}
+                        onSelect={(day) => day && setEndDate(day)}
                       />
                     </PopoverContent>
                   </Popover>
