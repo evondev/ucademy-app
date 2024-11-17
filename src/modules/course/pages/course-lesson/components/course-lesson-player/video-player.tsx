@@ -3,7 +3,7 @@ import MuxPlayer from '@mux/mux-player-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { Button } from '@/shared/components/ui/button';
+import { Button } from '@/shared/components/ui';
 import { useGlobalStore } from '@/shared/store';
 import { cn } from '@/shared/utils';
 

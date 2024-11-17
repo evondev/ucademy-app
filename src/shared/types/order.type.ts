@@ -1,7 +1,6 @@
-import { CourseItemData } from '@/shared/types';
+import { CouponItemData, CourseItemData } from '@/shared/types';
 
 import { OrderStatus } from '../constants';
-import { CouponItemData } from './coupon.type';
 import { OrderModelProps } from './models';
 import { UserItemData } from './user.type';
 

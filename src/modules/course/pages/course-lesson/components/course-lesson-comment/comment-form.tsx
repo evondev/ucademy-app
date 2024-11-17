@@ -9,22 +9,22 @@ import { toast } from 'react-toastify';
 import { createComment } from '@/modules/comment/actions';
 import { courseCommentFormSchema } from '@/modules/course/schemas';
 import { CourseCommentFormValues } from '@/modules/course/types';
-import { Button } from '@/shared/components/ui/button';
 import {
+  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@/shared/components/ui/form';
-import { Textarea } from '@/shared/components/ui/textarea';
+  Textarea,
+} from '@/shared/components/ui';
 import { useUserContext } from '@/shared/contexts';
+import { CommentItemData } from '@/shared/types';
 import { cn } from '@/shared/utils';
-import { CommentItem } from '@/types';
 
 interface CommentFormProps {
   lessonId: string;
-  comment?: CommentItem;
+  comment?: CommentItemData;
   isReply?: boolean;
   closeReply?: () => void;
 }

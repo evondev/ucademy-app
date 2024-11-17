@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/shared/components/ui/accordion';
+} from '@/shared/components/ui';
 import { CourseQAData } from '@/shared/types';
 
 export interface QaItemProps {

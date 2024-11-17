@@ -3,13 +3,13 @@
 import { useState } from 'react';
 
 import { MAX_COMMENT_LEVEL } from '@/shared/constants';
+import { CommentItemData } from '@/shared/types';
 import { cn } from '@/shared/utils';
-import { CommentItem } from '@/types';
 
 import CommentForm from './comment-form';
 
 interface CommentReplyProps {
-  comment: CommentItem;
+  comment: CommentItemData;
   lessonId: string;
 }
 

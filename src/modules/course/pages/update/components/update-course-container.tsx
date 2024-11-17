@@ -11,24 +11,22 @@ import { z } from 'zod';
 
 import { updateCourse } from '@/modules/course/actions';
 import { IconAdd } from '@/shared/components/icons';
-import { Button } from '@/shared/components/ui/button';
 import {
+  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/shared/components/ui/form';
-import { Input } from '@/shared/components/ui/input';
-import {
+  Input,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/shared/components/ui/select';
-import { Textarea } from '@/shared/components/ui/textarea';
+  Textarea,
+} from '@/shared/components/ui';
 import {
   CourseLevel,
   courseLevel,

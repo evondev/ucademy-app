@@ -1,14 +1,5 @@
-import { CourseItemData } from '@/shared/types';
-
 import { RatingStatus } from '../constants';
-import { RatingModelProps } from './models';
-import { UserItemData } from './user.type';
 
-export interface RatingItemData
-  extends Omit<RatingModelProps, 'course' | 'user'> {
-  course: CourseItemData;
-  user: UserItemData;
-}
 export type CreateRatingParams = {
   rate: number;
   content: string;

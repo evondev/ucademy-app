@@ -1,13 +1,5 @@
 import { QuerySortFilter } from './common';
-import { LectureItemData } from './lecture.type';
 import { CourseModelProps, LessonModelProps } from './models';
-import { RatingItemData } from './rating.type';
-
-export interface CourseItemData
-  extends Omit<CourseModelProps, 'lectures' | 'rating'> {
-  lectures: LectureItemData[];
-  rating: RatingItemData[];
-}
 
 export interface CourseLessonData {
   duration: number;

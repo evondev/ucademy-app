@@ -9,16 +9,16 @@ import { toast } from 'react-toastify';
 import { z } from 'zod';
 
 import { updateLesson } from '@/modules/lesson/actions';
-import { Button } from '@/shared/components/ui/button';
 import {
+  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/shared/components/ui/form';
-import { Input } from '@/shared/components/ui/input';
+  Input,
+} from '@/shared/components/ui';
 import { editorOptions } from '@/shared/constants';
 import { LessonItemData } from '@/shared/types';
 

@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/shared/components/ui/accordion';
+} from '@/shared/components/ui';
 import { HistoryItemData, LectureItemData } from '@/shared/types';
 
 import CourseOutlineItem from './course-outline-item';

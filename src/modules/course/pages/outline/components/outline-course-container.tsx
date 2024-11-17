@@ -23,9 +23,9 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/shared/components/ui/accordion';
-import { Button } from '@/shared/components/ui/button';
-import { Input } from '@/shared/components/ui/input';
+  Button,
+  Input,
+} from '@/shared/components/ui';
 import { CourseItemData } from '@/shared/types';
 
 import OutlineAction from './outline-action';

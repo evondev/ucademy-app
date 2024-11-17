@@ -4,9 +4,9 @@ import PageNotFound from '@/app/not-found';
 import { getCourseLessonsInfo } from '@/modules/course/actions';
 import { CourseOutline } from '@/shared/components/course';
 import { courseLevelTitle, CourseStatus } from '@/shared/constants';
+import { formatMinutesToHour } from '@/shared/helpers';
 import { CourseItemData } from '@/shared/types';
 import { CourseLessonData, CourseQAData } from '@/shared/types/course.type';
-import { formatMinutesToHour } from '@/shared/utils';
 
 import BenefitItem from './benefit-item';
 import CourseWidget from './course-widget';

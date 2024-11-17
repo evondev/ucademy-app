@@ -10,7 +10,7 @@ import {
 import { toast } from 'react-toastify';
 
 import { getValidateCoupon } from '@/modules/coupon/actions';
-import { Input } from '@/shared/components/ui/input';
+import { Input } from '@/shared/components/ui';
 import { CouponType } from '@/shared/constants';
 
 interface CouponFormProps {

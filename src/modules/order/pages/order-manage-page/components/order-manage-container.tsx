@@ -10,23 +10,21 @@ import {
   Pagination,
 } from '@/shared/components/common';
 import { IconCancel, IconCheck } from '@/shared/components/icons';
-import { Input } from '@/shared/components/ui/input';
 import {
+  Input,
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/shared/components/ui/select';
-import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/shared/components/ui/table';
+} from '@/shared/components/ui';
 import {
   allValue,
   ITEMS_PER_PAGE,

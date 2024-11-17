@@ -6,8 +6,8 @@ import { revalidatePath } from 'next/cache';
 import { RatingStatus } from '@/shared/constants';
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import { CourseModel, RatingModel } from '@/shared/schemas';
-import { QueryFilter } from '@/shared/types';
-import { CreateRatingParams, RatingItemData } from '@/shared/types/rating.type';
+import { QueryFilter, RatingItemData } from '@/shared/types';
+import { CreateRatingParams } from '@/shared/types/rating.type';
 
 export async function createRating(
   params: CreateRatingParams,

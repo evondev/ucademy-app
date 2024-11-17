@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
 import { createOrder } from '@/modules/order/actions/order.actions';
-import { Button } from '@/shared/components/ui/button';
+import { Button } from '@/shared/components/ui';
 import { useUserContext } from '@/shared/contexts';
 
 interface ButtonEnrollProps {

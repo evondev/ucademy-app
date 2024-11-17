@@ -13,14 +13,13 @@ import {
   UserModel,
 } from '@/shared/schemas';
 import {
+  CourseItemData,
   CourseLessonData,
   CreateCourseParams,
   GetAllCourseParams,
   QueryFilter,
   UpdateCourseParams,
 } from '@/shared/types';
-
-import { CourseItemData } from '../types';
 
 export async function fetchCourses(
   params: QueryFilter,

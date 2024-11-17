@@ -1,3 +1,4 @@
+export * from './app.type';
 export * from './comment.type';
 export * from './common';
 export * from './coupon.type';

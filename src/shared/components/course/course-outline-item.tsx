@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { createHistory } from '@/modules/history/actions';
 import { IconPlay } from '@/shared/components/icons';
-import { Checkbox } from '@/shared/components/ui/checkbox';
+import { Checkbox } from '@/shared/components/ui';
 import { LessonItemData } from '@/shared/types';
 import { cn } from '@/shared/utils';
 

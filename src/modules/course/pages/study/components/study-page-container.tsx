@@ -2,9 +2,10 @@
 import { useEffect, useState } from 'react';
 
 import CourseItem from '@/modules/course/components/course-item';
-import { CourseItemData, LassLessonData } from '@/modules/course/types';
+import { LassLessonData } from '@/modules/course/types';
 import { CourseGrid } from '@/shared/components/common';
 import { lastLessonKey } from '@/shared/constants';
+import { CourseItemData } from '@/shared/types';
 
 export interface StudyPageContainerProps {
   courses: CourseItemData[];

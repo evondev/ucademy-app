@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { IconLeftArrow, IconRightArrow } from '@/shared/components/icons';
-import { Button } from '@/shared/components/ui/button';
+import { Button } from '@/shared/components/ui';
 
 interface LessonNavigationProps {
   nextLesson: string;

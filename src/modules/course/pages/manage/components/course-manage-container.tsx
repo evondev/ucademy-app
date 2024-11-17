@@ -11,23 +11,21 @@ import {
   TableAction,
   TableActionItem,
 } from '@/shared/components/common';
-import { Input } from '@/shared/components/ui/input';
 import {
+  Input,
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/shared/components/ui/select';
-import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/shared/components/ui/table';
+} from '@/shared/components/ui';
 import { allValue, CourseStatus, courseStatus } from '@/shared/constants';
 import { useQueryString } from '@/shared/hooks';
 import { CourseItemData } from '@/shared/types';

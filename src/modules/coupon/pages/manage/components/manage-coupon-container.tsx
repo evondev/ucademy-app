@@ -25,7 +25,7 @@ import {
 } from '@/shared/components/ui';
 import { allValue, couponStatuses, CouponType } from '@/shared/constants';
 import { useQueryString } from '@/shared/hooks';
-import { CouponItemData } from '@/shared/types/coupon.type';
+import { CouponItemData } from '@/shared/types';
 
 import DeleteCouponModal from './delete-coupon-modal';
 

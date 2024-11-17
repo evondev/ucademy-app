@@ -8,16 +8,16 @@ import {
   getRatingByUserId,
 } from '@/modules/rating/actions/rating.actions';
 import { IconStar } from '@/shared/components/icons';
-import { Button } from '@/shared/components/ui/button';
 import {
+  Button,
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/shared/components/ui/dialog';
-import { Textarea } from '@/shared/components/ui/textarea';
+  Textarea,
+} from '@/shared/components/ui';
 import { ratingList } from '@/shared/constants';
 import { useUserContext } from '@/shared/contexts';
 import { cn } from '@/shared/utils';

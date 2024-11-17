@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { IconEye, IconStar } from '@/shared/components/icons';
-import { formatNumberToK } from '@/utils';
+import { formatNumberToK } from '@/shared/helpers';
+import { CourseItemData } from '@/shared/types';
 
-import { CourseItemData } from '../../types';
 import CourseItemDuration from './course-item-duration';
 
 interface CourseItemProps {

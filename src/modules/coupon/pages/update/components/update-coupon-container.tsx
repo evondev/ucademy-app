@@ -12,30 +12,28 @@ import { couponCreateSchema } from '@/modules/coupon/schemas';
 import { CouponCreateFormValues } from '@/modules/coupon/types';
 import { fetchCourses } from '@/modules/course/actions';
 import { IconClose } from '@/shared/components/icons';
-import { InputFormatCurrency } from '@/shared/components/ui';
-import { Button } from '@/shared/components/ui/button';
-import { Calendar } from '@/shared/components/ui/calendar';
-import { Checkbox } from '@/shared/components/ui/checkbox';
 import {
+  Button,
+  Calendar,
+  Checkbox,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/shared/components/ui/form';
-import { Input } from '@/shared/components/ui/input';
-import { Label } from '@/shared/components/ui/label';
-import {
+  Input,
+  InputFormatCurrency,
+  Label,
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/shared/components/ui/popover';
-import { RadioGroup, RadioGroupItem } from '@/shared/components/ui/radio-group';
-import { Switch } from '@/shared/components/ui/switch';
+  RadioGroup,
+  RadioGroupItem,
+  Switch,
+} from '@/shared/components/ui';
 import { CouponType, couponTypes } from '@/shared/constants';
-import { CourseItemData } from '@/shared/types';
-import { CouponItemData } from '@/shared/types/coupon.type';
+import { CouponItemData, CourseItemData } from '@/shared/types';
 
 export interface UpdateCouponContainerProps {
   couponDetails: CouponItemData;

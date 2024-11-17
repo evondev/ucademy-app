@@ -10,16 +10,16 @@ import slugify from 'slugify';
 import { createCourse } from '@/modules/course/actions';
 import { courseCreateSchema } from '@/modules/course/schemas';
 import { CourseCreateFormValues } from '@/modules/course/types';
-import { Button } from '@/shared/components/ui/button';
 import {
+  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/shared/components/ui/form';
-import { Input } from '@/shared/components/ui/input';
+  Input,
+} from '@/shared/components/ui';
 import { useUserContext } from '@/shared/contexts';
 
 function CreateCourseContainer() {
