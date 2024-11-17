@@ -6,9 +6,10 @@ import { debounce } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { z } from 'zod';
 
 import { updateCoupon } from '@/modules/coupon/actions';
+import { couponCreateSchema } from '@/modules/coupon/schemas';
+import { CouponCreateFormValues } from '@/modules/coupon/types';
 import { fetchCourses } from '@/modules/course/actions';
 import { CourseItemData } from '@/modules/course/types';
 import { IconClose } from '@/shared/components/icons';
@@ -33,7 +34,7 @@ import {
 } from '@/shared/components/ui/popover';
 import { RadioGroup, RadioGroupItem } from '@/shared/components/ui/radio-group';
 import { Switch } from '@/shared/components/ui/switch';
-import { couponFormSchema, CouponType, couponTypes } from '@/shared/constants';
+import { CouponType, couponTypes } from '@/shared/constants';
 import { CouponItemData } from '@/shared/types/coupon.type';
 
 export interface UpdateCouponContainerProps {
@@ -53,8 +54,8 @@ const UpdateCouponContainer = ({
   const [endDate, setEndDate] = useState<Date>(
     couponDetails.end_date || new Date(),
   );
-  const form = useForm<z.infer<typeof couponFormSchema>>({
-    resolver: zodResolver(couponFormSchema),
+  const form = useForm<CouponCreateFormValues>({
+    resolver: zodResolver(couponCreateSchema),
     defaultValues: {
       title: couponDetails.title,
       code: couponDetails.code,
@@ -71,7 +72,7 @@ const UpdateCouponContainer = ({
     }
   }, [couponDetails.courses]);
 
-  async function onSubmit(values: z.infer<typeof couponFormSchema>) {
+  async function onSubmit(values: CouponCreateFormValues) {
     try {
       const couponType = values.type;
       const couponValue = Number(values.value?.replace(/,/g, ''));
@@ -92,7 +93,7 @@ const UpdateCouponContainer = ({
           value: couponValue,
           start_date: startDate,
           end_date: endDate,
-          courses: selectedCourses.map((course) => course._id),
+          courses: selectedCourses.map((course) => course._id.toString()),
         },
       });
 

@@ -1,5 +1,5 @@
 'use server';
-import { FilterQuery, ObjectId } from 'mongoose';
+import { FilterQuery } from 'mongoose';
 import { revalidatePath } from 'next/cache';
 
 import { OrderStatus } from '@/shared/constants';
@@ -115,7 +115,8 @@ export async function updateOrder({
       status === OrderStatus.COMPLETED &&
       findOrder.status === OrderStatus.PENDING
     ) {
-      findUser.courses.push(findOrder.course._id as ObjectId);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      findUser.courses.push(findOrder.course._id as any);
       await findUser.save();
     }
     if (
