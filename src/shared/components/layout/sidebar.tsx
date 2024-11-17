@@ -2,11 +2,12 @@
 import { useAuth, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 
-import { MenuItem, ModeToggle } from '@/shared/components';
 import { IconUsers } from '@/shared/components/icons';
 import { menuItems } from '@/shared/constants';
 
-const Sidebar = () => {
+import { MenuItem, ModeToggle } from '../common';
+
+function Sidebar() {
   const { userId } = useAuth();
 
   return (
@@ -45,6 +46,6 @@ const Sidebar = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Sidebar;

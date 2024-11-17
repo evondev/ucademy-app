@@ -3,8 +3,7 @@
 import { debounce } from 'lodash';
 
 import { ITEMS_PER_PAGE } from '@/shared/constants';
-
-import { useQueryString } from '../hooks';
+import { useQueryString } from '@/shared/hooks';
 
 interface PaginationProps {
   totalPages: number;

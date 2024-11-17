@@ -1,7 +1,6 @@
 import { commonClassNames } from '@/shared/constants';
+import { BadgeStatusVariant } from '@/shared/types';
 import { cn } from '@/shared/utils';
-
-import { BadgeStatusVariant } from '../types';
 
 interface BadgeStatusProps {
   title?: string;

@@ -6,7 +6,7 @@ import {
 } from '@/shared/components/ui/accordion';
 import { HistoryItemData, LectureItemData } from '@/shared/types';
 
-import CourseLessonItem from './course-lesson-item';
+import CourseOutlineItem from './course-outline-item';
 
 interface CourseOutlineProps {
   lectures: LectureItemData[];
@@ -38,7 +38,7 @@ function CourseOutline({
             <AccordionContent className="border-none !bg-transparent p-0">
               <div className="mt-5 flex flex-col gap-3">
                 {lecture.lessons.map((lesson) => (
-                  <CourseLessonItem
+                  <CourseOutlineItem
                     key={lesson._id}
                     isActive={slug ? lesson.slug === slug : false}
                     lesson={lesson ? JSON.parse(JSON.stringify(lesson)) : {}}

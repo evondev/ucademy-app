@@ -7,18 +7,18 @@ import { Checkbox } from '@/shared/components/ui/checkbox';
 import { LessonItemData } from '@/shared/types';
 import { cn } from '@/shared/utils';
 
-interface CourseLessonItemProps {
+interface CourseOutlineItemProps {
   lesson: LessonItemData;
   url?: string;
   isActive?: boolean;
   isChecked?: boolean;
 }
-const CourseLessonItem = ({
+const CourseOutlineItem = ({
   isActive = false,
   isChecked = false,
   lesson,
   url,
-}: CourseLessonItemProps) => {
+}: CourseOutlineItemProps) => {
   const handleCompleteLesson = async (checked: boolean | string) => {
     try {
       await createHistory({
@@ -64,4 +64,4 @@ const CourseLessonItem = ({
   );
 };
 
-export default CourseLessonItem;
+export default CourseOutlineItem;
