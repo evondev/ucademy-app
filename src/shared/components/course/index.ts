@@ -1,1 +1,1 @@
-export { default } from './course-outline';
+export { default as CourseOutline } from './course-outline';

@@ -7,7 +7,7 @@ import {
   Pagination,
   TableAction,
   TableActionItem,
-} from '@/shared/components';
+} from '@/shared/components/common';
 import {
   InputFormatCurrency,
   Select,

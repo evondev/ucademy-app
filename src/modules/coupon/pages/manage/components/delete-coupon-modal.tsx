@@ -2,7 +2,7 @@
 import Swal from 'sweetalert2';
 
 import { deleteCoupon } from '@/modules/coupon/actions';
-import { TableActionItem } from '@/shared/components';
+import { TableActionItem } from '@/shared/components/common';
 
 interface DeleteCouponModalProps {
   code: string;

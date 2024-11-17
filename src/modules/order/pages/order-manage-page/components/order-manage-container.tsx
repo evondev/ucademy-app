@@ -8,7 +8,7 @@ import {
   EmptySpace,
   Heading,
   Pagination,
-} from '@/shared/components';
+} from '@/shared/components/common';
 import { IconCancel, IconCheck } from '@/shared/components/icons';
 import { Input } from '@/shared/components/ui/input';
 import {

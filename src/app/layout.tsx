@@ -7,7 +7,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
 
-import { ThemeProvider } from '@/shared/components';
+import { ThemeProvider } from '@/shared/components/common';
 import { UserProvider } from '@/shared/contexts';
 import { manrope } from '@/utils';
 

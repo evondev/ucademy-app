@@ -3,7 +3,8 @@ import { Suspense } from 'react';
 import { fetchCourseBySlug } from '@/modules/course/actions';
 import { getHistory } from '@/modules/history/actions';
 import { countLessonByCourseId } from '@/modules/lesson/actions';
-import { CourseOutline, Loading } from '@/shared/components';
+import { Loading } from '@/shared/components/common';
+import { CourseOutline } from '@/shared/components/course';
 import { CourseLessonPageRootProps } from '@/shared/types';
 
 import CourseLessonComment from './course-lesson-comment';

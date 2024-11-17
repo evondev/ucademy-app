@@ -1,5 +1,5 @@
 import { findAllLessons } from '@/modules/lesson/actions';
-import { Heading } from '@/shared/components';
+import { Heading } from '@/shared/components/common';
 
 import LessonSaveUrl from './lesson-save-url';
 import VideoPlayer from './video-player';

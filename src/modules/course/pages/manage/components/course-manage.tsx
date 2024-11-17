@@ -10,7 +10,7 @@ import {
   Heading,
   TableAction,
   TableActionItem,
-} from '@/shared/components';
+} from '@/shared/components/common';
 import { Input } from '@/shared/components/ui/input';
 import {
   Select,
