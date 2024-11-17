@@ -12,7 +12,6 @@ import { createCoupon } from '@/modules/coupon/actions';
 import { couponCreateSchema } from '@/modules/coupon/schemas';
 import { CouponCreateFormValues } from '@/modules/coupon/types';
 import { fetchCourses } from '@/modules/course/actions';
-import { CourseItemData } from '@/modules/course/types';
 import { IconClose } from '@/shared/components/icons';
 import {
   Button,
@@ -35,6 +34,7 @@ import {
   Switch,
 } from '@/shared/components/ui';
 import { CouponType, couponTypes } from '@/shared/constants';
+import { CourseItemData } from '@/shared/types';
 
 const CreateCouponContainer = () => {
   const [startDate, setStartDate] = useState<Date>();

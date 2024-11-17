@@ -1,6 +1,6 @@
 import CourseItem from '@/modules/course/components/course-item';
-import { CourseItemData } from '@/modules/course/types';
 import { CourseGrid } from '@/shared/components/common';
+import { CourseItemData } from '@/shared/types';
 
 export interface CourseDashboardContainerProps {
   courseList: CourseItemData[];

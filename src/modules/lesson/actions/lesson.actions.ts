@@ -3,8 +3,11 @@ import { revalidatePath } from 'next/cache';
 
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import { CourseModel, LectureModel, LessonModel } from '@/shared/schemas';
-import { LessonModelProps } from '@/shared/types';
-import { CreateLessonParams, UpdateLessonParams } from '@/types';
+import {
+  CreateLessonParams,
+  LessonModelProps,
+  UpdateLessonParams,
+} from '@/shared/types';
 
 export async function createLesson(params: CreateLessonParams) {
   try {

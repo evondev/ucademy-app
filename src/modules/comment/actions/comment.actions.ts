@@ -4,16 +4,15 @@ import { revalidatePath } from 'next/cache';
 
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import { CommentModel, UserModel } from '@/shared/schemas';
-import { CommentItem } from '@/types';
+import {
+  CommentItemData,
+  CreateCommentParams,
+  QuerySortFilter,
+} from '@/shared/types';
 
-export async function createComment(params: {
-  content: string;
-  lesson: string;
-  user: string;
-  level: number;
-  parentId?: string;
-  path?: string;
-}): Promise<boolean | undefined> {
+export async function createComment(
+  params: CreateCommentParams,
+): Promise<boolean | undefined> {
   try {
     connectToDatabase();
     const newComment = await CommentModel.create(params);
@@ -28,11 +27,11 @@ export async function createComment(params: {
 }
 export async function getCommentsByLesson(
   lessonId: string,
-  sort: 'recent' | 'oldest' = 'recent',
-): Promise<CommentItem[] | undefined> {
+  sort: QuerySortFilter,
+): Promise<CommentItemData[] | undefined> {
   try {
     connectToDatabase();
-    const comments = await CommentModel.find<CommentItem>({
+    const comments = await CommentModel.find<CommentItemData>({
       lesson: lessonId,
     })
       .sort({ created_at: sort === 'recent' ? -1 : 1 })

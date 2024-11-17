@@ -10,7 +10,6 @@ import { useImmer } from 'use-immer';
 import { z } from 'zod';
 
 import { updateCourse } from '@/modules/course/actions';
-import { CourseItemData } from '@/modules/course/types';
 import { IconAdd } from '@/shared/components/icons';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -36,6 +35,7 @@ import {
   CourseStatus,
   courseStatus,
 } from '@/shared/constants';
+import { CourseItemData } from '@/shared/types';
 import { UploadButton } from '@/shared/utils/uploadthing';
 
 const formSchema = z.object({

@@ -5,8 +5,12 @@ import { revalidatePath } from 'next/cache';
 
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import { CouponModel } from '@/shared/schemas';
-import { CouponItemData } from '@/shared/types/coupon.type';
-import { CreateCouponParams, FilterData, UpdateCouponParams } from '@/types';
+import {
+  CouponItemData,
+  CreateCouponParams,
+  QueryFilter,
+  UpdateCouponParams,
+} from '@/shared/types';
 
 export async function createCoupon(params: CreateCouponParams) {
   try {
@@ -45,7 +49,7 @@ export async function updateCoupon(params: UpdateCouponParams) {
     console.log(error);
   }
 }
-export async function getCoupons(params: FilterData): Promise<
+export async function getCoupons(params: QueryFilter): Promise<
   | {
       coupons: CouponItemData[] | undefined;
       total: number;

@@ -7,8 +7,7 @@ import { RatingStatus } from '@/shared/constants';
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import { CourseModel, RatingModel } from '@/shared/schemas';
 import { QueryFilter } from '@/shared/types';
-import { RatingItemData } from '@/shared/types/rating.type';
-import { CreateRatingParams } from '@/types';
+import { CreateRatingParams, RatingItemData } from '@/shared/types/rating.type';
 
 export async function createRating(
   params: CreateRatingParams,

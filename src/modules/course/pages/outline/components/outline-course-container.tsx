@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import slugify from 'slugify';
 import Swal from 'sweetalert2';
 
-import { CourseItemData } from '@/modules/course/types';
 import {
   createLecture,
   updateLecture,
@@ -27,9 +26,9 @@ import {
 } from '@/shared/components/ui/accordion';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
-import { commonClassNames } from '@/shared/constants';
-import { cn } from '@/shared/utils';
+import { CourseItemData } from '@/shared/types';
 
+import OutlineAction from './outline-action';
 import OutlineItem from './outline-item';
 
 interface OutlineCourseContainerProps {
@@ -184,58 +183,46 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
                           />
                         </div>
                         <div className="flex gap-2">
-                          <span
-                            className={cn(
-                              commonClassNames.action,
-                              'text-green-500',
-                            )}
+                          <OutlineAction
+                            variant="success"
                             onClick={(event) =>
                               handleUpdateLecture(event, lecture._id)
                             }
                           >
                             <IconCheck />
-                          </span>
-                          <span
-                            className={cn(
-                              commonClassNames.action,
-                              'text-red-500',
-                            )}
+                          </OutlineAction>
+                          <OutlineAction
+                            variant="danger"
                             onClick={(event) => {
                               event.stopPropagation();
                               setLectureIdEdit('');
                             }}
                           >
                             <IconCancel />
-                          </span>
+                          </OutlineAction>
                         </div>
                       </>
                     ) : (
                       <>
                         <div>{lecture.title}</div>
                         <div className="flex gap-2">
-                          <span
-                            className={cn(
-                              commonClassNames.action,
-                              'text-blue-500',
-                            )}
+                          <OutlineAction
+                            variant="info"
                             onClick={(event) => {
                               event.stopPropagation();
                               setLectureIdEdit(lecture._id);
                             }}
                           >
                             <IconEdit />
-                          </span>
-                          <span
-                            className={cn(
-                              commonClassNames.action,
-                              'text-red-500',
-                            )}
+                          </OutlineAction>
+                          <OutlineAction
+                            variant="danger"
                             onClick={(event) =>
                               handleDeleteLecture(event, lecture._id)
                             }
                           >
                             <IconDelete />
-                          </span>
+                          </OutlineAction>
                         </div>
                       </>
                     )}
@@ -264,56 +251,41 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
                                     />
                                   </div>
                                   <div className="flex gap-2">
-                                    <span
-                                      className={cn(
-                                        commonClassNames.action,
-                                        'text-green-500',
-                                      )}
+                                    <OutlineAction
+                                      variant="success"
                                       onClick={(event) =>
                                         handleUpdateLesson(event, lesson._id)
                                       }
                                     >
                                       <IconCheck />
-                                    </span>
-                                    <span
-                                      className={cn(
-                                        commonClassNames.action,
-                                        'text-red-500',
-                                      )}
+                                    </OutlineAction>
+                                    <OutlineAction
+                                      variant="danger"
                                       onClick={(event) => {
                                         event.stopPropagation();
                                         setLessonIdEdit('');
                                       }}
                                     >
                                       <IconCancel />
-                                    </span>
+                                    </OutlineAction>
                                   </div>
                                 </>
                               ) : (
                                 <>
                                   <div>{lesson.title}</div>
                                   <div className="flex gap-2">
-                                    <span
-                                      className={cn(
-                                        commonClassNames.action,
-                                        'text-blue-500',
-                                      )}
+                                    <OutlineAction
+                                      variant="info"
                                       onClick={(event) => {
                                         event.stopPropagation();
                                         setLessonIdEdit(lesson._id);
                                       }}
                                     >
                                       <IconEdit />
-                                    </span>
-                                    <span
-                                      className={cn(
-                                        commonClassNames.action,
-                                        'text-red-500',
-                                      )}
-                                      // onClick={(e) => handleDeleteLesson(e, lecture._id)}
-                                    >
+                                    </OutlineAction>
+                                    <OutlineAction variant="danger">
                                       <IconDelete />
-                                    </span>
+                                    </OutlineAction>
                                   </div>
                                 </>
                               )}

@@ -3,7 +3,7 @@ import { revalidatePath } from 'next/cache';
 
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import { CourseModel, LectureModel } from '@/shared/schemas';
-import { CreateLectureParams, UpdateLectureParams } from '@/types';
+import { CreateLectureParams, UpdateLectureParams } from '@/shared/types';
 
 export async function createLecture(params: CreateLectureParams) {
   try {

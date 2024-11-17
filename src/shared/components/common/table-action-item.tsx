@@ -7,7 +7,6 @@ import {
   IconEye,
   IconStudy,
 } from '@/shared/components/icons';
-import { commonClassNames } from '@/shared/constants';
 
 type TableActionIcon = 'edit' | 'delete' | 'view' | 'study' | 'approve';
 interface TableActionItemProps {
@@ -24,10 +23,13 @@ const TableActionItem = ({ onClick, type, url }: TableActionItemProps) => {
     approve: <IconCheck />,
   };
 
+  const className =
+    'size-8 rounded-md border flex items-center justify-center p-2  text-gray-500 hover:border-opacity-80 dark:bg-transparent borderDarkMode dark:hover:border-opacity-20';
+
   if (url)
     return (
       <Link
-        className={commonClassNames.action}
+        className={className}
         href={url}
       >
         {icon[type]}
@@ -36,7 +38,7 @@ const TableActionItem = ({ onClick, type, url }: TableActionItemProps) => {
 
   return (
     <button
-      className={commonClassNames.action}
+      className={className}
       onClick={onClick}
     >
       {icon[type]}

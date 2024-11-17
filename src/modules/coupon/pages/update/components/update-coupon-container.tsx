@@ -11,7 +11,6 @@ import { updateCoupon } from '@/modules/coupon/actions';
 import { couponCreateSchema } from '@/modules/coupon/schemas';
 import { CouponCreateFormValues } from '@/modules/coupon/types';
 import { fetchCourses } from '@/modules/course/actions';
-import { CourseItemData } from '@/modules/course/types';
 import { IconClose } from '@/shared/components/icons';
 import { InputFormatCurrency } from '@/shared/components/ui';
 import { Button } from '@/shared/components/ui/button';
@@ -35,6 +34,7 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/shared/components/ui/radio-group';
 import { Switch } from '@/shared/components/ui/switch';
 import { CouponType, couponTypes } from '@/shared/constants';
+import { CourseItemData } from '@/shared/types';
 import { CouponItemData } from '@/shared/types/coupon.type';
 
 export interface UpdateCouponContainerProps {

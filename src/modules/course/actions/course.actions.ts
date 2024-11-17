@@ -12,14 +12,13 @@ import {
   RatingModel,
   UserModel,
 } from '@/shared/schemas';
-import { QueryFilter } from '@/shared/types';
-import { CourseLessonData } from '@/shared/types/course.type';
 import {
+  CourseLessonData,
   CreateCourseParams,
   GetAllCourseParams,
-  StudyCoursesProps,
+  QueryFilter,
   UpdateCourseParams,
-} from '@/types';
+} from '@/shared/types';
 
 import { CourseItemData } from '../types';
 
@@ -115,11 +114,9 @@ export async function fetchCourseBySlug({
     console.log(error);
   }
 }
-
-// fetching
 export async function getAllCoursesPublic(
   params: GetAllCourseParams,
-): Promise<StudyCoursesProps[] | undefined> {
+): Promise<CourseItemData[] | undefined> {
   try {
     connectToDatabase();
     const { limit = 10, page = 1, search } = params;
@@ -140,8 +137,6 @@ export async function getAllCoursesPublic(
     console.log(error);
   }
 }
-
-// CRUD
 export async function createCourse(params: CreateCourseParams) {
   try {
     connectToDatabase();

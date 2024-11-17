@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { createOrder } from '@/modules/order/actions/order.actions';
 import { Button } from '@/shared/components/ui/button';
 import { useUserContext } from '@/shared/contexts';
-import { createOrderCode } from '@/utils';
 
 interface ButtonEnrollProps {
   courseId: string;
@@ -16,6 +15,9 @@ const ButtonEnroll = ({ amount, coupon, courseId }: ButtonEnrollProps) => {
   const { userInfo } = useUserContext();
 
   const router = useRouter();
+
+  const createOrderCode = () => `DH-${Date.now().toString().slice(-6)}`;
+
   const handleEnrollCourse = async () => {
     if (!userInfo?.name) {
       toast.error('Vui lòng đăng nhập để mua khóa học');

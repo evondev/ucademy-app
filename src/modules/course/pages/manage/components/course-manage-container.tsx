@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
 import { updateCourse } from '@/modules/course/actions';
-import { CourseItemData } from '@/modules/course/types';
 import {
   BadgeStatus,
   BouncedLink,
@@ -31,6 +30,7 @@ import {
 } from '@/shared/components/ui/table';
 import { allValue, CourseStatus, courseStatus } from '@/shared/constants';
 import { useQueryString } from '@/shared/hooks';
+import { CourseItemData } from '@/shared/types';
 
 interface CourseManageContainerProps {
   courses?: CourseItemData[];

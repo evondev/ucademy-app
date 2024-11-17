@@ -1,17 +1,18 @@
 'use client';
+import { ObjectId } from 'mongoose';
 import Image from 'next/image';
 
 import { CommentStatus } from '@/shared/constants';
-import { cn } from '@/shared/utils';
-import { CommentItem } from '@/types';
-import { getRepliesComment, timeAgo } from '@/utils';
+import { timeAgo } from '@/shared/helpers';
+import { CommentItemData } from '@/shared/types';
+import { cn } from '@/shared/utils/common';
 
 import CommentReply from './comment-reply';
 
 interface CommentItemProps {
-  comment: CommentItem;
+  comment: CommentItemData;
   lessonId: string;
-  comments: CommentItem[];
+  comments: CommentItemData[];
 }
 
 const CommentField = ({
@@ -19,6 +20,15 @@ const CommentField = ({
   comments = [],
   lessonId,
 }: CommentItemProps) => {
+  const getRepliesComment = (
+    comments: CommentItemData[],
+    parentId: string | ObjectId,
+  ) => {
+    return comments.filter(
+      (item) => item.parentId?.toString() === parentId.toString(),
+    );
+  };
+
   const replies = getRepliesComment(comments, comment._id);
   const level = comment.level || 0;
   const COMMENT_SPACING = 55;

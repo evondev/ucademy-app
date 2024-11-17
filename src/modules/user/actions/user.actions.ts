@@ -3,7 +3,7 @@
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import { UserModel } from '@/shared/schemas';
 import { UserModelProps } from '@/shared/types';
-import { CreateUserParams } from '@/types';
+import { CreateUserParams } from '@/shared/types/user.type';
 
 export async function createUser(params: CreateUserParams) {
   try {

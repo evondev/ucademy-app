@@ -1,4 +1,3 @@
-import { commonClassNames } from '@/shared/constants';
 import { BadgeStatusVariant } from '@/shared/types';
 import { cn } from '@/shared/utils';
 
@@ -25,7 +24,7 @@ const BadgeStatus = ({
   return (
     <span
       className={cn(
-        commonClassNames.status,
+        'whitespace-nowrap rounded-md border border-current bg-opacity-10 px-3 py-1 text-xs font-medium',
         variantsClassNames[variant],
         className,
       )}

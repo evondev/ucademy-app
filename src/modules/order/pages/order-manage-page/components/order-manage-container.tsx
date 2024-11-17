@@ -29,7 +29,6 @@ import {
 } from '@/shared/components/ui/table';
 import {
   allValue,
-  commonClassNames,
   ITEMS_PER_PAGE,
   OrderStatus,
   orderStatus,
@@ -37,6 +36,8 @@ import {
 import { useQueryString } from '@/shared/hooks';
 import { OrderItemData } from '@/shared/types/order.type';
 import { cn } from '@/shared/utils';
+
+import OrderAction from './order-action';
 
 interface OrderManagePageProps {
   orders?: OrderItemData[];
@@ -165,9 +166,7 @@ const OrderManagePage = ({ orders = [], total = 0 }: OrderManagePageProps) => {
                     {order.status !== OrderStatus.CANCELED && (
                       <div className="flex gap-3">
                         {order.status === OrderStatus.PENDING && (
-                          <button
-                            className={commonClassNames.action}
-                            type="button"
+                          <OrderAction
                             onClick={() =>
                               handleUpdateOrder({
                                 orderId: order._id,
@@ -176,11 +175,9 @@ const OrderManagePage = ({ orders = [], total = 0 }: OrderManagePageProps) => {
                             }
                           >
                             <IconCheck />
-                          </button>
+                          </OrderAction>
                         )}
-                        <button
-                          className={commonClassNames.action}
-                          type="button"
+                        <OrderAction
                           onClick={() =>
                             handleUpdateOrder({
                               orderId: order._id,
@@ -189,7 +186,7 @@ const OrderManagePage = ({ orders = [], total = 0 }: OrderManagePageProps) => {
                           }
                         >
                           <IconCancel />
-                        </button>
+                        </OrderAction>
                       </div>
                     )}
                   </TableCell>

@@ -2,9 +2,9 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { CourseItemData } from '@/modules/course/types';
 import { IconPlay, IconStudy, IconUsers } from '@/shared/components/icons';
 import { useUserContext } from '@/shared/contexts';
+import { CourseItemData } from '@/shared/types';
 
 import ButtonEnroll from './button-enroll';
 import CouponForm from './coupon-form';
