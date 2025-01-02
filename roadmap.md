@@ -132,59 +132,19 @@
 - Course
 - Order
 
-## Client side vs Server side
-
-## Tanstack query
-
-## Client components
-
-## Server components
-
-## Server actions
-
-## Routes
-
-- Parallel routes
-- Intercepting routes
-
-## Performance
-
-## Data Fetching
-
-## Caching
-
-## Streaming
-
-## Linking
-
-## Navigating
-
-## Error handling
-
-## Loading UI
-
-## Redirecting
-
-## Partial Prerendering
-
-## Storybook
-
-# Other features
-
-## Notification
-
-## User
-
-## Optimize UI UX
-
-## Commit
-
-- Commitlint with Husky
-
-# Final
+## Features
 
 - DragnDrop Lecture - Lesson
 - Test project features
-- Interview questions
+
+## Husky
+
+## Nuqs
+
+## Tanstack Query
+
+## Storybook
+
+## Optimize UI UX
 
 # What's next?
