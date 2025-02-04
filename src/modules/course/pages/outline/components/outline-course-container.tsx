@@ -20,7 +20,6 @@ import {
 } from '@/shared/components/icons';
 import {
   Accordion,
-  AccordionContent,
   AccordionItem,
   AccordionTrigger,
   Button,
@@ -29,7 +28,7 @@ import {
 import { CourseItemData } from '@/shared/types';
 
 import OutlineAction from './outline-action';
-import OutlineItem from './outline-item';
+import OutlineDraggableContent from './outline-draggable-content';
 
 interface OutlineCourseContainerProps {
   course: CourseItemData;
@@ -110,6 +109,8 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
     }
   };
   const handleAddNewLesson = async (lectureId: string, courseId: string) => {
+    const foundLecture = lectures.find((lecture) => lecture._id === lectureId);
+
     try {
       const response = await createLesson({
         path: `/manage/course/update-content?slug=${course.slug}`,
@@ -117,6 +118,7 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
         course: courseId,
         title: 'Tiêu đề bài học mới',
         slug: `tieu-de-bai-hoc-moi-${Date.now().toString().slice(-3)}`,
+        order: (foundLecture?.lessons.length || 0) + 1,
       });
 
       if (response?.success) {
@@ -228,77 +230,12 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
                     )}
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="border-none !bg-transparent">
-                  <div className="flex flex-col gap-5">
-                    {lecture.lessons.map((lesson) => (
-                      <Accordion
-                        key={lesson._id}
-                        collapsible={!lessonEdit}
-                        type="single"
-                      >
-                        <AccordionItem value={lesson._id}>
-                          <AccordionTrigger>
-                            <div className="flex w-full items-center justify-between gap-3 pr-5">
-                              {lesson._id === lessonIdEdit ? (
-                                <>
-                                  <div className="w-full">
-                                    <Input
-                                      defaultValue={lesson.title}
-                                      placeholder="Tên bài học"
-                                      onChange={(event) =>
-                                        setLessonEdit(event.target.value)
-                                      }
-                                    />
-                                  </div>
-                                  <div className="flex gap-2">
-                                    <OutlineAction
-                                      variant="success"
-                                      onClick={(event) =>
-                                        handleUpdateLesson(event, lesson._id)
-                                      }
-                                    >
-                                      <IconCheck />
-                                    </OutlineAction>
-                                    <OutlineAction
-                                      variant="danger"
-                                      onClick={(event) => {
-                                        event.stopPropagation();
-                                        setLessonIdEdit('');
-                                      }}
-                                    >
-                                      <IconCancel />
-                                    </OutlineAction>
-                                  </div>
-                                </>
-                              ) : (
-                                <>
-                                  <div>{lesson.title}</div>
-                                  <div className="flex gap-2">
-                                    <OutlineAction
-                                      variant="info"
-                                      onClick={(event) => {
-                                        event.stopPropagation();
-                                        setLessonIdEdit(lesson._id);
-                                      }}
-                                    >
-                                      <IconEdit />
-                                    </OutlineAction>
-                                    <OutlineAction variant="danger">
-                                      <IconDelete />
-                                    </OutlineAction>
-                                  </div>
-                                </>
-                              )}
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <OutlineItem lesson={lesson} />
-                          </AccordionContent>
-                        </AccordionItem>
-                      </Accordion>
-                    ))}
-                  </div>
-                </AccordionContent>
+                <OutlineDraggableContent
+                  lecture={lecture}
+                  lessonEdit={lessonEdit}
+                  lessonIdEdit={lessonIdEdit}
+                  setLessonEdit={setLessonEdit}
+                />
               </AccordionItem>
             </Accordion>
             <Button
