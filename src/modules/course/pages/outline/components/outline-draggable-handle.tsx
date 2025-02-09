@@ -14,6 +14,7 @@ export default function OutlineDraggableHandle(
       {...attributes}
       {...listeners}
       ref={ref}
+      className="cursor-grab"
     >
       <svg
         viewBox="0 0 20 20"

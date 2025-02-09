@@ -1,17 +1,13 @@
 'use client';
 import { MouseEvent, useState } from 'react';
 import { toast } from 'react-toastify';
-import slugify from 'slugify';
 import Swal from 'sweetalert2';
 
 import {
   createLecture,
   updateLecture,
 } from '@/modules/lecture/actions/lecture.actions';
-import {
-  createLesson,
-  updateLesson,
-} from '@/modules/lesson/actions/lesson.actions';
+import { createLesson } from '@/modules/lesson/actions/lesson.actions';
 import {
   IconCancel,
   IconCheck,
@@ -131,34 +127,6 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
       console.log(error);
     }
   };
-  const handleUpdateLesson = async (
-    event: MouseEvent<HTMLSpanElement>,
-    lessonId: string,
-  ) => {
-    event.stopPropagation();
-    try {
-      const response = await updateLesson({
-        lessonId,
-        path: `/manage/course/update-content?slug=${course.slug}`,
-        updateData: {
-          title: lessonEdit,
-          slug: slugify(lessonEdit, {
-            lower: true,
-            locale: 'vi',
-            remove: /[*+~.()'"!:@]/g,
-          }),
-        },
-      });
-
-      if (response?.success) {
-        toast.success('Cập nhật bài học thành công!');
-        setLessonEdit('');
-        setLessonIdEdit('');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div>
@@ -231,10 +199,12 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
                   </div>
                 </AccordionTrigger>
                 <OutlineDraggableContent
+                  courseSlug={course.slug}
                   lecture={lecture}
                   lessonEdit={lessonEdit}
                   lessonIdEdit={lessonIdEdit}
                   setLessonEdit={setLessonEdit}
+                  setLessonIdEdit={setLessonIdEdit}
                 />
               </AccordionItem>
             </Accordion>

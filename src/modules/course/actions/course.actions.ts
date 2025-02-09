@@ -98,6 +98,11 @@ export async function fetchCourseBySlug({
           match: {
             _destroy: false,
           },
+          options: {
+            sort: {
+              order: 1,
+            },
+          },
         },
       })
       .populate({

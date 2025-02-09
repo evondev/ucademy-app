@@ -1,7 +1,16 @@
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext } from '@dnd-kit/sortable';
-import { useEffect, useState } from 'react';
+import {
+  Dispatch,
+  MouseEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
+import { toast } from 'react-toastify';
+import slugify from 'slugify';
 
+import { updateLesson, updateLessonOrder } from '@/modules/lesson/actions';
 import {
   IconCancel,
   IconCheck,
@@ -27,31 +36,72 @@ export interface OutlineDraggableContentProps {
   lessonEdit: string;
   setLessonEdit: (value: string) => void;
   lessonIdEdit: string;
+  setLessonIdEdit: Dispatch<SetStateAction<string>>;
+  courseSlug: string;
 }
 
 export default function OutlineDraggableContent({
+  courseSlug,
   lecture,
   lessonEdit,
   lessonIdEdit,
   setLessonEdit,
+  setLessonIdEdit,
 }: OutlineDraggableContentProps) {
   const [lessonList, setLessonList] = useState<LessonItemData[]>([]);
 
-  useEffect(() => {
-    setLessonList(lecture.lessons || []);
-  }, [lecture.lessons]);
+  const handleUpdateLesson = async (
+    event: MouseEvent<HTMLSpanElement>,
+    lessonId: string,
+  ) => {
+    event.stopPropagation();
+    try {
+      const response = await updateLesson({
+        lessonId,
+        path: `/manage/course/update-content?slug=${courseSlug}`,
+        updateData: {
+          title: lessonEdit,
+          slug: slugify(lessonEdit, {
+            lower: true,
+            locale: 'vi',
+            remove: /[*+~.()'"!:@]/g,
+          }),
+        },
+      });
 
-  const handleDragEnd = ({ active, over }: DragEndEvent) => {
+      if (response?.success) {
+        toast.success('Cập nhật bài học thành công!');
+        setLessonEdit('');
+        setLessonIdEdit('');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDragEnd = async ({ active, over }: DragEndEvent) => {
     if (over && active.id !== over?.id) {
       const activeIndex = lessonList.findIndex(({ _id }) => _id === active.id);
       const overIndex = lessonList.findIndex(({ _id }) => _id === over.id);
 
       const newLessons = arrayMove(lessonList, activeIndex, overIndex);
-      // newLessons.forEach((lesson, index) => {handleUpdateLessonOrder(lesson._id, index + 1);});
 
       setLessonList(newLessons);
+
+      for (const [index, lesson] of newLessons.entries()) {
+        await updateLessonOrder({
+          lessonId: lesson._id,
+          order: index + 1,
+          path: `/manage/course/outline?slug=${courseSlug}`,
+        });
+      }
+      toast.success('Thay đổi thứ tự bài học thành công!');
     }
   };
+
+  useEffect(() => {
+    setLessonList(lecture.lessons || []);
+  }, [lecture.lessons]);
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
@@ -64,7 +114,7 @@ export default function OutlineDraggableContent({
                 id={lesson._id}
               >
                 <Accordion
-                  collapsible={!lessonEdit}
+                  collapsible={!lessonIdEdit}
                   type="single"
                 >
                   <AccordionItem value={lesson._id}>
@@ -84,18 +134,18 @@ export default function OutlineDraggableContent({
                             <div className="flex gap-2">
                               <OutlineAction
                                 variant="success"
-                                // onClick={(event) =>
-                                //   handleUpdateLesson(event, lesson._id)
-                                // }
+                                onClick={(event) =>
+                                  handleUpdateLesson(event, lesson._id)
+                                }
                               >
                                 <IconCheck />
                               </OutlineAction>
                               <OutlineAction
                                 variant="danger"
-                                // onClick={(event) => {
-                                //   event.stopPropagation();
-                                //   setLessonIdEdit('');
-                                // }}
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  setLessonIdEdit('');
+                                }}
                               >
                                 <IconCancel />
                               </OutlineAction>
@@ -107,10 +157,10 @@ export default function OutlineDraggableContent({
                             <div className="flex gap-2">
                               <OutlineAction
                                 variant="info"
-                                // onClick={(event) => {
-                                //   event.stopPropagation();
-                                //   setLessonIdEdit(lesson._id);
-                                // }}
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  setLessonIdEdit(lesson._id);
+                                }}
                               >
                                 <IconEdit />
                               </OutlineAction>
