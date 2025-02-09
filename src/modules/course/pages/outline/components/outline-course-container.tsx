@@ -1,5 +1,6 @@
 'use client';
-import { MouseEvent, useState } from 'react';
+import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import { MouseEvent, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
@@ -21,7 +22,7 @@ import {
   Button,
   Input,
 } from '@/shared/components/ui';
-import { CourseItemData } from '@/shared/types';
+import { CourseItemData, LessonItemData } from '@/shared/types';
 
 import OutlineAction from './outline-action';
 import OutlineDraggableContent from './outline-draggable-content';
@@ -36,6 +37,8 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
   const [lessonEdit, setLessonEdit] = useState('');
   const [lectureIdEdit, setLectureIdEdit] = useState('');
   const [lessonIdEdit, setLessonIdEdit] = useState('');
+  const [lessonList, setLessonList] = useState<LessonItemData[]>([]);
+
   const handleAddNewLecture = async () => {
     try {
       const response = await createLecture({
@@ -52,6 +55,7 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
       console.log(error);
     }
   };
+
   const handleDeleteLecture = async (
     event: MouseEvent<HTMLSpanElement>,
     lectureId: string,
@@ -81,6 +85,7 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
       console.log(error);
     }
   };
+
   const handleUpdateLecture = async (
     event: MouseEvent<HTMLSpanElement>,
     lectureId: string,
@@ -104,6 +109,7 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
       console.log(error);
     }
   };
+
   const handleAddNewLesson = async (lectureId: string, courseId: string) => {
     const foundLecture = lectures.find((lecture) => lecture._id === lectureId);
 
@@ -128,8 +134,18 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
     }
   };
 
+  const handleDragEnd = async (event: DragEndEvent) => {
+    console.info('File outline-course-container.tsx event at line 138:', event);
+  };
+
+  useEffect(() => {
+    const allLessons = lectures.flatMap((lecture) => lecture.lessons);
+
+    setLessonList(allLessons);
+  }, [lectures]);
+
   return (
-    <div>
+    <DndContext onDragEnd={handleDragEnd}>
       <div className="flex flex-col gap-5">
         {lectures.map((lecture) => (
           <div key={lecture._id}>
@@ -200,11 +216,14 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
                 </AccordionTrigger>
                 <OutlineDraggableContent
                   courseSlug={course.slug}
-                  lecture={lecture}
+                  id={lecture._id}
                   lessonEdit={lessonEdit}
                   lessonIdEdit={lessonIdEdit}
                   setLessonEdit={setLessonEdit}
                   setLessonIdEdit={setLessonIdEdit}
+                  lessons={lessonList.filter(
+                    (item) => item.lecture === lecture._id,
+                  )}
                 />
               </AccordionItem>
             </Accordion>
@@ -223,7 +242,7 @@ const OutlineCourseContainer = ({ course }: OutlineCourseContainerProps) => {
       >
         Thêm chương mới
       </Button>
-    </div>
+    </DndContext>
   );
 };
 

@@ -3,6 +3,7 @@ import { LessonModelProps } from './models';
 export interface LessonItemData
   extends Omit<LessonModelProps, 'course' | 'lecture'> {
   course: string;
+  lecture: string;
 }
 export type CreateLessonParams = {
   lecture: string;

@@ -3,9 +3,7 @@ import { MouseEvent } from 'react';
 import { cn } from '@/shared/utils';
 
 export interface OutlineActionProps {
-  onClick?: (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
-  ) => void;
+  onClick?: (event: MouseEvent<HTMLElement, globalThis.MouseEvent>) => void;
   children: React.ReactNode;
   variant: 'default' | 'success' | 'warning' | 'danger' | 'info';
 }
@@ -24,8 +22,7 @@ function OutlineAction({
   };
 
   return (
-    <button
-      type="button"
+    <div
       className={cn(
         'borderDarkMode hover:border/80 dark:hover:border/20 flex size-8 items-center justify-center rounded-md border p-2 text-gray-500 dark:bg-transparent',
         variantsClassName[variant],
@@ -33,7 +30,7 @@ function OutlineAction({
       onClick={onClick}
     >
       {children}
-    </button>
+    </div>
   );
 }
 
