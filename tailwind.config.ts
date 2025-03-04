@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import tailwindAnimate from 'tailwindcss-animate';
 import { withUt } from 'uploadthing/tw';
 
 const config: Config = {
@@ -10,7 +11,7 @@ const config: Config = {
         '3xl': '2000px',
       },
       colors: {
-        primary: '#8873EF',
+        primary: '#47A5FF',
         secondary: '#2979ff',
         grayDarkest: '#131316',
         grayDarker: '#212126',
@@ -35,7 +36,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [tailwindAnimate],
 };
 
 export default withUt(config);

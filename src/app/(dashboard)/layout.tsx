@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { MenuItem } from '@/shared/components/common';
-import { Sidebar } from '@/shared/components/layout';
+import { Header, Sidebar } from '@/shared/components/layout';
 import { menuItems } from '@/shared/constants';
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="wrapper block min-h-screen pb-20 lg:grid lg:grid-cols-[300px,minmax(0,1fr)] lg:pb-0">
+    <div className="wrapper block min-h-screen pb-20 pt-[76px] lg:grid lg:grid-cols-[270px,minmax(0,1fr)] lg:pb-0">
       <Sidebar />
       <ul className="bgDarkMode borderDarkMode fixed bottom-0 left-0 z-50 flex h-16 w-full justify-center gap-5 border-t p-3 lg:hidden">
         {menuItems.map((item, index) => (
@@ -19,7 +19,8 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           />
         ))}
       </ul>
-      <div className="hidden lg:block" />
+      <Header />
+      <div />
       <main className="p-5">{children}</main>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ActiveLink from './active-link';
+import MenuItemLink from './menu-item-link';
 
 interface MenuItemProps {
   url: string;
@@ -12,10 +12,10 @@ interface MenuItemProps {
 const MenuItem = ({ icon, onlyIcon, title = '', url = '/' }: MenuItemProps) => {
   return (
     <li>
-      <ActiveLink url={url}>
+      <MenuItemLink url={url}>
         {icon}
         {onlyIcon ? null : title}
-      </ActiveLink>
+      </MenuItemLink>
     </li>
   );
 };

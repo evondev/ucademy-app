@@ -1,27 +1,28 @@
 'use client';
-import { useAuth, UserButton } from '@clerk/nextjs';
+import Image from 'next/image';
 import Link from 'next/link';
 
-import { IconUsers } from '@/shared/components/icons';
 import { menuItems } from '@/shared/constants';
 
-import { MenuItem, ModeToggle } from '../common';
+import { MenuItem } from '../common';
 
-function Sidebar() {
-  const { userId } = useAuth();
+export interface SidebarProps {}
 
+export function Sidebar(_props: SidebarProps) {
   return (
-    <div className="borderDarkMode bgDarkMode fixed inset-y-0 left-0 hidden w-[300px] flex-col border-r p-5 lg:flex">
+    <div className="fixed inset-y-0 left-0 z-50 hidden w-[250px] flex-col bg-white lg:flex">
       <Link
-        className="mb-5 inline-flex h-10 items-center gap-2 self-start pl-3 text-2xl font-bold"
+        className="flex items-center justify-center p-5"
         href="/"
       >
-        <span className="bgDarkMode borderDarkMode flex size-10 items-center justify-center rounded-lg border text-lg text-primary">
-          U
-        </span>
-        <span>Ucademy</span>
+        <Image
+          alt="ucademy"
+          height={40}
+          src="/logo-books.png"
+          width={40}
+        />
       </Link>
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-3 px-3">
         {menuItems.map((item, index) => (
           <MenuItem
             key={index}
@@ -31,21 +32,6 @@ function Sidebar() {
           />
         ))}
       </ul>
-      <div className="mt-auto flex items-center justify-end gap-2">
-        <ModeToggle />
-        {userId ? (
-          <UserButton />
-        ) : (
-          <Link
-            className="flex size-10 items-center justify-center rounded-lg bg-primary p-1 text-white"
-            href="/sign-in"
-          >
-            <IconUsers />
-          </Link>
-        )}
-      </div>
     </div>
   );
 }
-
-export default Sidebar;
