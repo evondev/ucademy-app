@@ -13,7 +13,9 @@ const MenuItem = ({ icon, onlyIcon, title = '', url = '/' }: MenuItemProps) => {
   return (
     <li>
       <ActiveLink url={url}>
-        {icon}
+        <div className="bgDarkMode flex size-8 items-center justify-center rounded-lg">
+          {icon}
+        </div>
         {onlyIcon ? null : title}
       </ActiveLink>
     </li>

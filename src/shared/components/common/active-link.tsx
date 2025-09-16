@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { cn } from '@/shared/utils';
+
 interface ActiveLinkProps {
   url: string;
   children: React.ReactNode;
@@ -13,11 +15,14 @@ const ActiveLink = ({ children, url }: ActiveLinkProps) => {
   return (
     <Link
       href={url}
-      className={`flex items-center gap-3 rounded-md p-3 text-base font-medium text-slate-600 transition-all dark:text-grayDark ${
-        isActive
-          ? 'svg-animate bg-primary/10 font-semibold !text-primary'
-          : 'hover:!bg-primary/10 hover:!text-primary'
-      } `}
+      className={cn(
+        'flex items-center gap-4 rounded-lg border p-2 text-base text-black transition-all hover:bg-gray-100 dark:text-grayDark dark:hover:bg-black/10',
+        {
+          'svg-animate border-gray-200 bg-gray-100 font-bold dark:border-gray-200/10 dark:bg-black/10 dark:text-white':
+            isActive,
+          'border-transparent font-medium': !isActive,
+        },
+      )}
     >
       {children}
     </Link>
