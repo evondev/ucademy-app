@@ -1,4 +1,5 @@
 export { default as IconAdd } from './icon-add';
+export { default as IconBell } from './icon-bell';
 export { default as IconCancel } from './icon-cancel';
 export { default as IconCheck } from './icon-check';
 export { default as IconClock } from './icon-clock';

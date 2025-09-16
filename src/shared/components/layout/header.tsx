@@ -3,7 +3,7 @@ import { useAuth, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 
 import { ModeToggle } from '../common';
-import { IconUsers } from '../icons';
+import { IconBell, IconUsers } from '../icons';
 import { Input } from '../ui';
 
 export interface HeaderProps {}
@@ -15,11 +15,12 @@ export default function Header(_props: HeaderProps) {
     <div className="bgDarkMode flex h-20 flex-col justify-center px-5 py-2">
       <div className="flex items-center justify-between gap-5">
         <Input
-          className="w-[400px]"
-          placeholder="Search course..."
+          className="w-[400px] rounded-lg"
+          placeholder="Tìm kiếm khóa học..."
         />
-        <div className="mt-auto flex items-center justify-end gap-2">
+        <div className="flex items-center justify-end gap-4">
           <ModeToggle />
+          <IconBell />
           {userId ? (
             <UserButton />
           ) : (
