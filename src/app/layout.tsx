@@ -6,10 +6,12 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { ToastContainer } from 'react-toastify';
 
 import { ThemeProvider } from '@/shared/components/common';
 import { UserProvider } from '@/shared/contexts';
+import { ReactQueryContext } from '@/shared/contexts/react-query-context';
 
 export const metadata: Metadata = {
   title: 'Ucademy',
@@ -36,7 +38,11 @@ export default function RootLayout({
             attribute="class"
             defaultTheme="system"
           >
-            <UserProvider>{children}</UserProvider>
+            <ReactQueryContext>
+              <UserProvider>
+                <NuqsAdapter>{children}</NuqsAdapter>
+              </UserProvider>
+            </ReactQueryContext>
             <SpeedInsights />
             <Analytics />
             <ToastContainer
