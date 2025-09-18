@@ -1,11 +1,25 @@
 import React from 'react';
 
+import { CourseItemSkeleton } from '@/modules/course/components/course-item';
+
 interface CourseGridProps {
   children: React.ReactNode;
+  isLoading?: boolean;
 }
-const CourseGrid = ({ children }: CourseGridProps) => {
+const CourseGrid = ({ children, isLoading }: CourseGridProps) => {
+  if (isLoading)
+    return (
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
+        {Array.from({ length: 6 })
+          .fill(0)
+          .map((item, index) => (
+            <CourseItemSkeleton key={index} />
+          ))}
+      </div>
+    );
+
   return (
-    <div className="course-slider mt-6 grid gap-4 lg:grid-cols-2 lg:gap-8 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-6">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
       {children}
     </div>
   );

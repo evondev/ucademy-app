@@ -12,7 +12,7 @@ interface CourseItemProps {
   cta?: string;
   url?: string;
 }
-const CourseItem = ({
+export const CourseItem = ({
   cta = 'Xem chi tiết',
   data,
   url = '',
@@ -76,5 +76,3 @@ const CourseItem = ({
     </div>
   );
 };
-
-export default CourseItem;
