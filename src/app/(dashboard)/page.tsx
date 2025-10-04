@@ -1,11 +1,7 @@
 import { CourseDashboardPage } from '@/modules/course/pages';
 
 function CourseDashboardRoot() {
-  return (
-    <>
-      <CourseDashboardPage />
-    </>
-  );
+  return <CourseDashboardPage />;
 }
 
 export default CourseDashboardRoot;

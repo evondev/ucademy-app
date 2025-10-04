@@ -3,10 +3,10 @@
 @tailwind utilities;
 @layer base {
   body {
-    @apply bg-gray-50 dark:bg-grayDarkest dark:text-white text-grayDarkest antialiased;
+    @apply bg-white text-grayDarkest antialiased dark:bg-grayDarkest dark:text-white;
   }
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
@@ -41,7 +41,7 @@
     @apply focus:ring-4 focus:ring-primary focus:ring-opacity-10;
   }
   .skeleton {
-    @apply bg-gray-200 dark:bg-grayDarker animate-pulse;
+    @apply animate-pulse bg-gray-200 dark:bg-grayDarker;
   }
 }
 @media screen and (max-width: 1023.98px) {
@@ -103,7 +103,7 @@
     @apply pl-10;
   }
   a {
-    @apply underline text-primary font-medium;
+    @apply font-medium text-primary underline;
   }
 }
 .button-primary {
@@ -111,7 +111,7 @@
   overflow: hidden;
   z-index: 2;
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: auto;
@@ -133,7 +133,7 @@ html body .swal2-container {
     max-width: 450px;
   }
   .swal2-title {
-    @apply font-bold text-xl;
+    @apply text-xl font-bold;
   }
   .swal2-actions {
     .swal2-confirm {

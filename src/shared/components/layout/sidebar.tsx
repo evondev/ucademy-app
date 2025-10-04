@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { menuItems } from '@/shared/constants';
@@ -9,12 +10,15 @@ function Sidebar() {
   return (
     <div className="borderDarkMode bgDarkMode fixed inset-y-0 left-0 hidden w-[300px] flex-col gap-10 border-r p-5 lg:flex">
       <Link
-        className="inline-flex items-center gap-2 self-start pl-3 text-xl font-bold"
+        className="mx-auto flex flex-col items-center gap-2 self-start pl-3 text-xl font-bold"
         href="/"
       >
-        <span className="flex size-10 items-center justify-center rounded-full bg-primary text-white">
-          U
-        </span>
+        <Image
+          alt="ucademy"
+          height={40}
+          src="/logo-main.png"
+          width={40}
+        />
         <span>Ucademy</span>
       </Link>
       <ul className="flex flex-col gap-3">
