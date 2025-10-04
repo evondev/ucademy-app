@@ -8,11 +8,17 @@ import {
   IconStudy,
   IconUsers,
 } from '../components/icons';
+import IconHome from '../components/icons/icon-home';
 import { MenuField } from '../types';
 
 export const menuItems: MenuField[] = [
   {
     url: '/',
+    title: 'Dashboard',
+    icon: <IconHome className="size-5" />,
+  },
+  {
+    url: '/explore',
     title: 'Khám phá',
     icon: <IconPlay className="size-5" />,
   },

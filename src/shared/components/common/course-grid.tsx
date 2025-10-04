@@ -10,9 +10,9 @@ const CourseGrid = ({ children, isLoading }: CourseGridProps) => {
   if (isLoading)
     return (
       <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
-        {Array.from({ length: 6 })
+        {Array.from({ length: 3 })
           .fill(0)
-          .map((item, index) => (
+          .map((_, index) => (
             <CourseItemSkeleton key={index} />
           ))}
       </div>

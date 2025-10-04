@@ -1,5 +1,6 @@
 'use server';
 
+import { parseData } from '@/shared/helpers';
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import { UserModel } from '@/shared/schemas';
 import { UserModelProps } from '@/shared/types';
@@ -26,7 +27,7 @@ export async function getUserInfo({
 
     if (!findUser?._id) return null;
 
-    return JSON.parse(JSON.stringify(findUser));
+    return parseData(findUser);
   } catch (error) {
     console.log(error);
   }

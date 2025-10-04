@@ -8,16 +8,16 @@ import { MenuItem } from '../common';
 
 function Sidebar() {
   return (
-    <div className="borderDarkMode bgDarkMode fixed inset-y-0 left-0 hidden w-[300px] flex-col gap-10 border-r p-5 lg:flex">
+    <div className="borderDarkMode bgDarkMode fixed inset-y-0 left-0 hidden w-[300px] flex-col gap-5 border-r p-5 lg:flex">
       <Link
         className="mx-auto flex flex-col items-center gap-2 self-start pl-3 text-xl font-bold"
         href="/"
       >
         <Image
           alt="ucademy"
-          height={40}
+          height={30}
           src="/logo-main.png"
-          width={40}
+          width={30}
         />
         <span>Ucademy</span>
       </Link>

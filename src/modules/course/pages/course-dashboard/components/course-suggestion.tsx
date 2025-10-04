@@ -3,11 +3,15 @@
 import { CourseItem } from '@/modules/course/components/course-item';
 import { useQueryFetchCourses } from '@/modules/course/libs/react-query';
 import { CourseGrid } from '@/shared/components/common';
+import { CourseStatus } from '@/shared/constants';
 
-export interface CourseListAllProps {}
+export interface CourseSuggestionProps {}
 
-export function CourseListAll(_props: CourseListAllProps) {
-  const { data, isLoading } = useQueryFetchCourses({});
+export function CourseSuggestion(_props: CourseSuggestionProps) {
+  const { data, isLoading } = useQueryFetchCourses({
+    limit: 3,
+    status: CourseStatus.APPROVED,
+  });
 
   const courseList = data || [];
 

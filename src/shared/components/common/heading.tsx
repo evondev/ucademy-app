@@ -8,7 +8,7 @@ interface HeadingProps {
 }
 const Heading = ({ children, className = '' }: HeadingProps) => {
   return (
-    <h2 className={cn('text-2xl font-bold lg:text-3xl', className)}>
+    <h2 className={cn('text-xl font-bold lg:text-2xl', className)}>
       {children}
     </h2>
   );

@@ -21,6 +21,8 @@ export function useMutationUpdateCourse() {
       if (response?.success) {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.FETCH_COURSES],
+          // use refetchType active to make invalidate query bypass staletime
+          refetchType: 'active',
         });
       }
     },

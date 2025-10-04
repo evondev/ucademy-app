@@ -27,14 +27,16 @@ export async function fetchCourses(
 ): Promise<CourseItemData[] | undefined> {
   try {
     connectToDatabase();
-    const { limit = 10, page = 1, search } = params;
+    const { limit = 10, page = 1, search, status } = params;
     const skip = (page - 1) * limit;
     const query: FilterQuery<typeof CourseModel> = {};
 
     if (search) {
       query.$or = [{ title: { $regex: search, $options: 'i' } }];
     }
-    // query.status = status || CourseStatus.APPROVED;
+    if (status) {
+      query.status = status;
+    }
     const courses = await CourseModel.find(query)
       .skip(skip)
       .limit(limit)
@@ -229,6 +231,30 @@ export async function getCourseLessonsInfo({
       duration,
       lessons: lessons.length,
     };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function fetchUserCoursesContinue({
+  clerkId,
+}: {
+  clerkId: string;
+}): Promise<CourseItemData[] | undefined> {
+  try {
+    connectToDatabase();
+    const findUser = await UserModel.findOne({ clerkId: clerkId }).populate({
+      path: 'courses',
+      model: CourseModel,
+      match: {
+        status: CourseStatus.APPROVED,
+      },
+    });
+
+    if (!findUser) return;
+    const courses = parseData(findUser.courses);
+
+    return courses;
   } catch (error) {
     console.log(error);
   }
