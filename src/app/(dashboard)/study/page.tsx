@@ -4,7 +4,7 @@ import { Heading } from '@/shared/components/common';
 const StudyPageRoot = async () => {
   return (
     <>
-      <Heading>Khu vực học tập</Heading>
+      <Heading className="mb-8">Khu vực học tập</Heading>
       <StudyPage />
     </>
   );

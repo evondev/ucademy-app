@@ -3,13 +3,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useImmer } from 'use-immer';
 import { z } from 'zod';
 
-import { updateCourse } from '@/modules/course/actions';
+import { useMutationUpdateCourse } from '@/modules/course/libs/react-query';
 import { IconAdd } from '@/shared/components/icons';
 import {
   Button,
@@ -70,7 +69,7 @@ interface UpdateCourseContainerProps {
 
 const UpdateCourseContainer = ({ course }: UpdateCourseContainerProps) => {
   const router = useRouter();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const mutationUpdateCourse = useMutationUpdateCourse();
   const [courseInfo, setCourseInfo] = useImmer({
     requirements: course.info.requirements,
     benefits: course.info.benefits,
@@ -98,39 +97,32 @@ const UpdateCourseContainer = ({ course }: UpdateCourseContainerProps) => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
-    try {
-      const response = await updateCourse({
-        slug: course.slug,
-        updateData: {
-          title: values.title,
-          slug: values.slug,
-          price: values.price,
-          sale_price: values.sale_price,
-          intro_url: values.intro_url,
-          desc: values.desc,
-          views: values.views,
-          info: {
-            requirements: courseInfo.requirements,
-            benefits: courseInfo.benefits,
-            qa: courseInfo.qa,
-          },
-          status: values.status,
-          level: values.level,
-          image: values.image,
+    const response = await mutationUpdateCourse.mutateAsync({
+      slug: course.slug,
+      updateData: {
+        title: values.title,
+        slug: values.slug,
+        price: values.price,
+        sale_price: values.sale_price,
+        intro_url: values.intro_url,
+        desc: values.desc,
+        views: values.views,
+        info: {
+          requirements: courseInfo.requirements,
+          benefits: courseInfo.benefits,
+          qa: courseInfo.qa,
         },
-      });
+        status: values.status,
+        level: values.level,
+        image: values.image,
+      },
+    });
 
-      if (values.slug !== course.slug) {
-        router.replace(`/manage/course/update?slug=${values.slug}`);
-      }
-      if (response?.success) {
-        toast.success(response.message);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
+    if (values.slug !== course.slug) {
+      router.replace(`/manage/course/update?slug=${values.slug}`);
+    }
+    if (response?.success) {
+      toast.success(response.message);
     }
   }
   const imageWatch = form.watch('image');
@@ -500,8 +492,8 @@ const UpdateCourseContainer = ({ course }: UpdateCourseContainerProps) => {
         </div>
         <Button
           className="w-[150px]"
-          disabled={isSubmitting}
-          isLoading={isSubmitting}
+          disabled={mutationUpdateCourse.isPending}
+          isLoading={mutationUpdateCourse.isPending}
           type="submit"
           variant="primary"
         >

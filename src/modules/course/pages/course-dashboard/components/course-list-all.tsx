@@ -7,7 +7,7 @@ import { CourseGrid } from '@/shared/components/common';
 export interface CourseListAllProps {}
 
 export function CourseListAll(_props: CourseListAllProps) {
-  const { data, isLoading } = useQueryFetchCourses();
+  const { data, isLoading } = useQueryFetchCourses({});
 
   const courseList = data || [];
 

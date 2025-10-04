@@ -4,6 +4,7 @@ import { FilterQuery } from 'mongoose';
 import { revalidatePath } from 'next/cache';
 
 import { CourseStatus, RatingStatus } from '@/shared/constants';
+import { parseData } from '@/shared/helpers';
 import { connectToDatabase } from '@/shared/lib/mongoose';
 import {
   CourseModel,
@@ -33,13 +34,13 @@ export async function fetchCourses(
     if (search) {
       query.$or = [{ title: { $regex: search, $options: 'i' } }];
     }
-    query.status = CourseStatus.APPROVED;
+    // query.status = status || CourseStatus.APPROVED;
     const courses = await CourseModel.find(query)
       .skip(skip)
       .limit(limit)
       .sort({ created_at: -1 });
 
-    return JSON.parse(JSON.stringify(courses));
+    return parseData(courses);
   } catch (error) {
     console.log(error);
   }
@@ -69,7 +70,7 @@ export async function fetchCoursesOfUser(
     });
 
     if (!findUser) return;
-    const courses = JSON.parse(JSON.stringify(findUser.courses));
+    const courses = parseData(findUser.courses);
 
     return courses;
   } catch (error) {
@@ -113,7 +114,7 @@ export async function fetchCourseBySlug({
         },
       });
 
-    return JSON.parse(JSON.stringify(findCourse)) as CourseItemData;
+    return parseData(findCourse) as CourseItemData;
   } catch (error) {
     console.log(error);
   }
@@ -136,7 +137,7 @@ export async function getAllCoursesPublic(
       .limit(limit)
       .sort({ created_at: -1 });
 
-    return JSON.parse(JSON.stringify(courses));
+    return parseData(courses);
   } catch (error) {
     console.log(error);
   }
@@ -156,7 +157,7 @@ export async function createCourse(params: CreateCourseParams) {
 
     return {
       success: true,
-      data: JSON.parse(JSON.stringify(course)),
+      data: parseData(course),
     };
   } catch (error) {
     console.log(error);

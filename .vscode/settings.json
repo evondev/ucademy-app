@@ -10,5 +10,5 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "window.zoomLevel": -0.25
+  "window.zoomLevel": -0.5
 }
