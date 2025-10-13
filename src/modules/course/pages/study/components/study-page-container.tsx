@@ -27,10 +27,10 @@ function StudyPageContainer({ courses }: StudyPageContainerProps) {
   return (
     <CourseGrid>
       {courses.map((item) => {
-        const firstLessonUrl = item.lectures[0].lessons[0].slug;
+        const firstLessonUrl = item.lectures[0].lessons[0]._id;
         const lastURL =
           lastLesson.find((element) => element.course === item.slug)?.lesson ||
-          `/${item.slug}/lesson?slug=${firstLessonUrl}`;
+          `/${item.slug}/lesson?id=${firstLessonUrl}`;
 
         return (
           <CourseItem

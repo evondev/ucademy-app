@@ -6,43 +6,45 @@ import VideoPlayer from './video-player';
 
 export interface CourseLessonPlayerProps {
   courseId: string;
-  lessonSlug: string;
+  lessonId: string;
   courseSlug: string;
 }
 
 async function CourseLessonPlayer({
   courseId,
   courseSlug,
-  lessonSlug,
+  lessonId,
 }: CourseLessonPlayerProps) {
   const lessonList = await findAllLessons({ course: courseId || '' });
+
   const lessonDetails = lessonList?.find(
-    (element) => element.slug === lessonSlug,
+    (element) => element._id.toString() === lessonId,
   );
 
   if (!lessonDetails) return null;
 
   const currentLessonIndex =
-    lessonList?.findIndex((element) => element.slug === lessonSlug) || 0;
+    lessonList?.findIndex((element) => element._id === lessonId) || 0;
   const nextLesson = lessonList?.[currentLessonIndex + 1];
   const previousLesson = lessonList?.[currentLessonIndex - 1];
   const nextLessonUrl = nextLesson
-    ? `/${courseSlug}/lesson?slug=${nextLesson.slug}`
+    ? `/${courseSlug}/lesson?id=${nextLesson._id}`
     : '';
   const previousLessonUrl = previousLesson
-    ? `/${courseSlug}/lesson?slug=${previousLesson.slug}`
+    ? `/${courseSlug}/lesson?id=${previousLesson._id}`
     : '';
 
   return (
     <div className="mb-5">
       <LessonSaveUrl
         course={courseSlug}
-        url={`/${courseSlug}/lesson?slug=${lessonSlug}`}
+        url={`/${courseSlug}/lesson?id=${lessonId}`}
       />
 
       <VideoPlayer
         courseId={courseId}
         nextLesson={nextLessonUrl}
+        playbackId={lessonDetails.video_url}
         prevLesson={previousLessonUrl}
       />
 

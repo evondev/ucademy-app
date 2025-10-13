@@ -14,6 +14,7 @@ export interface CourseLessonPageRootProps {
     course: string;
   };
   searchParams: {
+    id: string;
     slug: string;
     sort: QuerySortFilter;
   };

@@ -14,10 +14,12 @@ interface VideoPlayerProps {
   nextLesson: string;
   prevLesson: string;
   courseId: string;
+  playbackId: string;
 }
 const VideoPlayer = ({
   courseId,
   nextLesson,
+  playbackId,
   prevLesson,
 }: VideoPlayerProps) => {
   const duration = 5000;
@@ -43,16 +45,23 @@ const VideoPlayer = ({
             isEndedVideo ? 'animate-bar' : '',
           )}
         />
-        <MuxPlayer
-          metadataVideoTitle="Placeholder (optional)"
-          metadataViewerUserId="Placeholder (optional)"
-          playbackId="cLtCRXwXHA016mp005eh3cT5fWreC3VSv00VnhXvXzSJ9E"
-          primaryColor="#FFFFFF"
-          secondaryColor="#000000"
-          streamType="on-demand"
-          onEnded={() => setIsEndedVideo(true)}
-          onPlay={() => setIsEndedVideo(false)}
-        />
+        {!!playbackId && (
+          <MuxPlayer
+            metadataVideoTitle="Placeholder (optional)"
+            metadataViewerUserId="Placeholder (optional)"
+            playbackId={playbackId}
+            primaryColor="#FFFFFF"
+            secondaryColor="#000000"
+            streamType="on-demand"
+            onEnded={() => setIsEndedVideo(true)}
+            onPlay={() => setIsEndedVideo(false)}
+          />
+        )}
+        {!playbackId && (
+          <div className="flex aspect-video items-center justify-center bg-gray-200">
+            No video
+          </div>
+        )}
       </div>
       <div className="mb-5 flex items-center justify-between">
         <LessonNavigation

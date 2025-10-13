@@ -20,7 +20,7 @@ async function CourseLessonContainer({
   searchParams,
 }: CourseLessonContainerProps) {
   const courseSlug = params.course;
-  const lessonSlug = searchParams.slug;
+  const lessonId = searchParams.id;
   const foundCourse = await fetchCourseBySlug({ slug: courseSlug });
 
   if (!foundCourse) return null;
@@ -38,13 +38,13 @@ async function CourseLessonContainer({
           <CourseLessonPlayer
             courseId={courseId}
             courseSlug={courseSlug}
-            lessonSlug={lessonSlug}
+            lessonId={lessonId}
           />
         </Suspense>
         <Suspense fallback={<Loading />}>
           <CourseLessonComment
             courseId={courseId}
-            lessonSlug={lessonSlug}
+            lessonSlug={searchParams.slug}
             sort={searchParams.sort}
           />
         </Suspense>
@@ -54,7 +54,7 @@ async function CourseLessonContainer({
           course={courseSlug}
           histories={histories ? JSON.parse(JSON.stringify(histories)) : []}
           lectures={lectures}
-          slug={lessonSlug}
+          lessonId={lessonId}
         />
       </CourseLessonOutline>
     </LessonWrapper>

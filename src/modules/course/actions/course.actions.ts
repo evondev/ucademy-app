@@ -249,6 +249,16 @@ export async function fetchUserCoursesContinue({
       match: {
         status: CourseStatus.APPROVED,
       },
+      populate: {
+        path: 'lectures',
+        model: LectureModel,
+        select: 'lessons',
+        populate: {
+          path: 'lessons',
+          model: LessonModel,
+          select: '_id slug',
+        },
+      },
     });
 
     if (!findUser) return;

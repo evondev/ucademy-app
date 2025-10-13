@@ -11,14 +11,14 @@ import CourseOutlineItem from './course-outline-item';
 interface CourseOutlineProps {
   lectures: LectureItemData[];
   course: string;
-  slug: string;
+  lessonId: string;
   histories?: HistoryItemData[];
 }
 function CourseOutline({
   course = '',
   histories = [],
   lectures = [],
-  slug = '',
+  lessonId = '',
 }: CourseOutlineProps) {
   return (
     <div className="flex flex-col gap-5">
@@ -40,9 +40,9 @@ function CourseOutline({
                 {lecture.lessons.map((lesson) => (
                   <CourseOutlineItem
                     key={lesson._id}
-                    isActive={slug ? lesson.slug === slug : false}
+                    isActive={lessonId ? lesson._id === lessonId : false}
                     lesson={lesson ? JSON.parse(JSON.stringify(lesson)) : {}}
-                    url={course ? `/${course}/lesson?slug=${lesson.slug}` : ''}
+                    url={course ? `/${course}/lesson?id=${lesson._id}` : ''}
                     isChecked={histories.some(
                       (element) =>
                         element.lesson.toString() === lesson._id.toString(),
