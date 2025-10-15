@@ -16,3 +16,8 @@ export interface CourseItemData
 export interface CouponItemData extends Omit<CouponModelProps, 'courses'> {
   courses: CourseItemData[];
 }
+
+export interface StorageLesson {
+  course: string;
+  lesson: string;
+}

@@ -1,10 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
 
-import { CourseItem } from '@/modules/course/components/course-item';
-import { LassLessonData } from '@/modules/course/types';
+import { CourseItemContinue } from '@/modules/course/components/course-item/course-item-continue';
 import { CourseGrid } from '@/shared/components/common';
-import { lastLessonKey } from '@/shared/constants';
+import { handleGetStorageLesson } from '@/shared/helpers';
 import { CourseItemData } from '@/shared/types';
 
 export interface StudyPageContainerProps {
@@ -12,32 +10,23 @@ export interface StudyPageContainerProps {
 }
 
 function StudyPageContainer({ courses }: StudyPageContainerProps) {
-  const [lastLesson, setLastLesson] = useState<LassLessonData[]>([]);
-
-  useEffect(() => {
-    if (typeof localStorage === 'undefined') return;
-    const lesson = localStorage
-      ? JSON.parse(localStorage?.getItem(lastLessonKey) || '[]') || []
-      : [];
-
-    setLastLesson(lesson);
-  }, []);
   if (!courses || courses.length <= 0) return null;
 
   return (
     <CourseGrid>
       {courses.map((item) => {
         const firstLessonUrl = item.lectures[0].lessons[0]._id;
-        const lastURL =
-          lastLesson.find((element) => element.course === item.slug)?.lesson ||
-          `/${item.slug}/lesson?id=${firstLessonUrl}`;
+        const url = handleGetStorageLesson({
+          courseSlug: item.slug,
+          lessonId: firstLessonUrl,
+        });
 
         return (
-          <CourseItem
+          <CourseItemContinue
             key={item.slug}
             cta="Tiếp tục học"
             data={item}
-            url={lastURL}
+            url={url}
           />
         );
       })}

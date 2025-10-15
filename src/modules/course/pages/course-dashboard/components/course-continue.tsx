@@ -1,29 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
-import { CourseItem } from '@/modules/course/components/course-item';
+import { CourseItemContinue } from '@/modules/course/components/course-item/course-item-continue';
 import { useQueryFetchUserCoursesContinue } from '@/modules/course/libs/react-query';
-import { LassLessonData } from '@/modules/course/types';
-import { CourseGrid } from '@/shared/components/common';
-import { lastLessonKey } from '@/shared/constants';
+import { CourseGrid, Heading } from '@/shared/components/common';
 import { useUserContext } from '@/shared/contexts';
+import { handleGetStorageLesson } from '@/shared/helpers';
 
 export interface CourseContinueProps {}
 
 export function CourseContinue(_props: CourseContinueProps) {
   const { userInfo } = useUserContext();
-
-  const [lastLesson, setLastLesson] = useState<LassLessonData[]>([]);
-
-  useEffect(() => {
-    if (typeof localStorage === 'undefined') return;
-    const lesson = localStorage
-      ? JSON.parse(localStorage?.getItem(lastLessonKey) || '[]') || []
-      : [];
-
-    setLastLesson(lesson);
-  }, []);
 
   const { data, isLoading } = useQueryFetchUserCoursesContinue({
     clerkId: userInfo?.clerkId || '',
@@ -31,27 +17,32 @@ export function CourseContinue(_props: CourseContinueProps) {
 
   const courseList = data || [];
 
+  if (!isLoading && courseList.length === 0)
+    return <div>Bạn chưa có khóa học nào.</div>;
+
   return (
-    <>
+    <div className="flex flex-col gap-5">
+      <Heading className="lg:text-xl">Tiếp tục học</Heading>
       <CourseGrid isLoading={isLoading}>
         {courseList.length > 0 &&
           courseList?.map((item) => {
             const firstLessonUrl = item.lectures?.[0]?.lessons?.[0]?._id;
 
-            const lastURL =
-              lastLesson.find((element) => element.course === item.slug)
-                ?.lesson || `/${item.slug}/lesson?id=${firstLessonUrl}`;
+            const url = handleGetStorageLesson({
+              courseSlug: item.slug,
+              lessonId: firstLessonUrl,
+            });
 
             return (
-              <CourseItem
+              <CourseItemContinue
                 key={item.slug}
                 cta="Tiếp tục học"
                 data={item}
-                url={lastURL}
+                url={url}
               />
             );
           })}
       </CourseGrid>
-    </>
+    </div>
   );
 }

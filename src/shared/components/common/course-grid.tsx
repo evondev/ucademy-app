@@ -9,7 +9,7 @@ interface CourseGridProps {
 const CourseGrid = ({ children, isLoading }: CourseGridProps) => {
   if (isLoading)
     return (
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
         {Array.from({ length: 3 })
           .fill(0)
           .map((_, index) => (
@@ -19,7 +19,7 @@ const CourseGrid = ({ children, isLoading }: CourseGridProps) => {
     );
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
       {children}
     </div>
   );
